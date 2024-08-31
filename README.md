@@ -1,24 +1,39 @@
-# README
+# サイトテーマ
+#### __旅先で、現地の人と交流しよう！！__
+アプリでの交流を通じて、実際に旅先で会うことで
+唯一無二の旅行をすることを目的としたサイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## テーマを選んだ理由
+私自身、海外旅行が好きでした。現地の人ともっと交流できるような機会があったら、  
+もっと海外旅行が楽しくなると思ったので、このアプリを作ろうと決めました。  
+旅先で現地の方と交流することはなかなか難しい場合がよくあります。  
+観光するのと同時に、現地の人と交流を持てたらとても貴重な経験になると思います。  
+いろんな人に使ってもらって、日本/海外問わず現地での交流を増やすことができたら  
+いいなと考えて、このテーマにしました。
 
-Things you may want to cover:
+### ターゲットユーザー
+* 海外旅行が好きな方
+* 旅行で現地の人と交流してみたい方(海外・日本問わず)
+* 言語を勉強したい方
 
-* Ruby version
+#### 主な利用シーン
+* 海外/日本問わず現地の人たちと交流してみたいと考えている
+* 旅行の計画を立てている
+* 現地の人の知り合いが欲しい
 
-* System dependencies
+#### 設計書
+後ほど作成予定
 
-* Configuration
+#### 開発環境
+* OS：Linux(CentOS)
+* 言語：HTML,CSS,Javascript,Ruby,SQL
+* フレームワーク：Ruby on Rails
+* JSライブラリ：jQuery
+* IDE：Cloud9
 
-* Database creation
 
-* Database initialization
+#### 使用素材
+後ほど作成予定
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##### 作成者情報
+えだっち
