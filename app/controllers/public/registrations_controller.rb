@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
 
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :family_name, :introduction, :age, :topic])
-  # end
+  def after_sign_up_path_for(resource)
+    user_path
+  end
+
+
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :family_name, :introduction, :age, :topic])
+  end
 
 
 
