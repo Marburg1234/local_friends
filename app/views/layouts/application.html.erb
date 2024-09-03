@@ -8,6 +8,8 @@
 
     <script src="https://kit.fontawesome.com/da08226a47.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -16,7 +18,7 @@
       <%= render 'layouts/header' %>
     </header>
 
-    <main class="main-content d-flex justify-content-center">
+    <main class="main-content d-flex justify-content-center flex-column">
       <%= yield %>
     </main>
 
