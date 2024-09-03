@@ -1,0 +1,41 @@
+
+.profile_image{
+  width: 200px;
+  height:200px;
+  background-color: yellow;
+}
+
+.basic_info{
+  width: 500px;
+  height: 200px;
+  background-color: green;
+  color: white;
+}
+
+.language{
+  width: 200px;
+  height: 200px;
+  background-color: blue;
+  color: white;
+}
+
+.content{
+  width: 500px;
+  height: 200px;
+  background-color: limegreen;
+  color: white;
+}
+
+.sub_image{
+  width: 400px;
+  height: 200px;
+  background-color: gray;
+  color: white;
+}
+
+.posts{
+  width: 400px;
+  height: 200px;
+  background-color: black;
+  color: white;
+}

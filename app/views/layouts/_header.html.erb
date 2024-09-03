@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
   <div class="container">
-    <%= link_to "Trips", root_path, class: 'navbar-brand text-light' %>
+    <%= link_to "Local Friends", root_path, class: 'navbar-brand text-light' %>
 
     <!--ボタンの長い記述→ハンバーガーメニューにできる魔法のコード！-->
     <button class="navbar-toggler" type="button"
@@ -15,40 +15,46 @@
 
     <div class="navbar navbar-right navbar-expand-lg collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
+        <!--管理者ログインした時のヘッダー-->
          <% if admin_signed_in? %>
           <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
           <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
 
         <% elsif user_signed_in? %>
-          <!--サインイン状態のヘッダーnav-->
+          <!--ユーザー サインイン状態のヘッダーnav-->
           <li>
-            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning' %>
+            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
           </li>
           <li>
-            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-newspaper"></i>Articles
+            <%= link_to my_page_users_path, method: :GET, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-user"></i>マイページ
             <% end %>
           </li>
           <li>
-            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-signs-post"></i>New post
+            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-newspaper"></i>投稿一覧
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-person-walking-arrow-right"></i> Log out
+            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-signs-post"></i>新規投稿
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
             <% end %>
           </li>
         <% else %>
-          <!--サインインしていない状態のヘッダーnav-->
+          <!--ユーザーサインアウト状態のヘッダーnav-->
           <li>
-            <%= link_to new_user_registration_path, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-right-to-bracket"></i> Sign up
+            <%= link_to new_user_registration_path, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-right-to-bracket"></i> 新規会員登録
           <% end %>
           </li>
           <li>
-            <%= link_to new_user_session_path, class: 'nav-link text-warning' do %>
-            <i class="fa-regular fa-address-card"></i> Log in
+            <%= link_to new_user_session_path, class: 'nav-link text-warning btn' do %>
+            <i class="fa-regular fa-address-card"></i> ログイン
           <% end %>
           </li>
         <% end %>
