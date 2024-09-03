@@ -1,0 +1,17 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.top_image{
+  /*background-color: yellow;*/
+  background-image: url(/assets/nature-4.jpg);
+  width: 100%;
+  height: 500px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color:rgba(0,0,0,0.5);
+  background-blend-mode:darken;
+}

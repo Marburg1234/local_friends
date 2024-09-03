@@ -7,6 +7,8 @@ class Trip < ApplicationRecord
   validates :title, presence: true
   validates :explain, presence: true
 
+  has_one_attached :trip_image
+
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name
   end
