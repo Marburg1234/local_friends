@@ -3,7 +3,7 @@
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-        
+
         <%= form_with model: @user, url: user_registration_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
           <div class="field mb-2">
@@ -42,43 +42,32 @@
             <%= f.label :地域 %><br />
             <%= f.select :region_id, options_from_collection_for_select(Region.all, :id, :name), include_blank: true %>
           </div>
-      </div>
-    </div>
-
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
-      <div class="form-body p-4">
-
 
           <!--母国語language 選択-->
           <div class="field mb-2">
             <%= f.label :母国語 %><br />
-            <%= f.select :language, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
+            <%= f.select :mother_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
           </div>
-
           <!--学習中の言語language 選択-->
           <div class="field mb-2">
             <%= f.label :学習中の言語 %><br />
-            <%= f.select :language, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
+            <%= f.select :practice_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
           </div>
-
           <!--年齢を選択する-->
           <div class="field mb-2">
             <%= f.label :年齢 %><br />
             <%= f.select :age, *[16..100], include_blank: true %>
           </div>
-
           <!--自己紹介文 introduction入力欄-->
           <div class="field mb-2">
             <%= f.label :自己紹介 %><br />
             <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！" %>
           </div>
-
           <!--好きな話題 topic入力欄-->
           <div class="field mb-2">
             <%= f.label :話したい話題 %><br />
             <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事" %>
           </div>
-
           <div class="actions">
             <%= f.submit "新規会員登録" %>
           </div>
