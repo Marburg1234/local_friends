@@ -19,7 +19,7 @@
           <% if user_signed_in? %>
           <!--サインイン状態のヘッダーnav-->
           <li>
-            <%= link_to "管理者ログイン", new_admin_sessionpath, method: :GET, class: 'nav-link text-warning' %>
+            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning' %>
           </li>
           <li>
             <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
@@ -31,11 +31,11 @@
             <i class="fa-solid fa-signs-post"></i>New post
             <% end %>
           </li>
-          <li>
-            <%= link_to user_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-user"></i>User page
-            <% end %>
-          </li>
+          <!--<li>-->
+          <!--  <= link_to user_path, method: :GET, class: 'nav-link text-warning' do %>-->
+          <!--  <i class="fa-solid fa-user"></i>User page-->
+          <!--  < end %>-->
+          <!--</li>-->
           <li>
             <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
             <i class="fa-solid fa-person-walking-arrow-right"></i> Log out
@@ -51,7 +51,7 @@
           </li>
           <li>
             <%= link_to new_user_session_path, class: 'nav-link text-warning' do %>
-            <i class="fa-regular fa-address-card"></i> Sign in
+            <i class="fa-regular fa-address-card"></i> Log in
           <% end %>
           </li>
           <% end %>

@@ -1,19 +1,18 @@
 <div class="container">
+  <div class="text-center mt-3"><h2>新規会員登録</h2></div>
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-        <h2>Sign up</h2>
-
+        
         <%= form_with model: @user, url: user_registration_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
-
           <div class="field mb-2">
             <%= f.label :姓 %><br />
-            <%= f.email_field :family_name, autofocus: true, autocomplete: "family_name" %>
+            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %>
           </div>
           <div class="field mb-2">
             <%= f.label :名 %><br />
-            <%= f.email_field :first_name, autocomplete: "first_name" %>
+            <%= f.text_field :first_name, autocomplete: "first_name" %>
           </div>
 
           <div class="field mb-2">
@@ -33,7 +32,6 @@
             <%= f.label :パスワード再入力 %><br />
             <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
           </div>
-
           <!--Country 選択-->
           <div class="field mb-2">
             <%= f.label :出身国 %><br />
@@ -44,6 +42,12 @@
             <%= f.label :地域 %><br />
             <%= f.select :region_id, options_from_collection_for_select(Region.all, :id, :name), include_blank: true %>
           </div>
+      </div>
+    </div>
+
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <div class="form-body p-4">
+
 
           <!--母国語language 選択-->
           <div class="field mb-2">
@@ -81,6 +85,8 @@
         <% end %>
 
         <%= render "public/shared/links" %>
+
+
       </div>
     </div>
   </div>
