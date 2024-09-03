@@ -34,14 +34,14 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.references :country, null: false, foreign_key: true
       t.references :region, null: false, foreign_key: true
-      t.integer :mother_language_id
-      t.integer :practice_language_id
-      t.string :first_name
-      t.string :family_name
-      t.text :introduction
-      t.integer :age
-      t.text :topic
-      t.boolean :is_active
+      t.integer :mother_language_id, null:false
+      t.integer :practice_language_id, null:false
+      t.string :first_name, null:false
+      t.string :family_name, null:false
+      t.text :introduction, null: false
+      t.integer :age, null:false
+      t.text :topic, null: false
+      t.boolean :is_active, null: false, default: "true"
 
       t.timestamps null: false
     end
