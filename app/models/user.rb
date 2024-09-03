@@ -12,8 +12,8 @@ class User < ApplicationRecord
 
   has_many :trips, dependent: :destroy
 
-  validates :first_name, presence: true, length: { in 2..50 }
-  validates :family_name, presence: true, length: { in 2..50 }
+  validates :first_name, presence: true
+  validates :family_name, presence: true
   validates :introduction, presence: true
   validates :age, presence: true
   validates :topic, presence: true
