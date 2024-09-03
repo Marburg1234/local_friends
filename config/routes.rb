@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :trips
     resources :users, only: %i[edit show update] do
       collection do
-
+        get "/my_page" => "users#my_page"
         patch 'withdraw'
       end
       member do
