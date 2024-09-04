@@ -1,7 +1,10 @@
 <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="container d-flex justify-content-center flex-column">
 
+<div class="container d-flex justify-content-center flex-column">
+  <div class="w-25 text-light text-center bg-info mt-3">
+    <%= flash[:notice] %>
+  </div>
   <div class="row">
     <div class="col text-center mt-2 mb-4">
   <h1 class="text-center">ユーザープロフィール</h1>
@@ -20,8 +23,8 @@
   </div>
 
 <!--以下がユーザー情報に関するコードたち-->
-  <div class="row d-flex justify-content-center mb-2">
-    <div class="profile_image col-lg-4 col-md-5 col-sm-12 justify-content-center text-center rounded">
+  <div class="row d-flex justify-content-center mb-4">
+    <div class="profile_image col-lg-4 col-md-5 col-sm-12 justify-content-center text-center rounded shadow-lg">
      ユーザー写真<br/>
      <%= image_tag @user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
     </div>
@@ -33,7 +36,7 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center rounded mb-2">
+  <div class="row d-flex justify-content-center rounded mb-4">
     <div class="language col-lg-4 col-md-5 col-sm-12">
       母国語と学習中の言語を表示<br>
       母国語: <%= @user.mother_language.name %><br>
@@ -46,11 +49,12 @@
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center mb-2">
-    <div class="sub_image col-lg-4 col-md-5 col-sm-12 rounded">
+  <div class="row d-flex justify-content-center mb-4">
+    <div class="sub_image col-lg-4 col-md-5 col-sm-12 rounded flex-wrap">
      さぶ写真たち<br/>
-     <%= image_tag @user.get_sub_image, size: '90x90', class: 'rounded' %>
-     <%= image_tag @user.get_sub_image, size: '90x90', class: 'rounded' %>
+      <% @user.sub_images.each do |sub_image| %>
+        <%= image_tag sub_image, size: '90x90', class: 'rounded mr-3 mb-3' %>
+      <% end %>
     </div>
     <div class="posts sub_image col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
       投稿した記事(最新4件)
