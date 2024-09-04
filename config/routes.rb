@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :users, only: %i[index show edit update]
+    resources :users, only: %i[index show edit update] do
+     patch '/admin/users/:id/change_status', to: 'admin/users#change_status', as: 'admin_user_change_status'
+    end
   end
 
   scope module: :public do
