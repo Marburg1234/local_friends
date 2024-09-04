@@ -1,5 +1,12 @@
 class Public::UsersController < ApplicationController
+
   def post_index
+  end
+
+  def show
+    @user = User.find(params[:id])
+
+    @trips = @user.trips
   end
 
   def edit
@@ -17,10 +24,6 @@ class Public::UsersController < ApplicationController
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-    @trips = @user.trips
-  end
 
   def my_page
 
@@ -33,7 +36,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :sub_image, :practice_language_id)
+    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, sub_images: [])
   end
 
 end
