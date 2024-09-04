@@ -7,18 +7,13 @@
   </div>
   <div class="row">
     <div class="col text-center mt-2 mb-4">
-  <h1 class="text-center">ユーザープロフィール</h1>
+  <h1 class="text-center"><strong><%= @user.first_name %>さんのユーザープロフィール</strong></h1>
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-5 border text-center">
       ボタンを入れるスペース
-    </div>
-  </div>
-  <div class="row d-flex justify-content-center">
-    <div class="col mt-2 mb-3 text-right">
-      <%= link_to "ユーザー情報編集する", edit_user_path(current_user), class: 'btn btn-warning text-light shadow' %>
     </div>
   </div>
 
