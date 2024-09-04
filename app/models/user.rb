@@ -24,7 +24,7 @@ class User < ApplicationRecord
   # プロフィール写真を表示させるためのメソッドを定義する
   def get_profile_image
     if profile_image.attached?
-      image
+      profile_image
     else
       'no_image.jpg'
     end
@@ -33,7 +33,7 @@ class User < ApplicationRecord
   # サブ写真を表示させるためのメソッドを定義する
   def get_sub_image
     if sub_image.attached?
-      image
+      sub_image
     else
       'no_image.jpg'
     end

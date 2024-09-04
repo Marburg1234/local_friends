@@ -1,2 +1,43 @@
-<h1>Public::Users#edit</h1>
-<p>Find me in app/views/public/users/edit.html.erb</p>
+
+<div class="container d-flex justify-content-center flex-column">
+  <div class="row no-gutters">
+    <div class="col text-center my-3">
+      <h1>ユーザー情報編集</h1>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center form-body">
+    <%= form_with model: @user do |f| %>
+      <div class="row mb-2 form-group">
+        姓
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
+      <div class="row mb-2">
+        名
+        <%= f.text_field :family_name, class: 'form-control' %>
+      </div>
+      <div class="row mb-2">
+        学習中の言語
+        <% already_registered_language = @user.practice_language %>
+        <% practice_languages = Language.where.not(id: already_registered_language).order("id ASC") %>
+        <%= f.select :practice_language_id, options_from_collection_for_select([already_registered_language] + practice_languages, :id, :name) %>
+      </div>
+      <div class="row mb-2">
+        自己紹介文
+        <%= f.text_area :introduction, class: 'form-control' %>
+     </div>
+      <div class="row mb-2">
+        話したい話題
+        <%= f.text_area :topic, class: 'form-control' %>
+      </div>
+      <div class="row mb-2">
+        <label for="inputName">プロフィール写真</label>
+        <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*" %>
+      </div>
+      <div class="row mb-2">
+        <label for="inputImage">サブ写真</label>
+        <%= f.file_field :sub_image, accept: "image/*" %>
+      </div>
+      <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success' %></div>
+    <% end %>
+  </div>
+</div>
