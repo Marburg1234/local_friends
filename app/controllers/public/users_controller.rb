@@ -25,7 +25,7 @@ class Public::UsersController < ApplicationController
   end
 
   def my_page
-
+    @user = current_user
   end
 
   def unsubscribe
