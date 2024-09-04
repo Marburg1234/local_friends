@@ -1,6 +1,10 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
 
+  # 特定ユーザーの投稿一覧を表示する
   def post_index
+    @user = User.find(params[:id])
+    @trips = @user.trips
   end
 
   def show
