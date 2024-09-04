@@ -1,6 +1,7 @@
 <%= stylesheet_link_tag 'user_edit', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container d-flex justify-content-center flex-column">
+  <%= flash{:notice} %>
   <div class="w-25 text-light text-center bg-danger mt-3">
     <%= flash[:notice] %>
   </div>
