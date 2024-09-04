@@ -1,2 +1,51 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="container mx-auto container-fluid">
+  <div class="row my-3 justify-content-center">
+    <div class="col-10 px-sm-0">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
+        <div style="text-align: right;">
+        </div>
+      </div>
+
+
+    <div class="col-12 mt-3">
+      <table class="w-100" style="border-top: 2px solid gray; border-bottom: 2px solid gray;">
+        <thead>
+          <tr>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">会員ID</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">プロフィール写真</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">氏名</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">メールアドレス</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @users.each do |user| %>
+          </tr>
+          <td style="padding: 10px;"><%= user.id %></td>
+          <td style="padding: 10px;"><%= image_tag user.get_profile_image, size: '100x100', class: 'rounded-circle' %></td>
+          <td style="padding: 10px;">
+            <%= link_to admin_user_path(user) do %>
+              <%= user.family_name %><%= user.first_name %>
+            <% end %>
+          </td>
+          <td style="padding: 10px;"><%= user.email %></td>
+          <td style="padding: 10px;">
+            <% if user.is_active == true %>
+              <p class="text-center" style="color:black; background-color:#CCFF99;"><strong>有効</strong></p>
+            <% else %>
+              <p class="text-center" style="color:black; background-color:#FFABCE;">退会済み</p>
+            <% end %>
+          </td>
+          <% end %>
+        </tbody>
+      </table>
+          <div class="d-flex justify-content-center mt-3">
+          <!--<= paginate @customers %>-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
