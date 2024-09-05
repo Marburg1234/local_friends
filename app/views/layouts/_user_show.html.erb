@@ -19,11 +19,11 @@
 <!--以下がユーザー情報に関するコードたち-->
   <div class="row d-flex justify-content-center mb-4">
     <div class="profile_image col-lg-4 col-md-5 col-sm-12 justify-content-center text-center rounded shadow-lg">
-     ユーザー写真<br/>
+     <h5 class="pt-3">ユーザー写真</h5>
      <%= image_tag user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
     </div>
     <div class="basic_info col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
-      基本情報(国など)<br>
+      <h5 class="pt-3">基本情報(国など)</h5>
       Name: <%= user.family_name %>  <%= user.first_name %><br>
       Country: <%= user.country.name %><br>
       Location: <%= user.region.name %>
@@ -32,12 +32,12 @@
 
   <div class="row d-flex justify-content-center rounded mb-4">
     <div class="language col-lg-4 col-md-5 col-sm-12">
-      母国語と学習中の言語を表示<br>
+      <h5 class="pt-3">母国語と学習中の言語</h5>
       母国語: <%= user.mother_language.name %><br>
       学習中の言語: <%= user.practice_language.name %>
     </div>
     <div class="content col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
-      自己紹介・話したい話題<br>
+      <h5 class="pt-3">自己紹介・話したい話題</h5>
       自己紹介文: <%= user.introduction %><br>
       話したい話題: <%= user.topic %>
     </div>
@@ -45,7 +45,7 @@
 
   <div class="row d-flex justify-content-center mb-4">
     <div class="sub_image col-lg-4 col-md-5 col-sm-12 rounded flex-wrap">
-     さぶ写真たち<br/>
+     <h5 class="pt-3">さぶ写真たち</h5>
       <% user.sub_images.each do |sub_image| %>
         <%= image_tag sub_image, size: '90x90', class: 'rounded mr-3 mb-3' %>
       <% end %>
