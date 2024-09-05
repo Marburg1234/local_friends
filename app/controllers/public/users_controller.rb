@@ -9,7 +9,6 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
     @trips = @user.trips
   end
 
@@ -30,6 +29,7 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
+    @trips = @user.trips
   end
 
   def unsubscribe
