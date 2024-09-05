@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       member do
         get "/unsubscribe" => "users#unsubscribe"
         get 'post_index'
+        get "/likes" => "users#likes"
       end
     end
   end

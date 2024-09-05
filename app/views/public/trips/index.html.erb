@@ -1,10 +1,13 @@
 <div class="container">
+
+  <!--ページの題名-->
   <div class="row">
     <div class="col-md-10 mx-auto text-center my-5">
       <h1>投稿一覧から気になる投稿を見つけよう！</h1>
     </div>
   </div>
 
+  <!--左側の部分 プロフィール写真と投稿ユーザー名-->
   <div class="row">
     <% @trips.each do |trip| %>
     <div class="col-lg-3 col-md-10 col-sm-12 ml-5 mb-5">
@@ -21,6 +24,7 @@
       </div>
     </div>
 
+  <!--右側の部分　投稿の内容-->
     <div class="col-6">
       <table class="table mt-4">
         <tr>

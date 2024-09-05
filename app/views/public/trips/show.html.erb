@@ -1,10 +1,12 @@
 <div class="container">
+
+  <!--ページの題名-->
   <div class="row">
     <h1 class="col text-center mt-4 mb-4 border-bottom pb-3">投稿詳細</h1>
   </div>
 
+  <!--投稿写真と投稿情報-->
   <div class="row my-3">
-    <!--投稿写真と投稿情報-->
     <div class="col-lg-4 offset-1 col-md-8 col-sm-12 text-center">
       <%= image_tag @trip.get_trip_image, size: '300x300' %>
     </div>
@@ -69,10 +71,10 @@
 
   <div class="row">
     <div class="col-12 container-fluid text-center mb-3 mt-4">
-      <!--コメントの投稿フォーム-->
       <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメントの投稿</h3>
     </div>
   </div>
+
   <!--コメントの投稿フォーム (部分テンプレート)-->
   <%= render 'public/trip_comments/form', trip: @trip, trip_comment: @trip_comment %>
 

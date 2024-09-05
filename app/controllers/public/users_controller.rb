@@ -43,6 +43,11 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def likes
+    @user = current_user
+    @favorites = @user.favorites
+    @trip
+  end
 
   private
 
