@@ -41,21 +41,7 @@
         <td  class="pl-3">
           コメント数:<%= @trip.trip_comments.count %>
         </td>
-        <div class="col-12 container-fluid text-center mt-3">
       </table>
-      <div>
-        <!--コメントの表示-->
-        <div>
-          <% @trip.trip_comments.each do |trip_comment| %>
-            <%= image_tag trip_comment.user.get_profile_image, size: '100x100', class: 'rounded-circle' %>
-            <%= trip_comment.user.first_name %> <%= trip_comment.user.family_name %>
-            <%= trip_comment.comment %>
-            <%= trip_comment.created_at.strftime('%Y/%m/%d') %>
-          <% end %>
-        </div>
-
-      </div>
-
     </div>
   </div>
 
@@ -96,11 +82,31 @@
     </div>
   </div>
 
+  <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメント一覧</h3>
+  <!--コメントの表示-->
+  <% @trip.trip_comments.each do |trip_comment| %>
+    <div class="row mb-4">
+      <div class="col-lg-4 text-right">
+        <%= image_tag trip_comment.user.get_profile_image, size: '100x100', class: 'rounded-circle' %>
+      </div>
+      <div class="col-lg-7">
+        <table class="mb-3">
+          <tr>
+          <th class="pr-3">ユーザー名</th>
+          <td><%= trip_comment.user.family_name %> <%= trip_comment.user.first_name %></td>
+          </tr>
+          <tr>
+            <th class="pr-3">コメント投稿日</th>
+            <td><%= trip_comment.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th>コメント</th>
+          </tr>
+        </table>
+        <%= trip_comment.comment %>
 
-  <div class="row">
-    <div class="col-12 border container-fluid text-center mb-3 mt-3" style="height:200px;">
-      投稿されたコメントを一覧で表示するゾーン
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>
