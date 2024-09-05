@@ -1,6 +1,4 @@
-
 <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
-
 
 <div class="container d-flex justify-content-center flex-column">
   <div class="w-25 text-light text-center bg-info mt-3">
@@ -59,6 +57,7 @@
     </div>
     <div class="posts sub_image col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
       投稿した記事(最新4件)
+      <%= link_to "特定ユーザーの投稿一覧", post_index_user_path(@user), method: :GET, class: 'nav-link text-warning mr-5 border' %>
     </div>
   </div>
 
