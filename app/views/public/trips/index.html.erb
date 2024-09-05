@@ -38,6 +38,10 @@
           <th>投稿日</th>
           <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
+        <tr>
+          <th></th>
+          <td><%= render 'public/favorites/like', trip: trip %></td>
+        </tr>
       </table>
     </div>
       <% end %>

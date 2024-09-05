@@ -1,0 +1,26 @@
+<!--いいねボタンを挿入する-->
+<!--自分の投稿にはいいね数のみ表示-->
+<% if trip.user == current_user %>
+  お気に入り・
+  <span>
+    <%= trip.favorites.count %>いいね
+  </span>
+<% else %>
+  <% if trip.favorited_by?(current_user) %>
+  お気に入り・
+    <span>
+      <%= link_to trip_favorite_path(trip), method: :delete, class: 'text-warning' do %>
+        <i class="fa-regular fa-thumbs-up"></i>
+        <%= trip.favorites.count %>いいね
+      <% end %>
+    </span>
+  <% else %>
+  お気に入り・
+    <span>
+      <%= link_to trip_favorite_path(trip), method: :post do %>
+        <i class="fa-regular fa-thumbs-up"></i>
+        <%= trip.favorites.count %>いいね
+      <% end %>
+    </span>
+  <% end %>
+<% end %>

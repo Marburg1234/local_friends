@@ -1,6 +1,7 @@
 class Trip < ApplicationRecord
 
   belongs_to :user
+  has_many :favorites, dependent: :destroy
 
   validates :post_code, presence: true, length: { is: 7 }
   validates :address, presence: true, length: { minimum: 2 }
@@ -20,6 +21,11 @@ class Trip < ApplicationRecord
       trip_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     trip_image
+  end
+
+  # いいねをしているか確認するメソッド
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
 
 end

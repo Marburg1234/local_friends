@@ -34,8 +34,11 @@
 
       <!--いいね♡・コメント数の表示-->
       <div class="col-12 border container-fluid text-center mt-3" style="height:100px;">
-        いいね・コメントの数を表示するゾーン
+         <%= render 'public/favorites/like', trip: @trip %>
+
+        <p>コメント数を入れる</p>
       </div>
+
     </div>
   </div>
 

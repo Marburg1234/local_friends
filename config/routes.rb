@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
-    resources :trips
+    resources :trips do
+      resource :favorite, only: %i[create destroy]
+    end
     resources :users, only: %i[edit show update] do
       collection do
         get "/my_page" => "users#my_page"
@@ -33,9 +35,5 @@ Rails.application.routes.draw do
         get 'post_index'
       end
     end
-
   end
-
-
-
 end
