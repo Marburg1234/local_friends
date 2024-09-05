@@ -57,23 +57,20 @@
     </div>
     <div class="posts sub_image col-lg-7 offset-1 col-md-5 col-sm-12 rounded flex-wrap">
       <h5 class="pt-3">投稿した写真</h5>
-      <div>
-       <div>
-         <div class="text-center">
-            <% if @trips.empty? %>
-              投稿画像がありません
-            <% end %>
-          </div>
-            <% @trips.first(4).each do |trip| %>
-              <%= image_tag trip.get_trip_image, size: '100x90', class: 'mr-4 my-3' %>
-            <% end %>>
+
+        <div class="text-center">
+          <% if @trips.empty? %>
+            投稿画像がありません
+          <% end %>
+          <% @trips.first(4).each do |trip| %>
+            <%= image_tag trip.get_trip_image, size: '100x90', class: 'mr-4 my-3' %>
+          <% end %>
+          <% if @trips.empty? %>
+          <% else %>
+            <%= link_to "もっと見る", post_index_user_path(@user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
+          <% end %>
       </div>
-      <% if @trips.empty? %>
-      <% else %>
-        <%= link_to "もっと見る", post_index_user_path(@user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
-      <% end %>
     </div>
-  </div>
   </div>
 
 </div>
