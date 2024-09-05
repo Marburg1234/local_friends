@@ -32,11 +32,28 @@
       </table>
         <div class="border pb-5"><%= @trip.explain %></div>
 
-      <!--いいね♡・コメント数の表示-->
-      <div class="col-12 border container-fluid text-center mt-3" style="height:100px;">
-         <%= render 'public/favorites/like', trip: @trip %>
+      <table>
+        <th  class="px-3 py-2"></th>
+        <td  class="pl-3">
+          <!--いいね♡の表示-->
+          <%= render 'public/favorites/like', trip: @trip %>
+         </td>
+        <td  class="pl-3">
+          コメント数:<%= @trip.trip_comments.count %>
+        </td>
+        <div class="col-12 container-fluid text-center mt-3">
+      </table>
+      <div>
+        <!--コメントの表示-->
+        <div>
+          <% @trip.trip_comments.each do |trip_comment| %>
+            <%= image_tag trip_comment.user.get_profile_image, size: '100x100', class: 'rounded-circle' %>
+            <%= trip_comment.user.first_name %> <%= trip_comment.user.family_name %>
+            <%= trip_comment.comment %>
+            <%= trip_comment.created_at.strftime('%Y/%m/%d') %>
+          <% end %>
+        </div>
 
-        <p>コメント数を入れる</p>
       </div>
 
     </div>
@@ -65,10 +82,20 @@
   </div>
 
   <div class="row">
-    <div class="col-12 border container-fluid text-center mb-3 mt-4" style="height:200px;">
-      コメントのフォームを入れるゾーン
+    <div class="col-12 container-fluid text-center mb-3 mt-4">
+      <!--コメントの投稿フォーム-->
+      <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメントの投稿</h3>
     </div>
-   </div>
+  </div>
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <%= form_with model: [@trip, @trip_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力してください", class: 'form-control border-info mb-4' %>
+        <%= f.submit "送信する" %>
+      <% end %>
+    </div>
+  </div>
+
 
   <div class="row">
     <div class="col-12 border container-fluid text-center mb-3 mt-3" style="height:200px;">

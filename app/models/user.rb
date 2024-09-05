@@ -10,6 +10,7 @@ class User < ApplicationRecord
   belongs_to :practice_language, class_name: "Language", foreign_key: "practice_language_id"
   has_many :trips, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :trip_comments, dependent: :destroy
 
   validates :first_name, presence: true
   validates :family_name, presence: true

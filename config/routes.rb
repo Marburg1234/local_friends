@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get '/about', to:'homes#about', as:'about'
     resources :trips do
       resource :favorite, only: %i[create destroy]
+      resources :trip_comments, only: %i[create destroy]
     end
     resources :users, only: %i[edit show update] do
       collection do

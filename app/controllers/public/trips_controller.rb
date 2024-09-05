@@ -24,6 +24,7 @@ class Public::TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @trip_comment = TripComment.new
   end
 
   def edit
