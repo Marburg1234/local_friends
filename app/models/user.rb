@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-
   belongs_to :country
   belongs_to :region
   belongs_to :mother_language, class_name: "Language", foreign_key: "mother_language_id"
@@ -20,7 +19,6 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many_attached :sub_images
 
-
   # プロフィール写真を表示させるためのメソッドを定義する
   # Rails側で画像を読み込むように設定する
   def get_profile_image
@@ -30,29 +28,15 @@ class User < ApplicationRecord
     end
     profile_image
   end
-  # def get_profile_image
-  #   if profile_image.attached?
-  #     profile_image
-  #   else
-  #     'no_image.jpg'
-  #   end
-  # end
 
   # サブ写真を表示させるためのメソッドを定義する
   # Rails側で画像を読み込むように設定する
-    def get_sub_images
+  def get_sub_images
     unless sub_images.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       sub_images.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     sub_images
   end
-  # def get_sub_image
-  #   if sub_image.attached?
-  #     sub_image
-  #   else
-  #     'no_image.jpg'
-  #   end
-  # end
 
 end

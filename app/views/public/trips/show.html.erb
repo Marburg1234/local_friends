@@ -1,2 +1,76 @@
-<h1>Public::Trips#show</h1>
-<p>Find me in app/views/public/trips/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1 class="col text-center mt-4 mb-4 border-bottom pb-3">投稿詳細</h1>
+  </div>
+
+  <div class="row my-3">
+    <!--投稿写真と投稿情報-->
+    <div class="col-lg-4 offset-1 col-md-8 col-sm-12 text-center">
+      <%= image_tag @trip.get_trip_image, size: '300x300' %>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-12">
+      <table>
+        <tr>
+          <th class="px-3 py-2">タイトル</th>
+          <td class="pl-3"><%= @trip.title %></td>
+        </tr>
+        <tr>
+          <th class="px-3 py-2">郵便番号</th>
+          <td class="pl-3"><%= @trip.post_code %></td>
+        </tr>
+        <tr>
+          <th class="px-3 py-2">住所</th>
+          <td class="pl-3"><%= @trip.address %></td>
+        </tr>
+        <tr>
+          <th class="px-3 py-2">投稿日</th>
+          <td class="pl-3"><%= @trip.created_at %></td>
+        </tr>
+        <tr>
+          <th class="px-3 py-2">投稿内容</th>
+        </tr>
+      </table>
+        <div class="border pb-5"><%= @trip.explain %></div>
+
+      <!--いいね♡・コメント数の表示-->
+      <div class="col-12 border container-fluid text-center mt-3" style="height:100px;">
+        いいね・コメントの数を表示するゾーン
+      </div>
+    </div>
+  </div>
+
+    <!--投稿したユーザーの基本情報-->
+  <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">投稿したユーザー情報</h3>
+  <div class="row">
+    <div class="col-lg-4 offset-1 col-md-8 col-sm-12 text-center">
+      <%= link_to user_path(@trip.user) do %>
+        <%= image_tag @trip.user.get_profile_image, size: '200x200', class: 'rounded-circle' %>
+      <% end %>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-12 mt-4">
+      <table>
+        <tr>
+          <th class="px-3 py-2">投稿ユーザー</th>
+          <td class="pl-3"><%= @trip.user.family_name %> <%= @trip.user.first_name %></td>
+        </tr>
+        <tr>
+          <th class="px-3 py-2">地域</th>
+          <td class="pl-3"><%= @trip.user.region.name %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 border container-fluid text-center mb-3 mt-4" style="height:200px;">
+      コメントのフォームを入れるゾーン
+    </div>
+   </div>
+
+  <div class="row">
+    <div class="col-12 border container-fluid text-center mb-3 mt-3" style="height:200px;">
+      投稿されたコメントを一覧で表示するゾーン
+    </div>
+  </div>
+
+</div>
