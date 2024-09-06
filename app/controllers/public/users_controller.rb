@@ -43,11 +43,26 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  # いいねした記事一覧を表示するメソッドlikes
   def likes
     @user = current_user
     @favorites = @user.favorites
     @trip
   end
+
+  # フォロー機能のメソッド
+  # ================================================
+  def follows
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+  # =================================================
+
 
   private
 
