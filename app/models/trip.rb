@@ -29,4 +29,19 @@ class Trip < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  # 検索するためのメソッド
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @trip = Trip.where("title LIKE?", "#{word}")
+    elsif search == "forward_match"
+        @trip = Trip.where("title LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @trip = Trip.where("title LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @trip = Trip.where("title LIKE?","%#{word}%")
+    else
+      @trip = Trip.all
+    end
+  end
+
 end

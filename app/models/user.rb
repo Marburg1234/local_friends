@@ -41,4 +41,19 @@ class User < ApplicationRecord
     sub_images
   end
 
+  # 検索するためのメソッド とりあえずfamily_nameカラムを設定している
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("family_name LIKE?", "#{word}")
+    elsif search == "forward_match"
+        @user = User.where("family_name LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("family_name LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("family_name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
+  end
+
 end
