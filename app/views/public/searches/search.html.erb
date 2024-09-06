@@ -2,7 +2,9 @@
   <table class="table my-5">
   <!--検索対象モデルがUserの時-->
     <% if @range == "User" %>
-      <h2 class="my-4">検索結果 キーワード:"<%= @word %>"</h2>
+          <h2 class="my-4 text-center">検索結果</h2>
+          <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
+          検索条件:"<%= @search %>"</div>
         <thead>
           <tr>
             <th>image</th>
@@ -41,7 +43,9 @@
           </tr>
         </thead>
         <tbody>
-          <h2 class="my-4 text-center">検索結果 キーワード: "<%= @word %>" <br/>検索条件:"<%= @search %>"</h2>
+          <h2 class="my-4 text-center">検索結果</h2>
+          <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
+          検索条件:"<%= @search %>"</div>
           <% @trips.each do |trip| %>
           <tr>
             <td>
