@@ -1,0 +1,24 @@
+  <!--コメントの表示-->
+  <% trip.trip_comments.each do |trip_comment| %>
+    <div class="row mb-4">
+      <div class="col-lg-4 text-right">
+        <%= image_tag trip_comment.user.get_profile_image, size: '100x100', class: 'rounded-circle' %>
+      </div>
+      <div class="col-lg-7">
+        <table class="mb-3">
+          <tr>
+          <th class="pr-3">ユーザー名</th>
+          <td><%= trip_comment.user.family_name %> <%= trip_comment.user.first_name %></td>
+          </tr>
+          <tr>
+            <th class="pr-3">コメント投稿日</th>
+            <td><%= trip_comment.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <th>コメント</th>
+          </tr>
+        </table>
+        <%= trip_comment.comment %>
+      </div>
+    </div>
+  <% end %>

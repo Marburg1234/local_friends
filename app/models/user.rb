@@ -9,6 +9,8 @@ class User < ApplicationRecord
   belongs_to :mother_language, class_name: "Language", foreign_key: "mother_language_id"
   belongs_to :practice_language, class_name: "Language", foreign_key: "practice_language_id"
   has_many :trips, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :trip_comments, dependent: :destroy
 
   validates :first_name, presence: true
   validates :family_name, presence: true
@@ -37,6 +39,21 @@ class User < ApplicationRecord
       sub_images.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     sub_images
+  end
+
+  # 検索するためのメソッド とりあえずfamily_nameカラムを設定している
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("family_name LIKE?", "#{word}")
+    elsif search == "forward_match"
+        @user = User.where("family_name LIKE?", "#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("family_name LIKE?", "%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("family_name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
   end
 
 end

@@ -1,0 +1,77 @@
+<div class="container">
+  <table class="table my-5">
+  <!--検索対象モデルがUserの時-->
+    <% if @range == "User" %>
+          <h2 class="my-4 text-center">検索結果</h2>
+          <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
+          検索条件:"<%= @search %>"</div>
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th colspan="3">introduction</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_profile_image, size: '50x50' %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user_path(user.id) do %>
+              <%= user.family_name %> <%= user.first_name %>
+              <% end %>
+            </td>
+            <td>
+              <%= user.introduction %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+        <% else %>
+
+        <!--検索対象がbookの時-->
+        <thead>
+          <tr>
+            <th>投稿ユーザー</th>
+            <th>投稿写真</th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <h2 class="my-4 text-center">検索結果</h2>
+          <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
+          検索条件:"<%= @search %>"</div>
+          <% @trips.each do |trip| %>
+          <tr>
+            <td>
+              <%= link_to user_path(trip.user) do %>
+                <%= image_tag trip.user.get_profile_image, size: '50x50' %>
+              <% end %>
+              <%= link_to user_path(trip.user) do %>
+                <%= trip.user.family_name %><%= trip.user.first_name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to trip_path(trip.id) do %>
+                <%= image_tag trip.get_trip_image, size: '50x50' %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to trip_path(trip.id) do %>
+                <%= trip.title %>
+              <% end %>
+            </td>
+            <td>
+              <%= trip.explain %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>

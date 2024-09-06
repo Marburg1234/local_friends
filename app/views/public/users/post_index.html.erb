@@ -1,25 +1,31 @@
 <div class="container">
+
+  <!--ページの題名-->
   <div class="row">
     <div class="col-lg-5 col-md-8 col-sm-12 mx-auto text-center">
       <h2><%= @user.first_name %>さんの投稿一覧</h2>
     </div>
   </div>
 
-<div class="row d-flex">
-  <% @trips.each_slice(4) do |trips| %>
-  <div class="row">
-  <% trips.each do |trip| %>
-    <div class="card p-3 mt-5 bg-transparent" style="width:18rem;">
-      <%= link_to trip_path(trip.id) do %>
-        <%=  image_tag trip.get_trip_image, size: '200x200', class: 'card-img-top border-bottom' %>
-      <% end %>
-      <div class="card-body">
-        <div class="card-title"><%= trip.title %></div>
-        <div class="card-text"><%= trip.address %></div>
-        <div class="card-text"><%= trip.explain %></div>
+  <!--投稿一覧の表示-->
+  <div class="row d-flex">
+    <% @trips.each_slice(4) do |trips| %>
+      <div class="row">
+        <% trips.each do |trip| %>
+          <div class="card p-3 mt-5 bg-transparent" style="width:18rem;">
+            <%= link_to trip_path(trip.id) do %>
+              <%=  image_tag trip.get_trip_image, size: '200x200', class: 'card-img-top border-bottom' %>
+            <% end %>
+            <div class="card-body">
+              <div class="card-title"><%= trip.title %></div>
+              <div class="card-text"><%= trip.address %></div>
+              <div class="card-text"><%= trip.explain %></div>
+              <div class="card-text mt-3"><%= render 'public/favorites/like', trip: trip %></div>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
-</div>
-<% end %>
+    <% end %>
+  </div>
+
 </div>
