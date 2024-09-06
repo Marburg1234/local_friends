@@ -35,8 +35,14 @@
       Name: <%= user.family_name %>  <%= user.first_name %><br>
       Country: <%= user.country.name %><br>
       Location: <%= user.region.name %><br>
-      フォロー数：<%= user.followings.count %><br>
-      フォロワー数：<%= user.followers.count %>
+      <br>
+      <%= link_to follows_user_path(@user.id), class: 'text-light' do %>
+        フォロー数：<%= @user.followings.count %>
+      <% end %>
+      <br>
+      <%= link_to followers_user_path(@user.id), class: 'text-light' do %>
+        フォロワー数：<%= @user.followers.count %>
+      <% end %>
     </div>
   </div>
 
