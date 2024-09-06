@@ -1,6 +1,5 @@
 class Public::SearchesController < ApplicationController
 
-
   def search
     @range = params[:range]
     @word = params[:word]
@@ -12,5 +11,4 @@ class Public::SearchesController < ApplicationController
       @trips = Trip.looks(@search, @word)
     end
   end
-
 end
