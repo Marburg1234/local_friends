@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
+  has_many :chat_rooms, through: :user_rooms
 
 # ========================================================================================
   validates :first_name, presence: true
