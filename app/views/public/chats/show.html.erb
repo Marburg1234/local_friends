@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-6 mx-auto">
       <!--チャット相手の表示→OK-->
-      <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>", class="mb-5 text-center"><%= @chat_person.family_name %><%= @chat_person.first_name %>さんとのチャット</h2>
+      <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>", class="mb-5 text-center">ログイン中のユーザー:<%= @user.family_name %><%= @user.first_name %></h2>
 
       <!--チャットの中身-->
       <div class="message mx-auto" style="width: 400px;">
@@ -28,7 +28,7 @@
       <%= form_with model: @chat, data: { remote: true } do |f| %>
         <%= f.text_field :message %>
         <%= f.submit "送信", class: "btn btn-success btn-sm" %>
-        <%= f.hidden_field :chat_room_id, value: @room.id %>
+        <%= f.hidden_field :chat_room_id %>
       <% end %>
     </div>
 

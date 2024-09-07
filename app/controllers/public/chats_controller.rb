@@ -13,7 +13,7 @@ class Public::ChatsController < ApplicationController
     unless user_rooms.nil?
       # 共有チャットルームが存在する場合、そのチャットルームを表示する
       @room = user_rooms.chat_room
-      @chat_person = User.find(user_rooms.chat_room_id)
+      # @chat_person = User.find(user_rooms.chat_room_id)
 
     else
       # 共有チャットルームが存在しない場合、新しいチャットルームを作成する
