@@ -20,8 +20,8 @@
           <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
           <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
 
+        <!--ユーザー サインイン状態のヘッダーnav-->
         <% elsif user_signed_in? %>
-          <!--ユーザー サインイン状態のヘッダーnav-->
           <li>
             <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
           </li>

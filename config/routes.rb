@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       collection do
         get "/my_page" => "users#my_page"
         patch 'withdraw'
+        post "/guest_sign_in" => "users/sessions#guest_sign_in"
       end
       member do
         get "/unsubscribe" => "users#unsubscribe"

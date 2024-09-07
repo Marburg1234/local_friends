@@ -9,6 +9,8 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
+
+#==========================================================================
   # 退会したユーザーがログインできないようにする
   private
   # アクティブであるかを判断するメソッド
@@ -27,4 +29,5 @@ class Public::SessionsController < Devise::SessionsController
       redirect_to new_user_registration_path
     end
   end
+#==========================================================================
 end
