@@ -1,26 +1,35 @@
 <!--いいねボタンを挿入する-->
-<!--自分の投稿にはいいねできないようにする(数字の表示のみ-->
-<% if trip.user == current_user %>
+<!--ゲストログインはいいねできず数の確認のみ-->
+<% if current_user.email == "guest@example.com" %>
   お気に入り・
   <span>
     <%= trip.favorites.count %>いいね
   </span>
 <% else %>
-  <% if trip.favorited_by?(current_user) %>
-  お気に入り・
+<!--自分の投稿にはいいねできないようにする(数字の表示のみ)-->
+  <% if trip.user == current_user %>
+    お気に入り・
     <span>
-      <%= link_to trip_favorite_path(trip), method: :delete, class: 'text-warning', remote:true, data: {"turbolinks" => false} do %>
-        <i class="fa-regular fa-thumbs-up"></i>
-        <%= trip.favorites.count %>いいね
-      <% end %>
+      <%= trip.favorites.count %>いいね
     </span>
   <% else %>
-  お気に入り・
-    <span>
-      <%= link_to trip_favorite_path(trip), method: :post, remote:true, data: {"turbolinks" => false} do %>
-        <i class="fa-regular fa-thumbs-up"></i>
-        <%= trip.favorites.count %>いいね
-      <% end %>
-    </span>
+    <% if trip.favorited_by?(current_user) %>
+    お気に入り・
+      <span>
+        <%= link_to trip_favorite_path(trip), method: :delete, class: 'text-warning', remote:true, data: {"turbolinks" => false} do %>
+          <i class="fa-regular fa-thumbs-up"></i>
+          <%= trip.favorites.count %>いいね
+        <% end %>
+      </span>
+    <% else %>
+    お気に入り・
+      <span>
+        <%= link_to trip_favorite_path(trip), method: :post, remote:true, data: {"turbolinks" => false} do %>
+          <i class="fa-regular fa-thumbs-up"></i>
+          <%= trip.favorites.count %>いいね
+        <% end %>
+      </span>
+    <% end %>
   <% end %>
 <% end %>
+
