@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "編集内容を保存しました"
-      redirect_to admin_user_path
+      redirect_to admin_users_path
     else
       @user = User.find(params[:id])
       flash[:notice] = "編集に失敗しました"
@@ -43,7 +43,7 @@ class Admin::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, sub_images: [])
+    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, :is_active, sub_images: [])
   end
 
 end
