@@ -13,8 +13,6 @@ class Public::ChatsController < ApplicationController
     unless user_rooms.nil?
       # 共有チャットルームが存在する場合、そのチャットルームを表示する
       @room = user_rooms.chat_room
-      # @chat_person = User.find(user_rooms.chat_room_id)
-
     else
       # 共有チャットルームが存在しない場合、新しいチャットルームを作成する
       @room = ChatRoom.new
@@ -40,7 +38,7 @@ class Public::ChatsController < ApplicationController
   end
 
 
-  def desroy
+  def destroy
     # ログイン中のユーザーに関連するメッセージを削除
     @chat = current_user.chats.find(params[:id])
     @chat.destroy
