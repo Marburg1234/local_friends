@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'relationships/create'
+    get 'relationships/destroy'
+  end
+  get 'relationships/create'
+  get 'relationships/destroy'
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
@@ -29,6 +35,9 @@ Rails.application.routes.draw do
       resources :trip_comments, only: %i[create destroy]
     end
     resources :users, only: %i[edit show update] do
+      resource :relationships, only: %i[create destroy]
+      get :follows, on: :member
+      get :followers, on: :member
       collection do
         get "/my_page" => "users#my_page"
         patch 'withdraw'
