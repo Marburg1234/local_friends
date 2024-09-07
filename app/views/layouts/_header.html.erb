@@ -16,9 +16,22 @@
     <div class="navbar navbar-right navbar-expand-lg collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ml-auto">
         <!--管理者ログインした時のヘッダー-->
-         <% if admin_signed_in? %>
+        <% if admin_signed_in? %>
           <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
           <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
+
+        <!--ゲストログイン時のヘッダー-->
+        <% elsif current_user.email == "guest@example.com" %>
+          <li>
+            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-newspaper"></i>投稿一覧
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
+            <% end %>
+          </li>
 
         <!--ユーザー サインイン状態のヘッダーnav-->
         <% elsif user_signed_in? %>
