@@ -6,7 +6,6 @@ class Public::ChatsController < ApplicationController
   def show
     # チャット相手のユーザーをURLから取得する
     @user = User.find(params[:id])
-    byebug
     # 現在ログイン中のユーザーが参加しているチャットルームの一覧を取得
     rooms = current_user.user_rooms.pluck(:chat_room_id)
     # 相手ユーザーとの共有チャットルームが存在するか確認
@@ -14,6 +13,7 @@ class Public::ChatsController < ApplicationController
     unless user_rooms.nil?
       # 共有チャットルームが存在する場合、そのチャットルームを表示する
       @room = user_rooms.chat_room
+      @chat_person = User.find(user_rooms.chat_room_id)
 
     else
       # 共有チャットルームが存在しない場合、新しいチャットルームを作成する
