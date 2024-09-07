@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container mb-5">
   <div class="row">
-    <div class="col-lg-6 mx-auto">
+    <div class="col-lg-8 mx-auto">
       <!--チャット相手の表示→OK-->
-      <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>", class="mb-5 text-center"><%= @user.family_name %><%= @user.first_name %>さんとのチャット</h2>
+      <h2 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>", class="mb-5 mt-3 text-center"><%= @user.family_name %><%= @user.first_name %>さんとのチャット</h2>
 
       <!--チャットの中身-->
-      <div class="message mx-auto" style="width: 400px;">
+      <div class="message mx-auto p-3">
         <% @chats.each do |chat| %>
           <% if chat.user_id == current_user.id %>
           <!--部分テンプレの呼び出し-->
           <%= render "public/chats/chat", chat: chat %>
           <% else %>
-            <div class="left-container d-flex">
-              <%= image_tag @user.get_profile_image, size: '30x30' %>
-              <p class="ml-1" style="text-align: left;"><span style="background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><%= chat.message %></span></p>
+            <div class="left-container d-flex mb-3">
+              <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+              <p class="ml-1" style="text-align: left;"><span class="p-2" style="background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></span></p>
             </div>
           <% end %>
         <% end %>
@@ -27,7 +27,7 @@
     <div class="col-lg-6 mx-auto">
       <%= form_with model: @chat, data: { remote: true } do |f| %>
         <%= f.text_field :message %>
-        <%= f.submit "送信", class: "btn btn-success btn-sm" %>
+        <%= f.submit "送信", class: "btn btn-info btn-sm" %>
         <%= f.hidden_field :chat_room_id %>
       <% end %>
     </div>
