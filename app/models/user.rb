@@ -12,18 +12,22 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
 
+# ========================================================================================
   validates :first_name, presence: true
   validates :family_name, presence: true
   validates :introduction, presence: true
   validates :age, presence: true
   validates :topic, presence: true
+# ========================================================================================
 
+# ========================================================================================
   # プロフィール写真を扱う
   has_one_attached :profile_image
   # ユーザーのサブ写真を扱う
   has_many_attached :sub_images
+# ========================================================================================
 
-
+# ========================================================================================
   # フォローフォロワー機能
   # ============フォローする・している側からの視点===========================================
   # フォローする側の情報についての紐づけ
@@ -39,12 +43,12 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: :followed_id, dependent: :destroy
   # passiveを通して、フォローしてくるユーザー情報を取得⇒source: :followingになる
   has_many :followers, through: :passive_relationships, source: :following
-
   # ========================================================================================
-
+# ========================================================================================
 
   # プロフィール写真を表示させるためのメソッドを定義する
   # Rails側で画像を読み込むように設定する
+  # ==========================================================================================================
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -52,7 +56,9 @@ class User < ApplicationRecord
     end
     profile_image
   end
+  # ========================================================================================
 
+# ========================================================================================
   # サブ写真を表示させるためのメソッドを定義する
   # Rails側で画像を読み込むように設定する
   def get_sub_images
@@ -62,7 +68,9 @@ class User < ApplicationRecord
     end
     sub_images
   end
+# ========================================================================================
 
+# ========================================================================================
   # 検索するためのメソッド とりあえずfamily_nameカラムを設定している
   def self.looks(search, word)
     if search == "perfect_match"
@@ -77,12 +85,34 @@ class User < ApplicationRecord
       @user = User.all
     end
   end
+# ========================================================================================
 
+# ========================================================================================
   # フォローされているかどうかを確認するメソッド
   def followed_by?(user)
     # 今自分が(引数のユーザー)がフォローしようとしているユーザー(受け側)がフォローしているかどうかを判別する
     passive_relationships.find_by(following_id: user.id).present?
   end
+# ========================================================================================
 
+# ========================================================================================
+  # ゲストログインのメソッド
+  GUEST_USER_EMAIL = "guest@example.com"
+
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.family_name = "ゲストユーザー"
+      user.first_name = 'ゲストユーザー'
+      user.country_id = 1
+      user.region_id = 1
+      user.mother_language_id = 1
+      user.practice_language_id = 2
+      user.introduction = "ゲストユーザーです！"
+      user.age = 50
+      user.topic = "ゲストユーザーです！"
+    end
+  end
+# ========================================================================================
 
 end

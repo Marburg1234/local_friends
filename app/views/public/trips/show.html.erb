@@ -80,6 +80,9 @@
 
   <!--コメントの一覧表示 (部分テンプレート)-->
   <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメント一覧</h3>
+  <% if @trip.trip_comments.count == 0 %>
+    <p class="text-center mb-5">コメントがありません</p>
+  <% else %>
     <%= render 'public/trip_comments/comment_index', trip: @trip %>
-
+  <% end %>
 </div>

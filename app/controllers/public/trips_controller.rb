@@ -1,5 +1,6 @@
 class Public::TripsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:new, :edit]
 
   def new
     @trip = Trip.new
@@ -31,10 +32,18 @@ class Public::TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
 
+
   private
 
   def trip_params
     params.require(:trip).permit(:trip_image, :post_code, :address, :title, :explain)
+  end
+
+# ゲストログインユーザーのダイレクトアタックを阻止するメソッド
+  def ensure_guest_user
+    if current_user.email == "guest@example.com"
+      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+    end
   end
 
 end

@@ -5,5 +5,12 @@
     <h1 class="text-light p-3">全ての始まりTOP画面です</h1>
     <p class="text-light">試しに使ってみよう！</p>
   </div>
-
+  <div>
+    <%= link_to "ゲストログイン(閲覧用)", guest_sign_in_users_path, method: :post, class: "btn btn-light text-black border btn-block sign_in my-3" %>
+  </div>
+  <div class="mb-4">
+    <p>ゲストログイン：</p>
+    <span>※投稿された記事の閲覧やユーザーを見ることができます。</span>
+    <span>新規投稿やチャットをするには、ユーザー会員登録が必要です。</span>
+  </div>
 </div>
