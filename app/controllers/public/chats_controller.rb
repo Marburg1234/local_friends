@@ -45,6 +45,12 @@ class Public::ChatsController < ApplicationController
   end
 
 
+  def index
+    rooms = current_user.user_rooms.pluck(:chat_room_id)
+    @opponents = UserRoom.where(chat_room_id: rooms).where.not(user_id: current_user.id).pluck(:user_id)
+    @users = User.where(id: @opponents)
+  end
+
   private
 
   # フォームから送信されたパラメーターを安全に取得する⇒ストロングパラメーター定義

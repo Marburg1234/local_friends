@@ -33,6 +33,11 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to chats_path, method: :GET, class: 'nav-link text-warning btn' do %>
+                <i class="fa-solid fa-comment-dots"></i>Chat
+                <% end %>
+              </li>
+              <li>
                 <%= link_to trips_path, method: :GET, class: 'nav-link text-warning btn' do %>
                 <i class="fa-solid fa-newspaper"></i>投稿一覧
                 <% end %>

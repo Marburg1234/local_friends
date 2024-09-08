@@ -1,0 +1,36 @@
+<div class="container d-flex justify-content-center flex-column">
+  <div class="row">
+    <div class="col text-center mt-2 mb-4 border-bottom shadow pb-3 mt-4">
+      <h1><strong>チャット相手一覧</strong></h1>
+    </div>
+      </div>
+
+
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-lg-3 text-center">
+      <!--プロフィール写真-->
+        <%= image_tag user.get_profile_image, size: '80x80', class: 'rounded-circle' %>
+      </div>
+      <div class="col-lg-5">
+        <!--右側 個人情報-->
+        <table>
+          <tr>
+            <th class="pr-4 pb-3">ユーザー名</th>
+            <td class="pb-3"><%= user.family_name %> <%= user.first_name %></td>
+          </tr>
+          <tr>
+            <th class="pr-4 pb-3">住んでいる地域</th>
+            <td class="pb-3"><%= user.country.name %> <%= user.region.name %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg-2">
+
+          <%= render 'public/chats/chat_start_btn', user: user %>
+
+      </div>
+    <% end %>
+
+  </div>
+</div>

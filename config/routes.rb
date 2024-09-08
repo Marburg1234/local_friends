@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get '/about', to:'homes#about', as:'about'
     # 検索のルーティング
     get 'search' => "searches#search"
-    resources :chats, only: %i[show create destroy]
+    resources :chats, only: %i[show index create destroy]
     resources :trips do
       resource :favorite, only: %i[create destroy]
       resources :trip_comments, only: %i[create destroy]
