@@ -1,16 +1,28 @@
 <%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <div class="container d-flex flex-column justify-content-center">
 
+<div class="container-fluid d-flex flex-column justify-content-center">
   <div class="top_image text-center">
     <h1 class="text-light p-3">TOP画面です</h1>
     <p class="text-light">試しに使ってみよう！</p>
-  </div>
-  <div>
-    <%= link_to "ゲストログイン(閲覧用)", guest_sign_in_users_path, method: :post, class: "btn btn-light text-black border btn-block sign_in my-3" %>
-  </div>
-  <div class="mb-4">
-    <p>ゲストログイン：</p>
-    <span>※投稿された記事の閲覧やユーザーを見ることができます。</span>
-    <span>新規投稿やチャットをするには、ユーザー会員登録が必要です。</span>
+      <div class="col-12 p-3 mx-atuo text-center">
+        <%= link_to new_user_registration_path, class: 'btn btn-lg btn-success w-50' do %>
+          新規会員登録(無料)
+        <% end %>
+      </div>
+      <div class="col-12 p-3 text-center">
+        <%= link_to new_user_session_path, class: 'btn btn-lg btn-info w-50' do %>
+          ログイン
+        <% end %>
+    </div>
+    <div class="row">
+      <div class="p-3 col-12 text-center">
+        <%= link_to "ゲストログイン(閲覧用)", guest_sign_in_users_path, method: :post, class: "btn btn-lg btn-light w-50" %>
+      </div>
+   </div>
+    <div class="row">
+      <div class="p-3 col-12 text-center">
+        <%= link_to "Local.Friendsについて", about_path, method: :get, class: 'btn btn-lg btn-secondary text-light' %>
+      </div>
+    </div>
   </div>
 </div>

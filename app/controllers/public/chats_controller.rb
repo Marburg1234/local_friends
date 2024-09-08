@@ -1,6 +1,6 @@
 class Public::ChatsController < ApplicationController
-
-  # before_action :block_non_related_users, only: [:show]
+  before_action :ensure_guest_user, only: [:index, :show,]
+  before_action :block_non_related_users, only: [:show]
 
 # チャットルームの表示
   def show
@@ -66,6 +66,12 @@ class Public::ChatsController < ApplicationController
     end
   end
 
+  # ゲストログインユーザーのダイレクトアタックを阻止するメソッド
+  def ensure_guest_user
+    if current_user.email == "guest@example.com"
+      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+    end
+  end
 
 
 end

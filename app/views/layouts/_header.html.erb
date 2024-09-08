@@ -30,27 +30,27 @@
                 <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
               </li>
               <li>
-                <%= link_to my_page_users_path, method: :GET, class: 'nav-link text-warning btn' do %>
+                <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn text-warning' do %>
                 <i class="fa-solid fa-user"></i>マイページ
                 <% end %>
               </li>
               <li>
-                <%= link_to chats_path, method: :GET, class: 'nav-link text-warning btn' do %>
+                <%= link_to chats_path, method: :GET, class: 'nav-link text-warning' do %>
                 <i class="fa-solid fa-comment-dots"></i>Chat
                 <% end %>
               </li>
               <li>
-                <%= link_to trips_path, method: :GET, class: 'nav-link text-warning btn' do %>
+                <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
                 <i class="fa-solid fa-newspaper"></i>投稿一覧
                 <% end %>
               </li>
               <li>
-                <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning btn' do %>
+                <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
                 <i class="fa-solid fa-signs-post"></i>新規投稿
                 <% end %>
               </li>
               <li>
-                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning btn' do %>
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
                 <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
                 <% end %>
               </li>
