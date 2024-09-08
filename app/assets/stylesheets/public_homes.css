@@ -15,6 +15,18 @@ header{
   z-index: 100;
 }
 
+.logo_font {
+  font-family: 'Sacramento', cursive;
+}
+
+.local{
+  color: #66FFFF;
+}
+
+.friends{
+  color:#FFFF66;
+}
+
 .top_image{
   background-image: url(/assets/nature-4.jpg);
   width: 100%;
