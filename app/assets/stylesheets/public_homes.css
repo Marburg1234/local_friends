@@ -10,7 +10,7 @@ header{
   left: 0;
   width: 100%;
   height: 100px;
-  background-color: #3CB371;
+  background-color: #008BBB;
   padding:10px;
   z-index: 100;
 }
@@ -31,7 +31,7 @@ main{
 }
 
 footer{
-  background-color: #008BBB	;
+  background-color: #008BBB;
   width: 100%;
   padding: 10px;
 }

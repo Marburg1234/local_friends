@@ -88,3 +88,16 @@
 
 
 </nav>
+
+<!--スクロールしたらヘッダーを透過するJavascript-->
+<script>
+  $(document).ready(function() {
+    $(window).scroll(function() {
+      if ($(this).scrollTop() > 0) {
+        $('header').css('opacity', 0.9);
+      } else {
+        $('header').css('opacity', 1);
+      }
+    });
+  });
+</script>
