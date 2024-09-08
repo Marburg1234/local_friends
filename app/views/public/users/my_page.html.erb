@@ -12,11 +12,10 @@
 
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-5 border text-center">
-      ボタンを入れるスペース
       <!--いいねした記事一覧ページへのリンク-->
       <%= link_to "いいねした記事をみる", likes_user_path(current_user), class: 'btn btn-success text-light shadow' %>
       <!--Chat相手一覧ページへのリンク挿入-->
-      <%= link_to chats_path, method: :GET, class: 'text-warning btn btn-transparant' do %>
+      <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
         <i class="fa-solid fa-comment-dots"></i>Chat
       <% end %>
     </div>

@@ -8,29 +8,29 @@
           <%= render "public/shared/error_messages", resource: resource %>
           <div class="field mb-2">
             <%= f.label :姓 %><br />
-            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name" %>
+            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true %>
           </div>
           <div class="field mb-2">
             <%= f.label :名 %><br />
-            <%= f.text_field :first_name, autocomplete: "first_name" %>
+            <%= f.text_field :first_name, autocomplete: "first_name", required: true %>
           </div>
 
           <div class="field mb-2">
             <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autocomplete: "email" %>
+            <%= f.email_field :email, autocomplete: "email", required: true %>
           </div>
 
           <div class="field mb-2">
             <%= f.label :パスワード %>
             <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true %>
           </div>
 
           <div class="field">
             <%= f.label :パスワード再入力 %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
           </div>
           <!--Country 選択-->
           <div class="field mb-2">
@@ -56,19 +56,19 @@
           <!--年齢を選択する-->
           <div class="field mb-2">
             <%= f.label :年齢 %><br />
-            <%= f.select :age, *[16..100], include_blank: true %>
+            <%= f.select :age, *[16..100], include_blank: true, required: true %>
           </div>
           <!--自己紹介文 introduction入力欄-->
           <div class="field mb-2">
             <%= f.label :自己紹介 %><br />
-            <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！" %>
+            <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！", required: true %>
           </div>
           <!--好きな話題 topic入力欄-->
           <div class="field mb-2">
             <%= f.label :話したい話題 %><br />
-            <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事" %>
+            <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事", required: true %>
           </div>
-          <div class="actions">
+          <div class="actions my-3">
             <%= f.submit "新規会員登録" %>
           </div>
         <% end %>

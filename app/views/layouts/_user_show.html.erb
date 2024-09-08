@@ -12,7 +12,6 @@
 
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-5 border text-center">
-      ボタンを入れるスペース
       <!--フォロー機能のボタンを入れる ゲストログインの場合には、ボタンの表示なし-->
       <% if current_user.email == "guest@example.com" %>
       <% else %>
@@ -24,6 +23,8 @@
           <% end %>
         <% end %>
       <% end %>
+      <!--chat開始ボタン-->
+      <%= render 'public/chats/chat_start_btn', user: user %>
     </div>
   </div>
 
@@ -39,12 +40,12 @@
       Country: <%= user.country.name %><br>
       Location: <%= user.region.name %><br>
       <br>
-      <%= link_to follows_user_path(@user.id), class: 'text-light' do %>
-        フォロー数：<%= @user.followings.count %>
+      <%= link_to follows_user_path(user.id), class: 'text-light' do %>
+        フォロー数：<%= user.followings.count %>
       <% end %>
       <br>
-      <%= link_to followers_user_path(@user.id), class: 'text-light' do %>
-        フォロワー数：<%= @user.followers.count %>
+      <%= link_to followers_user_path(user.id), class: 'text-light' do %>
+        フォロワー数：<%= user.followers.count %>
       <% end %>
     </div>
   </div>
