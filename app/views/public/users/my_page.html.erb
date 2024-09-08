@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+
 <div class="container d-flex justify-content-center flex-column">
   <div class="w-25 text-light text-center bg-info mt-3">
     <%= flash[:notice] %>
@@ -16,7 +17,7 @@
       <%= link_to "いいねした記事をみる", likes_user_path(current_user), class: 'btn btn-success text-light shadow' %>
       <!--Chat相手一覧ページへのリンク挿入-->
       <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
-        <i class="fa-solid fa-comment-dots"></i>Chat
+        <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
       <% end %>
     </div>
   </div>

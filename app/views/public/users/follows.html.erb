@@ -1,5 +1,13 @@
 <h1 class="text-center my-5">フォロー一覧</h1>
 
+<div class="row d-flex justify-content-end mb-4">
+  <div class= 'col-6 mx-auto text-right'>
+    <%= link_to followers_user_path(current_user.id), class: 'btn btn-info' do %>
+      フォロワー一覧へ
+    <% end %>
+  </div>
+</div>
+
 <div class="container-fluid mb-5">
   <table class="table table-striped">
     <thead>
@@ -21,6 +29,7 @@
           <td>フォロー数：<%= user.followings.count %></td>
           <td>フォロワー数：<%= user.followers.count %></td>
           <td><%= link_to "ユーザーページへ", user_path(user.id) %></td>
+          <td><%= render 'public/chats/chat_start_btn', user: user %></td>
         </tr>
       <% end %>
     </tbody>
