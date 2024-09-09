@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
+  before_action :ensure_log_in_user, only: [:edit, :update]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
@@ -78,5 +79,14 @@ class Public::UsersController < ApplicationController
       redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
     end
   end
+
+# 他人の編集ページへ直接アクセスするのを防ぐメソッド
+  def ensure_log_in_user
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to my_page_users_path
+    end
+  end
+
 
 end

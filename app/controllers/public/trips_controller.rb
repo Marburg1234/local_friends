@@ -39,7 +39,7 @@ class Public::TripsController < ApplicationController
     params.require(:trip).permit(:trip_image, :post_code, :address, :title, :explain)
   end
 
-# ゲストログインユーザーのダイレクトアタックを阻止するメソッド
+# ゲストログインユーザーの直接アクセスを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
       redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"

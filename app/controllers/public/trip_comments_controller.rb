@@ -9,10 +9,10 @@ class Public::TripCommentsController < ApplicationController
   end
 
   def destroy
-      comment = TripComment.find(params[:id])
-      comment.destroy
-      @trip = Trip.find(params[:book_id])
-      redirect_to request.referer
+    comment = TripComment.find(params[:id])
+    comment.destroy
+    @trip = Trip.find(params[:book_id])
+    redirect_to request.referer
   end
 
   private

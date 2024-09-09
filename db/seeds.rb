@@ -1,9 +1,5 @@
 
-
-
 Admin.create(email: '1@yahoo.co.jp', password: '111111')
-
-
 
 japan = Country.create(name: '日本')
 Region.create(name: '北海道', country: japan)

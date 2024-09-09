@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(3)
   end
 
   def show
@@ -26,19 +26,6 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  # def change_status
-  #   @user = User.find(params[:id])
-  #   if @user.is_active == true
-  #     @user.update(is_active:false)
-  #     reset_session
-  #     flash[:notice] = "退会処理を実行しました"
-  #     redirect_to admin_user_path
-  #   else
-  #     @user.update(is_active:true)
-  #     flash[:notice] = "会員ステータスを有効に変更しました"
-  #     redirect_to admin_user_path
-  #   end
-  # end
 
   private
 

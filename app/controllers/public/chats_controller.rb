@@ -51,6 +51,7 @@ class Public::ChatsController < ApplicationController
     @users = User.where(id: @opponents)
   end
 
+
   private
 
   # フォームから送信されたパラメーターを安全に取得する⇒ストロングパラメーター定義
@@ -58,7 +59,7 @@ class Public::ChatsController < ApplicationController
     params.require(:chat).permit(:message, :chat_room_id)
   end
 
-   # 関連のないユーザーをブロックする
+   # チャット 関連のないユーザーをブロックする
   def block_non_related_users
   # ユーザーがお互いにフォローしているか確認し、していないばあにはリダイレクト
     unless current_user.followed_by?(@user) && @user.followed_by?(current_user)
@@ -66,7 +67,7 @@ class Public::ChatsController < ApplicationController
     end
   end
 
-  # ゲストログインユーザーのダイレクトアタックを阻止するメソッド
+  # ゲストログインユーザーの直接URLのアクセスを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
       redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
