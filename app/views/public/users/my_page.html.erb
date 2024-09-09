@@ -18,7 +18,12 @@
       <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
         <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
       <% end %>
+  <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
+  <%= render 'follow_follower_count', user: @user %>
     </div>
+
+
+
   </div>
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-3 text-right">
@@ -26,98 +31,7 @@
     </div>
   </div>
 
-<!--以下がユーザー情報に関するコード-->
-  <div class="row d-flex justify-content-center mb-4">
-    <div class="col-lg-4 col-md-5 col-sm-12 justify-content-center text-center shadow border p-3" style="border-radius: 20px;">
-     <h5 class="mb-3 border-bottom">ユーザー写真</h5>
-     <%= image_tag @user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
-    </div>
-    <div class="col-lg-7 offset-1 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
-      <h5 class="mb-3 border-bottom text-center">基本情報</h5>
-      <table>
-        <tr>
-          <th class="pr-3 pb-2">Name</th>
-          <th class="pl-3 pb-2"><%= @user.family_name %>  <%= @user.first_name %></th>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2">Country</th>
-          <th class="pl-3 pb-2"><%= @user.country.name %></th>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2">Location</th>
-          <th class="pl-3 pb-2"> <%= @user.region.name %></th>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2">フォロー数</th>
-          <th class="pl-3 pb-2 text-center">
-            <%= link_to follows_user_path(@user.id) do %>
-              <%= @user.followings.count %>
-            <% end %>
-          </th>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2">フォロワー数</th>
-          <th class="pl-3  pb-2 text-center">
-            <%= link_to followers_user_path(@user.id) do %>
-              <%= @user.followers.count %>
-            <% end %>
-          </th>
-        </tr>
-      </table>
-    </div>
-  </div>
+  <!--ユーザー情報は部分テンプレート化-->
+  <%= render 'layouts/user_show', user: @user, trips: @trips %>
 
-  <div class="row d-flex justify-content-center rounded mb-4">
-    <div class="col-lg-4 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
-      <h5 class="mb-3 border-bottom text-center">母国語と学習中の言語</h5>
-      <table>
-        <tr>
-          <th class="pr-3 pb-2 py-2 border-bottom">母国語</th>
-          <td class="pl-3 pb-2 py-2 border-bottom"><%= image_tag @user.mother_language.flag, size: '40x40', class: 'rounded border mr-2' %><%= @user.mother_language.name %></td>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2 py-3">学習中の言語</th>
-          <td class="pl-3 pb-2 py-3"><%= image_tag @user.practice_language.flag, size: '40x40', class: 'rounded border mr-2' %><%= @user.practice_language.name %></td>
-        </tr>
-
-      </table>
-    </div>
-    <div class="col-lg-7 offset-1 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
-      <div class="my-3">
-        <h5 class="mb-3 border-bottom text-center">自己紹介・話したい話題</h5>
-        <div class="my-2"><strong>自己紹介文</strong></div>
-        <div class="border rounded p-2"><%= @user.introduction %></div>
-      </div>
-      <div>
-        <div class="my-2"><strong>話したい話題</strong></div>
-        <div class="border rounded p-2"><%= @user.topic %></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row d-flex justify-content-center mb-4">
-    <div class="col-lg-4 col-md-5 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#EEFFFF;">
-      <h5 class="mb-3 border-bottom text-center">ユーザー写真</h5>
-      <% @user.sub_images.each do |sub_image| %>
-        <%= image_tag sub_image, size: '90x90', class: 'rounded mr-3 mb-3' %>
-      <% end %>
-    </div>
-    <div class="col-lg-7 offset-1 col-md-5 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#EEFFFF;">
-      <h5 class="mb-3 border-bottom text-center">投稿した写真</h5>
-        <div>
-          <div class="text-center">
-            <% if @trips.empty? %>
-              投稿画像がありません
-            <% end %>
-          </div>
-          <% @trips.first(4).each do |trip| %>
-            <%= image_tag trip.get_trip_image, size: '100x90', class: 'mr-4 my-3' %>
-          <% end %>
-          <% if @trips.empty? %>
-            <% else %>
-            <%= link_to "もっと見る", post_index_user_path(@user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
-          <% end %>
-      </div>
-    </div>
-  </div>
 </div>

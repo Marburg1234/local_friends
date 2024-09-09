@@ -25,7 +25,11 @@
       <% end %>
       <!--chat開始ボタン-->
       <%= render 'public/chats/chat_start_btn', user: @user %>
+
+          <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
+    <%= render 'follow_follower_count', user: @user %>
     </div>
+
   </div>
 
 
@@ -33,3 +37,4 @@
 <%= render 'layouts/user_show', user: @user, trips: @trips %>
 
 
+</div>
