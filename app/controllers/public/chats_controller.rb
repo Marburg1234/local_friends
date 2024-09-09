@@ -1,11 +1,14 @@
 class Public::ChatsController < ApplicationController
   before_action :ensure_guest_user, only: [:index, :show,]
-  before_action :block_non_related_users, only: [:show]
 
 # チャットルームの表示
   def show
     # チャット相手のユーザーをURLから取得する
     @user = User.find(params[:id])
+    # 相互フォローしていないユーザーのチャット画面へは遷移できないようにするunless
+    unless current_user.followed_by?(@user) && @user.followed_by?(current_user)
+      redirect_to chats_path
+    end
     # 現在ログイン中のユーザーが参加しているチャットルームの一覧を取得
     rooms = current_user.user_rooms.pluck(:chat_room_id)
     # 相手ユーザーとの共有チャットルームが存在するか確認
@@ -37,7 +40,7 @@ class Public::ChatsController < ApplicationController
     render :validate unless @chat.save
   end
 
-
+  # メッセージの削除
   def destroy
     # ログイン中のユーザーに関連するメッセージを削除
     @chat = current_user.chats.find(params[:id])
@@ -57,14 +60,6 @@ class Public::ChatsController < ApplicationController
   # フォームから送信されたパラメーターを安全に取得する⇒ストロングパラメーター定義
   def chat_params
     params.require(:chat).permit(:message, :chat_room_id)
-  end
-
-   # チャット 関連のないユーザーをブロックする
-  def block_non_related_users
-  # ユーザーがお互いにフォローしているか確認し、していないばあにはリダイレクト
-    unless current_user.followed_by?(@user) && @user.followed_by?(current_user)
-      redirect_to trips_path
-    end
   end
 
   # ゲストログインユーザーの直接URLのアクセスを阻止するメソッド

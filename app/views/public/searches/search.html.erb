@@ -2,9 +2,19 @@
   <table class="table my-5">
   <!--検索対象モデルがUserの時-->
     <% if @range == "User" %>
-          <h2 class="my-4 text-center">検索結果</h2>
+        <h2 class="my-4 text-center">検索結果</h2>
           <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
-          検索条件:"<%= @search %>"</div>
+            検索条件:
+              <% if @search == "perfect_match" %>
+                "<%= "完全一致" %>"
+              <% elsif @search == "forward_match" %>
+                "<%= "前方一致" %>
+              <% elsif @search == "backward_match" %>
+                "<%= "後方一致" %>"
+              <% else %>
+                "<%= "部分一致" %>"
+              <% end %>
+          </div>
         <thead>
           <tr>
             <th>image</th>
@@ -33,7 +43,7 @@
         </tbody>
         <% else %>
 
-        <!--検索対象がbookの時-->
+        <!--検索対象が記事(trip)の時-->
         <thead>
           <tr>
             <th>投稿ユーザー</th>
@@ -44,8 +54,19 @@
         </thead>
         <tbody>
           <h2 class="my-4 text-center">検索結果</h2>
-          <div class="col-4 mx-auto my-4">キーワード: "<%= @word %>" <br/>
-          検索条件:"<%= @search %>"</div>
+          <div class="col-4 mx-auto my-4">
+            キーワード: "<%= @word %>" <br/>
+            検索条件:
+            <% if @search == "perfect_match" %>
+              "<%= "完全一致" %>"
+            <% elsif @search == "forward_match" %>
+              "<%= "前方一致" %>
+            <% elsif @search == "backward_match" %>
+              "<%= "後方一致" %>"
+            <% else %>
+              "<%= "部分一致" %>"
+            <% end %>
+          </div>
           <% @trips.each do |trip| %>
           <tr>
             <td>

@@ -28,68 +28,68 @@
 
   <div>
     <div class="navbar navbar-right navbar-expand-lg collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav ml-auto">
-            <!--管理者ログインした時のヘッダー-->
-            <% if admin_signed_in? %>
-              <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-              <%= link_to '投稿一覧', admin_trips_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-              <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
+      <ul class="navbar-nav ml-auto">
+        <!--管理者ログインした時のヘッダー-->
+        <% if admin_signed_in? %>
+          <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
+          <%= link_to '投稿一覧', admin_trips_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
 
-            <!--ユーザー サインイン状態のヘッダーnav-->
-            <% elsif user_signed_in? %>
-              <li>
-                <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
-              </li>
-              <li>
-                <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn text-warning' do %>
-                <i class="fa-solid fa-user"></i>マイページ
-                <% end %>
-              </li>
-              <li>
-                <%= link_to users_path, method: :GET, class: 'nav-link text-warning' do %>
-                <i class="fa-solid fa-people-carry-box"></i>コミュニティ<br/>
-                (ユーザーを探す)
-                <% end %>
-              </li>
-              <li>
-                <%= link_to chats_path, method: :GET, class: 'nav-link text-warning' do %>
-                <i class="fa-solid fa-comment-dots"></i>Chat
-                <% end %>
-              </li>
-              <li>
-                <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
-                <i class="fa-solid fa-newspaper"></i>投稿一覧
-                <% end %>
-              </li>
-              <li>
-                <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
-                <i class="fa-solid fa-signs-post"></i>新規投稿
-                <% end %>
-              </li>
-              <li>
-                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
-                <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
-                <% end %>
-              </li>
-            <% else %>
-              <!--ユーザーサインアウト状態のヘッダーnav-->
-              <li>
-                <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
-              </li>
-              <li>
-                <%= link_to new_user_registration_path, class: 'nav-link text-warning btn' do %>
-                <i class="fa-solid fa-right-to-bracket"></i> 新規会員登録
-              <% end %>
-              </li>
-              <li>
-                <%= link_to new_user_session_path, class: 'nav-link text-warning btn' do %>
-                <i class="fa-regular fa-address-card"></i> ログイン
-              <% end %>
-              </li>
+        <!--ユーザー サインイン状態のヘッダーnav-->
+        <% elsif user_signed_in? %>
+          <li>
+            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
+          </li>
+          <li>
+            <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn text-warning' do %>
+            <i class="fa-solid fa-user"></i>マイページ
             <% end %>
-          </ul>
-        </div>
-      </div>
+          </li>
+          <li>
+            <%= link_to users_path, method: :GET, class: 'nav-link text-warning' do %>
+            <i class="fa-solid fa-people-carry-box"></i>コミュニティ<br/>
+            (ユーザーを探す)
+            <% end %>
+          </li>
+          <li>
+            <%= link_to chats_path, method: :GET, class: 'nav-link text-warning' do %>
+            <i class="fa-solid fa-comment-dots"></i>Chat
+            <% end %>
+          </li>
+          <li>
+            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
+            <i class="fa-solid fa-newspaper"></i>投稿一覧
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
+            <i class="fa-solid fa-signs-post"></i>新規投稿
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
+            <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
+            <% end %>
+          </li>
+        <% else %>
+          <!--ユーザーサインアウト状態のヘッダーnav-->
+          <li>
+            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path, class: 'nav-link text-warning btn' do %>
+            <i class="fa-solid fa-right-to-bracket"></i> 新規会員登録
+          <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_session_path, class: 'nav-link text-warning btn' do %>
+            <i class="fa-regular fa-address-card"></i> ログイン
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 
    <div class="row">
       <!--検索フォームの追加-->
