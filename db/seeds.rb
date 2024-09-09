@@ -144,41 +144,41 @@ Language.create!(name: '英語') do |language|
     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/usa.png"), filename:"usa.png")
 end
 
-# Language.create!(name: '韓国語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/korea.png"), filename:"korea.png")
-# end
+Language.create!(name: '韓国語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/korea.png"), filename:"korea.png")
+end
 
-# Language.create!(name: '中国語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/china.png"), filename:"china.png")
-# end
+Language.create!(name: '中国語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/china.png"), filename:"china.png")
+end
 
-# Language.create!(name: 'スペイン語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/spain.png"), filename:"spain.png")
-# end
+Language.create!(name: 'スペイン語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/spain.png"), filename:"spain.png")
+end
 
-# Language.create!(name: 'フランス語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/france.png"), filename:"france.png")
-# end
+Language.create!(name: 'フランス語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/france.png"), filename:"france.png")
+end
 
-# Language.create!(name: 'イタリア語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/italy.png"), filename:"italy.png")
-# end
+Language.create!(name: 'イタリア語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/italy.png"), filename:"italy.png")
+end
 
-# Language.create!(name: 'ドイツ語') do |language|
-#     language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/germany.png"), filename:"germany.png")
-# end
+Language.create!(name: 'ドイツ語') do |language|
+    language.flag = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/germany.png"), filename:"germany.png")
+end
 
 
-User.create!(first_name: 'かつお') do |user|
-    user.family_name = '磯野'
+User.create!(first_name: '元太') do |user|
+    user.family_name = '小嶋'
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
     user.country_id = 1
     user.region_id = 1
     user.mother_language_id = 1
     user.practice_language_id = 2
-    user.introduction = "磯野かつおです！かなりの有名人です！"
+    user.introduction = "小嶋元太、参上！！"
     user.age = 11
-    user.topic = "なんでも大好きです！"
+    user.topic = "うな重食わせろ！"
     user.is_active = 'true'
 end

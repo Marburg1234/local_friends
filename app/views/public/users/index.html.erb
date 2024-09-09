@@ -1,4 +1,4 @@
-<div class="container mx-auto container-fluid">
+<div class="container container-fluid">
   <div class="row my-3">
     <div class="col-12 px-sm-0 text-center">
       <h2 class="pr-3 pl-3">他のユーザーと交流しよう！</h2>
@@ -6,7 +6,7 @@
   </div>
 
   <div class="row my-3">
-    <div class="d-flex flex-column flex-sm-row flex-wrap">
+    <div class="col-12 d-flex flex-wrap">
       <% @users.each_slice(4) do |users| %>
         <% users.each do |user| %>
           <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->
