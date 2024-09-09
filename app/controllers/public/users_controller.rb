@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
   # 特定ユーザーの投稿一覧を表示する
   def post_index
     @user = User.find(params[:id])
-    @trips = @user.trips
+    @trips = @user.trips.page(params[:page]).per(8)
   end
 
   def show
@@ -49,8 +49,7 @@ class Public::UsersController < ApplicationController
   # いいねした記事一覧を表示するメソッドlikes
   def likes
     @user = current_user
-    @favorites = @user.favorites
-    @trip
+    @favorites = @user.favorites.page(params[:page]).per(4)
   end
 # ================================================
 

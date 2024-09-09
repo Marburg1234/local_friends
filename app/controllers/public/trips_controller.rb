@@ -20,7 +20,7 @@ class Public::TripsController < ApplicationController
   end
 
   def index
-    @trips = Trip.all
+    @trips = Trip.page(params[:page]).per(5)
   end
 
   def show

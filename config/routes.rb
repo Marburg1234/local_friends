@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-
+  namespace :admin do
+    get 'trips/index'
+    get 'trips/show'
+  end
   namespace :public do
     get 'relationships/create'
     get 'relationships/destroy'
@@ -24,6 +27,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index show edit update] do
      patch '/admin/users/:id/change_status', to: 'admin/users#change_status', as: 'admin_user_change_status'
     end
+    resources :trips, only: %i[index show destroy]
   end
 
   scope module: :public do
