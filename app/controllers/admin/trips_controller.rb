@@ -11,7 +11,7 @@ class Admin::TripsController < ApplicationController
   def destroy
     @trip = Trip.find(params[:id])
     @trip.destroy
-    flash[:notice] = "削除しました"
+    flash[:notice] = "選択した投稿記事を削除しました"
     redirect_to admin_trips_path
   end
 

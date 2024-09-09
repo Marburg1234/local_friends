@@ -1,0 +1,39 @@
+<div class="container mx-auto container-fluid">
+  <div class="row my-3">
+    <div class="col-12 px-sm-0 text-center">
+      <h2 class="pr-3 pl-3">他のユーザーと交流しよう！</h2>
+    </div>
+  </div>
+
+  <div class="row my-3">
+    <div class="d-flex flex-column flex-sm-row flex-wrap">
+      <% @users.each_slice(4) do |users| %>
+        <% users.each do |user| %>
+          <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top border-bottom rounded' %>
+            <div class="card-body text-dark">
+              <div class="card-title">
+                <strong><%= user.family_name %><%= user.first_name %></strong>
+              </div>
+              <div class="card-text">
+                出身
+                <span><%= user.country.name %></span>
+                <td><% user.region.name %></td>
+              </div>
+              <div class="card-text">
+                <th>母国語</th>
+                <td><%= image_tag user.mother_language.flag, size: '20x20', class: 'border' %><%= user.mother_language.name %></td>
+              </div>
+              <div class="card-text">
+                <th class="pr-3">学習中</th>
+                <td><%= image_tag user.practice_language.flag, size: '20x20', class: 'border' %><%= user.practice_language.name %></td>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

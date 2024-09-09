@@ -11,13 +11,13 @@
   <div class="row">
     <% @trips.each do |trip| %>
     <div class="col-lg-3 col-md-10 col-sm-12 ml-5 mb-5">
-      <%= link_to trip_path(trip.id) do %>
+      <%= link_to admin_trip_path(trip.id) do %>
         <%= image_tag trip.get_trip_image, size: "240x180" %>
       <% end %>
       <br/>
       <div class="pt-1 d-flex">
         <span style="vertical-align: middle; display: flex; align-items: center;">投稿ユーザー：</span>
-          <%= link_to user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
+          <%= link_to admin_user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
             <%= trip.user.family_name %>
             <%= trip.user.first_name %>
           <% end %>
@@ -40,7 +40,7 @@
           <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
-          <th><%= link_to "詳細ページへ", admin_trip_path(trip.id), clas: 'btn btn-info' %></th>
+          <th><%= link_to "投稿詳細ページへ", admin_trip_path(trip.id), clas: 'btn btn-info' %></th>
         </tr>
       </table>
     </div>

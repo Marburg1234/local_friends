@@ -1,15 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'trips/index'
-    get 'trips/show'
-  end
-  namespace :public do
-    get 'relationships/create'
-    get 'relationships/destroy'
-  end
-  get 'relationships/create'
-  get 'relationships/destroy'
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
@@ -40,7 +30,7 @@ Rails.application.routes.draw do
       resource :favorite, only: %i[create destroy]
       resources :trip_comments, only: %i[create destroy]
     end
-    resources :users, only: %i[edit show update] do
+    resources :users, only: %i[edit show update index] do
       resource :relationships, only: %i[create destroy]
       get :follows, on: :member
       get :followers, on: :member

@@ -1,8 +1,18 @@
 <nav class="header navbar navbar-expand-lg navbar-dark d-flex justify-content-between">
   <div>
-    <%= link_to  root_path, class: 'navbar-brand text-light logo_font' do %>
-     <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
-     <% end %>
+    <% if admin_signed_in? %>
+      <%= link_to admin_users_path, class: 'navbar-brand text-light logo_font' do %>
+        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+      <% end %>
+    <% elsif user_signed_in? %>
+      <%= link_to my_page_users_path, class: 'navbar-brand text-light logo_font' do %>
+        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: 'navbar-brand text-light logo_font' do %>
+        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+      <% end %>
+    <% end %>
   </div>
 
     <!--ボタンの長い記述→ハンバーガーメニューにできる魔法のコード！-->
@@ -33,6 +43,12 @@
               <li>
                 <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn text-warning' do %>
                 <i class="fa-solid fa-user"></i>マイページ
+                <% end %>
+              </li>
+              <li>
+                <%= link_to users_path, method: :GET, class: 'nav-link text-warning' do %>
+                <i class="fa-solid fa-people-carry-box"></i>コミュニティ<br/>
+                (ユーザーを探す)
                 <% end %>
               </li>
               <li>

@@ -9,6 +9,11 @@ class Public::UsersController < ApplicationController
     @trips = @user.trips.page(params[:page]).per(8)
   end
 
+  # ランダムでユーザーを表示する
+  def index
+    @users = User.order("RANDOM()").all
+  end
+
   def show
     @user = User.find(params[:id])
     @trips = @user.trips
