@@ -12,11 +12,12 @@
     <%= form_with model: @user do |f| %>
       <div class="row my-3">
         <span>プロフィール写真<br />
-          <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*", class: 'image_form' %>
+          <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
+          <div id="preview-item1" style="max-height: 100px; max-width: 100px;">
+            <%= image_tag @user.get_profile_image, size: '100x100' %>
+          </div>
         </span>
       </div>
-
-
 
       <div class="row mb-3 form-group">
         姓
@@ -43,8 +44,14 @@
 
       <div class="row my-3">
         <span>サブ写真(※最大5枚の画像を保存できます)<br />
-          <%= f.file_field :sub_images, placeholder:"画像をアップ", multiple:true, accept: "image/*" %>
+          <%= f.file_field :sub_images, placeholder:"画像をアップ", multiple:true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")' %>
+            <div id="preview-item2" class="d-flex" style="margin-top: 10px;" >
+              <% @user.get_sub_images.each do |sub_image| %>
+                <%= image_tag sub_image, size: '100x100', class: 'mr-2' %>
+              <% end %>
+            </div>
         </span>
+
       </div>
       <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
     <% end %>
@@ -55,3 +62,48 @@
       <%= link_to "退会する", unsubscribe_user_path, method: :GET, class: 'btn btn-danger' %>
   </div>
 </div>
+
+<!--プロフィール写真用のプレビュー表示 関数名 ProfileimgPreview-->
+<script>
+  function ProfileimgPreview(event, previewId) {
+    var input = event.target;
+    var reader = new FileReader();
+
+    reader.onload = function() {
+      var preview = document.getElementById(previewId);
+      var img = document.createElement('img');
+      img.src = reader.result;
+      img.style.height = '100px';
+      img.style.width = '100px';
+      preview.innerHTML = '';
+      preview.appendChild(img);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+
+<!--サブ写真用のプレビュー表示 関数名 SubimgPreview-->
+<script>
+  function SubimgPreview(event, previewId) {
+    var input = event.target;
+    var preview = document.getElementById(previewId);
+    preview.innerHTML = ''; // 既存のプレビューをクリア
+
+    Array.from(input.files).forEach(file => {
+      var reader = new FileReader();
+
+      reader.onload = function() {
+        var img = document.createElement('img');
+        img.src = reader.result;
+        img.style.height = '100px';
+        img.style.width = '100px';
+        img.style.marginRight = '10px'; // 画像間にスペースを追加
+        img.style.marginTop = '10px';
+        preview.appendChild(img);
+      }
+
+      reader.readAsDataURL(file);
+    });
+  }
+</script>
