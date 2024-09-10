@@ -35,11 +35,11 @@
 
       <table class="mt-3">
         <th  class="px-3 py-2"></th>
-        <td  class="pl-3">
+        <td  id="favorite_button_<%= @trip.id %>" class="pl-3">
           <!--いいね♡の表示-->
           <%= render 'public/favorites/like', trip: @trip %>
          </td>
-        <td  class="pl-3">
+        <td class="pl-3">
           <%= render 'public/trip_comments/count', trip: @trip %>
         </td>
       </table>

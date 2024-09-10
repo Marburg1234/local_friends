@@ -20,7 +20,7 @@
               <div class="card-title"><%= trip.title %></div>
               <div class="card-text"><%= trip.address %></div>
               <div class="card-text"><%= trip.explain %></div>
-              <div class="card-text mt-3"><%= render 'public/favorites/like', trip: trip %></div>
+              <div  id="favorite_button_<%= trip.id %>" class="card-text mt-3"><%= render 'public/favorites/like', trip: trip %></div>
             </div>
           </div>
         <% end %>
