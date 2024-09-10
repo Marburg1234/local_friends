@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    @users = User.where.not(id: current_user.id).order("RANDOM()").all
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).order("RANDOM()").all
   end
 
   def show

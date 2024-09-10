@@ -19,8 +19,12 @@ class Public::TripsController < ApplicationController
     end
   end
 
+  # 投稿一覧表示：退会済みユーザーの投稿を表示しない
   def index
-    @trips = Trip.page(params[:page]).per(5)
+    # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
+    not_active_users = User.where(is_active: false).pluck(:id)
+    # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
+    @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
   end
 
   def show
