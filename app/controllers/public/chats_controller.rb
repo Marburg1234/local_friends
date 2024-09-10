@@ -3,6 +3,7 @@ class Public::ChatsController < ApplicationController
   before_action :check_follow_situation, only: [:show]
   before_action :check_not_active_user, only: [:show]
 
+#============================================================================
 # チャットルームの表示
   def show
     # チャット相手のユーザーをURLから取得する
@@ -32,6 +33,7 @@ class Public::ChatsController < ApplicationController
     # 新しいメッセージの作成するために、空のChatオブジェクトを生成する
     @chat = Chat.new(chat_room_id: @room.id)
   end
+#=============================================================================
 
    # メッセージの送信
   def create
@@ -49,12 +51,15 @@ class Public::ChatsController < ApplicationController
     @chat.destroy
   end
 
+#=============================================================================
+# チャット相手の一覧を表示する
   def index
     rooms = current_user.user_rooms.pluck(:chat_room_id)
     not_active_users = User.where(is_active: false).pluck(:id)
     @opponents = UserRoom.where(chat_room_id: rooms).where.not(user_id: current_user.id).where.not(user_id: not_active_users).pluck(:user_id)
     @users = User.where(id: @opponents)
   end
+#=============================================================================
 
 
   private
@@ -79,7 +84,8 @@ class Public::ChatsController < ApplicationController
     end
   end
 
-  #相互フォローしているかの確認メソッド
+  #相互フォローしているかの確認メソッド　before_actionで直接アクセスを防ぐ
+  # 相互フォローしていない人同士で勝手にチャットルームが作られないようにする
   def check_follow_situation
     @user = User.find(params[:id])
     # 相互フォローしていないユーザーのチャット画面へは遷移できないようにするunless
