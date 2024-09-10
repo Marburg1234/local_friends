@@ -2,15 +2,15 @@
   <div>
     <% if admin_signed_in? %>
       <%= link_to admin_users_path, class: 'navbar-brand text-light logo_font' do %>
-        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+        <h2 class="logo"><span class="local">Local</span>.<span class="friends">Friends</span></h2>
       <% end %>
     <% elsif user_signed_in? %>
       <%= link_to my_page_users_path, class: 'navbar-brand text-light logo_font' do %>
-        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+        <h2 class="logo"><span class="local">Local</span>.<span class="friends">Friends</span></h2>
       <% end %>
     <% else %>
       <%= link_to root_path, class: 'navbar-brand text-light logo_font' do %>
-        <h2><span class="local">Local</span>.<span class="friends">Friends</span></h2>
+        <h2 class="logo"><span class="local">Local</span>.<span class="friends">Friends</span></h2>
       <% end %>
     <% end %>
   </div>
@@ -77,12 +77,12 @@
             <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
           </li>
           <li>
-            <%= link_to new_user_registration_path, class: 'nav-link text-warning btn' do %>
+            <%= link_to new_user_registration_path, class: 'header-link nav-link' do %>
             <i class="fa-solid fa-right-to-bracket"></i> 新規会員登録
           <% end %>
           </li>
           <li>
-            <%= link_to new_user_session_path, class: 'nav-link text-warning btn' do %>
+            <%= link_to new_user_session_path, class: 'header-link nav-link' do %>
             <i class="fa-regular fa-address-card"></i> ログイン
           <% end %>
           </li>

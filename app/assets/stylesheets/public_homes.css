@@ -19,6 +19,11 @@ header{
   font-family: 'Sacramento', cursive;
 }
 
+.logo:hover{
+  font-size: 2.3rem;
+  transition: size 2.0s;
+}
+
 .local{
   color: #66FFFF;
 }
