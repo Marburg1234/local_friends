@@ -52,9 +52,14 @@ class Public::TripsController < ApplicationController
   end
 
 # 退会したユーザーの投稿showページへ直接アクセスを防ぐメソッド
+# 同時にparams1000などの直接アクセス RecordNotFoundエラーを防止する
   def check_not_active_user
-    @trip = Trip.find(params[:id])
-    unless @trip.user.is_active == true
+    begin
+      @trip = Trip.find(params[:id])
+      unless @trip.user.is_active == true
+        redirect_to trips_path
+      end
+    rescue ActiveRecord::RecordNotFound
       redirect_to trips_path
     end
   end
