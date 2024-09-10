@@ -1,3 +1,3 @@
 $('#trip-comments').html("<%= j(render 'public/trip_comments/comment_index', trip: @trip ) %>");
-$('#comment-count').html("<%= @trip.trip_comments.count %>")
+$('#comment-count').html("コメント数: <%= @trip.trip_comments.count %>");
 $("textarea").val('');
