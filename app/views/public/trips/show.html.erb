@@ -39,7 +39,7 @@
           <!--いいね♡の表示-->
           <%= render 'public/favorites/like', trip: @trip %>
          </td>
-        <td class="pl-3">
+        <td id="comment-count" class="pl-3">
           <%= render 'public/trip_comments/count', trip: @trip %>
         </td>
       </table>
@@ -75,13 +75,17 @@
   </div>
 
   <!--コメントの投稿フォーム (部分テンプレート)-->
-  <%= render 'public/trip_comments/form', trip: @trip, trip_comment: @trip_comment %>
+  <div id="comment-form">
+    <%= render 'public/trip_comments/form', trip: @trip, trip_comment: @trip_comment %>
+  </div>
 
   <!--コメントの一覧表示 (部分テンプレート)-->
   <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメント一覧</h3>
-  <% if @trip.trip_comments.count == 0 %>
-    <p class="text-center mb-5">コメントがありません</p>
-  <% else %>
-    <%= render 'public/trip_comments/comment_index', trip: @trip %>
-  <% end %>
+  <div id="trip-comments">
+    <% if @trip.trip_comments.count == 0 %>
+      <p class="text-center mb-5">コメントがありません</p>
+    <% else %>
+      <%= render 'public/trip_comments/comment_index', trip: @trip %>
+    <% end %>
+  </div>
 </div>

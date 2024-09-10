@@ -19,6 +19,7 @@
           </tr>
         </table>
         <%= trip_comment.comment %>
+        <%= link_to "削除する", trip_trip_comment_path(trip, trip_comment), method: :delete, data: { confirm: "削除してよろしいでしょうか？" }, class: 'btn btn-danger btn-sm', remote:true, data: {"turbolinks" => false} %>
       </div>
     </div>
   <% end %>
