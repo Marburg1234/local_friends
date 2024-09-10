@@ -9,7 +9,6 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
-
 #==========================================================================
   # 退会したユーザーがログインできないようにする
   private
