@@ -38,13 +38,13 @@
           </div>
           <!--Country 選択-->
           <div class="field my-3">
-            <%= f.label :出身国 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name), include_blank: true %>
+            <%= f.label :国 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %>
           </div>
           <!--Region 選択-->
-          <div class="field my-3">
+          <div class="field mb-3">
             <%= f.label :地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.select :region_id, options_from_collection_for_select(Region.all, :id, :name), include_blank: true %>
+            <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
           </div>
 
           <!--母国語language 選択-->
@@ -83,3 +83,33 @@
     </div>
   </div>
 </div>
+
+
+<!--JSの記述 国を選択したら、関連した地域が出てくる-->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const countrySelect = document.getElementById('country_select');
+    const regionSelect = document.getElementById('region_select');
+
+    countrySelect.addEventListener('change', function() {
+      const countryId = countrySelect.value;
+
+      if (countryId) {
+        fetch(`/countries/${countryId}/regions`)
+          .then(response => response.json())
+          .then(data => {
+            regionSelect.innerHTML = ''; // 既存の選択肢をクリア
+
+            data.forEach(region => {
+              const option = document.createElement('option');
+              option.value = region.id;
+              option.text = region.name;
+              regionSelect.appendChild(option);
+            });
+          });
+      } else {
+        regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
+      }
+    });
+  });
+</script>

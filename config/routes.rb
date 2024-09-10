@@ -47,6 +47,8 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :countries, only: [] do
+    get 'regions', on: :member
+  end
 
 end
