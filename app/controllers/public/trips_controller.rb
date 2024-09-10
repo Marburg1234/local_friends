@@ -1,6 +1,7 @@
 class Public::TripsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:new, :edit]
+  before_action :check_not_active_user, only: [:show, :edit]
 
   def new
     @trip = Trip.new
@@ -47,6 +48,14 @@ class Public::TripsController < ApplicationController
   def ensure_guest_user
     if current_user.email == "guest@example.com"
       redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+    end
+  end
+
+# 退会したユーザーの投稿showページへ直接アクセスを防ぐメソッド
+  def check_not_active_user
+    @trip = Trip.find(params[:id])
+    unless @trip.user.is_active == true
+      redirect_to trips_path
     end
   end
 

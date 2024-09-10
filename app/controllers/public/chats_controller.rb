@@ -1,5 +1,7 @@
 class Public::ChatsController < ApplicationController
-  before_action :ensure_guest_user, only: [:index, :show,]
+  before_action :ensure_guest_user, only: [:index, :show]
+  before_action :check_follow_situation, only: [:show]
+  before_action :check_not_active_user, only: [:show]
 
 # チャットルームの表示
   def show
@@ -47,10 +49,10 @@ class Public::ChatsController < ApplicationController
     @chat.destroy
   end
 
-
   def index
     rooms = current_user.user_rooms.pluck(:chat_room_id)
-    @opponents = UserRoom.where(chat_room_id: rooms).where.not(user_id: current_user.id).pluck(:user_id)
+    not_active_users = User.where(is_active: false).pluck(:id)
+    @opponents = UserRoom.where(chat_room_id: rooms).where.not(user_id: current_user.id).where.not(user_id: not_active_users).pluck(:user_id)
     @users = User.where(id: @opponents)
   end
 
@@ -69,5 +71,21 @@ class Public::ChatsController < ApplicationController
     end
   end
 
+  #退会ユーザーとのチャットページへの直接アクセスを防ぐ
+  def check_not_active_user
+    user = User.find(params[:id])
+    unless user.is_active == true
+      redirect_to my_page_users_path
+    end
+  end
+
+  #相互フォローしているかの確認メソッド
+  def check_follow_situation
+    @user = User.find(params[:id])
+    # 相互フォローしていないユーザーのチャット画面へは遷移できないようにするunless
+    unless current_user.followed_by?(@user) && @user.followed_by?(current_user)
+      redirect_to my_page_users_path
+    end
+  end
 
 end

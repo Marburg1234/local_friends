@@ -2,6 +2,7 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
   before_action :ensure_log_in_user, only: [:edit, :update]
+  before_action :check_not_active_user, only: [:show, :post_index, :edit]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
@@ -92,5 +93,12 @@ class Public::UsersController < ApplicationController
     end
   end
 
+#退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
+  def check_not_active_user
+    @user = User.find(params[:id])
+    unless @user.is_active == true
+      redirect_to users_path
+    end
+  end
 
 end
