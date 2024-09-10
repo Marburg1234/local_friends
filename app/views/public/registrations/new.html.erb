@@ -1,71 +1,75 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <div class="container">
   <div class="text-center mt-3"><h2>新規会員登録</h2></div>
+  <div class="registration_alert-message">
+    <%= flash[:registration_alert] %>
+  </div>
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-
         <%= form_with model: @user, url: user_registration_path do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
-          <div class="field mb-2">
-            <%= f.label :姓 %><br />
-            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true %>
+          <div class="field mb-4">
+            <%= f.label :姓 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true, class: 'form-control' %>
           </div>
-          <div class="field mb-2">
-            <%= f.label :名 %><br />
-            <%= f.text_field :first_name, autocomplete: "first_name", required: true %>
-          </div>
-
-          <div class="field mb-2">
-            <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autocomplete: "email", required: true %>
+          <div class="field my-3">
+            <%= f.label :名 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.text_field :first_name, autocomplete: "first_name", required: true, class: 'form-control' %>
           </div>
 
-          <div class="field mb-2">
+          <div class="field my-3">
+            <%= f.label :メールアドレス %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.email_field :email, autocomplete: "email", required: true, class: 'form-control' %>
+          </div>
+
+          <div class="field my-3">
             <%= f.label :パスワード %>
             <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> 文字以上)</em>
+            <em>(<%= @minimum_password_length %> 文字以上)</em><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", required: true %>
+            <%= f.password_field :password, autocomplete: "new-password", required: true, class: 'form-control' %>
           </div>
 
-          <div class="field">
-            <%= f.label :パスワード再入力 %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+          <div class="field my-3">
+            <%= f.label :パスワード再入力 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: 'form-control' %>
           </div>
           <!--Country 選択-->
-          <div class="field mb-2">
-            <%= f.label :出身国 %><br />
+          <div class="field my-3">
+            <%= f.label :出身国 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :country_id, options_from_collection_for_select(Country.all, :id, :name), include_blank: true %>
           </div>
           <!--Region 選択-->
-          <div class="field mb-2">
-            <%= f.label :地域 %><br />
+          <div class="field my-3">
+            <%= f.label :地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :region_id, options_from_collection_for_select(Region.all, :id, :name), include_blank: true %>
           </div>
 
           <!--母国語language 選択-->
-          <div class="field mb-2">
-            <%= f.label :母国語 %><br />
+          <div class="field mb-3">
+            <%= f.label :母国語 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :mother_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
           </div>
           <!--学習中の言語language 選択-->
-          <div class="field mb-2">
-            <%= f.label :学習中の言語 %><br />
+          <div class="field mb-3">
+            <%= f.label :学習中の言語 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :practice_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
           </div>
           <!--年齢を選択する-->
-          <div class="field mb-2">
-            <%= f.label :年齢 %><br />
+          <div class="field mb-4">
+            <%= f.label :年齢 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :age, *[16..100], include_blank: true, required: true %>
           </div>
           <!--自己紹介文 introduction入力欄-->
-          <div class="field mb-2">
-            <%= f.label :自己紹介 %><br />
+          <div class="field mb-3">
+            <%= f.label :自己紹介 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！", required: true %>
           </div>
           <!--好きな話題 topic入力欄-->
-          <div class="field mb-2">
-            <%= f.label :話したい話題 %><br />
+          <div class="field mb-3">
+            <%= f.label :話したい話題 %><span class="ml-2 text-light p-1" style="background-color: #FF6600;"><%= "必須" %></span><br />
             <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事", required: true %>
           </div>
           <div class="actions my-3">
@@ -74,7 +78,6 @@
         <% end %>
 
         <%= render "public/shared/links" %>
-
 
       </div>
     </div>

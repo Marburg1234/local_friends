@@ -24,8 +24,10 @@ class Public::RegistrationsController < Devise::RegistrationsController
       redirect_to after_inactive_sign_up_path_for(resource)
       end
     else
+      resource.errors.clear
       clean_up_passwords resource
-      flash[:alert] = resource.errors.full_messages.join(', ')
+      flash[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
+      # flash[:alert] = resource.errors.full_messages.join(', ')
       redirect_to new_user_registration_path
     end
   end

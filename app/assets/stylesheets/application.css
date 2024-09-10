@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');*/
 
 *{
   margin:0;
@@ -25,4 +25,10 @@
 
 .first{
   color:black;
+}
+
+.registration_alert-message{
+  color: white;
+  background-color: #FF8856;
+  heigth: 50px
 }
