@@ -2,6 +2,7 @@ class Admin::TripsController < ApplicationController
 
   def index
     @trips = Trip.all.page(params[:page]).per(5)
+    @all_trips = @trips.count
   end
 
   def show

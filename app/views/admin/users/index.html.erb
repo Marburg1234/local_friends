@@ -1,4 +1,30 @@
-<div class="container mx-auto container-fluid">
+
+
+<div class="container mx-auto container-fluid my-3">
+
+  <table class="table table-bordered">
+    <tr>
+      <th>項目</th>
+      <th>人数(人)</th>
+      <th>割合(%)</th>
+    </tr>
+    <tr>
+      <th>合計人数</th>
+      <td><%= @users_count %></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>有効人数</th>
+      <td><%= @active_users_all %></td>
+      <td><%= @active_user_ration %> %</td>
+    </tr>
+    <tr>
+      <th>退会済み</th>
+      <td><%= @not_active_users %></td>
+      <td><%= @not_active_user_ration %> %</td>
+    </tr>
+  </table>
+
   <div class="row my-3 justify-content-center">
     <div class="col-10 px-sm-0">
 
