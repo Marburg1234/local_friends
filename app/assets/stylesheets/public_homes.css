@@ -57,3 +57,22 @@ footer{
   width: 100%;
   padding: 10px;
 }
+
+
+/*Admin_user_index*/
+.admin_user_table .head{
+  background-color:#EEEEEE;
+}
+
+.admin_user_table .analyse_link:hover{
+  background-color: yellow;
+  font-size: 2.3rem;
+}
+
+.admin_user_table .active_users{
+  background-color:#CCFF99;
+}
+
+.admin_user_table .non_active_users{
+  background-color:#FFABCE;
+}

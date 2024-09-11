@@ -15,6 +15,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index show edit update] do
+      collection do
+        get 'active_users' => "users#active_users"
+        get 'inactive_users' => "users#inactive_users"
+      end
      patch '/admin/users/:id/change_status', to: 'admin/users#change_status', as: 'admin_user_change_status'
     end
     resources :trips, only: %i[index show destroy]

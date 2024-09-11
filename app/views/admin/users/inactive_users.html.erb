@@ -43,7 +43,7 @@
       <div class="row">
         <!-- ページのタイトル -->
         <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
+          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">退会済みの会員一覧</span>
         </div>
 
         <!-- 会員一覧の表示 -->
@@ -59,7 +59,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @users.each do |user| %>
+              <% @not_actives.each do |user| %>
                 <tr>
                   <td style="padding: 10px;"><%= user.id %></td>
                   <td style="padding: 10px;"><%= image_tag user.get_profile_image, size: '100x100', class: 'rounded-circle' %></td>
@@ -81,7 +81,7 @@
             </tbody>
           </table>
           <div class="d-flex justify-content-center mt-3">
-            <%= paginate @users %>
+            <%= paginate @not_actives %>
           </div>
         </div>
       </div>

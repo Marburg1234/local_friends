@@ -12,7 +12,7 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    @users = User.where.not(id: current_user.id).where.not(is_active: false).order("RANDOM()").all
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").order("RANDOM()").all
   end
 
   def show
@@ -93,17 +93,17 @@ class Public::UsersController < ApplicationController
     end
   end
 
-#退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
+# 退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
 # 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundになるため)
- def check_not_active_user
-  begin
-    @user = User.find(params[:id])
-    unless @user.is_active == true
-      redirect_to users_path, alert: "このユーザーはアクティブではありません。"
+  def check_not_active_user
+    begin
+      @user = User.find(params[:id])
+      unless @user.is_active == true
+        redirect_to users_path, alert: "このユーザーはアクティブではありません。"
+      end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to users_path, alert: "ユーザーが見つかりませんでした。"
     end
-  rescue ActiveRecord::RecordNotFound
-    redirect_to users_path, alert: "ユーザーが見つかりませんでした。"
-  end
   end
 
 end
