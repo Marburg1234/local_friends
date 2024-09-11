@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col text-center mt-2 mb-4">
-  <h1><strong>マイページ</strong></h1>
+      <h1><strong>マイページ</strong></h1>
     </div>
   </div>
 
@@ -18,20 +18,76 @@
       <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
         <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
       <% end %>
-  <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
-  <%= render 'follow_follower_count', user: @user %>
+      <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
+      <%= render 'follow_follower_count', user: @user %>
     </div>
-
-
-
   </div>
+
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-3 text-right">
       <%= link_to "ユーザー情報編集する", edit_user_path(current_user), class: 'btn btn-warning text-light shadow' %>
     </div>
   </div>
 
-  <!--ユーザー情報は部分テンプレート化-->
+  <!--ユーザー情報は部分テンプレート-->
   <%= render 'layouts/user_show', user: @user, trips: @trips %>
 
+<!--スライドショー(carousel)でサブ写真を表示する each_with_indexで取り出したデータそれぞれに0から番号を割り振る-->
+<!--carouselでは最初の画像にactiveクラスを与えないといけない-->
+  <!--方法1 取り出した値にindex番号をつける 最初=0番のものはactiveクラスのdivになる！-->
+  <div class="d-flex justify-content-center mb-5">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:400px">
+      <div class="carousel-inner">
+         <% @user.sub_images.each_with_index do |sub_image, index| %>
+          <% if index == 0 %>
+            <div class="carousel-item active">
+              <%= image_tag sub_image, class: "d-block w-100", height: 300 %>
+            </div>
+          <% else %>
+            <div class="carousel-item">
+              <%= image_tag sub_image, class: "d-block w-100", height: 300 %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <%= link_to "#carouselExampleControls", role: "button", data: {slide: "prev"}, class: "carousel-control-prev" do %>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    <% end %>
+    <%= link_to "#carouselExampleControls", role: "button", data: {slide: "next"}, class: "carousel-control-next" do %>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    <% end %>
+    </div>
+  </div>
 </div>
+
+<!--===========================================================================================================================================-->
+<!--方法2 each do を使う コードを読む順番を利用して、最初のデータかどうかを分岐させる -->
+<!--trueをeach do の上にかくことで最初の1回のみtrueで発動させる-->
+<!--active if first_itm で最初のitemにactiveクラスをつける-->
+
+<!--<div class="d-flex justify-content-center mb-5">-->
+<!--  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:400px">-->
+<!--    <div class="carousel-inner">-->
+<!--      <%# first_item = true %> <!-- カウンタとして使う変数を設定 -->-->
+<!--      <%# @user.sub_images.each do |sub_image| %>-->
+<!--        <div class="carousel-item <%#= "active" if first_item %>">-->
+<!--          <%#= image_tag sub_image, class: "d-block w-100", height: 300 %>-->
+<!--        </div>-->
+<!--        <%# first_item = false %> <!-- 最初のアイテムが処理されたらフラグをfalseに変更 -->-->
+<!--      <%# end %>-->
+<!--  </div>-->
+<!--  <%#= link_to "#carouselExampleControls", role: "button", data: {slide: "prev"}, class: "carousel-control-prev" do %>-->
+<!--    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--    <span class="sr-only">Previous</span>-->
+<!--  <%# end %>-->
+<!--  <%#= link_to "#carouselExampleControls", role: "button", data: {slide: "next"}, class: "carousel-control-next" do %>-->
+<!--    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--    <span class="sr-only">Next</span>-->
+<!--  <%# end %>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
