@@ -33,7 +33,8 @@ header{
 }
 
 .top_image{
-  background-image: url(/assets/nature-4.jpg);
+  /*background-image: url(/assets/nature-4.jpg);*/
+  background-image: image-url("nature-4.jpg");
   width: 100%;
   height: 600px;
   background-position: center;

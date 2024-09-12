@@ -139,15 +139,15 @@ end
 
 
 # ユーザーを登録
-User.create!(first_name: '元太') do |user|
-    user.family_name = '小嶋'
+User.create!(first_name: '田中') do |user|
+    user.family_name = 'タロウ'
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
     user.country_id = 1
     user.region_id = 1
     user.mother_language_id = 1
     user.practice_language_id = 2
-    user.introduction = "小嶋元太、参上！！"
+    user.introduction = "田中タロウ、参上！！"
     user.age = 11
     user.topic = "うな重食わせろ！"
     user.is_active = 'true'
