@@ -4,14 +4,76 @@
   box-sizing: border-box;
 }
 
+header{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-color: #008BBB;
+  padding:10px;
+  z-index: 100;
+}
+
+.logo_font {
+  font-family: 'Sacramento', cursive;
+}
+
+.logo:hover{
+  font-size: 2.3rem;
+  transition: size 2.0s;
+}
+
+.local{
+  color: #66FFFF;
+}
+
+.friends{
+  color:#FFFF66;
+}
+
 .top_image{
-  /*background-color: yellow;*/
   background-image: url(/assets/nature-4.jpg);
   width: 100%;
-  height: 500px;
+  height: 600px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-color:rgba(0,0,0,0.5);
   background-blend-mode:darken;
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+main{
+  margin-top: 100px;
+}
+
+footer{
+  background-color: #008BBB;
+  width: 100%;
+  padding: 10px;
+}
+
+
+/*Admin_user_index*/
+.admin_user_table .head{
+  background-color:#EEEEEE;
+}
+
+.admin_user_table .analyse_link:hover{
+  background-color: yellow;
+  /*transition: background-color 1.0s;*/
+  font-size: 2.3rem;
+}
+
+.admin_user_table .active_users{
+  background-color:#CCFF99;
+}
+
+.admin_user_table .non_active_users{
+  background-color:#FFABCE;
 }

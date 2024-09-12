@@ -1,13 +1,13 @@
 <div class="container">
+  <%= flash[:notice] %>
+  <!--ページの題名-->
   <div class="row">
-    <div>
-      <%= link_to "新規投稿する", new_trip_path, class: 'btn btn-info text-light mt-2' %>
-    </div>
     <div class="col-md-10 mx-auto text-center my-5">
       <h1>投稿一覧から気になる投稿を見つけよう！</h1>
     </div>
   </div>
 
+  <!--左側の部分 プロフィール写真と投稿ユーザー名-->
   <div class="row">
     <% @trips.each do |trip| %>
     <div class="col-lg-3 col-md-10 col-sm-12 ml-5 mb-5">
@@ -24,6 +24,7 @@
       </div>
     </div>
 
+  <!--右側の部分　投稿の内容-->
     <div class="col-6">
       <table class="table mt-4">
         <tr>
@@ -38,8 +39,17 @@
           <th>投稿日</th>
           <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
+        <tr>
+          <th></th>
+          <td id="favorite_button_<%= trip.id %>"><%= render 'public/favorites/like', trip: trip %></td>
+        </tr>
       </table>
     </div>
       <% end %>
+
   </div>
+
+</div>
+<div class="text-center align-center">
+  <%= paginate @trips %>
 </div>

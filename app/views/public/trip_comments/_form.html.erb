@@ -1,0 +1,20 @@
+<!--コメントのフォーム-->
+<!--自分の投稿に対して と ゲストログインはコメントできないようにする-->
+<div class="row">
+  <div class="col-8 mx-auto text-right">
+    <% if current_user.email != "guest@example.com" %>
+      <% if current_user != trip.user %>
+        <%= form_with model: [trip, trip_comment], local: false do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントを入力してください", class: 'form-control border-info mb-4' %>
+          <%= f.submit "送信する", class: "btn btn-dark text-light" %>
+        <% end %>
+      <% else %>
+        <p class="text-center">自分の投稿にコメントすることはできません</p>
+      <% end %>
+    <% else %>
+        <p class="text-center">ゲストユーザーはコメントの投稿ができません</p>
+    <% end %>
+  </div>
+</div>
+
+

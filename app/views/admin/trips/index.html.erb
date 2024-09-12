@@ -1,0 +1,55 @@
+<div class="container">
+  <%= flash[:notice] %>
+  <!--ページの題名-->
+  <div class="row">
+    <div class="col-md-10 mx-auto text-center my-5">
+      <h1>投稿一覧</h1>
+      <p>合計投稿件数：<%= @all_trips %></p>
+    </div>
+  </div>
+
+  <!--左側の部分 プロフィール写真と投稿ユーザー名-->
+  <div class="row">
+    <% @trips.each do |trip| %>
+    <div class="col-lg-3 col-md-10 col-sm-12 ml-5 mb-5">
+      <%= link_to admin_trip_path(trip.id) do %>
+        <%= image_tag trip.get_trip_image, size: "240x180" %>
+      <% end %>
+      <br/>
+      <div class="pt-1 d-flex">
+        <span style="vertical-align: middle; display: flex; align-items: center;">投稿ユーザー：</span>
+          <%= link_to admin_user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
+            <%= trip.user.family_name %>
+            <%= trip.user.first_name %>
+          <% end %>
+      </div>
+    </div>
+
+  <!--右側の部分　投稿の内容-->
+    <div class="col-6">
+      <table class="table mt-4">
+        <tr>
+          <th>タイトル</th>
+          <td><%= trip.title %></td>
+        </tr>
+        <tr>
+          <th>場所</th>
+          <td><%= trip.address%></td>
+        </tr>
+        <tr>
+          <th>投稿日</th>
+          <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th><%= link_to "投稿詳細ページへ", admin_trip_path(trip.id), clas: 'btn btn-info' %></th>
+        </tr>
+      </table>
+    </div>
+      <% end %>
+
+  </div>
+
+</div>
+<div class="text-center align-center">
+  <%= paginate @trips %>
+</div>

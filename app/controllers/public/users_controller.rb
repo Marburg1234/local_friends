@@ -1,10 +1,18 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
+  before_action :ensure_log_in_user, only: [:edit, :update]
+  before_action :check_not_active_user, only: [:show, :post_index, :edit]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
     @user = User.find(params[:id])
-    @trips = @user.trips
+    @trips = @user.trips.page(params[:page]).per(8)
+  end
+
+  # ランダムでユーザーを表示する
+  def index
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").order("RANDOM()").all
   end
 
   def show
@@ -43,11 +51,59 @@ class Public::UsersController < ApplicationController
     redirect_to root_path
   end
 
+# ================================================
+  # いいねした記事一覧を表示するメソッドlikes
+  def likes
+    @user = current_user
+    @favorites = @user.favorites.page(params[:page]).per(4)
+  end
+# ================================================
+
+# ================================================
+  # フォロー機能のメソッド
+  def follows
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+# ================================================
 
   private
-
+# ストロングパラメーター
   def user_params
     params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, sub_images: [])
+  end
+
+# ゲストログインユーザーのダイレクトアタックを阻止するメソッド
+  def ensure_guest_user
+    if current_user.email == "guest@example.com"
+      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+    end
+  end
+
+# 他人の編集ページへ直接アクセスするのを防ぐメソッド
+  def ensure_log_in_user
+    @user = User.find(params[:id])
+    unless @user.id == current_user.id
+      redirect_to my_page_users_path
+    end
+  end
+
+# 退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
+# 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundになるため)
+  def check_not_active_user
+    begin
+      @user = User.find(params[:id])
+      unless @user.is_active == true
+        redirect_to users_path, alert: "このユーザーはアクティブではありません。"
+      end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to users_path, alert: "ユーザーが見つかりませんでした。"
+    end
   end
 
 end

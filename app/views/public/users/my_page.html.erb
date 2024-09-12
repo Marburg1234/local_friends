@@ -6,72 +6,36 @@
   </div>
   <div class="row">
     <div class="col text-center mt-2 mb-4">
-  <h1 class="text-center"><strong>マイページ</strong></h1>
+      <h1><strong>マイページ</strong></h1>
     </div>
   </div>
 
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-5 border text-center">
-      ボタンを入れるスペース
+      <!--いいねした記事一覧ページへのリンク-->
+      <%= link_to "いいねした記事をみる", likes_user_path(current_user), class: 'btn btn-success text-light shadow rounded' %>
+      <!--Chat相手一覧ページへのリンク挿入-->
+      <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
+        <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
+      <% end %>
+      <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
+      <%= render 'follow_follower_count', user: @user %>
     </div>
   </div>
+
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-3 text-right">
       <%= link_to "ユーザー情報編集する", edit_user_path(current_user), class: 'btn btn-warning text-light shadow' %>
     </div>
   </div>
 
-<!--以下がユーザー情報に関するコードたち-->
-  <div class="row d-flex justify-content-center mb-4">
-    <div class="profile_image col-lg-4 col-md-5 col-sm-12 justify-content-center text-center rounded shadow-lg">
-     <h5 class="pt-3">ユーザー写真</h5>
-     <%= image_tag @user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
-    </div>
-    <div class="basic_info col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
-      <h5 class="pt-3">基本情報(国など)</h5>
-      Name: <%= @user.family_name %>  <%= @user.first_name %><br>
-      Country: <%= @user.country.name %><br>
-      Location: <%= @user.region.name %>
-    </div>
-  </div>
+  <!--ユーザー情報は部分テンプレート-->
+  <%= render 'layouts/user_show', user: @user, trips: @trips %>
 
-  <div class="row d-flex justify-content-center rounded mb-4">
-    <div class="language col-lg-4 col-md-5 col-sm-12">
-      <h5 class="pt-3">母国語と学習中の言語を表示</h5>
-      母国語: <%= @user.mother_language.name %><br>
-      学習中の言語: <%= @user.practice_language.name %>
-    </div>
-    <div class="content col-lg-7 offset-1 col-md-5 col-sm-12 rounded">
-      <h5 class="pt-3">自己紹介・話したい話題</h5>
-      自己紹介文: <%= @user.introduction %><br>
-      話したい話題: <%= @user.topic %>
-    </div>
-  </div>
-
-  <div class="row d-flex justify-content-center mb-4">
-    <div class="sub_image col-lg-4 col-md-5 col-sm-12 rounded flex-wrap">
-      <h5 class="pt-3">さぶ写真たち</h5>
-      <% @user.sub_images.each do |sub_image| %>
-        <%= image_tag sub_image, size: '90x90', class: 'rounded mr-3 mb-3' %>
-      <% end %>
-    </div>
-    <div class="posts sub_image col-lg-7 offset-1 col-md-5 col-sm-12 rounded flex-wrap">
-      <h5 class="pt-3">投稿した写真</h5>
-        <div>
-          <div class="text-center">
-            <% if @trips.empty? %>
-              投稿画像がありません
-            <% end %>
-          </div>
-          <% @trips.first(4).each do |trip| %>
-            <%= image_tag trip.get_trip_image, size: '100x90', class: 'mr-4 my-3' %>
-          <% end %>
-          <% if @trips.empty? %>
-            <% else %>
-            <%= link_to "もっと見る", post_index_user_path(@user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
-          <% end %>
-      </div>
-
-  </div>
 
 </div>
+
+
+
+
+

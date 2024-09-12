@@ -4,29 +4,33 @@
       <h1>思い出を共有しよう！</h1>
 
       <%= form_with model: @trip, local:true do |f| %>
-
       <div class="form-group">
         <h4>Photo</h4>
-        <%= f.file_field :trip_image, accept: "image/*" %>
+        <div class="d-flex">
+          <!--JSプレビュー関数を呼び出す onChange 変更があったら TripimgPreviewこの関数を呼び出す ()の中身は引数として渡している-->
+          <%= f.file_field :trip_image, accept: "image/*", required: true, 'onChange': 'TripimgPreview(event, "preview-item1")' %>
+        </div>
+        <!--プレビュー表示用のスペース idを使って指定して発火点とJSを紐づける-->
+        <div id="preview-item1"></div>
       </div>
 
       <div class="form-group">
         <strong><%= f.label :post_code %></strong>
-        <%= f.text_field :post_code, class: 'form-control' %>
+        <%= f.text_field :post_code, class: 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <strong><%= f.label :address %></strong>
-        <%= f.text_field :address, class: 'form-control' %>
+        <%= f.text_field :address, class: 'form-control', required: true %>
       </div>
       <div class="form-group">
         <strong><%= f.label :title %></strong>
-        <%= f.text_field :title, local: true, class: 'form-control' %>
+        <%= f.text_field :title, local: true, class: 'form-control', required: true %>
       </div>
 
       <div class="form-group">
         <strong><%= f.label :explain  %></strong>
-        <%= f.text_area :explain, class: 'form-control' %>
+        <%= f.text_area :explain, class: 'form-control', required: true %>
       </div>
 
       <div class="form-group">
@@ -37,3 +41,40 @@
     </div>
   </div>
 </div>
+
+
+
+<!--投稿写真用のプレビュー表示Javascript 関数名 TripimgPreview-->
+<script>
+  //JSの記述方法 function rubyのメソッドのこと 今回TripimgPreviewを関数名として定義 引数にeventとpreviewIdが設定されている
+  function TripimgPreview(event, previewId) {
+    // var 変数名 = ~ で代入している varは変数を宣言する
+    var input = event.target;
+    var reader = new FileReader();  //FileReaderの説明については下を参照
+
+    reader.onload = function() {
+      // idを持つ要素を取得して変数に格納する
+      var preview = document.getElementById(previewId);
+      // 実際の画像を取得して変数に格納する
+      var img = document.createElement('img');
+      // 読み込んだ画像データをsrc(ソース)としてimg要素に設定している
+      img.src = reader.result;
+      // サイズの調整 JS側でサイズ指定して、html.erbでは表示のみする
+      img.style.height = '200px';
+      img.style.width = '300px';
+      // すでに存在するhtmlの要素を空にする処理 今回であれば、すでにプレビュー表示されている画像
+      preview.innerHTML = '';
+      // 新たに設定したimg要素をpreview要素内に追加する動作 この2つのコードで既存の画像を削除して、新たな画像をpreview要素内に追加する処理を担っている
+      preview.appendChild(img);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+
+
+<!--`FileReader`オブジェクトは、ファイルの内容を非同期に読み込むためのオブジェクトです。この変数を使用して、ファイルのデータを読み込む処理を行います。-->
+
+<!--.onload イベントハンドラの1つ ページなどが読み込まれた時のイベント 今回の場合には、画像が読み込まれた時-->
+<!--イベントハンドラはさまざまな種類がある 例 クリックイベント（`onclick`）、入力値が変更されたイベント（`onchange`）-->
+<!--イベントハンドラ以降に具体的な処理が記述される-->
