@@ -34,8 +34,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
 
       t.references :country, null: false, foreign_key: true
       t.references :region, null: false, foreign_key: true
-      t.integer :mother_language_id, null:false
-      t.integer :practice_language_id, null:false
+      t.bigint :mother_language_id, null:false
+      t.bigint :practice_language_id, null:false
       t.string :first_name, null:false
       t.string :family_name, null:false
       t.text :introduction, null: false
