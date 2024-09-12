@@ -8,7 +8,7 @@
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-        <%= form_with model: @user, url: user_registration_path do |f| %>
+        <%= form_with model: @user, url: user_registration_path, local: false do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
           <div class="field mb-4">
             <%= f.label :姓 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
