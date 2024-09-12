@@ -59,7 +59,7 @@ class Admin::UsersController < ApplicationController
 
   def inactive_users
     # 全ユーザー情報を取得して5人1ページで表示する(ゲストは除く)
-    @users = User.page(params[:page]).per(5).where.not(email: "guest@example.com")
+    @users = User.where.not(email: "guest@example.com")
     # 全ユーザーの人数を数える
     @users_count = @users.count
 
@@ -80,5 +80,6 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, :is_active, sub_images: [])
   end
+
 
 end

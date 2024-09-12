@@ -107,15 +107,18 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.family_name = "ゲストユーザー"
       user.first_name = 'ゲストユーザー'
-      # user.country_id = 1
-      # user.region_id = 1
-      # user.mother_language_id = 1
-      # user.practice_language_id = 2
-      # user.introduction = "ゲストユーザーです！"
-      # user.age = 50
-      # user.topic = "ゲストユーザーです！"
+      user.country_id = 1
+      user.region_id = 1
+      user.mother_language_id = 1
+      user.practice_language_id = 2
+      user.introduction = "ゲストユーザーです！"
+      user.age = 50
+      user.topic = "ゲストユーザーです！"
     end
   end
 # ========================================================================================
+
+
+
 
 end
