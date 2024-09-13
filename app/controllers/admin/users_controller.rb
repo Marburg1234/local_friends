@@ -20,9 +20,9 @@ class Admin::UsersController < ApplicationController
     # 国別の利用者数を表示するための情報を取得
     @user_counts_per_country = User.group(:country_id).count
     # ============================================================
-    # 学習中の言語別人数を表示する
+    # 学習中の言語別人数を表示するための情報を取得
     @user_practice_language = User.group(:practice_language_id).count
-
+    # ============================================================
   end
 
   def show
