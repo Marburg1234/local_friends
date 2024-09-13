@@ -138,17 +138,137 @@ Language.create!(name: 'ドイツ語') do |language|
 end
 
 
-# ユーザーを登録
-User.create!(first_name: '田中') do |user|
-    user.family_name = 'タロウ'
+# ユーザーを登録1
+User.create!(first_name: 'Liam') do |user|
+    user.family_name = 'O Connor'
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
+    user.country_id = 2
+    user.region_id = 54
+    user.mother_language_id = 2
+    user.practice_language_id = 8
+    user.introduction = "Hello, my name is Liam. I am studying German and interested in German beer culture and history. My hobbies are cycling and reading."
+    user.age = 24
+    user.topic = "Cycling, beer culture, history, travel"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録2
+User.create!(first_name: 'Isabel') do |user|
+    user.family_name = 'López'
+    user.email = '2@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 5
+    user.region_id = 72
+    user.mother_language_id = 2
+    user.practice_language_id = 7
+    user.introduction = "¡Ora! Me llamo Isabelle. Me encanta el arte y la comida italiana y estoy aprendiendo italiano. Mi sueño es aprender la cocina local en Italia！"
+    user.age = 28
+    user.topic = "Arte, cocina, viajes, cultura italiana！"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録3
+User.create!(first_name: 'Sophie') do |user|
+    user.family_name = 'Müller'
+    user.email = '3@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 3
+    user.region_id = 62
+    user.mother_language_id = 8
+    user.practice_language_id = 5
+    user.introduction = "Hallo, mein Name ist Sophie. Ich studiere Spanisch und mein Ziel ist es, durch Südamerika zu reisen. Ich liebe Musik und Tanz, und ich bin besonders von lateinamerikanischer Musik angezogen."
+    user.age = 21
+    user.topic = "Musik, Tanz, Reisen, Sprachen lernen！"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録4
+User.create!(first_name: 'Hamilton') do |user|
+    user.family_name = 'Ojay'
+    user.email = '4@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 2
+    user.region_id = 47
+    user.mother_language_id = 4
+    user.practice_language_id = 1
+    user.introduction = "I want to talk japanese fluently！！"
+    user.age = 29
+    user.topic = "Anime, japanese custom, movie"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録5
+User.create!(first_name: 'Emily') do |user|
+    user.family_name = 'Thompson'
+    user.email = '5@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 2
+    user.region_id = 50
+    user.mother_language_id = 2
+    user.practice_language_id = 1
+    user.introduction = "こんにちは！エミリーです。私はテクノロジー業界で働いていて、日本の文化に興味があります。特に日本のアニメや食べ物が大好きです。"
+    user.age = 26
+    user.topic = "アニメ、テクノロジー、料理、日本文化"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録6
+User.create!(first_name: 'Hiroshi') do |user|
+    user.family_name = 'Nakamura'
+    user.email = '6@yahoo.co.jp'
+    user.password = '111111'
     user.country_id = 1
-    user.region_id = 1
+    user.region_id = 28
     user.mother_language_id = 1
     user.practice_language_id = 2
-    user.introduction = "田中タロウ、参上！！"
-    user.age = 11
-    user.topic = "うな重食わせろ！"
+    user.introduction = "こんにちは、ヒロシです。英語を勉強しながら、世界中の人々と交流するのが大好きです。趣味は写真撮影と旅行です。"
+    user.age = 33
+    user.topic = "写真、旅行、言語学習、音楽"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録7
+User.create!(first_name: 'Marta') do |user|
+    user.family_name = 'Nowak'
+    user.email = '7@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 4
+    user.region_id = 68
+    user.mother_language_id = 6
+    user.practice_language_id = 1
+    user.introduction = "ヤチェム！マルタです。日本の歴史や美術に興味があり、日本語を勉強して日本に行くことが夢です。"
+    user.age = 22
+    user.topic = "美術、歴史、旅行、言語学習"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録8
+User.create!(first_name: 'Carlos') do |user|
+    user.family_name = 'Ramirez'
+    user.email = '8@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 3
+    user.region_id = 60
+    user.mother_language_id = 8
+    user.practice_language_id = 1
+    user.introduction = "こんにちは！カルロスです。日本文化が好きで、日本語を勉強しています。サッカーが大好きで、旅行して新しい友達を作るのが楽しみです。"
+    user.age = 22
+    user.topic = "サッカー、旅行、文化交流、料理"
+    user.is_active = 'true'
+end
+
+# ユーザーを登録9
+User.create!(first_name: 'Yumi') do |user|
+    user.family_name = 'Tanaka'
+    user.email = '9@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 1
+    user.region_id = 36
+    user.mother_language_id = 1
+    user.practice_language_id = 3
+    user.introduction = "こんにちは、ユミです。韓国ドラマが好きで、韓国語を勉強中です。趣味はカフェ巡りとファッションです。"
+    user.age = 22
+    user.topic = "韓国ドラマ、ファッション、カフェ、旅行"
     user.is_active = 'true'
 end
