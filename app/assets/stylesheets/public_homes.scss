@@ -62,7 +62,8 @@ footer{
 
 /*Admin_user_index*/
 .admin_user_table .head{
-  background-color:#EEEEEE;
+  background-color: #336699;
+  color: white;
 }
 
 .admin_user_table .analyse_link:hover{
@@ -77,4 +78,13 @@ footer{
 
 .admin_user_table .non_active_users{
   background-color:#FFABCE;
+}
+
+.country_table_head .head{
+  background-color: #336699;
+  color: white;
+}
+
+.country_table_body td{
+  color: black;
 }

@@ -2,7 +2,8 @@
   <div class="row">
     <!-- 左側に配置するテーブル -->
     <div class="col-md-4">
-      <table class="table table-bordered text-center admin_user_table">
+      <h3 class="text-center border-bottom pb-2 my-2">合計会員数</h3>
+      <table class="table table-bordered text-center admin_user_table mb-3">
         <tr>
           <th class="head">項目</th>
           <th class="head">人数(人)</th>
@@ -35,6 +36,50 @@
           </td>
           <td class="non_active_users"><%= @not_active_user_ration %> %</td>
         </tr>
+      </table>
+      <!--国別のユーザー数を表示する-->
+      <h3 class="text-center border-bottom pb-2 my-2">国別の会員数</h3>
+      <table class="table table-bordered text-center admin_user_table table-hover">
+        <thead class="country_table_head">
+          <tr>
+            <th class="head">国のID</th>
+            <th class="head">国名</th>
+            <th class="head">ユーザー数(人)</th>
+            <th class="head">割合(%)</th>
+          </tr>
+        </thead>
+        <tbody class="country_table_body">
+          <% @user_counts_per_country.each do |country_id, count| %>
+            <tr>
+              <td><%= country_id %></td>
+              <td><%= Country.find(country_id).name %></td>
+              <td><%= count %></td>
+              <td><%= count * 100 / @users_count %> % </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <!--学習中の言語別ユーザー数を表示する-->
+      <h3 class="text-center border-bottom pb-2 my-2">学習中の言語別の会員数</h3>
+      <table class="table table-bordered text-center admin_user_table table-hover">
+        <thead class="country_table_head">
+          <tr>
+            <th class="head">言語のID</th>
+            <th class="head">言語名</th>
+            <th class="head">ユーザー数(人)</th>
+            <th class="head">割合(%)</th>
+          </tr>
+        </thead>
+        <tbody class="country_table_body">
+          <% @user_practice_language.each do |practice_language_id, count| %>
+            <tr>
+              <td><%= practice_language_id %></td>
+              <td><%= Language.find(practice_language_id).name %></td>
+              <td><%= count %></td>
+              <td><%= count * 100 / @users_count %> % </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
 
