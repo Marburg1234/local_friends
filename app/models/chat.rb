@@ -12,6 +12,16 @@ class Chat < ApplicationRecord
   # いずれかの1つを送ることができるため、それ以外をエラーとしてはじくvalidate
   validate :only_one_type_of_attachment, :message_or_media_present?
 
+  # ==========================================================================================================
+  def get_image
+    if image.attached?
+      image
+    else
+      nil
+    end
+  end
+
+
   private
 
   def only_one_type_of_attachment
@@ -25,5 +35,7 @@ class Chat < ApplicationRecord
       errors.add(:base, "いずれか1つを送信することができます")
     end
   end
+
+
 
 end

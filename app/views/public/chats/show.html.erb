@@ -34,7 +34,7 @@
         <label for="chat_image" style="cursor: pointer;" >
           <i class="fas fa-image fa-lg"></i>
         </label>
-        <%= f.file_field :image, id: "chat_image", style: "display:none" %>
+        <%= f.file_field :image, id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
 
         <!--動画を投稿するフォーム-->
         <label for="chat_video" style="cursor: pointer;" >
@@ -43,6 +43,14 @@
         <%= f.file_field :video, id: "chat_video", style: "display:none" %>
 
         <%= f.submit "送信", class: "btn btn-info btn-sm" %>
+        <div id="preview-item3">
+          <% if @chat.get_image == nil %>
+            <div></div>
+          <% else %>
+            <%= image_tag @chat.get_image, size: '100x100' %>
+          <% end %>
+        </div>
+
         <%= f.hidden_field :chat_room_id %>
       <% end %>
     </div>
@@ -50,3 +58,41 @@
     </div>
   </div>
 </div>
+
+
+
+<!--送信したい写真のプレビュー表示 関数名 SendimgPreview-->
+<script>
+  function SendimgPreview(event, previewId) {
+    var input = event.target;
+    var reader = new FileReader();
+
+    reader.onload = function() {
+      var preview = document.getElementById(previewId);
+      var img = document.createElement('img');
+      img.src = reader.result;
+      img.style.height = '100px';
+      img.style.width = '100px';
+      preview.innerHTML = '';
+      preview.appendChild(img);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+
+<!--送信ボタンを押したら、プレビュー表示画像が消える 読み込まず　多分非同期にしているため-->
+<!--<script>-->
+<!--//   // 送信ボタンをクリックした時の処理-->
+<!--// function submitForm() {-->
+<!--//   // プレビュー表示されている画像の親要素を取得-->
+<!--//   var preview = document.getElementById('preview-item3');-->
+
+<!--//   // プレビュー表示されている画像の削除-->
+<!--//   while (preview.firstChild) {-->
+<!--//     preview.removeChild(preview.firstChild);-->
+<!--//   }-->
+
+<!--//   // フォームの送信処理などを行う（従来通りのcreateアクションなど）-->
+<!--// }-->
+// <!--</script>-->
