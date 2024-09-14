@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
     resources :trips, only: %i[index show destroy]
     get 'homes/top'
+    get 'search' => "searches#search"
   end
 
   scope module: :public do
