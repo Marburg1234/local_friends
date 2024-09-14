@@ -23,7 +23,9 @@
         <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
       <% end %>
       <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
-      <%= render 'follow_follower_count', user: @user %>
+      <span id="follow_button_<% @user.id %>">
+        <%= render 'public/relationships/follow_follower_count', user: @user %>
+      </span>
     </div>
   </div>
 

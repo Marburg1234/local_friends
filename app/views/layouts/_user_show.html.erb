@@ -21,22 +21,6 @@
           <th class="pr-3 pb-2">Location</th>
           <th class="pl-3 pb-2"> <%= user.region.name %></th>
         </tr>
-        <tr>
-          <th class="pr-3 pb-2">フォロー数</th>
-          <th class="pl-3 pb-2 text-center">
-            <%= link_to follows_user_path(user.id) do %>
-              <%= user.followings.count %>
-            <% end %>
-          </th>
-        </tr>
-        <tr>
-          <th class="pr-3 pb-2">フォロワー数</th>
-          <th class="pl-3  pb-2 text-center">
-            <%= link_to followers_user_path(user.id) do %>
-              <%= user.followers.count %>
-            <% end %>
-          </th>
-        </tr>
       </table>
     </div>
   </div>
