@@ -1,7 +1,7 @@
 <nav class="header navbar navbar-expand-lg navbar-dark d-flex justify-content-between">
   <div>
     <% if admin_signed_in? %>
-      <%= link_to admin_users_path, class: 'navbar-brand text-light logo_font' do %>
+      <%= link_to admin_homes_top_path, class: 'navbar-brand text-light logo_font' do %>
         <h2 class="logo"><span class="local">Local</span>.<span class="friends">Friends</span></h2>
       <% end %>
     <% elsif user_signed_in? %>

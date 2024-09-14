@@ -22,6 +22,7 @@ Rails.application.routes.draw do
      patch '/admin/users/:id/change_status', to: 'admin/users#change_status', as: 'admin_user_change_status'
     end
     resources :trips, only: %i[index show destroy]
+    get 'homes/top'
   end
 
   scope module: :public do
