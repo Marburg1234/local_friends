@@ -33,6 +33,7 @@ class Public::ChatsController < ApplicationController
     # 新しいメッセージの作成するために、空のChatオブジェクトを生成する
     @chat = Chat.new(chat_room_id: @room.id)
   end
+#=============================================================================
 
 #=============================================================================
    # メッセージの送信
@@ -43,16 +44,19 @@ class Public::ChatsController < ApplicationController
     # バリデーションに合格しない場合はエラーを表示
     render :validate unless @chat.save
   end
+#=============================================================================
 
+#=============================================================================
   # メッセージの削除
   def destroy
     # ログイン中のユーザーに関連するメッセージを削除
     @chat = current_user.chats.find(params[:id])
     @chat.destroy
   end
+#=============================================================================
 
 #=============================================================================
-# チャット相手の一覧を表示する
+  # チャット相手の一覧を表示する
   def index
     rooms = current_user.user_rooms.pluck(:chat_room_id)
     not_active_users = User.where(is_active: false).pluck(:id)
@@ -61,12 +65,12 @@ class Public::ChatsController < ApplicationController
   end
 #=============================================================================
 
-
+#=============================================================================
   private
 
   # フォームから送信されたパラメーターを安全に取得する⇒ストロングパラメーター定義
   def chat_params
-    params.require(:chat).permit(:message, :chat_room_id)
+    params.require(:chat).permit(:message, :chat_room_id, :image, :video)
   end
 
   # ゲストログインユーザーの直接URLのアクセスを阻止するメソッド

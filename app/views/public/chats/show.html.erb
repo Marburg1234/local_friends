@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <div class="container mb-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
@@ -26,7 +28,20 @@
       <!--チャットを送るフォーム→表示されている-->
     <div class="col-lg-6 mx-auto">
       <%= form_with model: @chat, data: { remote: true } do |f| %>
-        <%= f.text_field :message %>
+        <%= f.text_field :message, placeholder: "メッセージ" %>
+
+        <!--画像を投稿するフォーム-->
+        <label for="chat_image" style="cursor: pointer;" >
+          <i class="fas fa-image fa-lg"></i>
+        </label>
+        <%= f.file_field :image, id: "chat_image", style: "display:none" %>
+
+        <!--動画を投稿するフォーム-->
+        <label for="chat_video" style="cursor: pointer;" >
+          <i class="fas fa-video fa-lg"></i>
+        </label>
+        <%= f.file_field :video, id: "chat_video", style: "display:none" %>
+
         <%= f.submit "送信", class: "btn btn-info btn-sm" %>
         <%= f.hidden_field :chat_room_id %>
       <% end %>
