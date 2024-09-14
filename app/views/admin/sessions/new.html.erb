@@ -1,11 +1,17 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <!--ログイン成功のメッセージ-->
+  <div class="fail_notice">
+    <%= flash[:notice] %>
+  </div>
+
 <div class="container">
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-        <h2>管理者ログイン</h2>
+        <h2 class="bg-info text-light text-center py-2">管理者ログイン</h2>
 
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+        <%= form_with model: @admin, url: admin_session_path do |f| %>
           <div class="field mt-3">
             <%= f.label :メールアドレス %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
