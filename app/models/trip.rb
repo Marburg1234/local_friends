@@ -4,7 +4,7 @@ class Trip < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
 
-  validates :post_code, presence: true, length: { is: 7 }
+  validates :post_code, presence: true
   validates :address, presence: true, length: { minimum: 2 }
   validates :title, presence: true
   validates :explain, presence: true

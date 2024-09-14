@@ -30,6 +30,31 @@
 .registration_alert-message{
   color: white;
   background-color: #FF8856;
-  heigth: 50px
+  heigth: 50px;
+  text-align: center;
+  margin: 30px 0px;
 }
 
+.success_notice{
+  background-color: #66FFFF;
+  heigth: 50px;
+  text-align: center;
+  margin: 30px 0px;
+  font-size: 1.3rem;
+}
+
+.fail_notice{
+  background-color: #FF8856;
+  heigth: 50px;
+  text-align: center;
+  margin: 30px 0px;
+  font-size: 1.3rem;
+}
+
+.withdraw_notice{
+  background-color: #FFCC33;
+  heigth: 50px;
+  text-align: center;
+  margin: 30px 0px;
+  font-size: 1.3rem;
+}

@@ -1,5 +1,8 @@
-
-
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+ <!--退会処理成功のメッセージ-->
+  <div class="withdraw_notice">
+    <%= flash[:notice] %>
+  </div>
 
   <!--アプリの説明を挿入する-->
   <h1 class="text-center border-bottom my-5 pb-3">Local.Friendsについて</h1>

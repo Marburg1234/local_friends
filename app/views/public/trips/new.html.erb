@@ -1,4 +1,9 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <div class="container">
+  <div class="fail_notice">
+    <%= flash[:notice] %>
+  </div>
   <div class="row">
     <div class="col-md-6 mx-auto">
       <h1>思い出を共有しよう！</h1>
