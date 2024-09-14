@@ -16,6 +16,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
     if resource.save
       if resource.active_for_authentication?
       set_flash_message! :notice, :signed_up
+      flash[:notice] = "新規登録し、サインアップしました！"
       sign_up(resource_name, resource)
       redirect_to after_sign_up_path_for(resource)
       else
