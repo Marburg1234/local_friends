@@ -30,6 +30,7 @@ class Public::ChatsController < ApplicationController
     end
     # チャットルームに関連付けられてたメッセージを取得
     @chats = @room.chats
+    # @chat_image = @room.chats.image
     # 新しいメッセージの作成するために、空のChatオブジェクトを生成する
     @chat = Chat.new(chat_room_id: @room.id)
   end
