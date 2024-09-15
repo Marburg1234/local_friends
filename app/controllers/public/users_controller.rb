@@ -47,7 +47,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.update(is_active:false)
     reset_session
-    flash[:notice] = "退会しました。またのご利用お待ちしております！"
+    flash[:guest_notice] = "退会しました。またのご利用お待ちしております！"
     redirect_to about_path
   end
 
@@ -81,7 +81,8 @@ class Public::UsersController < ApplicationController
 # ゲストログインユーザーのダイレクトアタックを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+      flash[:alert] =  "ゲストユーザーはマイページを利用できません"
+      redirect_to trips_path
     end
   end
 

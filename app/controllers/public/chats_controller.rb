@@ -76,7 +76,8 @@ class Public::ChatsController < ApplicationController
   # ゲストログインユーザーの直接URLのアクセスを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+      flash[:alert] =  "ゲストユーザーはチャットを利用できません"
+      redirect_to trips_path
     end
   end
 

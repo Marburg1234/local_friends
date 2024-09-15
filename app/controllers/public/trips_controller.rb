@@ -47,7 +47,8 @@ class Public::TripsController < ApplicationController
 # ゲストログインユーザーの直接アクセスを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+      flash[:alert] =  "ゲストユーザーは新規投稿ページへ移動できません"
+      redirect_to trips_path
     end
   end
 

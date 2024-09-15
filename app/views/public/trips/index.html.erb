@@ -1,8 +1,13 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container">
+  <!--処理が成功した際にでるフラッシュメッセージ-->
   <div class="success_notice">
     <%= flash[:notice] %>
+  </div>
+  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
+  <div class="guest_limit_notice">
+    <%= flash[:alert] %>
   </div>
   <!--ページの題名-->
   <div class="row">
