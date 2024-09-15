@@ -1,3 +1,7 @@
+<head>
+  <meta name="turbolinks-cache-control" content="no-cache">
+</head>
+
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container">
@@ -87,7 +91,7 @@
 
 <!--JSの記述 国を選択したら、関連した地域が出てくる-->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener("turbolinks:load", function() {
     const countrySelect = document.getElementById('country_select');
     const regionSelect = document.getElementById('region_select');
 
