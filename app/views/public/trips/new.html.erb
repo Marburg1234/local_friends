@@ -21,7 +21,7 @@
 
       <div class="form-group">
         <strong><%= f.label :post_code %></strong>
-        <%= f.text_field :post_code, class: 'form-control', required: true %>
+        <%= f.text_field :post_code, id: 'zipcode', class: 'form-control', required: true %>
       </div>
 
       <div class="form-group">
@@ -76,6 +76,9 @@
     reader.readAsDataURL(input.files[0]);
   }
 </script>
+
+<!--jPostalの呼び出し-->
+<%= javascript_pack_tag "jpostal",  'data-turbolinks-track': 'reload' %>
 
 
 <!--`FileReader`オブジェクトは、ファイルの内容を非同期に読み込むためのオブジェクトです。この変数を使用して、ファイルのデータを読み込む処理を行います。-->

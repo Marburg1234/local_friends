@@ -11,6 +11,9 @@ class Trip < ApplicationRecord
 
   has_one_attached :trip_image
 
+  geocoded_by :address
+  after_validation :geocode
+
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name
   end

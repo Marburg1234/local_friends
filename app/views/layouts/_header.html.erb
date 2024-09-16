@@ -62,7 +62,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
+            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning', data: {"turbolinks" => false} do %>
             <i class="fa-solid fa-signs-post"></i>新規投稿
             <% end %>
           </li>
