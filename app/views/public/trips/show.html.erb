@@ -21,7 +21,7 @@
         </tr>
         <tr>
           <th class="px-3 py-2">住所</th>
-          <td class="pl-3"><%= @trip.address %></td>
+          <td class="pl-3"><%= link_to map_path do %><%= @trip.address %><% end %></td>
         </tr>
         <tr>
           <th class="px-3 py-2">投稿日</th>

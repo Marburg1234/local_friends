@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <th>場所</th>
-          <td><%= trip.address%></td>
+          <td><%= link_to map_path do %><%= trip.address%><% end %></td>
         </tr>
         <tr>
           <th>投稿日</th>
