@@ -82,7 +82,10 @@ label {
       font-size: 20px;
       color: #333;
     }
-  }
+}
 
-
+#map {
+  width: 100%;
+  height: calc(100vh - 88px - 179px);
+}
 

@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
+    # 地図用のルーティング追記
+    resource :map, only: [:show]
     # 検索のルーティング
     get 'search' => "searches#search"
     resources :chats, only: %i[show index create destroy]
