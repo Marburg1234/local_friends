@@ -22,10 +22,20 @@ class Public::TripsController < ApplicationController
 
   # 投稿一覧表示：退会済みユーザーの投稿を表示しない
   def index
-    # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
-    not_active_users = User.where(is_active: false).pluck(:id)
-    # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
-    @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+    respond_to do |format|
+      # htmlでのリクエストの場合の処理 (通常のindexへのアクセス)
+      format.html do
+        # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
+        not_active_users = User.where(is_active: false).pluck(:id)
+        # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
+        @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+      end
+      # json形式でのリクエストの場合の処理 (APIやJS非同期のリクエストがきたとき)
+      format.json do
+        not_active_users = User.where(is_active: false).pluck(:id)
+        @trips = @trips = Trip.where.not(user_id: not_active_users).all
+      end
+    end
   end
 
   def show
