@@ -29,7 +29,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       flash[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
       # flash[:alert] = resource.errors.full_messages.join(', ')
-
       redirect_to new_user_registration_path
     end
   end
