@@ -47,12 +47,12 @@ async function initMap() {
       // マーカー押して出てくる情報ウィンドウの設定
       const contentString = `
         <div class="information container p-0">
-          <div class="mb-3 d-flex align-items-center">
+          <div class="mb-3 d-flex align-items-center border-bottom pt-3">
             <img class="rounded-circle mr-2" src="${userImage}" width="40" height="40">
             <p class="lead m-0 font-weight-bold">${userName}</p>
           </div>
           <div class="mb-3">
-            <img class="thumbnail" src="${postImage}" loading="lazy">
+            <img class="thumbnail" src="${postImage}" loading="lazy" width="250" height="200" style="object-fit: contain;">
           </div>
           <div>
             <h1 class="h4 font-weight-bold">${title}</h1>
