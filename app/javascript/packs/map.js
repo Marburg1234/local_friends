@@ -11,7 +11,7 @@ async function initMap() {
 
   // 地図の中心と倍率は公式から変更しています。
   map = new Map(document.getElementById("map"), {
-    center: { lat: 35.681236, lng: 139.767125 },
+    center: { lat: 52.5186, lng: 13.4081 },
     zoom: 15,
     mapTypeControl: false
   });
