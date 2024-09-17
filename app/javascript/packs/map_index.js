@@ -11,6 +11,7 @@ async function initMap() {
   const {AdvancedMarkerElement} = await google.maps.importLibrary("marker") // 追記
 
   // 地図の中心と倍率は公式から変更しています。
+  // getElementById(id名) この引数にはmapを表示する箇所のid名を記述する ここで紐づけをしている
   map = new Map(document.getElementById("map"), {
     center: { lat: 35.874124, lng: 139.650752 },
     zoom: 15,

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :maps, only: %i[index] do
       member do
         get '/show' => "maps#show"
+        get '/region' => "maps#region"
       end
     end
     # 検索のルーティング
