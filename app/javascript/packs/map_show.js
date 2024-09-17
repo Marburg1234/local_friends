@@ -10,7 +10,7 @@ async function initMap() {
   const { Map } = await google.maps.importLibrary("maps");
   const {AdvancedMarkerElement} = await google.maps.importLibrary("marker") // 追記
 
-  // 地図の中心と倍率は公式から変更しています。
+  // 地図の中心を設定しておく必要がある。 後のmap.setCenterで位置を更新できるが初期値は必須
   map = new Map(document.getElementById("maps"), {
     center: { lat: 35.874124, lng: 139.650752 },
     zoom: 15,
@@ -20,41 +20,39 @@ async function initMap() {
 
 
   try {
+    // fetchを使って、jsonデータ形式のリクエストをする リクエスト先は( )内 URLを参照 .jsonで記述
+    // 今回はtrip_showを参照するため、この記述になっている
     const response = await fetch(`/trips/${tripId}.json`);
+    // ここの処理でエラーが起きたら、このエラー文を表示する
     if (!response.ok) throw new Error('Network response was not ok');
 
-    // const { data: { items } } = await response.json();
-    // if (!Array.isArray(items)) throw new Error("Items is not an array");
-
-    // const data = await response.json();
+    // JS特有の記述「分割代入」 { data: { item } } dataプロパティを取り出す
+    // dataオブジェクトの中にあるitemプロパティを取り出す 取り出したitem内の値をさらに{ item }に代入する
+    // 取り出しと同時に値を代入しているイメージ
     const { data: { item } } = await response.json()
 
-    // dataの構造に応じて修正
-    // const item = data.data.item; // itemが含まれていない場合、dataそのものを使用
-
-
-
+      // 各値を取り出して、使いやすくするために変数を用意 格納する
       const latitude = item.latitude;
       const longitude = item.longitude;
       const title = item.title;
-
-
       const userImage = item.user.image;
       const userName = item.user.name;
       const postImage = item.image;
       const address = item.address;
       const explain = item.explain;
 
+      // マーカーの設定をする
       const marker = new google.maps.marker.AdvancedMarkerElement ({
         position: { lat: latitude, lng: longitude },
         map,
         title: title,
         // 他の任意のオプションもここに追加可能
       });
-      
+
+      // 地図表示の中心位置 初期値から必要に応じて更新する(今回は投稿記事の緯度経度にしている)
       map.setCenter({ lat: latitude, lng: longitude });
 
-      // マーカー押して出てくる情報ウィンドウの設定
+      // マーカー押して出てくる情報ウィンドウの設定 htmlの記述方法になっている
       const contentString = `
         <div class="information container p-0">
           <div class="mb-3 d-flex align-items-center border-bottom pt-3">
@@ -79,6 +77,7 @@ async function initMap() {
       });
 
       // クリックイベントの設定 JSはクリックを監視する、クリック発生すると中の処理がされる
+      // クリックするとinfowindowが開くという設定 infowindowは上で定義している
       marker.addListener("click", () => {
           infowindow.open({
           anchor: marker,
@@ -89,11 +88,14 @@ async function initMap() {
 
 
 
-
+    // エラーがあった際にでる文章の設定
+    // 下のエラー文がconsoleで出ていたらこの処理内でのエラー
   } catch (error) {
     console.error('Error fetching or processing trips:', error);
   }
 
 }
 
+
+// 最初に定義しているasync function initMap() { をここで呼び出している
 initMap()
