@@ -30,7 +30,11 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
     # 地図用のルーティング追記
-    resource :map, only: [:show]
+    resource :map, only: [:show] do
+      member do
+        get '/trip' => "maps#trip"
+      end
+    end
     # 検索のルーティング
     get 'search' => "searches#search"
     resources :chats, only: %i[show index create destroy]
