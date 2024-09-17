@@ -14,6 +14,9 @@ class Trip < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
 
+  # 新しい順に表示する
+  default_scope { order(created_at: :desc) }
+
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name
   end
