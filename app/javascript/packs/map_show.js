@@ -26,18 +26,18 @@ async function initMap() {
     // const { data: { items } } = await response.json();
     // if (!Array.isArray(items)) throw new Error("Items is not an array");
 
-    const data = await response.json();
+    // const data = await response.json();
+    const { data: { item } } = await response.json()
 
     // dataの構造に応じて修正
-    const item = data.item || data; // itemが含まれていない場合、dataそのものを使用
-    console.log(item)　//ここまでは正しいデータを持っている
+    // const item = data.data.item; // itemが含まれていない場合、dataそのものを使用
+
 
 
       const latitude = item.latitude;
-      console.log(latitude) //ここでもundefinedだった
       const longitude = item.longitude;
       const title = item.title;
-      console.log(title) //ここでundefinedになる
+
 
       const userImage = item.user.image;
       const userName = item.user.name;
@@ -51,6 +51,8 @@ async function initMap() {
         title: title,
         // 他の任意のオプションもここに追加可能
       });
+      
+      map.setCenter({ lat: latitude, lng: longitude });
 
       // マーカー押して出てくる情報ウィンドウの設定
       const contentString = `
