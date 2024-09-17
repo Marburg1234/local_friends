@@ -17,15 +17,16 @@
   <div class="success_notice">
     <%= flash[:notice] %>
   </div>
-  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
-  <div class="guest_limit_notice">
-    <%= flash[:alert] %>
-  </div>
   <!--ページの題名-->
     <div class="mb-4">
       <h1 class="text-center">投稿一覧から気になる投稿を見つけよう！</h1>
       <div class="text-center"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg' %></div>
     </div>
+  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
+  <div class="guest_limit_notice">
+    <%= flash[:alert] %>
+  </div>
+
 
 
 <div class="container auto-scroll">
