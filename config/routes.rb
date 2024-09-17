@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
     # 地図用のルーティング追記
-    resource :map, only: [:show] do
+    resources :maps, only: %i[index] do
       member do
-        get '/trip' => "maps#trip"
+        get '/show' => "maps#show"
       end
     end
     # 検索のルーティング

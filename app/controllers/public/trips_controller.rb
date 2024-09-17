@@ -39,8 +39,15 @@ class Public::TripsController < ApplicationController
   end
 
   def show
-    @trip = Trip.find(params[:id])
-    @trip_comment = TripComment.new
+    respond_to do |format|
+      format.html do
+        @trip = Trip.find(params[:id])
+        @trip_comment = TripComment.new
+      end
+      format.json do
+        @trip = Trip.find(params[:id])
+      end
+    end
   end
 
   def edit

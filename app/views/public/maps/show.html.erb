@@ -3,7 +3,12 @@
 <h1 class="text-center my-3">Map表示</h1>
 
 <div class="container my-3">
-  <div id="map"></div>
+  <div id="maps"></div>
 </div>
 
-<%= javascript_pack_tag 'map', 'data-turbolinks-track': 'reload' %>
+<!--parameterから投稿記事のidを取得する-->
+<script>
+  const tripId = <%= params[:id] %>
+</script>
+
+<%= javascript_pack_tag 'map_show', 'data-turbolinks-track': 'reload' %>
