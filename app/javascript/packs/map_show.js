@@ -3,7 +3,7 @@
   key: process.env.Maps_API_Key
 });
 
-// ライブラリの読み込み
+// Googleからライブラリ(地図)の読み込み
 let map;
 
 async function initMap() {
@@ -20,18 +20,26 @@ async function initMap() {
 
 
   try {
-    const response = await fetch("/trips/${tripId}.json");
+    const response = await fetch(`/trips/${tripId}.json`);
     if (!response.ok) throw new Error('Network response was not ok');
 
-    const { data: { items } } = await response.json();
-    if (!Array.isArray(items)) throw new Error("Items is not an array");
+    // const { data: { items } } = await response.json();
+    // if (!Array.isArray(items)) throw new Error("Items is not an array");
 
-    items.forEach( item => {
+    const data = await response.json();
+
+    // dataの構造に応じて修正
+    const item = data.item || data; // itemが含まれていない場合、dataそのものを使用
+    console.log(item)　//ここまでは正しいデータを持っている
+
+
       const latitude = item.latitude;
       const longitude = item.longitude;
       const title = item.title;
-      // 追記
+      console.log(title) //ここでundefinedになる
+
       const userImage = item.user.image;
+      console.log(userImage)
       const userName = item.user.name;
       const postImage = item.image;
       const address = item.address;
@@ -62,22 +70,24 @@ async function initMap() {
         </div>
       `;
 
+      //情報ウィンドウの設定 スタイルと中身 中身はcontentStringとして定義している
       const infowindow = new google.maps.InfoWindow({
         content: contentString,
         ariaLabel: title,
       });
 
+      // クリックイベントの設定 JSはクリックを監視する、クリック発生すると中の処理がされる
       marker.addListener("click", () => {
           infowindow.open({
           anchor: marker,
           map,
-        })
+        });
       });
 
 
 
 
-    });
+
   } catch (error) {
     console.error('Error fetching or processing trips:', error);
   }

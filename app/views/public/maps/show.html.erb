@@ -9,6 +9,7 @@
 <!--parameterから投稿記事のidを取得する-->
 <script>
   const tripId = <%= params[:id] %>
+  // console.log(tripId); // デバッグ用に追加
 </script>
 
 <%= javascript_pack_tag 'map_show', 'data-turbolinks-track': 'reload' %>
