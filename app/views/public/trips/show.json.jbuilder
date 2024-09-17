@@ -1,6 +1,5 @@
 json.data do
   json.item do
-
     json.id @trip.id
     json.user do
       json.name @trip.user.first_name
@@ -13,6 +12,5 @@ json.data do
     json.address @trip.address
     json.latitude @trip.latitude
     json.longitude @trip.longitude
-
   end
 end

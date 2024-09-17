@@ -34,12 +34,12 @@ async function initMap() {
 
 
       const latitude = item.latitude;
+      console.log(latitude) //ここでもundefinedだった
       const longitude = item.longitude;
       const title = item.title;
       console.log(title) //ここでundefinedになる
 
       const userImage = item.user.image;
-      console.log(userImage)
       const userName = item.user.name;
       const postImage = item.image;
       const address = item.address;
