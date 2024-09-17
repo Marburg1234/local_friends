@@ -12,7 +12,7 @@ async function initMap() {
 
   // 地図の中心を設定しておく必要がある。 後のmap.setCenterで位置を更新できるが初期値は必須
   map = new Map(document.getElementById("maps"), {
-    center: { lat: 35.874124, lng: 139.650752 },
+    center: { lat: 139.6995, lng: 35.6905 },
     zoom: 15,
     mapId: "DEMO_MAP_ID",
     mapTypeControl: false
