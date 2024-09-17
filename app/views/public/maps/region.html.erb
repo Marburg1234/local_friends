@@ -1,1 +1,14 @@
-<p>地域の地図をここに挿入する</p>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<h1 class="text-center my-3">地域の地図をここに挿入す</h1>
+
+<div class="container my-3">
+  <div id="region_map"></div>
+</div>
+
+<!--parameterから投稿記事のidを取得する-->
+<script>
+  const regionId = <%= params[:id] %>
+</script>
+
+<%= javascript_pack_tag 'map_region', 'data-turbolinks-track': 'reload' %>

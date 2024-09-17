@@ -99,6 +99,12 @@ label {
   height: 500px;
 }
 
+#region_map {
+  width: 100%;
+  // height: calc(100vh - 88px - 179px);
+  height: 500px;
+}
+
 #chart {
   width: 500px;
   height: 300px;

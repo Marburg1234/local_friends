@@ -19,7 +19,7 @@
         </tr>
         <tr>
           <th class="pr-3 pb-2">Location</th>
-          <th class="pl-3 pb-2"> <%= user.region.name %></th>
+          <th class="pl-3 pb-2"><%= link_to region_map_path(user.region_id) do %><%= user.region.name %><% end %></th>
         </tr>
       </table>
     </div>

@@ -28,7 +28,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: 'homes#top'
-    get '/about', to:'homes#about', as:'about'
+    get '/about', to: 'homes#about', as: 'about'
+    # 地域の地図を表示するための処理をするルーティングを定義
+    resources :regions, only: %i[show]
     # 地図用のルーティング追記
     resources :maps, only: %i[index] do
       member do
