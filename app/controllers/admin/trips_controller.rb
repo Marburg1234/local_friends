@@ -1,6 +1,6 @@
 class Admin::TripsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @trips = Trip.all.page(params[:page]).per(5)
     @all_trips = @trips.count
@@ -8,6 +8,7 @@ class Admin::TripsController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @trip_index = @trip.trip_comments.page(params[:page]).per(5)
   end
 
   def destroy

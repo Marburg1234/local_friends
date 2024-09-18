@@ -6,7 +6,6 @@ class Public::TripCommentsController < ApplicationController
     @comment = current_user.trip_comments.new(trip_comment_params)
     @comment.trip_id = @trip.id
     @comment.save
-    # redirect_to request.referer
   end
 
   def destroy
@@ -14,8 +13,8 @@ class Public::TripCommentsController < ApplicationController
     @comment.destroy
     @trip = Trip.find(params[:trip_id])
     @trip_index = @trip.trip_comments.page(params[:page]).per(5)
-    # redirect_to request.referer
   end
+
 
   private
 
