@@ -1,3 +1,6 @@
 $('#trip-comments').html("<%= j(render 'public/trip_comments/comment_index', trip: @trip, trip_index: @trip_index ) %>");
 $('#comment-count').html("コメント数: <%= @trip.trip_comments.count %>");
 $("textarea").val('');
+
+// 無限スクロールの再初期化
+initInfiniteScroll();
