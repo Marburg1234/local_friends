@@ -47,7 +47,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.update(is_active:false)
     reset_session
-    flash[:guest_notice] = "退会しました。またのご利用お待ちしております！"
+    flash[:notice] = "退会しました。またのご利用お待ちしております！"
     redirect_to about_path
   end
 
