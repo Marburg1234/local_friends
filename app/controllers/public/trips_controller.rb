@@ -42,6 +42,8 @@ class Public::TripsController < ApplicationController
     respond_to do |format|
       format.html do
         @trip = Trip.find(params[:id])
+        # paginateを入れておく コメント一覧
+        @trip_index = @trip.trip_comments.page(params[:page]).per(5)
         @trip_comment = TripComment.new
       end
       format.json do
