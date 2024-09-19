@@ -10,18 +10,19 @@
       <div class="message mx-auto p-3">
         <% @chats.each do |chat| %>
           <% if chat.user_id == current_user.id %>
-          <!--部分テンプレの呼び出し-->
+          <!--部分テンプレの呼び出し 右側の部分 送ったメッセージの表示-->
           <%= render "public/chats/chat", chat: chat %>
           <% else %>
+          <!--左側の部分 受け取ったメッセージの表示-->
             <div class="left-container d-flex mb-3">
               <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
 
               <% if chat.message.present? %>
-                <p class="ml-1" style="text-align: left;"><span class="p-2" style="background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></span></p>
+                <p class="ml-1 p-2" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
               <% end %>
               <!--画像を表示する-->
               <% if chat.image.attached? %>
-                <%= image_tag  chat.image, size: '200x200' %>
+                <%= image_tag chat.image, size: '200x200' %>
               <% end %>
 
             </div>
