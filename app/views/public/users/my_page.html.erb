@@ -2,11 +2,11 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   <!--ログイン成功のフラッシュメッセージ-->
-  <div class="success_notice">
-    <%= flash[:notice] %>
-  </div>
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "success_notice" %>
+  <% end %>
 
-<div class="container d-flex justify-content-center flex-column">
+<div class="container d-flex justify-content-center flex-column my-5">
   <div class="row">
     <div class="col text-center mt-2 mb-4">
       <h1><strong>マイページ</strong></h1>

@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container d-flex justify-content-center flex-column">
-  <div class="fail_notice">
-      <%= flash[:notice] %>
-    </div>
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "fail_notice" %>
+  <% end %>
 
   <div class="row no-gutters">
     <div class="col text-center my-3">

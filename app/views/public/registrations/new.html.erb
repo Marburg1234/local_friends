@@ -1,14 +1,16 @@
 <head>
   <meta name="turbolinks-cache-control" content="no-cache">
 </head>
-
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <!--退会処理成功した際のフラッシュメッセージ-->
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "withdraw_notice" %>
+  <% end %>
 
 <div class="container">
   <div class="text-center mt-3"><h2>新規会員登録</h2></div>
-  <div class="registration_alert-message">
-    <%= flash[:registration_alert] %>
-  </div>
+    <%= content_tag :div, flash[:registration_alert], class: "registration_alert-message" %>
   <div class="row no-gutters">
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
@@ -47,7 +49,7 @@
           </div>
           <!--Region 選択-->
           <div class="field mb-3">
-            <%= f.label :地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+            <%= f.label :住んでいる地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
             <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
           </div>
 

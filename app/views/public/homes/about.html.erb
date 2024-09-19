@@ -1,11 +1,12 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
- <!--退会処理成功とログアウトした際のフラッシュメッセージ-->
-  <div class="withdraw_notice">
-    <%= flash[:notice] %>
-  </div>
 
   <!--アプリの説明を挿入する-->
-  <h1 class="text-center border-bottom my-5 pb-3 about_image">Local.Friendsについて</h1>
+  <div class="about_image text-center text-light">
+    <h1 class="text-center text-light pb-3 mt-3">Local.Friendsについて</h1>
+    <h3 class="my-3">旅行先で現地の人と交流することを目的としたアプリです！</h3>
+    <h3 class="my-3">このアプリを通じて仲間を見つけましょう！</h3>
+    <p>※ポートフォリオで制作したアプリのため閉鎖する場合があります</p>
+  </div>
   <div class="row mt-2">
     <div class="col-6" style="height: 400px; background-color: #F5F5F5;">
       <div class="col-8 mx-auto mt-4" style="height: 300px; ">

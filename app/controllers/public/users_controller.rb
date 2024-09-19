@@ -48,7 +48,7 @@ class Public::UsersController < ApplicationController
     @user.update(is_active:false)
     reset_session
     flash[:notice] = "退会しました。またのご利用お待ちしております！"
-    redirect_to about_path
+    redirect_to new_user_registration_path
   end
 
 # ================================================

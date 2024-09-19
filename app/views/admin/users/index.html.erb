@@ -1,19 +1,11 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
- <!--ログイン成功のメッセージ-->
-  <div class="success_notice">
-    <%= flash[:notice] %>
-  </div>
 
-<div class="container-fluid my-3">
+<div class="container-fluid my-5">
   <div class="row">
     <!-- 左側に配置するテーブル -->
     <div class="col-md-4">
-
-
      <!--会員数を表示する表を部分テンプレ化呼び出す-->
      <%= render 'users_index_table', users_count: @users_count, active_users_all: @active_users_all, active_user_ration: @active_user_ration, not_active_users: @not_active_users, not_active_user_ration: @not_active_user_ration %>
-
-
       <!--国別のユーザー数を表示する-->
       <h3 class="text-center border-bottom pb-2 my-2">国別の会員数</h3>
       <table class="table table-bordered text-center admin_user_table table-hover">
@@ -65,7 +57,7 @@
       <div class="row">
         <!-- ページのタイトル -->
         <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
+          <span class="pr-3 pl-3" style="font-size: 1.5rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
         </div>
 
         <!-- 会員一覧の表示 -->

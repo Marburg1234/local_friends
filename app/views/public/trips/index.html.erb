@@ -14,20 +14,19 @@
 </style>
 
   <!--処理が成功した際にでるフラッシュメッセージ-->
-  <div class="success_notice">
-    <%= flash[:notice] %>
-  </div>
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "success_notice" %>
+  <% end %>
+
   <!--ページの題名-->
-    <div class="mb-4">
-      <h1 class="text-center">投稿一覧から気になる投稿を見つけよう！</h1>
-      <div class="text-center"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg' %></div>
-    </div>
-  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
-  <div class="guest_limit_notice">
-    <%= flash[:alert] %>
+  <div class="my-5">
+    <h1 class="text-center">投稿一覧から気になる投稿を見つけよう！</h1>
+    <div class="text-center mt-3"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg' %></div>
   </div>
-
-
+  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
+  <% if flash[:alert].present? %>
+    <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
+  <% end %>
 
 <div class="container auto-scroll">
   <!--左側の部分 プロフィール写真と投稿ユーザー名-->
@@ -46,7 +45,6 @@
           <% end %>
       </div>
     </div>
-
   <!--右側の部分　投稿の内容-->
     <div class="col-lg-8 col-md-12">
       <table class="table mt-2">
@@ -91,11 +89,3 @@
   });
 </script>
 
-
-
-
-
-
-
-
-<!--<= javascript_pack_tag 'jscroll', 'data-turbolinks-track': 'reload' %>-->

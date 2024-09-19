@@ -1,9 +1,9 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
  <!--退会処理成功とログアウトした際のフラッシュメッセージ-->
-  <div class="withdraw_notice">
-    <%= flash[:notice] %>
-  </div>
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "withdraw_notice" %>
+  <% end %>
 
 <div class="container">
   <div class="row no-gutters">

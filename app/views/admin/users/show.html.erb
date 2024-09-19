@@ -2,11 +2,11 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
  <!--変更処理成功のメッセージ-->
-  <div class="success_notice">
-    <%= flash[:notice] %>
-  </div>
+<% if flash[:notice].present? %>
+  <%= content_tag :div, flash[:notice], class: "success_notice" %>
+<% end %>
 
-<div class="container d-flex justify-content-center flex-column">
+<div class="container d-flex justify-content-center flex-column my-5">
   <div class="row">
     <div class="col text-center mt-2 mb-4">
   <h1 class="text-center"><strong><%= @user.first_name %>さんのユーザープロフィール</strong></h1>
@@ -25,7 +25,6 @@
   </div>
 <!--ユーザー情報は部分テンプレートにする-->
 <%= render 'layouts/user_show', user: @user, trips: @trips %>
-
 
 <div class="container mb-4">
   <div class="row">

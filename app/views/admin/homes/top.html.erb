@@ -1,8 +1,9 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--ログイン成功時のフラッシュメッセージ-->
+<% if flash[:notice].present? %>
+  <%= content_tag :div, flash[:notice], class: "success_notice" %>
+<% end %>
 
-<div class="text-center mt-3 success_notice">
-  <strong><%= flash[:notice] %></strong>
-</div>
 <div class="container d-flex justify-content-center flex-column mb-5">
   <h1 class="text-center my-5"><%= image_tag 'admin_man' %>管理者トップ</h1>
   <div class="row">
