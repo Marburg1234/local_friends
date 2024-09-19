@@ -152,6 +152,7 @@ User.create!(first_name: 'Liam') do |user|
     user.age = 24
     user.topic = "Cycling, beer culture, history, travel"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman1.png"), filename:"profile_woman1.png")
 end
 
 # ユーザーを登録2
@@ -167,6 +168,7 @@ User.create!(first_name: 'Isabel') do |user|
     user.age = 28
     user.topic = "Arte, cocina, viajes, cultura italiana！"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman2.jpg"), filename:"profile_woman2.jpg")
 end
 
 # ユーザーを登録3
@@ -182,6 +184,7 @@ User.create!(first_name: 'Sophie') do |user|
     user.age = 21
     user.topic = "Musik, Tanz, Reisen, Sprachen lernen！"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/animal_neko.png"), filename:"animal_neko.png")
 end
 
 # ユーザーを登録4
@@ -197,6 +200,7 @@ User.create!(first_name: 'Hamilton') do |user|
     user.age = 29
     user.topic = "Anime, japanese custom, movie"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man1.png"), filename:"profile_man1.png")
 end
 
 # ユーザーを登録5
@@ -212,6 +216,7 @@ User.create!(first_name: 'Emily') do |user|
     user.age = 26
     user.topic = "アニメ、テクノロジー、料理、日本文化"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman3.png"), filename:"profile_woman3.png")
 end
 
 # ユーザーを登録6
@@ -227,6 +232,7 @@ User.create!(first_name: 'Hiroshi') do |user|
     user.age = 33
     user.topic = "写真、旅行、言語学習、音楽"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man2.png"), filename:"profile_man2.png")
 end
 
 # ユーザーを登録7
@@ -239,9 +245,10 @@ User.create!(first_name: 'Marta') do |user|
     user.mother_language_id = 6
     user.practice_language_id = 1
     user.introduction = "ヤチェム！マルタです。日本の歴史や美術に興味があり、日本語を勉強して日本に行くことが夢です。"
-    user.age = 22
+    user.age = 36
     user.topic = "美術、歴史、旅行、言語学習"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man3.png"), filename:"profile_man3.png")
 end
 
 # ユーザーを登録8
@@ -257,6 +264,7 @@ User.create!(first_name: 'Carlos') do |user|
     user.age = 22
     user.topic = "サッカー、旅行、文化交流、料理"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman5.png"), filename:"profile_woman5.png")
 end
 
 # ユーザーを登録9
@@ -272,4 +280,101 @@ User.create!(first_name: 'Yumi') do |user|
     user.age = 22
     user.topic = "韓国ドラマ、ファッション、カフェ、旅行"
     user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman4.png"), filename:"profile_woman4.png")
+end
+
+# ユーザーを登録10
+User.create!(first_name: 'Takumi') do |user|
+    user.family_name = 'Yamada'
+    user.email = '10@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 1
+    user.region_id = 13
+    user.mother_language_id = 1
+    user.practice_language_id = 6
+    user.introduction = "こんにちは、拓海です。パティシエとして働いていて、フランス菓子に憧れてフランス語を勉強しています。いつかフランスで修行することが夢です。"
+    user.age = 28
+    user.topic = "フランス菓子、料理、旅行、映画"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/animal_dog.png"), filename:"animal_dog.png")
+end
+
+# ユーザーを登録11
+User.create!(first_name: 'Haruka') do |user|
+    user.family_name = 'Saito'
+    user.email = '11@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 1
+    user.region_id = 1
+    user.mother_language_id = 1
+    user.practice_language_id = 2
+    user.introduction = "英語を学びながら、国際的な視野を広げたいと考えています。自然が大好きで、趣味はキャンプとハイキングです。"
+    user.age = 24
+    user.topic = "自然、アウトドア、映画、音楽"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman6.png"), filename:"profile_woman6.png")
+end
+
+# ユーザーを登録12
+User.create!(first_name: 'Kenta') do |user|
+    user.family_name = 'Nikaido'
+    user.email = '12@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 1
+    user.region_id = 1
+    user.mother_language_id = 1
+    user.practice_language_id = 5
+    user.introduction = "スペインサッカーが好きで、スペイン語を勉強中です。サッカー観戦やヨーロッパ旅行をするのが夢です。"
+    user.age = 33
+    user.topic = "サッカー、旅行、ヨーロッパ文化、グルメ"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man4.png"), filename:"profile_man4.png")
+end
+
+# ユーザーを登録13
+User.create!(first_name: 'Shohei') do |user|
+    user.family_name = 'Suzuki'
+    user.email = '13@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 1
+    user.region_id = 41
+    user.mother_language_id = 1
+    user.practice_language_id = 4
+    user.introduction = "ビジネスマンとして中国と取引があるため、中国語を勉強しています。趣味は読書とビジネスに関する勉強です。"
+    user.age = 36
+    user.topic = "ビジネス、読書、言語学習、異文化交流"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man5.png"), filename:"profile_man5.png")
+end
+
+# ユーザーを登録14
+User.create!(first_name: 'Min-Ji') do |user|
+    user.family_name = 'Kim'
+    user.email = '14@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 6
+    user.region_id = 77
+    user.mother_language_id = 3
+    user.practice_language_id = 1
+    user.introduction = "アンニョンハセヨ、ミンジです。日本のアニメや漫画に興味があって、日本語を勉強しています。いつか日本に行って、アニメの聖地巡りをしたいです。"
+    user.age = 22
+    user.topic = "アニメ、漫画、旅行、ファッション"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman7.png"), filename:"profile_woman7.png")
+end
+
+# ユーザーを登録15
+User.create!(first_name: 'Jae-Hyun') do |user|
+    user.family_name = 'Park'
+    user.email = '15@yahoo.co.jp'
+    user.password = '111111'
+    user.country_id = 6
+    user.region_id = 78
+    user.mother_language_id = 3
+    user.practice_language_id = 2
+    user.introduction = "I am studying English and hope to work abroad in the future. My hobbies are listening to music and watching movies, and I especially enjoy Hollywood films."
+    user.age = 20
+    user.topic = "Movies, music, cultural exchange, technology"
+    user.is_active = 'true'
+    user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman8.png"), filename:"profile_woman8.png")
 end
