@@ -78,6 +78,7 @@ footer{
 // ヘッダーのリンクcss
 .nav-link i{
   color: #FFCC99;
+  font-size: 1.3rem;
 }
 
 .nav-link span{
@@ -89,6 +90,20 @@ footer{
   font-size: 1.5rem;
   font-weight: bold;
 }
+
+.nav-log-out i{
+  color: white;
+}
+
+.nav-log-out span{
+  color: white;
+}
+
+.nav-log-out:hover{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 // ===============================================
 
 // 管理側 user_indexページのcss===================

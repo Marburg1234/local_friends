@@ -145,7 +145,7 @@ User.create!(first_name: 'Liam') do |user|
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
     user.country_id = 2
-    user.region_id = 54
+    user.region_id = 49
     user.mother_language_id = 2
     user.practice_language_id = 8
     user.introduction = "Hello, my name is Liam. I am studying German and interested in German beer culture and history. My hobbies are cycling and reading."
@@ -193,7 +193,7 @@ User.create!(first_name: 'Hamilton') do |user|
     user.email = '4@yahoo.co.jp'
     user.password = '111111'
     user.country_id = 2
-    user.region_id = 47
+    user.region_id = 50
     user.mother_language_id = 4
     user.practice_language_id = 1
     user.introduction = "I want to talk japanese fluently！！"

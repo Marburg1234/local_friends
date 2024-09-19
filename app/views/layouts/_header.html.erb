@@ -34,9 +34,9 @@
       <ul class="navbar-nav ml-auto">
         <!--管理者ログインした時のヘッダー-->
         <% if admin_signed_in? %>
-          <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-          <%= link_to '投稿一覧', admin_trips_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
+          <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
+          <%= link_to '投稿一覧', admin_trips_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
 
         <!--ユーザー サインイン状態のヘッダーnav-->
         <% elsif user_signed_in? %>
@@ -67,7 +67,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning active' do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out' do %>
             <i class="fa-solid fa-person-walking-arrow-right"></i><span>ログアウト</span>
             <% end %>
           </li>
