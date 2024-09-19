@@ -16,7 +16,7 @@ header{
 
 // headerの透過に伴って、margin-topをmain上部に入れる
 main{
-  margin-top: 150px;
+  margin-top: var(--header-height);
 }
 
 footer{
@@ -75,6 +75,7 @@ footer{
   background-blend-mode:darken;
 }
 // ===============================================
+// ヘッダーのリンクcss
 .nav-link i{
   color: #FFCC99;
 }
@@ -88,7 +89,7 @@ footer{
   font-size: 1.5rem;
   font-weight: bold;
 }
-
+// ===============================================
 
 // 管理側 user_indexページのcss===================
 .admin_user_table .head{
