@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    # 全ユーザー情報を取得して5人1ページで表示する(ゲストは除く)
+    # 全ユーザー情報を取得して10人1ページで表示する(ゲストは除く)
     @users = User.page(params[:page]).per(10).where.not(email: "guest@example.com")
     # 全ユーザーの人数を数える
     @users_count = User.where.not(email: "guest@example.com").all.count
@@ -17,12 +17,12 @@ class Admin::UsersController < ApplicationController
     # 退会済みユーザーの割合算出 メソッド3
     @not_active_user_ration = not_active_user_ration
     # ============================================================
-    # 国別の利用者数を表示するための情報を取得
-    @user_counts_per_country = User.group(:country_id).count
+    # 国別の利用者数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
+    @user_counts_per_country = active_users_data.group(:country_id).count
 
     # ============================================================
-    # 学習中の言語別人数を表示するための情報を取得
-    @user_practice_language = User.group(:practice_language_id).count
+    # 学習中の言語別人数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
+    @user_practice_language = active_users_data.group(:practice_language_id).count
     # ============================================================
   end
 
@@ -76,7 +76,7 @@ class Admin::UsersController < ApplicationController
     @active_user_ration = active_user_ration
 
     # 退会済みユーザーの情報取得と10件ごとに表示(退会済みを検索キーとして情報を抽出する)
-    @not_actives = User.page(params[:page]).per(10).where(is_active: false).all
+    @not_actives = User.page(params[:page]).per(10).where(is_active: false).where.not(email: "guest@example.com").all
     # 退会済みのユーザーの合計人数 メソッド4
     @not_active_users = not_active_users
     # 退会済みユーザーの割合算出 メソッド3
@@ -112,7 +112,12 @@ class Admin::UsersController < ApplicationController
 
   # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
   def active_users_all
-   User.where.not(is_active: false).where.not(email: "guest@example.com").all.count
+    User.where.not(is_active: false).where.not(email: "guest@example.com").all.count
+  end
+
+  # 有効ユーザーのデータ(たち)(退会済みとゲストを除く) メソッド6
+  def active_users_data
+    User.where.not(is_active: false).where.not(email: "guest@example.com")
   end
 
 end

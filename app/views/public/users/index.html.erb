@@ -1,3 +1,9 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--退会済みユーザーのページへアクセスor登録のないユーザーにアクセスしたときのフラッシュ-->
+<% if flash[:alert].present? %>
+  <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
+<% end %>
+
 <div class="container container-fluid my-5">
   <div class="row my-3">
     <div class="col-12 px-sm-0 text-center">

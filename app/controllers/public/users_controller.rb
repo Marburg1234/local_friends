@@ -95,12 +95,12 @@ class Public::UsersController < ApplicationController
   end
 
 # 退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
-# 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundになるため)
+# 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundエラーを防ぐ)
   def check_not_active_user
     begin
       @user = User.find(params[:id])
       unless @user.is_active == true
-        redirect_to users_path, alert: "このユーザーはアクティブではありません。"
+        redirect_to users_path, alert: "このユーザーは退会しています。"
       end
     rescue ActiveRecord::RecordNotFound
       redirect_to users_path, alert: "ユーザーが見つかりませんでした。"

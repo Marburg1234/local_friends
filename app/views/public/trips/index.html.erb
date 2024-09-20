@@ -11,11 +11,19 @@
   .jscroll-inner {
     width: 100%; /* 幅の調整 */
   }
+
+  .left{
+    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
+  }
 </style>
 
   <!--処理が成功した際にでるフラッシュメッセージ-->
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "success_notice" %>
+  <% end %>
+  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
+  <% if flash[:alert].present? %>
+    <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
   <% end %>
 
   <!--ページの題名-->
@@ -23,13 +31,9 @@
     <h1 class="text-center">投稿一覧から気になる投稿を見つけよう！</h1>
     <div class="text-center mt-3"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg' %></div>
   </div>
-  <!--ゲストユーザーがいけないページへアクセスした際にでるフラッシュメッセージ-->
-  <% if flash[:alert].present? %>
-    <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
-  <% end %>
 
 <div class="container auto-scroll">
-  <!--左側の部分 プロフィール写真と投稿ユーザー名-->
+  <!--左側の部分 投稿写真と投稿ユーザー名-->
   <div class="row">
     <% @trips.each do |trip| %>
     <div class="col-lg col-md ml-5 mb-5">
@@ -49,19 +53,19 @@
     <div class="col-lg-8 col-md-12">
       <table class="table mt-2">
         <tr>
-          <th>タイトル</th>
+          <th class="left">タイトル</th>
           <td><%= trip.title %></td>
         </tr>
         <tr>
-          <th>場所</th>
-          <td><%= link_to show_map_path(trip) do %><%= trip.address%><% end %></td>
+          <th class="left">場所</th>
+          <td><%= link_to show_map_path(trip) do %><%= trip.address%><% end %> (地図を確認できます)</td>
         </tr>
         <tr>
-          <th>投稿日</th>
+          <th class="left">投稿日</th>
           <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
-          <th></th>
+          <th class="left"></th>
           <td id="favorite_button_<%= trip.id %>"><%= render 'public/favorites/like', trip: trip %></td>
         </tr>
       </table>
