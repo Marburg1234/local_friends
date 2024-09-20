@@ -1,45 +1,70 @@
-
-<div class="container d-flex justify-content-center flex-column">
-  <div class="w-25 text-light text-center bg-danger mt-3">
+<div class="container">
+  <!-- フラッシュメッセージ -->
+  <div class="w-50 mx-auto text-light text-center bg-danger mt-3">
     <%= flash[:notice] %>
   </div>
-  <div class="row no-gutters">
+
+  <!-- タイトル -->
+  <div class="row">
     <div class="col text-center my-3">
       <h1><%= @user.family_name %><%= @user.first_name %>さんのステータスを変更する</h1>
     </div>
   </div>
-  <div class="row d-flex justify-content-center flex-column">
-    <div class="row my-3">
-      <span>プロフィール写真<br />
-        <%= image_tag @user.get_profile_image %>
-      </span>
+
+  <!-- 会員ステータス表示 -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-6 mx-auto mt-2 border text-center">
+      会員ステータス：
+      <% if @user.is_active == true %>
+        <p class="alert alert-success text-center"><strong>有効</strong></p>
+      <% else %>
+        <p class="alert alert-danger text-center">退会済み</p>
+      <% end %>
     </div>
-    <div class="row mb-3 form-group">
-      姓
-      <%= @user.family_name %>
-    </div>
-    <div class="row mb-3">
-      名
-      <%= @user.first_name %>
-    </div>
-    <div class="row mb-3">
-      自己紹介文 <br/>
-      <%= @user.introduction %>
-   </div>
-    <div class="row mb-3">
-      話したい話題<br/>
-      <%= @user.topic %>
-    </div>
-    <div class="row my-3">
-    <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
-      <span>会員ステータス<br />
-        <%= f.radio_button :is_active, :true %>
-        <%= f.label :is_active, "有効"%>
-        <%= f.radio_button :is_active, :false, class: 'ml-4' %>
-        <%= f.label :is_active, "退会", class: 'text-right' %>
-      </span>
-      <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
+  </div>
+
+  <!-- ステータス変更フォーム -->
+  <div class="row d-flex justify-content-center my-4">
+    <%= form_with model: @user, url: admin_user_path, method: :patch, class: 'w-50' do |f| %>
+      <div class="form-group">
+        <label class="border-bottom">会員ステータス変更</label>
+        <div class="form-check mb-3">
+          <%= f.radio_button :is_active, true, class: 'form-check-input', style: 'width: 20px; height: 20px; cursor: pointer;' %>
+          <%= f.label :is_active_true, "有効", class: 'form-check-label pl-3', style: 'cursor: pointer;' %>
+        </div>
+        <div class="form-check">
+          <%= f.radio_button :is_active, false, class: 'form-check-input', style: 'width: 20px; height: 20px; cursor: pointer;' %>
+          <%= f.label :is_active_false, "退会", class: 'form-check-label pl-3', style: 'cursor: pointer;' %>
+        </div>
+        <div class="text-center">
+          <%= f.submit "変更内容を保存", class: 'btn btn-success mt-3' %>
+        </div>
+      </div>
     <% end %>
+  </div>
+
+<!--以下がユーザー情報に関するコード-->
+  <div class="row d-flex justify-content-center mb-4">
+    <div class="col-lg-5 col-md-5 col-sm-12 justify-content-center text-center shadow border p-3" style="border-radius: 20px;">
+     <h5 class="mb-3 border-bottom">プロフィール写真</h5>
+     <%= image_tag @user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-12 shadow border ml-3 p-3" style="border-radius: 20px;">
+      <h5 class="mb-3 border-bottom text-center">基本情報</h5>
+      <table>
+        <tr>
+          <th class="pr-3 pb-2">Name</th>
+          <th class="pl-3 pb-2"><%= @user.family_name %>  <%= @user.first_name %></th>
+        </tr>
+        <tr>
+          <th class="pr-3 pb-2">Country</th>
+          <th class="pl-3 pb-2"><%= @user.country.name %></th>
+        </tr>
+        <tr>
+          <th class="pr-3 pb-2">Location</th>
+          <th class="pl-3 pb-2"><%= @user.region.name %></th>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
