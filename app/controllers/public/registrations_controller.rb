@@ -4,6 +4,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
 
   def after_sign_up_path_for(resource)
+    flash[:notice] = "ようこそ！ 新規登録しました！"
     my_page_users_path
   end
 
@@ -28,7 +29,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
       resource.errors.clear
       clean_up_passwords resource
       flash[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
-      # flash[:alert] = resource.errors.full_messages.join(', ')
       redirect_to new_user_registration_path
     end
   end

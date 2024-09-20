@@ -114,10 +114,4 @@
 </script>
 
 <!--main部分のmargin-topをヘッダーの高さに合わせて自動調整するJavascript-->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-  const header = document.querySelector('header');
-  const headerHeight = header.offsetHeight;
-  document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
-});
-</script>
+<%= javascript_pack_tag 'main_margin_top', 'data-turbolinks-track': 'reload' %>
