@@ -16,8 +16,8 @@
             <th class="text-center">プロフィール写真</th>
             <th class="text-center">ユーザー名</th>
             <th class="text-center">国</th>
-            <th class="text-center">地域</th>
-            <th class="text-center">話したい話題</th>
+            <th class="d-none d-md-table-cell text-center">地域</th> <!-- スマホでは非表示 -->
+            <th class="d-none d-md-table-cell text-center">話したい話題</th> <!-- スマホでは非表示 -->
           </tr>
         </thead>
         <tbody>
@@ -25,7 +25,7 @@
             <tr>
               <td class="text-center align-middle">
                 <%= link_to user_path(user.id) do %>
-                  <%= image_tag user.get_profile_image, size: '50x50', class: 'rounded-circle' %>
+                  <%= image_tag user.get_profile_image, size: '50x50', class: 'rounded-circle img-fluid' %>
                 <% end %>
               </td>
               <td class="align-middle text-center">
@@ -33,9 +33,9 @@
                   <%= user.family_name %> <%= user.first_name %>
                 <% end %>
               </td>
-              <td class="align-middle text-center"><%= user.country.name %></td>
-              <td class="align-middle text-center"><%= user.region.name %></td>
-              <td class="align-middle text-center"><%= user.topic %></td>
+              <td class="align-middle text-nowrap text-truncate text-center"><%= user.country.name %></td>
+              <td class="d-none d-md-table-cell align-middle text-center"><%= user.region.name %></td>
+              <td class="d-none d-md-table-cell align-middle text-center text-truncate" style="max-width: 150px;"><%= user.topic %></td>
             </tr>
           <% end %>
         </tbody>
@@ -47,7 +47,7 @@
             <th class="text-center">投稿ユーザー</th>
             <th class="text-center">投稿写真</th>
             <th class="text-center">タイトル</th>
-            <th class="text-center">住所</th>
+            <th class="d-none d-md-table-cell text-center">住所</th> <!-- スマホでは非表示 -->
           </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
             <tr>
               <td class="align-middle text-center">
                 <%= link_to user_path(trip.user) do %>
-                  <%= image_tag trip.user.get_profile_image, size: '50x50', class: 'rounded-circle' %>
+                  <%= image_tag trip.user.get_profile_image, size: '50x50', class: 'rounded-circle img-fluid' %>
                 <% end %><br>
                 <%= link_to user_path(trip.user) do %>
                   <%= trip.user.family_name %><%= trip.user.first_name %>
@@ -63,15 +63,15 @@
               </td>
               <td class="align-middle text-center">
                 <%= link_to trip_path(trip.id) do %>
-                  <%= image_tag trip.get_trip_image, size: '80x80' %>
+                  <%= image_tag trip.get_trip_image, size: '80x80', class: 'img-fluid' %>
                 <% end %>
               </td>
-              <td class="align-middle text-center">
+              <td class="text-nowrap text-truncate align-middle text-center">
                 <%= link_to trip_path(trip.id) do %>
                   <%= trip.title %>
                 <% end %>
               </td>
-              <td class="align-middle text-center"><%= trip.address %></td>
+              <td class="d-none d-md-table-cell align-middle text-center text-truncate" style="max-width: 150px;"><%= trip.address %></td> <!-- スマホでは非表示 -->
             </tr>
           <% end %>
         </tbody>
