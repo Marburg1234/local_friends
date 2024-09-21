@@ -37,7 +37,7 @@ class Trip < ApplicationRecord
 
   # 検索するためのメソッド 部分一致検索のみに変更した
   def self.looks(search, word)
-    @trip = Trip.where("title LIKE? OR explain LIKE? OR post_code LIKE? OR address LIKE?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
+    @trip = Trip.where("title LIKE? OR `explain` LIKE? OR post_code LIKE? OR address LIKE?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
   end
 
 end
