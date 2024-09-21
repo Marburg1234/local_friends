@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "chat_room_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "chat_room_id", null: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "regions", force: :cascade do |t|
-    t.integer "country_id", null: false
+    t.bigint "country_id", null: false
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "trips", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "post_code", null: false
     t.string "address", null: false
     t.string "title", null: false
@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "user_rooms", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "chat_room_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "chat_room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_room_id"], name: "index_user_rooms_on_chat_room_id"
