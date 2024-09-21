@@ -1,7 +1,9 @@
 class Public::ChatsController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:index, :show]
   before_action :check_follow_situation, only: [:show]
   before_action :check_not_active_user, only: [:show]
+
 
 #============================================================================
 # チャットルームの表示

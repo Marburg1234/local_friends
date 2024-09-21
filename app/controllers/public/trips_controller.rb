@@ -84,4 +84,5 @@ class Public::TripsController < ApplicationController
     end
   end
 
+
 end

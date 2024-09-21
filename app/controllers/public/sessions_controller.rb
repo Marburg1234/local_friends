@@ -1,5 +1,6 @@
 class Public::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
+  before_action :redirect_if_admin_signed_in, only: [:new, :create]
 
   def after_sign_in_path_for(resource)
     flash[:notice] = "ようこそ！ ログインしました！"
@@ -9,6 +10,14 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     flash[:notice] = "ログアウトしました！"
     new_user_session_path
+  end
+
+  private
+
+  def redirect_if_admin_signed_in
+    if admin_signed_in?
+      redirect_to admin_homes_top_path, notice: "管理者としてログインしています。ログアウトが必要です。"
+    end
   end
 
 #==========================================================================

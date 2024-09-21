@@ -1,4 +1,5 @@
 class Public::MapsController < ApplicationController
+  before_action :authenticate_user!
 
   # 特定の投稿の住所を地図でマーカー表示
   def show
