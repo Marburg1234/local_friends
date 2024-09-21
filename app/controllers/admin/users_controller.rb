@@ -53,7 +53,7 @@ class Admin::UsersController < ApplicationController
     @users_count = @users.count
 
     # 有効ユーザーの情報を取得し10件ごとに表示する(退会済みとゲストを除く)
-    @active_users = User.page(params[:page]).per(10).where.not(is_active: false).where.not(email: "guest@example.com").all
+    @active_users = User.where.not(is_active: false).where.not(email: "guest@example.com").all.order(id: :asc).page(params[:page]).per(10)
     # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
     @active_users_all = active_users_all
     # 有効ユーザーの割合算出
@@ -76,7 +76,7 @@ class Admin::UsersController < ApplicationController
     @active_user_ration = active_user_ration
 
     # 退会済みユーザーの情報取得と10件ごとに表示(退会済みを検索キーとして情報を抽出する)
-    @not_actives = User.page(params[:page]).per(10).where(is_active: false).where.not(email: "guest@example.com").all
+    @not_actives = User.where(is_active: false).where.not(email: "guest@example.com").all.order(id: :asc).page(params[:page]).per(10)
     # 退会済みのユーザーの合計人数 メソッド4
     @not_active_users = not_active_users
     # 退会済みユーザーの割合算出 メソッド3
