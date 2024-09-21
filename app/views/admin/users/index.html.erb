@@ -1,40 +1,54 @@
-<div class="container-fluid my-3">
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<div class="container-fluid my-5">
   <div class="row">
     <!-- 左側に配置するテーブル -->
     <div class="col-md-4">
-      <table class="table table-bordered text-center admin_user_table">
-        <tr>
-          <th class="head">項目</th>
-          <th class="head">人数(人)</th>
-          <th class="head">割合(%)</th>
-        </tr>
-        <tr>
-          <th>会員人数</th>
-          <td class="analyse_link">
-            <%= link_to admin_users_path do %>
-              <%= @users_count %>
-            <% end %>
-          </td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th>有効</th>
-          <td class="analyse_link active_users">
-            <%= link_to active_users_admin_users_path do %>
-              <%= @active_users_all %>
-            <% end %>
-          </td>
-          <td class="active_users"><%= @active_user_ration %> %</td>
-        </tr>
-        <tr>
-          <th>退会済み</th>
-          <td class="analyse_link non_active_users">
-            <%= link_to inactive_users_admin_users_path do %>
-              <%= @not_active_users %>
-            <% end %>
-          </td>
-          <td class="non_active_users"><%= @not_active_user_ration %> %</td>
-        </tr>
+     <!--会員数を表示する表を部分テンプレ化呼び出す-->
+     <%= render 'users_index_table', users_count: @users_count, active_users_all: @active_users_all, active_user_ration: @active_user_ration, not_active_users: @not_active_users, not_active_user_ration: @not_active_user_ration %>
+      <!--国別のユーザー数を表示する-->
+      <h3 class="text-center border-bottom pb-2 my-2">国別の会員数</h3>
+      <table class="table table-bordered text-center admin_user_table table-hover">
+        <thead class="country_table_head">
+          <tr>
+            <th class="head">国のID</th>
+            <th class="head">国名</th>
+            <th class="head">ユーザー数(人)</th>
+            <th class="head">割合(%)</th>
+          </tr>
+        </thead>
+        <tbody class="country_table_body">
+          <% @user_counts_per_country.each do |country_id, count| %>
+            <tr>
+              <td><%= country_id %></td>
+              <td><%= Country.find(country_id).name %></td>
+              <td><%= count %></td>
+              <td><%= count * 100 / @users_count %> % </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <!--学習中の言語別ユーザー数を表示する-->
+      <h3 class="text-center border-bottom pb-2 my-2">学習中の言語別の会員数</h3>
+      <table class="table table-bordered text-center admin_user_table table-hover">
+        <thead class="country_table_head">
+          <tr>
+            <th class="head">言語のID</th>
+            <th class="head">言語名</th>
+            <th class="head">ユーザー数(人)</th>
+            <th class="head">割合(%)</th>
+          </tr>
+        </thead>
+        <tbody class="country_table_body">
+          <% @user_practice_language.each do |practice_language_id, count| %>
+            <tr>
+              <td><%= practice_language_id %></td>
+              <td><%= Language.find(practice_language_id).name %></td>
+              <td><%= count %></td>
+              <td><%= count * 100 / @users_count %> % </td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
 
@@ -43,7 +57,7 @@
       <div class="row">
         <!-- ページのタイトル -->
         <div class="col-12" style="display: flex; align-items: center; justify-content: space-between;">
-          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
+          <span class="pr-3 pl-3" style="font-size: 1.5rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
         </div>
 
         <!-- 会員一覧の表示 -->
@@ -88,3 +102,13 @@
     </div>
   </div>
 </div>
+
+<!--チャートの挿入-->
+<div class="row text-center d-flex justify-content-center">
+  <div style="width: 300px; height: 300px;">
+    <canvas id="chart"></canvas>
+  </div>
+</div>
+
+<!--チャートのJavascript挿入-->
+<%= javascript_pack_tag 'admin_chart', 'data-turbolinks-track': 'reload' %>

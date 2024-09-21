@@ -22,15 +22,34 @@ class Public::TripsController < ApplicationController
 
   # 投稿一覧表示：退会済みユーザーの投稿を表示しない
   def index
-    # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
-    not_active_users = User.where(is_active: false).pluck(:id)
-    # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
-    @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+    respond_to do |format|
+      # htmlでのリクエストの場合の処理 (通常のindexへのアクセス)
+      format.html do
+        # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
+        not_active_users = User.where(is_active: false).pluck(:id)
+        # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
+        @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+      end
+      # json形式でのリクエストの場合の処理 (APIやJS非同期のリクエストがきたとき)
+      format.json do
+        not_active_users = User.where(is_active: false).pluck(:id)
+        @trips = @trips = Trip.where.not(user_id: not_active_users).all
+      end
+    end
   end
 
   def show
-    @trip = Trip.find(params[:id])
-    @trip_comment = TripComment.new
+    respond_to do |format|
+      format.html do
+        @trip = Trip.find(params[:id])
+        # paginateを入れておく コメント一覧
+        @trip_index = @trip.trip_comments.page(params[:page]).per(5)
+        @trip_comment = TripComment.new
+      end
+      format.json do
+        @trip = Trip.find(params[:id])
+      end
+    end
   end
 
   def edit
@@ -47,7 +66,8 @@ class Public::TripsController < ApplicationController
 # ゲストログインユーザーの直接アクセスを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+      flash[:alert] =  "ゲストユーザーは新規投稿ページへ移動できません"
+      redirect_to trips_path
     end
   end
 
@@ -63,5 +83,6 @@ class Public::TripsController < ApplicationController
       redirect_to trips_path
     end
   end
+
 
 end

@@ -1,7 +1,10 @@
+<%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <nav class="header navbar navbar-expand-lg navbar-dark d-flex justify-content-between">
+  <!--左側のロゴ表示 条件分岐をしている-->
   <div>
     <% if admin_signed_in? %>
-      <%= link_to admin_users_path, class: 'navbar-brand text-light logo_font' do %>
+      <%= link_to admin_homes_top_path, class: 'navbar-brand text-light logo_font' do %>
         <h2 class="logo"><span class="local">Local</span>.<span class="friends">Friends</span></h2>
       <% end %>
     <% elsif user_signed_in? %>
@@ -31,44 +34,41 @@
       <ul class="navbar-nav ml-auto">
         <!--管理者ログインした時のヘッダー-->
         <% if admin_signed_in? %>
-          <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-          <%= link_to '投稿一覧', admin_trips_path, class: 'text-light hover-effect mx-3 link-offset-2' %>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2' %>
+          <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
+          <%= link_to '投稿一覧', admin_trips_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
 
         <!--ユーザー サインイン状態のヘッダーnav-->
         <% elsif user_signed_in? %>
-          <li>
-            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
-          </li>
-          <li>
-            <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn text-warning' do %>
-            <i class="fa-solid fa-user"></i>マイページ
+          <li class="header-link">
+            <%= link_to my_page_users_path, method: :GET, class: 'nav-link nav-btn active' do %>
+            <i class="fa-solid fa-user"></i><span>マイページ</span>
             <% end %>
           </li>
           <li>
-            <%= link_to users_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-people-carry-box"></i>コミュニティ<br/>
-            (ユーザーを探す)
+            <%= link_to users_path, method: :GET, class: 'nav-link nav-btn active' do %>
+            <i class="fa-solid fa-people-carry-box"></i><span>コミュニティ</span><br/>
+            <span>(ユーザーを探す)</span>
             <% end %>
           </li>
           <li>
-            <%= link_to chats_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-comment-dots"></i>Chat
+            <%= link_to chats_path, method: :GET, class: 'nav-link text-warning active' do %>
+            <i class="fa-solid fa-comment-dots"></i><span>Chat</span>
             <% end %>
           </li>
           <li>
-            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-newspaper"></i>投稿一覧
+            <%= link_to trips_path, method: :GET, class: 'nav-link text-warning active' do %>
+            <i class="fa-solid fa-newspaper"></i><span>投稿一覧</span>
             <% end %>
           </li>
           <li>
-            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-signs-post"></i>新規投稿
+            <%= link_to new_trip_path, method: :GET, class: 'nav-link text-warning active', data: {"turbolinks" => false} do %>
+            <i class="fa-solid fa-signs-post"></i><span>新規投稿</span>
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-warning' do %>
-            <i class="fa-solid fa-person-walking-arrow-right"></i> ログアウト
+            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out' do %>
+            <i class="fa-solid fa-person-walking-arrow-right"></i><span>ログアウト</span>
             <% end %>
           </li>
         <% else %>
@@ -90,23 +90,15 @@
       </ul>
     </div>
   </div>
-
-   <div class="row">
-      <!--検索フォームの追加-->
-      <% if user_signed_in? %>
-        <div class="search-form" %>
-          <%= form_with url: search_path, local: true, method: :get do |f| %>
-            <%= f.text_field :word %>
-            <%= f.select :range, options_for_select([['User'], ['Trip']]) %>
-            <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
-            <%= f.submit "検索", class: "btn-sm btn-primary" %>
-            <% end %>
-        </div>
-      <% end %>
-    </div>
-
-
 </nav>
+
+<!--検索フォームの追加-->
+  <div class="row">
+    <div class="col-8 max-auto ml-2">
+      <%= render 'layouts/search_form' %>
+    </div>
+  </div>
+
 
 <!--スクロールしたらヘッダーを透過するJavascript-->
 <script>
@@ -120,3 +112,6 @@
     });
   });
 </script>
+
+<!--main部分のmargin-topをヘッダーの高さに合わせて自動調整するJavascript-->
+<%= javascript_pack_tag 'main_margin_top', 'data-turbolinks-track': 'reload' %>

@@ -1,18 +1,20 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="container d-flex justify-content-center flex-column">
-  <div class="w-25 text-light text-center bg-danger mt-3">
-    <%= flash[:notice] %>
-  </div>
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "fail_notice" %>
+  <% end %>
+
   <div class="row no-gutters">
     <div class="col text-center my-3">
       <h1>ユーザー情報編集</h1>
     </div>
   </div>
   <div class="row d-flex justify-content-center form-body">
-    <%= form_with model: @user do |f| %>
+    <%= form_with(model: @user, local: true, multipart: true) do |f| %>
       <div class="row my-3">
         <span>プロフィール写真<br />
-          <%= f.file_field :profile_image, placeholder:"プロフィール画像", accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
+          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
           <div id="preview-item1" style="max-height: 100px; max-width: 100px;">
             <%= image_tag @user.get_profile_image, size: '100x100' %>
           </div>
@@ -44,14 +46,13 @@
 
       <div class="row my-3">
         <span>サブ写真(※最大5枚の画像を保存できます)<br />
-          <%= f.file_field :sub_images, placeholder:"画像をアップ", multiple:true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")' %>
+          <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")' %>
             <div id="preview-item2" class="d-flex" style="margin-top: 10px;" >
               <% @user.get_sub_images.each do |sub_image| %>
                 <%= image_tag sub_image, size: '100x100', class: 'mr-2' %>
               <% end %>
             </div>
         </span>
-
       </div>
       <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
     <% end %>

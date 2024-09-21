@@ -1,4 +1,10 @@
-<div class="container container-fluid">
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--退会済みユーザーのページへアクセスor登録のないユーザーにアクセスしたときのフラッシュ-->
+<% if flash[:alert].present? %>
+  <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
+<% end %>
+
+<div class="container container-fluid my-5">
   <div class="row my-3">
     <div class="col-12 px-sm-0 text-center">
       <h2 class="pr-3 pl-3">他のユーザーと交流しよう！</h2>
@@ -14,7 +20,7 @@
               <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top border-bottom rounded' %>
             <div class="card-body text-dark">
               <div class="card-title">
-                <strong><%= user.family_name %><%= user.first_name %></strong>
+                <strong><%= user.family_name %><%= "  " %><%= user.first_name %></strong>
               </div>
               <div class="card-text">
                 出身

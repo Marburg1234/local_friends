@@ -4,12 +4,18 @@ class Trip < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
 
-  validates :post_code, presence: true, length: { is: 7 }
+  validates :post_code, presence: true
   validates :address, presence: true, length: { minimum: 2 }
   validates :title, presence: true
   validates :explain, presence: true
 
   has_one_attached :trip_image
+
+  geocoded_by :address
+  after_validation :geocode
+
+  # 新しい順に表示する
+  default_scope { order(created_at: :desc) }
 
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name
@@ -29,19 +35,9 @@ class Trip < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
-  # 検索するためのメソッド
+  # 検索するためのメソッド 部分一致検索のみに変更した
   def self.looks(search, word)
-    if search == "perfect_match"
-      @trip = Trip.where("title LIKE?", "#{word}")
-    elsif search == "forward_match"
-        @trip = Trip.where("title LIKE?", "#{word}%")
-    elsif search == "backward_match"
-      @trip = Trip.where("title LIKE?", "%#{word}")
-    elsif search == "partial_match"
-      @trip = Trip.where("title LIKE?","%#{word}%")
-    else
-      @trip = Trip.all
-    end
+    @trip = Trip.where("title LIKE? OR explain LIKE? OR post_code LIKE? OR address LIKE?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
   end
 
 end

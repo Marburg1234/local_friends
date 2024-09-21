@@ -9,12 +9,23 @@ header{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
   background-color: #008BBB;
-  padding:10px;
+  padding: 10px;
   z-index: 100;
 }
 
+// headerの透過に伴って、margin-topをmain上部に入れる
+main{
+  margin-top: var(--header-height);
+}
+
+footer{
+  background-color: #008BBB;
+  width: 100%;
+  padding: 10px;
+}
+
+// ロゴに関するcss ==============================
 .logo_font {
   font-family: 'Sacramento', cursive;
 }
@@ -22,6 +33,7 @@ header{
 .logo:hover{
   font-size: 2.3rem;
   transition: size 2.0s;
+  font-weight: bold;
 }
 
 .local{
@@ -31,7 +43,9 @@ header{
 .friends{
   color:#FFFF66;
 }
+// ==============================================
 
+// Topページの背景画像===========================
 .top_image{
   /*background-image: url(/assets/nature-4.jpg);*/
   background-image: image-url("nature-4.jpg");
@@ -43,31 +57,63 @@ header{
   background-color:rgba(0,0,0,0.5);
   background-blend-mode:darken;
 }
-
+// ================================================
 .container-fluid {
   padding-right: 0;
   padding-left: 0;
 }
 
-main{
-  margin-top: 100px;
+
+// aboutページの背景画像 =========================
+.about_image{
+  /*background-image: url(/assets/nature-4.jpg);*/
+  background-image: image-url("World-14.png");
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color:rgba(0,0,0,0.5);
+  background-blend-mode:darken;
+}
+// ===============================================
+// ヘッダーのリンクcss
+.nav-link i{
+  color: #FFCC99;
+  font-size: 1.3rem;
 }
 
-footer{
-  background-color: #008BBB;
-  width: 100%;
-  padding: 10px;
+.nav-link span{
+  color: #FFCC99;
 }
 
+/* ホバー時のスタイル */
+.nav-link:hover {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
 
-/*Admin_user_index*/
+.nav-log-out i{
+  color: white;
+}
+
+.nav-log-out span{
+  color: white;
+}
+
+.nav-log-out:hover{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+// ===============================================
+
+// 管理側 user_indexページのcss===================
 .admin_user_table .head{
-  background-color:#EEEEEE;
+  background-color: #336699;
+  color: white;
 }
 
 .admin_user_table .analyse_link:hover{
   background-color: yellow;
-  /*transition: background-color 1.0s;*/
   font-size: 2.3rem;
 }
 
@@ -78,3 +124,15 @@ footer{
 .admin_user_table .non_active_users{
   background-color:#FFABCE;
 }
+
+.country_table_head .head{
+  background-color: #336699;
+  color: white;
+}
+
+.country_table_body td{
+  color: black;
+}
+
+// ==================================================
+

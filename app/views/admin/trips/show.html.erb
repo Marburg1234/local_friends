@@ -1,5 +1,18 @@
-<div class="container">
+<style>
+  .pagination {
+    display: none; /* 要素自体を表示しない */
+  }
 
+  .container {
+    width: 1140px; /* 固定幅の設定 */
+  }
+
+  .jscroll-inner {
+    width: 100%; /* 幅の調整 */
+  }
+</style>
+
+<div class="container">
   <!--ページの題名-->
   <div class="row">
     <h1 class="col text-center mt-4 mb-4 border-bottom pb-3">投稿詳細</h1>
@@ -70,9 +83,11 @@
 
   <!--コメントの一覧表示 (部分テンプレート)-->
   <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメント一覧</h3>
-  <% if @trip.trip_comments.count == 0 %>
-    <p class="text-center mb-5">コメントがありません</p>
-  <% else %>
-    <%= render 'public/trip_comments/comment_index', trip: @trip %>
-  <% end %>
+  <div class="auto-scroll">
+    <% if @trip.trip_comments.count == 0 %>
+      <p class="text-center mb-5">コメントがありません</p>
+    <% else %>
+      <%= render 'public/trip_comments/comment_index', trip: @trip, trip_index: @trip_index %>
+    <% end %>
+  </div>
 </div>

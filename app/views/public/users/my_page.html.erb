@@ -1,14 +1,18 @@
 <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="container d-flex justify-content-center flex-column">
-  <div class="w-25 text-light text-center bg-info mt-3">
-    <%= flash[:notice] %>
-  </div>
+  <!--ログイン成功のフラッシュメッセージ-->
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "success_notice" %>
+  <% end %>
+
+<div class="container d-flex justify-content-center flex-column my-5">
   <div class="row">
     <div class="col text-center mt-2 mb-4">
       <h1><strong>マイページ</strong></h1>
     </div>
   </div>
+
 
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-5 border text-center">
@@ -19,7 +23,9 @@
         <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
       <% end %>
       <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
-      <%= render 'follow_follower_count', user: @user %>
+      <span id="follow_button_<% @user.id %>">
+        <%= render 'public/relationships/follow_follower_count', user: @user %>
+      </span>
     </div>
   </div>
 
@@ -31,7 +37,6 @@
 
   <!--ユーザー情報は部分テンプレート-->
   <%= render 'layouts/user_show', user: @user, trips: @trips %>
-
 
 </div>
 

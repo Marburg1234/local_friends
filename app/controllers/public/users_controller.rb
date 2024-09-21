@@ -47,8 +47,8 @@ class Public::UsersController < ApplicationController
     @user = User.find(current_user.id)
     @user.update(is_active:false)
     reset_session
-    flash[:notice] = "退会処理を実行しました"
-    redirect_to root_path
+    flash[:notice] = "退会しました。またのご利用お待ちしております！"
+    redirect_to new_user_registration_path
   end
 
 # ================================================
@@ -81,7 +81,8 @@ class Public::UsersController < ApplicationController
 # ゲストログインユーザーのダイレクトアタックを阻止するメソッド
   def ensure_guest_user
     if current_user.email == "guest@example.com"
-      redirect_to trips_path, alert: "ゲストユーザーは投稿・編集できません"
+      flash[:alert] =  "ゲストユーザーはマイページを利用できません"
+      redirect_to trips_path
     end
   end
 
@@ -94,12 +95,12 @@ class Public::UsersController < ApplicationController
   end
 
 # 退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
-# 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundになるため)
+# 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundエラーを防ぐ)
   def check_not_active_user
     begin
       @user = User.find(params[:id])
       unless @user.is_active == true
-        redirect_to users_path, alert: "このユーザーはアクティブではありません。"
+        redirect_to users_path, alert: "このユーザーは退会しています。"
       end
     rescue ActiveRecord::RecordNotFound
       redirect_to users_path, alert: "ユーザーが見つかりませんでした。"

@@ -1,4 +1,18 @@
-<div class="container">
+<style>
+  .pagination {
+    display: none; /* 要素自体を表示しない */
+  }
+
+  .container {
+    width: 1140px; /* 固定幅の設定 */
+  }
+
+  .jscroll-inner {
+    width: 100%; /* 幅の調整 */
+  }
+</style>
+
+<div class="container my-5">
   <!--ページの題名-->
   <div class="row">
     <h1 class="col text-center mt-4 mb-4 border-bottom pb-3">投稿詳細</h1>
@@ -21,11 +35,11 @@
         </tr>
         <tr>
           <th class="px-3 py-2">住所</th>
-          <td class="pl-3"><%= @trip.address %></td>
+          <td class="pl-3"><%= link_to show_map_path(@trip) do %><%= @trip.address %><% end %></td>
         </tr>
         <tr>
           <th class="px-3 py-2">投稿日</th>
-          <td class="pl-3"><%= @trip.created_at %></td>
+          <td class="pl-3"><%= @trip.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
           <th class="px-3 py-2">投稿内容</th>
@@ -81,11 +95,18 @@
 
   <!--コメントの一覧表示 (部分テンプレート)-->
   <h3 class="col-12 text-center mt-4 my-3 pl-5 fw-semibold border-bottom pb-2">コメント一覧</h3>
-  <div id="trip-comments">
+  <div id="trip-comments" class="auto-scroll">
     <% if @trip.trip_comments.count == 0 %>
       <p class="text-center mb-5">コメントがありません</p>
     <% else %>
-      <%= render 'public/trip_comments/comment_index', trip: @trip %>
+      <%= render 'public/trip_comments/comment_index', trip: @trip, trip_index: @trip_index %>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+

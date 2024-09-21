@@ -57,7 +57,7 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
-    profile_image
+      profile_image
   end
   # ========================================================================================
 
@@ -69,24 +69,14 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       sub_images.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
-    sub_images
+      sub_images
   end
 # ========================================================================================
 
 # ========================================================================================
-  # 検索するためのメソッド とりあえずfamily_nameカラムを設定している
+  # 検索するためのメソッド 部分一致の検索のみに変更 退会済みユーザーは除外する
   def self.looks(search, word)
-    if search == "perfect_match"
-      @user = User.where("family_name LIKE?", "#{word}")
-    elsif search == "forward_match"
-        @user = User.where("family_name LIKE?", "#{word}%")
-    elsif search == "backward_match"
-      @user = User.where("family_name LIKE?", "%#{word}")
-    elsif search == "partial_match"
-      @user = User.where("family_name LIKE?","%#{word}%")
-    else
-      @user = User.all
-    end
+    @user = User.joins(:country).where.not(is_active: false).where("family_name LIKE ? OR first_name LIKE ? OR countries.name LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%").distinct
   end
 # ========================================================================================
 

@@ -22,11 +22,22 @@ Rails.application.routes.draw do
      patch '/admin/users/:id/change_status', to: 'admin/users#change_status', as: 'admin_user_change_status'
     end
     resources :trips, only: %i[index show destroy]
+    get 'homes/top'
+    get 'search' => "searches#search"
   end
 
   scope module: :public do
     root to: 'homes#top'
-    get '/about', to:'homes#about', as:'about'
+    get '/about', to: 'homes#about', as: 'about'
+    # 地域の地図を表示するための処理をするルーティングを定義
+    resources :regions, only: %i[show]
+    # 地図用のルーティング追記
+    resources :maps, only: %i[index] do
+      member do
+        get '/show' => "maps#show"
+        get '/region' => "maps#region"
+      end
+    end
     # 検索のルーティング
     get 'search' => "searches#search"
     resources :chats, only: %i[show index create destroy]

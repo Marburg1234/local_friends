@@ -1,20 +1,20 @@
-<div class="container d-flex justify-content-center flex-column">
+<div class="container d-flex justify-content-center flex-column my-5">
 
   <div class="row">
     <!--ページタイトル-->
-    <div class="col text-center mt-2 mb-4 border-bottom shadow pb-3 mt-4">
+    <div class="col text-center mb-4 border-bottom shadow p-3">
       <h1><strong>チャット相手一覧</strong></h1>
     </div>
   </div>
 
   <!--チャット相手一覧を表示する-->
   <% @users.each do |user| %>
-    <div class="row shadow-sm">
+    <div class="row shadow-sm bg-light p-2 mb-3">
       <div class="col-lg-3 col-md-3 col-sm-12 text-center">
       <!--プロフィール写真-->
         <%= image_tag user.get_profile_image, size: '80x80', class: 'rounded-circle' %>
       </div>
-      <div class="col-lg-5 col-md-6 col-sm-12">
+      <div class="col-lg-5 col-md-6 col-sm-12 table-responsive">
         <!--ユーザー情報とchat開始ボタン-->
         <table>
           <tr>
@@ -27,7 +27,7 @@
           </tr>
         </table>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-12">
+      <div class="col-lg-2 col-md-2 col-sm-12 d-flex align-items-center justify-content-center">
           <%= render 'public/chats/chat_start_btn', user: user %>
       </div>
     </div>

@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <div class="container mb-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
@@ -8,12 +10,21 @@
       <div class="message mx-auto p-3">
         <% @chats.each do |chat| %>
           <% if chat.user_id == current_user.id %>
-          <!--部分テンプレの呼び出し-->
+          <!--部分テンプレの呼び出し 右側の部分 送ったメッセージの表示-->
           <%= render "public/chats/chat", chat: chat %>
           <% else %>
+          <!--左側の部分 受け取ったメッセージの表示-->
             <div class="left-container d-flex mb-3">
               <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-              <p class="ml-1" style="text-align: left;"><span class="p-2" style="background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></span></p>
+
+              <% if chat.message.present? %>
+                <p class="ml-1 p-2" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
+              <% end %>
+              <!--画像を表示する-->
+              <% if chat.image.attached? %>
+                <%= image_tag chat.image, size: '200x200' %>
+              <% end %>
+
             </div>
           <% end %>
         <% end %>
@@ -26,8 +37,29 @@
       <!--チャットを送るフォーム→表示されている-->
     <div class="col-lg-6 mx-auto">
       <%= form_with model: @chat, data: { remote: true } do |f| %>
-        <%= f.text_field :message %>
-        <%= f.submit "送信", class: "btn btn-info btn-sm" %>
+        <%= f.text_field :message, placeholder: "メッセージ" %>
+
+        <!--画像を投稿するフォーム-->
+        <label for="chat_image" style="cursor: pointer;" >
+          <i class="fas fa-image fa-lg"></i>
+        </label>
+        <%= f.file_field :image, id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
+
+        <!--動画を投稿するフォーム 一旦やらないのでコメントアウトする-->
+        <!--<label for="chat_video" style="cursor: pointer;" >-->
+        <!--  <i class="fas fa-video fa-lg"></i>-->
+        <!--</label>-->
+        <!--<= f.file_field :video, id: "chat_video", style: "display:none" %>-->
+
+        <%= f.submit "送信", class: "btn btn-info btn-sm", id: 'send_button' %>
+        <div id="preview-item3">
+          <% if @chat.get_image == nil %>
+            <div></div>
+          <% else %>
+            <%= image_tag @chat.get_image, size: '100x100' %>
+          <% end %>
+        </div>
+
         <%= f.hidden_field :chat_room_id %>
       <% end %>
     </div>
@@ -35,3 +67,77 @@
     </div>
   </div>
 </div>
+
+
+
+<!--送信したい写真のプレビュー表示 関数名 SendimgPreview-->
+<script>
+  function SendimgPreview(event, previewId) {
+    var input = event.target;  //input要素を取得する
+    var reader = new FileReader();  //FileReaderオブジェクトを作成する
+
+    reader.onload = function() {  //イベントハンドラーonload 読み込みが完了したあとの処理
+      var preview = document.getElementById(previewId);  //プレビューエリアを取得する
+      var img = document.createElement('img');  //新しいimg要素を作成する
+      img.src = reader.result;  // 読み込まれたData URLを画像ソースに設定
+      img.style.height = '100px';
+      img.style.width = '100px';
+      preview.innerHTML = '';  //既存の内容をクリアする
+      preview.appendChild(img);  //新しい画像をプレビューエリアに追加する
+    }
+
+    reader.readAsDataURL(input.files[0]);  //ファイルをData URLとして読み込む
+  }
+
+  </script>
+
+  <!--送信ボタンを押したら、プレビュー画像を削除する 解消できず-->
+  <!--//   document.addEventListener("DOMContentLoaded", function() {-->
+  <!--//     var form = document.querySelector('form'); // フォームをセレクタで取得-->
+  <!--//     var sendButton = document.querySelector('button[type="submit"]'); // 送信ボタンをセレクタで取得-->
+
+  <!--//     if (form && sendButton) {-->
+  <!--//       sendButton.addEventListener('click', function() {-->
+  <!--//         var preview = document.getElementById('preview-item3'); // プレビューエリアを取得-->
+  <!--//         if (preview) {-->
+  <!--//           preview.innerHTML = ''; // プレビューエリアをクリア-->
+  <!--//         }-->
+  <!--//       });-->
+  <!--//     }-->
+  <!--//   });-->
+
+
+
+  <!--// 下記のコードを最初のJSに追加も解決できず-->
+  <!--//   document.addEventListener("DOMContentLoaded", function() {-->
+  <!--//   var form = document.querySelector('form'); // 送信対象のフォームセレクタに変更-->
+  <!--//   if (form) {-->
+  <!--//     form.addEventListener('submit', function() {-->
+  <!--//       var preview = document.getElementById('preview-item3'); // プレビューエリアのIDに変更-->
+  <!--//       if (preview) {-->
+  <!--//         preview.innerHTML = ''; // フォーム送信時にプレビューをクリア-->
+  <!--//       }-->
+  <!--//     });-->
+  <!--//   }-->
+  <!--// });-->
+
+
+<!--送信ボタンを押したら、プレビュー表示画像が消える 読み込まず　多分非同期にしているため-->
+<!--<script>-->
+<!--//   // 送信ボタンをクリックした時の処理-->
+<!--// function submitForm() {-->
+<!--//   // プレビュー表示されている画像の親要素を取得-->
+<!--//   var preview = document.getElementById('preview-item3');-->
+
+<!--//   // プレビュー表示されている画像の削除-->
+<!--//   while (preview.firstChild) {-->
+<!--//     preview.removeChild(preview.firstChild);-->
+<!--//   }-->
+
+<!--//   // フォームの送信処理などを行う（従来通りのcreateアクションなど）-->
+<!--// }-->
+// <!--</script>-->
+
+<!--プレビュークリアするメソッドを入れてもできなかった-->
+<!--preview.innerHTML = ''; // 既存のプレビューをクリア-->
+

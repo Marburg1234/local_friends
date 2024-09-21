@@ -1,0 +1,19 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--ログイン成功時のフラッシュメッセージ-->
+<% if flash[:notice].present? %>
+  <%= content_tag :div, flash[:notice], class: "success_notice" %>
+<% end %>
+
+<div class="container d-flex justify-content-center flex-column mb-5">
+  <h1 class="text-center my-5"><%= image_tag 'admin_man' %>管理者トップ</h1>
+  <div class="row">
+    <div class="col-md-3 offset-2 text-center">
+  <%= image_tag 'nature-5.jpg', size: '200x200' %>
+    </div>
+    <div class=" col-md-7">
+      <%= link_to "ユーザー管理をする", admin_users_path, class: 'btn btn-success w-100 my-3' %><br />
+      <%= link_to "投稿記事の管理をする", admin_trips_path, class: 'btn btn-warning w-100' %>
+    </div>
+
+  </div>
+</div>

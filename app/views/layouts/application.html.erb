@@ -7,12 +7,19 @@
     <%= csp_meta_tag %>
 
     <script src="https://kit.fontawesome.com/da08226a47.js" crossorigin="anonymous"></script>
+    <!--chart.jsのCDN-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'chat_page', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'main_margin_top', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -27,5 +34,8 @@
     <footer>
       <%= render 'layouts/footer' %>
     </footer>
+
+    <!--jquery.jpostal.jsを使うためにCDNをで読み込む-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 </html>

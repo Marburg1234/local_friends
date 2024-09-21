@@ -1,0 +1,35 @@
+ <h3 class="text-center border-bottom pb-2 my-2">合計会員数</h3>
+  <table class="table table-bordered text-center admin_user_table mb-3">
+    <tr>
+      <th class="head">項目</th>
+      <th class="head">人数(人)</th>
+      <th class="head">割合(%)</th>
+    </tr>
+    <tr>
+      <th>会員人数</th>
+      <td class="analyse_link">
+        <%= link_to admin_users_path do %>
+          <%= users_count %>
+        <% end %>
+      </td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <th>有効</th>
+      <td class="analyse_link active_users">
+        <%= link_to active_users_admin_users_path do %>
+          <%= active_users_all %>
+        <% end %>
+      </td>
+      <td class="active_users"><%= active_user_ration %> %</td>
+    </tr>
+    <tr>
+      <th>退会済み</th>
+      <td class="analyse_link non_active_users">
+        <%= link_to inactive_users_admin_users_path do %>
+          <%= not_active_users %>
+        <% end %>
+      </td>
+      <td class="non_active_users"><%= not_active_user_ration %> %</td>
+    </tr>
+  </table>

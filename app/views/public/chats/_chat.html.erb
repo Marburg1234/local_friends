@@ -1,5 +1,19 @@
-<!--ユーザーが送るメッセージ部分-->
+<!--ユーザーが送ったメッセージ表示-->
 <div class="right-container d-flex justify-content-end">
-  <p class="p-2 shadow mr-2" id="chat_<%= chat.id %>" style="color:black; background-color: rgba(202, 200, 201, 0.2); padding: 5px; border-radius: 10px; "><strong><%= chat.message %></strong></p>
-  <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
+  <% if chat.message.present? %>
+    <p class="p-2 shadow mr-2" id="chat_<%= chat.id %>" style="color:black; background-color: rgba(202, 200, 201, 0.2); padding: 5px; border-radius: 10px; "><strong><%= chat.message %></strong></p>
+    <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
+  <% end %>
+  <% if chat.image.attached? %>
+    <div class='file-container d-flex my-3' id="chat_<%= chat.id %>">
+      <%= image_tag(chat.image.variant(resize_to_limit: [150, 150]), width: '100%', height: 'auto', class: 'rounded') %>
+      <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
+    </div>
+  <% end %>
+  <% if chat.video.attached? %>
+    <div class='file-container' id="chat_<%= chat.id %>">
+      <%= video_tag rails_blob_path(chat.video), controls: true, class: 'responsive-video rounded' %>
+      <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
+    </div>
+  <% end %>
 </div>
