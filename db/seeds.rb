@@ -364,11 +364,12 @@ User.create!(first_name: 'Min-Ji') do |user|
 end
 
 # ユーザーを登録15
+unless User.find_by(first_name: 'Jae-Hyun')
 User.create!(first_name: 'Jae-Hyun') do |user|
     user.family_name = 'Park'
     user.email = '15@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 6
+    user.country_id = Country.find_by(name: '韓国').id
     user.region_id = 78
     user.mother_language_id = 3
     user.practice_language_id = 2
@@ -377,4 +378,5 @@ User.create!(first_name: 'Jae-Hyun') do |user|
     user.topic = "Movies, music, cultural exchange, technology"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman8.png"), filename:"profile_woman8.png")
+end
 end
