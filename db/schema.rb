@@ -139,10 +139,10 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "country_id", null: false
-    t.integer "region_id", null: false
-    t.integer "mother_language_id", null: false
-    t.integer "practice_language_id", null: false
+    t.bigint "country_id", null: false
+    t.bigint "region_id", null: false
+    t.bigint "mother_language_id", null: false
+    t.bigint "practice_language_id", null: false
     t.string "first_name", null: false
     t.string "family_name", null: false
     t.text "introduction", null: false
@@ -166,7 +166,5 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   add_foreign_key "user_rooms", "chat_rooms"
   add_foreign_key "user_rooms", "users"
   add_foreign_key "users", "countries"
-  add_foreign_key "users", "languages", column: "mother_language_id"
-  add_foreign_key "users", "languages", column: "practice_language_id"
   add_foreign_key "users", "regions"
 end
