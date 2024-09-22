@@ -11,24 +11,45 @@ class Public::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :family_name, :country_id, :region_id, :mother_language_id, :practice_language_id, :age, :introduction, :topic])
   end
 
+  # def create
+  #   build_resource(sign_up_params)
+  #   if resource.save
+  #     if resource.active_for_authentication?
+  #     set_flash_message! :notice, :signed_up
+  #     flash[:notice] = "新規登録し、サインアップしました！"
+  #     sign_up(resource_name, resource)
+  #     redirect_to after_sign_up_path_for(resource)
+  #     else
+  #     set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+  #     expire_data_after_sign_in!
+  #     redirect_to after_inactive_sign_up_path_for(resource)
+  #     end
+  #   else
+  #     # resource.errors.clear
+  #     clean_up_passwords resource
+  #     flash[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
+  #     # redirect_to new_user_registration_path
+  #     render :new  # リダイレクトではなくレンダリングを使用
+  #   end
+  # end
+
   def create
-    build_resource(sign_up_params)
-    if resource.save
-      if resource.active_for_authentication?
-      set_flash_message! :notice, :signed_up
-      flash[:notice] = "新規登録し、サインアップしました！"
-      sign_up(resource_name, resource)
-      redirect_to after_sign_up_path_for(resource)
+     @user = build_resource(sign_up_params)
+    if @user.save
+      if @user.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        flash[:notice] = "新規登録し、サインアップしました！"
+        sign_up(resource_name, resource)
+        redirect_to after_sign_up_path_for(resource)
       else
-      set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-      expire_data_after_sign_in!
-      redirect_to after_inactive_sign_up_path_for(resource)
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        redirect_to after_inactive_sign_up_path_for(resource)
       end
     else
-      resource.errors.clear
-      clean_up_passwords resource
-      flash[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
-      redirect_to new_user_registration_path
+      clean_up_passwords @user
+      flash.now[:registration_alert] = "出身国・地域・言語・年齢を選択してください"
+      render :new
     end
   end
 

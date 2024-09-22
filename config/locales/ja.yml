@@ -1,13 +1,34 @@
 ja:
   activerecord:
-    user: ユーザー
-    trip: 投稿
+    attributes:
+      user:
+        age: "年齢"
+        region: "地域名"
+        country: "国名"
+        mother_language: "母国語"
+        practice_language: "学習中の言語"
+        introduction: "自己紹介"
+        topic: "話したい話題"
     errors:
-      messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
+      models:
+        user:
+          attributes:
+            email:
+              invalid: "無効なメールアドレスです"
+              taken: "このメールアドレスは無効です"
+            password:
+              too_short: "は%{count}文字以上で入力してください"
+            age:
+              blank: "を選択してください"
+            country:
+              blank: "を選択してください"
+            region:
+              blank: "を選択してください"
+            mother_language:
+              blank: "を選択してください"
+            practice_language:
+              blank: "を選択してください"
+
   date:
     abbr_day_names:
     - 日

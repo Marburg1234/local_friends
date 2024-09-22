@@ -16,11 +16,11 @@ class User < ApplicationRecord
   has_many :chat_rooms, through: :user_rooms
 
 # ========================================================================================
-  validates :first_name, presence: true
-  validates :family_name, presence: true
-  validates :introduction, presence: true
+  validates :first_name, presence: { message: '名前を入力してください' }, length: { maximum: 25 }
+  validates :family_name, presence: { message: '姓を入力してください' }, length: { maximum: 25 }
+  validates :introduction, presence: true, length: { in: 2..100 }
   validates :age, presence: true
-  validates :topic, presence: true
+  validates :topic, presence: true, length: { in: 2..50 }
 # ========================================================================================
 
 # ========================================================================================

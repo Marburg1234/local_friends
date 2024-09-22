@@ -1,30 +1,62 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+.error_div{
+  position: relative;
+}
+  .error-column {
+    position: sticky; /* スクロール時に固定 */
+    top: 100px; /* ヘッダーの高さに合わせて調整 */
+    z-index: 10; /* 他の要素の上に表示 */
+    padding: 10px;
+  }
+
+  .alert {
+    margin-bottom: 0; /* エラーメッセージの下の余白をなくす */
+  }
+
+  .text-left {
+    text-align: left; /* 左揃え */
+  }
+</style>
 
   <!--退会処理成功した際のフラッシュメッセージ-->
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "withdraw_notice" %>
   <% end %>
 
-<div class="container">
-  <div class="text-center mt-3"><h2>新規会員登録</h2></div>
-    <%= content_tag :div, flash[:registration_alert], class: "registration_alert-message" %>
+<div class="text-center mt-3"><h2>新規会員登録</h2></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3 error_div">
+  <% if @user.errors.any? %>
+  <div class="alert alert-danger error-column">
+    <p>入力不足により登録できませんでした。<br>エラー内容:</p>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+</div>
+
+<div class="col-9 text-start text-left">
   <div class="row no-gutters">
-    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+    <div class="col-md-8 shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
-        <%= form_with model: @user, url: user_registration_path, local: false do |f| %>
-          <%= render "public/shared/error_messages", resource: resource %>
+        <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
           <div class="field mb-4">
             <%= f.label :姓 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true, class: 'form-control' %>
+            <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true, class: 'form-control', placeholder: "例)権現坂" %>
           </div>
           <div class="field my-3">
             <%= f.label :名 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.text_field :first_name, autocomplete: "first_name", required: true, class: 'form-control' %>
+            <%= f.text_field :first_name, autocomplete: "first_name", required: true, class: 'form-control', placeholder: "例)太一郎" %>
           </div>
 
           <div class="field my-3">
             <%= f.label :メールアドレス %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.email_field :email, autocomplete: "email", required: true, class: 'form-control' %>
+            <%= f.email_field :email, autocomplete: "email", required: true, class: 'form-control', placeholder: "例)sample@sample.com" %>
           </div>
 
           <div class="field my-3">
@@ -68,12 +100,12 @@
           <!--自己紹介文 introduction入力欄-->
           <div class="field mb-3">
             <%= f.label :自己紹介 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-            <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！", required: true %>
+            <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！(最大100文字)", required: true %>
           </div>
           <!--好きな話題 topic入力欄-->
           <div class="field mb-3">
             <%= f.label :話したい話題 %><span class="ml-2 text-light p-1" style="background-color: #FF6600;"><%= "必須" %></span><br />
-            <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事", required: true %>
+            <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事(最大50文字)", required: true %>
           </div>
           <div class="actions my-3">
             <%= f.submit "新規会員登録" %>
@@ -83,6 +115,8 @@
         <%= render "public/shared/links" %>
 
       </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>

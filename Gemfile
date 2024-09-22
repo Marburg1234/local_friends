@@ -71,3 +71,5 @@ gem "net-imap"
 
 
 gem 'geocoder' # 追加
+
+gem 'devise-i18n'
