@@ -29,7 +29,7 @@
   <!--ページの題名-->
   <div class="my-5">
     <h1 class="text-center"><strong>投稿一覧から気になる投稿を見つけよう！</strong></h1>
-    <div class="text-center mt-3"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg' %></div>
+    <div class="text-center mt-3"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg', data: {"turbolinks" => false} %></div>
   </div>
 
 <div class="container auto-scroll">
@@ -58,7 +58,7 @@
         </tr>
         <tr>
           <th class="left">場所</th>
-          <td><%= link_to show_map_path(trip) do %><%= trip.address%><% end %> (地図を確認できます)</td>
+          <td><%= link_to show_map_path(trip), data: {"turbolinks" => false} do %><%= trip.address%><% end %> (地図を確認できます)</td>
         </tr>
         <tr>
           <th class="left">投稿日</th>
