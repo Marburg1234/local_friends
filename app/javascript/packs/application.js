@@ -13,7 +13,9 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
 
-
+import "../packs/map_index.js";
+import "../packs/map_show.js";
+import "../packs/map_region.js";
 
 Rails.start()
 Turbolinks.start()

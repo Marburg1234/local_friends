@@ -370,9 +370,9 @@ User.create!(first_name: 'Jae-Hyun') do |user|
     user.email = '15@yahoo.co.jp'
     user.password = '111111'
     user.country_id = Country.find_by(name: '韓国').id
-    user.region_id = 78
-    user.mother_language_id = 3
-    user.practice_language_id = 2
+    user.region_id = Region.find_by(name: 'Busan').id
+    user.mother_language_id = Language.find_by( name: '韓国語').id
+    user.practice_language_id = Language.find_by( name: '英語').id
     user.introduction = "I am studying English and hope to work abroad in the future. My hobbies are listening to music and watching movies, and I especially enjoy Hollywood films."
     user.age = 20
     user.topic = "Movies, music, cultural exchange, technology"
