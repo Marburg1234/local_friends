@@ -97,12 +97,12 @@
               <!--自己紹介文 introduction入力欄-->
               <div class="field mb-3">
                 <%= f.label :自己紹介 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！(最大100文字)", required: true %>
+                <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！(最大300文字)", required: true %>
               </div>
               <!--好きな話題 topic入力欄-->
               <div class="field mb-3">
                 <%= f.label :話したい話題 %><span class="ml-2 text-light p-1" style="background-color: #FF6600;"><%= "必須" %></span><br />
-                <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事(最大50文字)", required: true %>
+                <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事(最大100文字)", required: true %>
               </div>
               <div class="actions my-3">
                 <%= f.submit "新規会員登録" %>

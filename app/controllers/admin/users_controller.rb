@@ -39,9 +39,10 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "会員ステータスを変更しました"
-      redirect_to admin_user_path
+      redirect_to admin_user_path(@user)
     else
       @user = User.find(params[:id])
+      flash[:notice] = "失敗です"
       render :edit
     end
   end

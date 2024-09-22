@@ -140,227 +140,255 @@ end
 
 
 # ユーザーを登録1
+unless User.find_by(first_name: 'Isabel')
 User.create!(first_name: 'Liam') do |user|
     user.family_name = 'O Connor'
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 2
-    user.region_id = 49
-    user.mother_language_id = 2
-    user.practice_language_id = 8
+    user.country_id = Country.find_by(name: 'アメリカ').id
+    user.region_id = Region.find_by(name: 'Hamburg').id
+    user.mother_language_id = Language.find_by( name: '英語').id
+    user.practice_language_id = Language.find_by( name: 'ドイツ語').id
     user.introduction = "Hello, my name is Liam. I am studying German and interested in German beer culture and history. My hobbies are cycling and reading."
     user.age = 24
     user.topic = "Cycling, beer culture, history, travel"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman1.png"), filename:"profile_woman1.png")
 end
+end
 
 # ユーザーを登録2
+unless User.find_by(first_name: 'Isabel')
 User.create!(first_name: 'Isabel') do |user|
     user.family_name = 'López'
     user.email = '2@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 5
-    user.region_id = 72
-    user.mother_language_id = 2
-    user.practice_language_id = 7
+    user.country_id = Country.find_by(name: 'イギリス').id
+    user.region_id = Region.find_by(name: 'New Castle').id
+    user.mother_language_id = Language.find_by( name: '英語').id
+    user.practice_language_id = Language.find_by( name: 'イタリア語').id
     user.introduction = "¡Ora! Me llamo Isabelle. Me encanta el arte y la comida italiana y estoy aprendiendo italiano. Mi sueño es aprender la cocina local en Italia！"
     user.age = 28
     user.topic = "Arte, cocina, viajes, cultura italiana！"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman2.jpg"), filename:"profile_woman2.jpg")
 end
+end
 
 # ユーザーを登録3
+unless User.find_by(first_name: 'Sophie')
 User.create!(first_name: 'Sophie') do |user|
     user.family_name = 'Müller'
     user.email = '3@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 3
-    user.region_id = 62
-    user.mother_language_id = 8
-    user.practice_language_id = 5
+    user.country_id = Country.find_by(name: 'ドイツ').id
+    user.region_id = Region.find_by(name: 'München').id
+    user.mother_language_id = Language.find_by( name: 'ドイツ語').id
+    user.practice_language_id = Language.find_by( name: 'スペイン語').id
     user.introduction = "Hallo, mein Name ist Sophie. Ich studiere Spanisch und mein Ziel ist es, durch Südamerika zu reisen. Ich liebe Musik und Tanz, und ich bin besonders von lateinamerikanischer Musik angezogen."
     user.age = 21
     user.topic = "Musik, Tanz, Reisen, Sprachen lernen！"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/animal_neko.png"), filename:"animal_neko.png")
 end
+end
 
 # ユーザーを登録4
+unless User.find_by(first_name: 'Hamilton')
 User.create!(first_name: 'Hamilton') do |user|
     user.family_name = 'Ojay'
     user.email = '4@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 2
-    user.region_id = 50
-    user.mother_language_id = 4
-    user.practice_language_id = 1
+    user.country_id = Country.find_by(name: 'アメリカ').id
+    user.region_id = Region.find_by(name: '沖縄').id
+    user.mother_language_id = Language.find_by( name: '中国語').id
+    user.practice_language_id = Language.find_by( name: '日本語').id
     user.introduction = "I want to talk japanese fluently！！"
     user.age = 29
     user.topic = "Anime, japanese custom, movie"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man1.png"), filename:"profile_man1.png")
 end
+end
 
 # ユーザーを登録5
+unless User.find_by(first_name: 'Emily')
 User.create!(first_name: 'Emily') do |user|
     user.family_name = 'Thompson'
     user.email = '5@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 2
-    user.region_id = 50
-    user.mother_language_id = 2
-    user.practice_language_id = 1
+    user.country_id = Country.find_by(name: 'アメリカ').id
+    user.region_id = Region.find_by(name: 'Ohio').id
+    user.mother_language_id = Language.find_by( name: '英語').id
+    user.practice_language_id = Language.find_by( name: '日本語').id
     user.introduction = "こんにちは！エミリーです。私はテクノロジー業界で働いていて、日本の文化に興味があります。特に日本のアニメや食べ物が大好きです。"
     user.age = 26
     user.topic = "アニメ、テクノロジー、料理、日本文化"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman3.png"), filename:"profile_woman3.png")
 end
+end
 
 # ユーザーを登録6
+unless User.find_by(first_name: 'Hiroshi')
 User.create!(first_name: 'Hiroshi') do |user|
     user.family_name = 'Nakamura'
     user.email = '6@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 28
-    user.mother_language_id = 1
-    user.practice_language_id = 2
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '兵庫').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: '英語').id
     user.introduction = "こんにちは、ヒロシです。英語を勉強しながら、世界中の人々と交流するのが大好きです。趣味は写真撮影と旅行です。"
     user.age = 33
     user.topic = "写真、旅行、言語学習、音楽"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man2.png"), filename:"profile_man2.png")
 end
+end
 
 # ユーザーを登録7
+unless User.find_by(first_name: 'Marta')
 User.create!(first_name: 'Marta') do |user|
     user.family_name = 'Nowak'
     user.email = '7@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 4
-    user.region_id = 68
-    user.mother_language_id = 6
-    user.practice_language_id = 1
+    user.country_id = Country.find_by(name: 'フランス').id
+    user.region_id = Region.find_by(name: 'Bordeaux').id
+    user.mother_language_id = Language.find_by( name: 'フランス語').id
+    user.practice_language_id = Language.find_by( name: '日本語').id
     user.introduction = "ヤチェム！マルタです。日本の歴史や美術に興味があり、日本語を勉強して日本に行くことが夢です。"
     user.age = 36
     user.topic = "美術、歴史、旅行、言語学習"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man3.png"), filename:"profile_man3.png")
 end
+end
 
 # ユーザーを登録8
+unless User.find_by(first_name: 'Carlos')
 User.create!(first_name: 'Carlos') do |user|
     user.family_name = 'Ramirez'
     user.email = '8@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 3
-    user.region_id = 60
-    user.mother_language_id = 8
-    user.practice_language_id = 1
+    user.country_id = Country.find_by(name: 'ドイツ').id
+    user.region_id = Region.find_by(name: 'Leipzig').id
+    user.mother_language_id = Language.find_by( name: 'ドイツ語').id
+    user.practice_language_id = Language.find_by( name: '日本語').id
     user.introduction = "こんにちは！カルロスです。日本文化が好きで、日本語を勉強しています。サッカーが大好きで、旅行して新しい友達を作るのが楽しみです。"
     user.age = 22
     user.topic = "サッカー、旅行、文化交流、料理"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman5.png"), filename:"profile_woman5.png")
 end
+end
 
 # ユーザーを登録9
+unless User.find_by(first_name: 'Yumi')
 User.create!(first_name: 'Yumi') do |user|
     user.family_name = 'Tanaka'
     user.email = '9@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 36
-    user.mother_language_id = 1
-    user.practice_language_id = 3
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '徳島').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: '韓国語').id
     user.introduction = "こんにちは、ユミです。韓国ドラマが好きで、韓国語を勉強中です。趣味はカフェ巡りとファッションです。"
     user.age = 22
     user.topic = "韓国ドラマ、ファッション、カフェ、旅行"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman4.png"), filename:"profile_woman4.png")
 end
+end
 
 # ユーザーを登録10
+unless User.find_by(first_name: 'Takumi')
 User.create!(first_name: 'Takumi') do |user|
     user.family_name = 'Yamada'
     user.email = '10@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 13
-    user.mother_language_id = 1
-    user.practice_language_id = 6
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '東京').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: 'フランス語').id
     user.introduction = "こんにちは、拓海です。パティシエとして働いていて、フランス菓子に憧れてフランス語を勉強しています。いつかフランスで修行することが夢です。"
     user.age = 28
     user.topic = "フランス菓子、料理、旅行、映画"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/animal_dog.png"), filename:"animal_dog.png")
 end
+end
 
 # ユーザーを登録11
+unless User.find_by(first_name: 'Haruka')
 User.create!(first_name: 'Haruka') do |user|
     user.family_name = 'Saito'
     user.email = '11@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 1
-    user.mother_language_id = 1
-    user.practice_language_id = 2
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '北海道').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: '英語').id
     user.introduction = "英語を学びながら、国際的な視野を広げたいと考えています。自然が大好きで、趣味はキャンプとハイキングです。"
     user.age = 24
     user.topic = "自然、アウトドア、映画、音楽"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman6.png"), filename:"profile_woman6.png")
 end
+end
 
 # ユーザーを登録12
+unless User.find_by(first_name: 'Kenta')
 User.create!(first_name: 'Kenta') do |user|
     user.family_name = 'Nikaido'
     user.email = '12@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 1
-    user.mother_language_id = 1
-    user.practice_language_id = 5
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '北海道').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: 'スペイン語').id
     user.introduction = "スペインサッカーが好きで、スペイン語を勉強中です。サッカー観戦やヨーロッパ旅行をするのが夢です。"
     user.age = 33
     user.topic = "サッカー、旅行、ヨーロッパ文化、グルメ"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man4.png"), filename:"profile_man4.png")
 end
+end
 
 # ユーザーを登録13
+unless User.find_by(first_name: 'Shohei')
 User.create!(first_name: 'Shohei') do |user|
     user.family_name = 'Suzuki'
     user.email = '13@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 1
-    user.region_id = 41
-    user.mother_language_id = 1
-    user.practice_language_id = 4
+    user.country_id = Country.find_by(name: '日本').id
+    user.region_id = Region.find_by(name: '長野').id
+    user.mother_language_id = Language.find_by( name: '日本語').id
+    user.practice_language_id = Language.find_by( name: '中国語').id
     user.introduction = "ビジネスマンとして中国と取引があるため、中国語を勉強しています。趣味は読書とビジネスに関する勉強です。"
     user.age = 36
     user.topic = "ビジネス、読書、言語学習、異文化交流"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_man5.png"), filename:"profile_man5.png")
 end
+end
 
 # ユーザーを登録14
+unless User.find_by(first_name: 'Min-Ji')
 User.create!(first_name: 'Min-Ji') do |user|
     user.family_name = 'Kim'
     user.email = '14@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = 6
-    user.region_id = 77
-    user.mother_language_id = 3
-    user.practice_language_id = 1
+    user.country_id = Country.find_by(name: '韓国').id
+    user.region_id = Region.find_by(name: 'Incheon').id
+    user.mother_language_id = Language.find_by( name: '韓国語').id
+    user.practice_language_id = Language.find_by( name: '日本語').id
     user.introduction = "アンニョンハセヨ、ミンジです。日本のアニメや漫画に興味があって、日本語を勉強しています。いつか日本に行って、アニメの聖地巡りをしたいです。"
     user.age = 22
     user.topic = "アニメ、漫画、旅行、ファッション"
     user.is_active = 'true'
     user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/profile_woman7.png"), filename:"profile_woman7.png")
+end
 end
 
 # ユーザーを登録15
@@ -370,7 +398,7 @@ User.create!(first_name: 'Jae-Hyun') do |user|
     user.email = '15@yahoo.co.jp'
     user.password = '111111'
     user.country_id = Country.find_by(name: '韓国').id
-    user.region_id = Region.find_by(name: 'Busan').id
+    user.region_id = Region.find_by(name: 'Incheon').id
     user.mother_language_id = Language.find_by( name: '韓国語').id
     user.practice_language_id = Language.find_by( name: '英語').id
     user.introduction = "I am studying English and hope to work abroad in the future. My hobbies are listening to music and watching movies, and I especially enjoy Hollywood films."

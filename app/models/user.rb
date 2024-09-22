@@ -18,9 +18,9 @@ class User < ApplicationRecord
 # ========================================================================================
   validates :first_name, presence: { message: '名前を入力してください' }, length: { maximum: 25 }
   validates :family_name, presence: { message: '姓を入力してください' }, length: { maximum: 25 }
-  validates :introduction, presence: true, length: { in: 2..100 }
+  validates :introduction, presence: true, length: { in: 2..300 }
   validates :age, presence: true
-  validates :topic, presence: true, length: { in: 2..50 }
+  validates :topic, presence: true, length: { in: 2..100 }
 # ========================================================================================
 
 # ========================================================================================
