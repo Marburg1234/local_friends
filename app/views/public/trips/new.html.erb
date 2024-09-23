@@ -25,25 +25,25 @@
 
       <!-- Postal Code -->
       <div class="form-group">
-        <label><strong><%= f.label :post_code %></strong></label>
+        <label><strong>郵便番号</strong></label>
         <%= f.text_field :post_code, id: 'zipcode', class: 'form-control', required: true, placeholder: "例: 123-4567" %>
       </div>
 
       <!-- Address -->
       <div class="form-group">
-        <label><strong><%= f.label :address %></strong></label>
+        <label><strong>住所</strong></label>
         <%= f.text_field :address, class: 'form-control', required: true, placeholder: "例: 東京都渋谷区" %>
       </div>
 
       <!-- Title -->
       <div class="form-group">
-        <label><strong><%= f.label :title %></strong></label>
+        <label><strong>タイトル</strong></label>
         <%= f.text_field :title, local: true, class: 'form-control', required: true, placeholder: "タイトルを入力してください" %>
       </div>
 
       <!-- Explanation -->
       <div class="form-group">
-        <label><strong><%= f.label :explain  %></strong></label>
+        <label><strong>説明欄</strong></label>
         <%= f.text_area :explain, class: 'form-control', required: true, placeholder: "説明を入力してください" %>
       </div>
 

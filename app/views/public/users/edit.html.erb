@@ -1,76 +1,89 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="container d-flex justify-content-center flex-column">
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "fail_notice" %>
   <% end %>
 
-  <%= form_with(model: @user, local: true, multipart: true) do |f| %>
-    <div class="row d-flex justify-content-center flex-column form-group">
-      <h1 class="border-bottom text-center mt-2 mb-4"><strong>ユーザー情報編集</strong></h1>
+<div class="container my-5 p-4">
+  <div class="row form-group shadow">
+    <div class="col-md-8 mx-auto">
+      <h1 class="border-bottom text-center my-4"><strong>ユーザー情報編集</strong></h1>
 
-        <div style="display: flex; flex-direction: column;">
-          <!-- pタグでのプロフィール写真の表示 -->
-          <h4 style="margin: 0;">プロフィール写真</h4>
-          <!-- ラベルとプレビュー画像を横並びにする部分 -->
-          <div style="display: flex; align-items: center; margin-top: 5px;">
-            <!-- ラベルとファイル選択の部分 -->
+      <%= form_with(model: @user, local: true, multipart: true) do |f| %>
+
+        <!-- Profile Image -->
+        <div class="form-group">
+          <h4 class="mb-3">プロフィール写真</h4>
+          <div class="d-flex align-items-center mb-3">
             <label for="profile_image_select" style="cursor: pointer; margin-right: 10px; background-color:#CCFFFF;">
               <%= image_tag 'icon_folder.png', size: '50x50' %>選択する
             </label>
-            <!-- ファイル選択フィールド -->
-            <%= f.file_field :profile_image, id: "profile_image_select", style: 'display: none;', accept: "image/*", class: 'form_control_file', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
-            <!-- プレビュー表示用の部分 -->
-            <div id="preview-item1" style="max-height: 100px; max-width: 100px;" class="rounded shadow">
+            <%= f.file_field :profile_image, id: "profile_image_select", style: 'display: none;', accept: "image/*", class: 'form-control-file', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
+            <div id="preview-item1" class="rounded shadow" style="max-height: 100px; max-width: 100px;">
               <%= image_tag @user.get_profile_image, size: '100x100' %>
             </div>
           </div>
         </div>
 
+        <!-- Family Name -->
+        <div class="form-group">
+          <label><strong>姓</strong></label>
+          <%= f.text_field :family_name, class: 'form-control', required: true %>
+        </div>
 
+        <!-- First Name -->
+        <div class="form-group">
+          <label><strong>名</strong></label>
+          <%= f.text_field :first_name, class: 'form-control', required: true %>
+        </div>
 
-      <div class="form-group">
-        姓
-        <%= f.text_field :family_name, class: 'form-control', required: true %>
-      </div>
-      <div class="form-group">
-        名
-        <%= f.text_field :first_name, class: 'form-control', required: true %>
-      </div>
-      <div class="form-group">
-        学習中の言語
-        <% already_registered_language = @user.practice_language %>
-        <% practice_languages = Language.where.not(id: already_registered_language).order("id ASC") %>
-        <%= f.select :practice_language_id, options_from_collection_for_select([already_registered_language] + practice_languages, :id, :name) %>
-      </div>
-      <div class="form-group">
-        自己紹介文
-        <%= f.text_area :introduction, class: 'form-control' %>
-     </div>
-      <div class="form-group">
-        話したい話題
-        <%= f.text_area :topic, class: 'form-control' %>
-      </div>
+        <!-- Practice Language -->
+        <div class="form-group">
+          <label><strong>学習中の言語</strong></label>
+          <% already_registered_language = @user.practice_language %>
+          <% practice_languages = Language.where.not(id: already_registered_language).order("id ASC") %>
+          <%= f.select :practice_language_id, options_from_collection_for_select([already_registered_language] + practice_languages, :id, :name), {}, class: 'form-control' %>
+        </div>
 
-      <div class="form-group">
-        <span>サブ写真(※最大5枚の画像を保存できます)<br />
-          <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")' %>
-            <div id="preview-item2" class="d-flex" style="margin-top: 10px;" >
-              <% @user.get_sub_images.each do |sub_image| %>
-                <%= image_tag sub_image, size: '100x100', class: 'mr-2' %>
-              <% end %>
-            </div>
-        </span>
-      </div>
-      <div class="col-12 text-center"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
+        <!-- Introduction -->
+        <div class="form-group">
+          <label><strong>自己紹介文</strong></label>
+          <%= f.text_area :introduction, class: 'form-control' %>
+        </div>
+
+        <!-- Topic -->
+        <div class="form-group">
+          <label><strong>話したい話題</strong></label>
+          <%= f.text_area :topic, class: 'form-control' %>
+        </div>
+
+        <!-- Sub Images -->
+        <div class="form-group">
+          <label><strong>サブ写真(※最大5枚の画像を保存できます)</strong></label>
+          <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")', class: 'form-control-file' %>
+          <div id="preview-item2" class="d-flex mt-2">
+            <% @user.get_sub_images.each do |sub_image| %>
+              <%= image_tag sub_image, size: '100x100', class: 'mr-2' %>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group text-center mt-4">
+          <%= f.submit "変更内容を保存", class: 'btn btn-success btn-lg' %>
+        </div>
+
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="text-right mb-4">
-      <p>※退会を希望する場合はこちら</p>
-      <%= link_to "退会する", unsubscribe_user_path, method: :GET, class: 'btn btn-danger' %>
+  </div>
+  <div class="text-right my-4">
+    <p>※退会を希望する場合はこちら</p>
+    <%= link_to "退会する", unsubscribe_user_path, method: :GET, class: 'btn btn-danger' %>
   </div>
 </div>
+
+
+
 
 <!--プロフィール写真用のプレビュー表示 関数名 ProfileimgPreview-->
 <script>
