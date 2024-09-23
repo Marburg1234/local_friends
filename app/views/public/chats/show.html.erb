@@ -3,6 +3,7 @@
 <div class="container mb-5">
   <div class="row">
     <div class="col-lg-8 mx-auto">
+
       <!--チャット相手の表示→OK-->
       <h1 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>", class="mb-5 mt-3 text-center"><strong><%= @user.family_name %><%= @user.first_name %>さんとのチャット</strong></h1>
 
@@ -10,29 +11,42 @@
       <div class="message mx-auto p-3">
         <% @chats.each do |chat| %>
           <% if chat.user_id == current_user.id %>
-          <!--部分テンプレの呼び出し 右側の部分 送ったメッセージの表示-->
+          <!--部分テンプレの呼び出し 右側の部分 送る側-->
           <%= render "public/chats/chat", chat: chat %>
           <% else %>
           <!--左側の部分 受け取ったメッセージの表示-->
             <div class="left-container d-flex mb-3">
-              <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-
-              <% if chat.message.present? %>
+              <!--メッセージと画像が両方受信していた場合の表示(メッセージ→画像の順番で表示する)-->
+              <% if chat.message.present? && chat.image.attached? %>
+                <div class="d-flex flex-column">
+                  <div class="d-flex">
+                    <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+                    <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
+                    <br/><%= chat.created_at.strftime( "%H:%M" ) %>
+                  </div>
+                  <div>
+                    <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+                    <%= image_tag chat.image, size: '200x200' %>
+                    <%= chat.created_at.strftime( "%H:%M" ) %>
+                  </div>
+                </div>
+                <!--メッセージの表示-->
+              <% elsif chat.message.present? %>
+                <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
                 <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
-              <% end %>
+                <br/><%= chat.created_at.strftime( "%H:%M" ) %>
               <!--画像を表示する-->
-              <% if chat.image.attached? %>
-                <%= image_tag chat.image, size: '200x200' %>
+              <% elsif chat.image.attached? %>
+                <div>
+                  <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+                  <%= image_tag chat.image, size: '200x200' %>
+                  <%= chat.created_at.strftime( "%H:%M" ) %>
+                </div>
               <% end %>
-
             </div>
           <% end %>
         <% end %>
       </div>
-
-    <!--<div class="errors">-->
-    <!--  <= render "layouts/errors", obj: @chat %>-->
-    <!--</div>-->
 
       <!--チャットを送るフォーム→表示されている-->
     <div class="col-lg-6 mx-auto">
@@ -44,13 +58,6 @@
           <i class="fas fa-image fa-lg"></i>
         </label>
         <%= f.file_field :image, id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
-
-        <!--動画を投稿するフォーム 一旦やらないのでコメントアウトする-->
-        <!--<label for="chat_video" style="cursor: pointer;" >-->
-        <!--  <i class="fas fa-video fa-lg"></i>-->
-        <!--</label>-->
-        <!--<= f.file_field :video, id: "chat_video", style: "display:none" %>-->
-
         <%= f.submit "送信", class: "btn btn-info btn-sm", id: 'send_button' %>
         <div id="preview-item3">
           <% if @chat.get_image == nil %>
@@ -59,7 +66,6 @@
             <%= image_tag @chat.get_image, size: '100x100' %>
           <% end %>
         </div>
-
         <%= f.hidden_field :chat_room_id %>
       <% end %>
     </div>

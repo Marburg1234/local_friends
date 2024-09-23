@@ -9,8 +9,9 @@ class Chat < ApplicationRecord
 
   # メッセージは空白でもいいように変更
   validates :message, length: { maximum: 140 }, allow_blank: true
+
   # いずれかの1つを送ることができるため、それ以外をエラーとしてはじくvalidate
-  validate :only_one_type_of_attachment, :message_or_media_present?
+  # validate :only_one_type_of_attachment, :message_or_media_present?
 
   # ==========================================================================================================
   def get_image
