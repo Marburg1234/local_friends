@@ -10,16 +10,29 @@
       <h1 class="border-bottom"><strong>ユーザー情報編集</strong></h1>
     </div>
   </div>
+
   <div class="row d-flex justify-content-center form-body">
     <%= form_with(model: @user, local: true, multipart: true) do |f| %>
       <div class="row my-3">
-        <span>プロフィール写真<br />
-          <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
-          <div id="preview-item1" style="max-height: 100px; max-width: 100px;">
-            <%= image_tag @user.get_profile_image, size: '100x100' %>
+        <div style="display: flex; flex-direction: column;">
+          <!-- pタグでのプロフィール写真の表示 -->
+          <h4 style="margin: 0;">プロフィール写真</h4>
+          <!-- ラベルとプレビュー画像を横並びにする部分 -->
+          <div style="display: flex; align-items: center; margin-top: 5px;">
+            <!-- ラベルとファイル選択の部分 -->
+            <label for="profile_image_select" style="cursor: pointer; margin-right: 10px; background-color:#CCFFFF;">
+              <%= image_tag 'icon_folder.png', size: '50x50' %>選択する
+            </label>
+            <!-- ファイル選択フィールド -->
+            <%= f.file_field :profile_image, id: "profile_image_select", style: 'display: none;', accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
+            <!-- プレビュー表示用の部分 -->
+            <div id="preview-item1" style="max-height: 100px; max-width: 100px;">
+              <%= image_tag @user.get_profile_image, size: '100x100' %>
+            </div>
           </div>
-        </span>
+        </div>
       </div>
+
 
       <div class="row mb-3 form-group">
         姓
