@@ -11,7 +11,7 @@
   </div>
 
   <div class="row d-flex justify-content-center">
-    <div class="col mt-2 mb-5 border text-center">
+    <div class="col mt-2 mb-5 text-center">
       <!--フォロー機能のボタンを入れる ゲストログインの場合には、ボタンの表示なし 非同期化id付与-->
       <span id="follow_button_<% @user.id %>">
         <%= render 'public/relationships/follow_btn', user: @user %>

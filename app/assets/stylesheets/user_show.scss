@@ -29,3 +29,14 @@
   background-color: black;
   color: white;
 }
+
+
+
+
+// レスポンシブ対応 user_show
+@media (max-width: 768px) {
+  /* nth-child(even)を使って偶数番目の要素に対して適用 2番目の要素にmargin-topを入れる */
+  .responsive-margin > *:nth-child(even) {
+    margin-top: 20px; /* 必要に応じて値を調整 */
+  }
+}
