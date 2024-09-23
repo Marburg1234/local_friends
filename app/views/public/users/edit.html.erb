@@ -5,15 +5,10 @@
     <%= content_tag :div, flash[:notice], class: "fail_notice" %>
   <% end %>
 
-  <div class="row no-gutters">
-    <div class="col text-center my-3">
-      <h1 class="border-bottom"><strong>ユーザー情報編集</strong></h1>
-    </div>
-  </div>
+  <%= form_with(model: @user, local: true, multipart: true) do |f| %>
+    <div class="row d-flex justify-content-center flex-column form-group">
+      <h1 class="border-bottom text-center mt-2 mb-4"><strong>ユーザー情報編集</strong></h1>
 
-  <div class="row d-flex justify-content-center form-body">
-    <%= form_with(model: @user, local: true, multipart: true) do |f| %>
-      <div class="row my-3">
         <div style="display: flex; flex-direction: column;">
           <!-- pタグでのプロフィール写真の表示 -->
           <h4 style="margin: 0;">プロフィール写真</h4>
@@ -24,40 +19,40 @@
               <%= image_tag 'icon_folder.png', size: '50x50' %>選択する
             </label>
             <!-- ファイル選択フィールド -->
-            <%= f.file_field :profile_image, id: "profile_image_select", style: 'display: none;', accept: "image/*", class: 'image_form', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
+            <%= f.file_field :profile_image, id: "profile_image_select", style: 'display: none;', accept: "image/*", class: 'form_control_file', 'onChange': 'ProfileimgPreview(event, "preview-item1")' %>
             <!-- プレビュー表示用の部分 -->
-            <div id="preview-item1" style="max-height: 100px; max-width: 100px;">
+            <div id="preview-item1" style="max-height: 100px; max-width: 100px;" class="rounded shadow">
               <%= image_tag @user.get_profile_image, size: '100x100' %>
             </div>
           </div>
         </div>
-      </div>
 
 
-      <div class="row mb-3 form-group">
+
+      <div class="form-group">
         姓
         <%= f.text_field :family_name, class: 'form-control', required: true %>
       </div>
-      <div class="row mb-3">
+      <div class="form-group">
         名
         <%= f.text_field :first_name, class: 'form-control', required: true %>
       </div>
-      <div class="row mb-3">
+      <div class="form-group">
         学習中の言語
         <% already_registered_language = @user.practice_language %>
         <% practice_languages = Language.where.not(id: already_registered_language).order("id ASC") %>
         <%= f.select :practice_language_id, options_from_collection_for_select([already_registered_language] + practice_languages, :id, :name) %>
       </div>
-      <div class="row mb-3">
+      <div class="form-group">
         自己紹介文
         <%= f.text_area :introduction, class: 'form-control' %>
      </div>
-      <div class="row mb-3">
+      <div class="form-group">
         話したい話題
         <%= f.text_area :topic, class: 'form-control' %>
       </div>
 
-      <div class="row my-3">
+      <div class="form-group">
         <span>サブ写真(※最大5枚の画像を保存できます)<br />
           <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")' %>
             <div id="preview-item2" class="d-flex" style="margin-top: 10px;" >
@@ -67,9 +62,9 @@
             </div>
         </span>
       </div>
-      <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
-    <% end %>
-  </div>
+      <div class="col-12 text-center"><%= f.submit "変更内容を保存", class: 'btn btn-success my-5' %></div>
+    </div>
+  <% end %>
 
   <div class="text-right mb-4">
       <p>※退会を希望する場合はこちら</p>

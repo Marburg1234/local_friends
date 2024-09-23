@@ -15,7 +15,7 @@
       <div class="form-group">
         <h4 class="mb-3">写真をアップロード</h4>
         <div class="d-flex mb-3">
-          <label for="trip_image_post" style="cursor-pointer margin-right: 10px; background-color:#CCFFFF;">
+          <label for="trip_image_post" style="cursor-pointer margin-right: 10px; background-color:#FFC7AF;">
             <%= image_tag 'icon_folder.png', size: '50x50' %>選択する
           </label>
           <%= f.file_field :trip_image, id: "trip_image_post", style: 'display: none;', accept: "image/*", required: true, class: 'form-control-file', 'onChange': 'TripimgPreview(event, "preview-item1")' %>
