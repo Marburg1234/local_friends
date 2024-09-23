@@ -9,7 +9,21 @@
 
       <!--チャットの中身-->
       <div class="message mx-auto p-3">
+        <% previous_date = nil %> <!-- 前の日付を初期化 -->
         <% @chats.each do |chat| %>
+
+        <% current_date = chat.created_at.to_date %> <!-- 現在の日付を取得 -->
+        <!-- 日付が変わった場合に区切りを表示 -->
+        <% if previous_date != current_date %>
+          <div class="date-divider text-center" style="background-color: #FFDDFF;">
+            <hr>
+            <!--hrタグ、水平線を表示してくれるタグ 終了タグは必要なし-->
+            <h4><strong><%= current_date.strftime("%m/%d") %></strong></h4>
+            <hr>
+          </div>
+          <% previous_date = current_date %> <!-- 前の日付を更新 -->
+        <% end %>
+
           <% if chat.user_id == current_user.id %>
           <!--部分テンプレの呼び出し 右側の部分 送る側-->
           <%= render "public/chats/chat", chat: chat %>
