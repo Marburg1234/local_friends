@@ -10,8 +10,6 @@ class Chat < ApplicationRecord
   # メッセージは空白でもいいように変更
   validates :message, length: { maximum: 140 }, allow_blank: true
 
-  # いずれかの1つを送ることができるため、それ以外をエラーとしてはじくvalidate
-  # validate :only_one_type_of_attachment, :message_or_media_present?
 
   # ==========================================================================================================
   def get_image
@@ -21,22 +19,5 @@ class Chat < ApplicationRecord
       nil
     end
   end
-
-
-  private
-
-  def only_one_type_of_attachment
-    if [message.present?, image.attached?, video.attached?].count(true) > 1
-      errors.add(:base, "いずれか1つを送信することができます")
-    end
-  end
-
-  def message_or_media_present?
-    if [message.present?, image.attached?, video.attached?].count(true) == 0
-      errors.add(:base, "いずれか1つを送信することができます")
-    end
-  end
-
-
 
 end
