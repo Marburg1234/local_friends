@@ -56,6 +56,13 @@ class Public::TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
 
+  def destroy
+    @trip = Trip.find(params[:id])
+    @trip.destroy
+    flash[:notice] = "選択した投稿記事を削除しました"
+    redirect_to post_index_user_path(current_user)
+  end
+
 
   private
 
