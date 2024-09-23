@@ -18,7 +18,7 @@
               <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
 
               <% if chat.message.present? %>
-                <p class="ml-1 p-2" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
+                <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
               <% end %>
               <!--画像を表示する-->
               <% if chat.image.attached? %>

@@ -1,6 +1,13 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<h1 class="text-center my-3">地域の場所を確認しよう！</h1>
+<div class="my-3">
+  <!--戻るボタン-->
+  <span class="ml-3">
+    <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
+  </span>
+  <h1 class="text-center my-3"><strong>地域の場所を確認しよう！</strong></h1>
+  <h2 class="text-center"><span class="border-bottom" style="background-color: #FFFF99;">地域名：<%= @region_name %></span></h2>
+</div>
 
 <div class="container my-3">
   <div id="region_map"></div>
