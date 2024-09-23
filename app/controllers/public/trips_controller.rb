@@ -56,6 +56,17 @@ class Public::TripsController < ApplicationController
     @trip = Trip.find(params[:id])
   end
 
+  def update
+    @trip = Trip.find(params[:id])
+    if @trip.update(trip_params)
+      flash[:notice] = "編集内容を保存しました"
+      redirect_to trip_path(@trip)
+    else
+      flash[:notice] = "編集に失敗しました"
+      render :edit
+    end
+  end
+
   def destroy
     @trip = Trip.find(params[:id])
     @trip.destroy

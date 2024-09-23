@@ -1,3 +1,9 @@
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--処理が成功した際にでるフラッシュメッセージ-->
+  <% if flash[:notice].present? %>
+    <%= content_tag :div, flash[:notice], class: "success_notice" %>
+  <% end %>
+
 <div class="container">
 
   <!--ページの題名-->
