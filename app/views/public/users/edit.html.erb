@@ -57,9 +57,9 @@
           <%= f.text_area :topic, class: 'form-control' %>
         </div>
 
-        <!-- Sub Images -->
+         Sub Images
         <div class="form-group">
-          <label><strong>サブ写真(※最大5枚の画像を保存できます)</strong></label>
+          <label><strong>サブ写真(※最大6枚の画像を保存できます)</strong></label>
           <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")', class: 'form-control-file' %>
           <div id="preview-item2" class="d-flex mt-2">
             <% @user.get_sub_images.each do |sub_image| %>
@@ -67,6 +67,7 @@
             <% end %>
           </div>
         </div>
+
 
         <!-- Submit Button -->
         <div class="form-group text-center mt-4">
@@ -110,7 +111,8 @@
   function SubimgPreview(event, previewId) {
     var input = event.target;
     var preview = document.getElementById(previewId);
-    preview.innerHTML = ''; // 既存のプレビューをクリア
+    // 既存のプレビューをクリア
+    preview.innerHTML = '';
 
     Array.from(input.files).forEach(file => {
       var reader = new FileReader();
@@ -120,7 +122,8 @@
         img.src = reader.result;
         img.style.height = '100px';
         img.style.width = '100px';
-        img.style.marginRight = '10px'; // 画像間にスペースを追加
+        // 画像間にスペースを追加
+        img.style.marginRight = '10px';
         img.style.marginTop = '10px';
         preview.appendChild(img);
       }
@@ -129,3 +132,5 @@
     });
   }
 </script>
+
+

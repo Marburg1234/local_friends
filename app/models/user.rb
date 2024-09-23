@@ -29,6 +29,8 @@ class User < ApplicationRecord
   # ユーザーのサブ写真を扱う
   has_many_attached :sub_images
 # ========================================================================================
+  validate :validate_sub_images_count
+
 
 # ========================================================================================
   # フォローフォロワー機能
@@ -109,6 +111,11 @@ class User < ApplicationRecord
 # ========================================================================================
 
 
+  def validate_sub_images_count
+    if sub_images.count > 6
+      errors.add(:sub_images, 'は最大6枚までアップロードできます。')
+    end
+  end
 
 
 end
