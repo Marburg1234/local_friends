@@ -78,7 +78,7 @@ class User < ApplicationRecord
 # ========================================================================================
   # 検索するためのメソッド 部分一致の検索のみに変更 退会済みユーザーは除外する
   def self.looks(search, word)
-    @user = User.joins(:country).where.not(is_active: false).where("family_name LIKE ? OR first_name LIKE ? OR countries.name LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%").distinct
+    @user = User.joins(:country).joins(:region).where.not(is_active: false).where("family_name LIKE ? OR first_name LIKE ? OR countries.name LIKE ? OR regions.name LIKE ?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%").distinct
   end
 # ========================================================================================
 
