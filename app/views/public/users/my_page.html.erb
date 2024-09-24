@@ -15,12 +15,14 @@
 
 
   <div class="row d-flex justify-content-center">
-    <div class="col mt-2 mb-5 border text-center">
+    <div class="col mt-2 mb-4 text-center">
       <!--いいねした記事一覧ページへのリンク-->
-      <%= link_to "いいねした記事をみる", likes_user_path(current_user), class: 'btn btn-success text-light shadow rounded' %>
+      <%= link_to likes_user_path(current_user), class: 'btn favorite_index rounded-pill border-info mb-3' do %>
+        <%= image_tag 'favorite_index.png' %>いいね記事一覧
+      <% end %>
       <!--Chat相手一覧ページへのリンク挿入-->
-      <%= link_to chats_path, method: :GET, class: 'text-warning btn' do %>
-        <i class="fa-solid fa-comment-dots"></i>チャット相手一覧
+      <%= link_to chats_path, method: :GET, class: 'btn chat_index rounded-pill border-info mb-3' do %>
+        <i class="fa-solid fa-comment-dots" style="font-size: 1.3rem;"></i><span>チャット相手一覧</span>
       <% end %>
       <!--フォロー/フォロワー数カウント・一覧ページへのリンク-->
       <span id="follow_button_<% @user.id %>">

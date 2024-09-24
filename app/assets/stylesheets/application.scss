@@ -35,7 +35,7 @@
 }
 
 .success_notice{
-  background-color: #66FFFF;
+  background-color: #CBFFD3	;
   heigth: 50px;
   text-align: center;
   margin: 30px 0px;
@@ -72,6 +72,29 @@
   font-size: 1.3rem;
   font-weight: bold;
 }
+
+.favorite_index{
+  width: 300px;
+  height: 60px;
+}
+
+.chat_index{
+  width: 300px;
+  height: 60px;
+  padding-top: 15px;
+
+}
+
+.favorite_index:hover{
+  background-color: #FFDDFF;
+  transition: background-color 0.5s;
+}
+
+.chat_index:hover{
+  background-color: #FFDDFF;
+  transition: background-color 0.5s;
+}
+
 
 // chatページ
 label {
