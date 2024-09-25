@@ -1,4 +1,22 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<style>
+  .pagination {
+    display: none; /* 要素自体を表示しない */
+  }
+
+  .container {
+    width: 1140px; /* 固定幅の設定 */
+  }
+
+  .jscroll-inner {
+    width: 100%; /* 幅の調整 */
+  }
+
+  .left{
+    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
+  }
+</style>
+
 <!--退会済みユーザーのページへアクセスor登録のないユーザーにアクセスしたときのフラッシュ-->
 <% if flash[:alert].present? %>
   <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
@@ -10,37 +28,56 @@
       <h1 class="pr-3 pl-3"><strong>他のユーザーと交流しよう！</strong></h1>
     </div>
   </div>
-
-  <div class="row my-3">
-    <div class="col-12 d-flex flex-wrap">
-      <% @users.each_slice(4) do |users| %>
-        <% users.each do |user| %>
-          <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->
-            <%= link_to user_path(user.id) do %>
-              <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top border-bottom rounded' %>
-            <div class="card-body text-dark">
-              <div class="card-title">
-                <strong><%= user.family_name %><%= "  " %><%= user.first_name %></strong>
+  <div class="auto-scroll">
+    <div class="row my-3">
+      <div class="col-12 d-flex flex-wrap">
+        <% @users.each_slice(4) do |users| %>
+          <% users.each do |user| %>
+            <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->
+              <%= link_to user_path(user.id) do %>
+                <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top border-bottom rounded' %>
+              <div class="card-body text-dark">
+                <div class="card-title">
+                  <strong><%= user.family_name %><%= "  " %><%= user.first_name %></strong>
+                </div>
+                <div class="card-text">
+                  出身
+                  <span><%= user.country.name %></span>
+                  <td><% user.region.name %></td>
+                </div>
+                <div class="card-text">
+                  <th>母国語</th>
+                  <td><%= image_tag user.mother_language.flag, size: '20x20', class: 'border' %><%= user.mother_language.name %></td>
+                </div>
+                <div class="card-text">
+                  <th class="pr-3">学習中</th>
+                  <td><%= image_tag user.practice_language.flag, size: '20x20', class: 'border' %><%= user.practice_language.name %></td>
+                </div>
               </div>
-              <div class="card-text">
-                出身
-                <span><%= user.country.name %></span>
-                <td><% user.region.name %></td>
-              </div>
-              <div class="card-text">
-                <th>母国語</th>
-                <td><%= image_tag user.mother_language.flag, size: '20x20', class: 'border' %><%= user.mother_language.name %></td>
-              </div>
-              <div class="card-text">
-                <th class="pr-3">学習中</th>
-                <td><%= image_tag user.practice_language.flag, size: '20x20', class: 'border' %><%= user.practice_language.name %></td>
-              </div>
+            <% end %>
             </div>
           <% end %>
-          </div>
         <% end %>
-      <% end %>
+      </div>
     </div>
+  <%= paginate @users %>
   </div>
-
 </div>
+
+
+<!-- jQuery CDN (必ず先に読み込む) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- jScroll CDN (必ずjQueryの後に読み込む) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+
+<!--無限スクロールを動かすJavascript-->
+<script>
+    $(document).on('DOMContentLoaded', function() {
+    $('.auto-scroll').jscroll({ // 追加したdivのclass名と合わせる
+      contentSelector: '.auto-scroll',
+      nextSelector: '.pagination a[rel=next]',  // 次ページリンクのセレクタ
+      loadingHtml: '読み込み中',
+
+    });
+  });
+</script>

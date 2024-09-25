@@ -46,7 +46,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to users_path, method: :GET, class: 'nav-link nav-btn active' do %>
+            <%= link_to users_path, method: :GET, class: 'nav-link nav-btn active', data: { turbolinks: false } do %>
             <i class="fa-solid fa-people-carry-box"></i><span>コミュニティ</span><br/>
             <span>(ユーザーを探す)</span>
             <% end %>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :users, only: %i[index show edit update] do
+    resources :users, only: %i[index show edit update destroy] do
       collection do
         get 'active_users' => "users#active_users"
         get 'inactive_users' => "users#inactive_users"

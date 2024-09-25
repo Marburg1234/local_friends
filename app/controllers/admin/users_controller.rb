@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
 
+# ユーザー一覧表示=============================================================================
   def index
     # 全ユーザー情報を取得して10人1ページで表示する(ゲストは除く)
     @users = User.where.not(email: "guest@example.com").order(id: :asc).page(params[:page]).per(10)
@@ -25,7 +26,9 @@ class Admin::UsersController < ApplicationController
     @user_practice_language = active_users_data.group(:practice_language_id).count
     # ============================================================
   end
+# ===============================================================================================
 
+# ユーザー詳細・編集(ステータス変更)・更新=============================================================================
   def show
     @user = User.find(params[:id])
     @trips = @user.trips
@@ -46,7 +49,17 @@ class Admin::UsersController < ApplicationController
       render :edit
     end
   end
+# ===============================================================================================
 
+  # ユーザーの物理削除
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "対象のユーザーを削除しました"
+    redirect_to admin_users_path
+  end
+
+# 有効ユーザーの一覧表示=============================================================================
   def active_users
     # 全ユーザー情報を取得する(ゲストは除く) メソッド1を活用
     @users = user_all_remove_guest
@@ -65,7 +78,9 @@ class Admin::UsersController < ApplicationController
     # 退会済みユーザーの割合算出
     @not_active_user_ration = not_active_user_ration
   end
+# ===============================================================================================
 
+# 退会ユーザーの一覧表示=============================================================================
   def inactive_users
     # 全ユーザー情報を取得する(ゲストは除く) メソッド1を活用
     @users = user_all_remove_guest
@@ -83,6 +98,7 @@ class Admin::UsersController < ApplicationController
     # 退会済みユーザーの割合算出 メソッド3
     @not_active_user_ration = not_active_user_ration
   end
+# ===============================================================================================
 
 
   private

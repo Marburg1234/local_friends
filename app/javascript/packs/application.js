@@ -16,7 +16,9 @@ import "../stylesheets/application";
 import "../packs/map_index.js";
 import "../packs/map_show.js";
 import "../packs/map_region.js";
-import "../packs/main_margin_top.js"
+import "../packs/main_margin_top.js";
+// import "../packs/jscroll.js";
+
 
 Rails.start()
 Turbolinks.start()
