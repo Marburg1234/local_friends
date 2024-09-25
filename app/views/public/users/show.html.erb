@@ -17,7 +17,9 @@
         <%= render 'public/relationships/follow_btn', user: @user %>
       </span>
       <!--chat開始ボタン-->
-      <%= render 'public/chats/chat_start_btn', user: @user %>
+      <span id="chat_start_btn_<% @user.id %>">
+        <%= render 'public/chats/chat_start_btn', user: @user %>
+      </span>
       <!--フォロー/フォロワー数カウント・一覧ページへのリンク 非同期化id付与-->
       <span id="follow_count">
         <%= render 'public/relationships/follow_follower_count', user: @user %>
