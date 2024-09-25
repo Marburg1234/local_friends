@@ -54,7 +54,9 @@
           </tr>
           <tr>
             <th class="left">住所</th>
-            <td><%= favorite.trip.address %></td>
+            <td>
+              <%= link_to show_map_path(favorite.trip), data: {"turbolinks" => false} do %><%= favorite.trip.address %><% end %> (地図を確認できます)
+            </td>
           </tr>
         </table>
       </div>

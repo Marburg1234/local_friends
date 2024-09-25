@@ -53,7 +53,7 @@
         </tr>
         <tr>
           <th class="px-3 py-2">住所</th>
-          <td class="pl-3"><%= link_to show_map_path(@trip) do %><%= @trip.address %><% end %></td>
+          <td class="pl-3"><%= link_to show_map_path(@trip), data: {"turbolinks" => false} do %><%= @trip.address %><% end %></td>
         </tr>
         <tr>
           <th class="px-3 py-2">投稿日</th>
@@ -121,35 +121,4 @@
     <% end %>
   </div>
 </div>
-
-
-
-<!-- jQuery CDN (必ず先に読み込む) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- jScroll CDN (必ずjQueryの後に読み込む) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-<script>
-  // コメント投稿/削除の非同期通信完了後の処理
-$(document).on('ajax:success', function() {
-  // ページネーション用の自動スクロール処理を再初期化
-  initAutoScroll();
-});
-
-function initAutoScroll() {
-  // ページネーションの初期化処理
-  $(window).off('scroll'); // 一度イベントを削除
-  $(window).on('scroll', function() {
-    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
-      // スクロール位置が下部に近づいたときに次のページを読み込む処理
-      let nextPage = $('.pagination .next_page').attr('href');
-      if (nextPage) {
-        $('.pagination').text("Loading...");
-        $.getScript(nextPage);
-      }
-    }
-  });
-}
-
-</script>
-
 

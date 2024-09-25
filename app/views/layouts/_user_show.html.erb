@@ -79,7 +79,10 @@
           <% end %>
           <% if trips.empty? %>
             <% else %>
-            <%= link_to "もっと見る", post_index_user_path(user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
+            <% if user_signed_in? %>
+              <%= link_to "もっと見る", post_index_user_path(user), method: :GET, class: 'nav-link text-warning mr-5 text-right' %>
+            <% elsif admin_signed_in? %>
+              <% end %>
           <% end %>
       </div>
     </div>
