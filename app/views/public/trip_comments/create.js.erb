@@ -2,6 +2,30 @@ $('#trip-comments').html("<%= j(render 'public/trip_comments/comment_index', tri
 $('#comment-count').html("コメント数: <%= @trip.trip_comments.count %>");
 $("textarea").val('');
 
-// 無限スクロールの再初期化
-initInfiniteScroll();
-console.log(initInfiniteScroll)
+
+<!--// 自動スクロールの初期化を再度実行-->
+<!--initInfiniteScroll();-->
+
+<!--  // コメント投稿/削除の非同期通信完了後の処理-->
+<!--$(document).on('ajax:success', function() {-->
+<!--  // ページネーション用の自動スクロール処理を再初期化-->
+<!--  initAutoScroll();-->
+<!--});-->
+
+<!--function initAutoScroll() {-->
+<!--  // ページネーションの初期化処理-->
+<!--  $(window).off('scroll'); // 一度イベントを削除-->
+<!--  $(window).on('scroll', function() {-->
+<!--    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {-->
+<!--      // スクロール位置が下部に近づいたときに次のページを読み込む処理-->
+<!--      let nextPage = $('.pagination .next_page').attr('href');-->
+<!--      if (nextPage) {-->
+<!--        $('.pagination').text("Loading...");-->
+<!--        $.getScript(nextPage);-->
+<!--      }-->
+<!--    }-->
+<!--  });-->
+<!--}-->
+
+
+
