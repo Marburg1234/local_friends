@@ -1,0 +1,70 @@
+<div class="container">
+  <h3 class="text-center border-bottom pb-2 my-2">学習中の言語別の会員数</h3>
+  <div class="row">
+    <div class="col-7">
+      <table class="table table-bordered text-center admin_user_table table-hover">
+        <thead class="country_table_head">
+          <tr>
+            <th class="head">言語のID</th>
+            <th class="head">言語名</th>
+            <th class="head">ユーザー数(人)</th>
+            <th class="head">割合(%)</th>
+          </tr>
+        </thead>
+        <tbody class="country_table_body">
+          <% @user_practice_language.each do |practice_language_id, count| %>
+            <tr>
+              <td><%= practice_language_id %></td>
+              <td><%= Language.find(practice_language_id).name %></td>
+              <td><%= count %></td>
+              <td><%= count * 100 / @users_count %> % </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <!--チャートの挿入-->
+    <div class="col-4">
+      <div class="row text-center d-flex justify-content-center">
+        <div style="width: 300px; height: 300px;">
+          <canvas id="practice_language_chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    const chartData = <%= @chat_data.to_json.html_safe %>;
+
+    var ctx = document.getElementById('practice_language_chart').getContext('2d')
+    var chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: chartData.labels,
+        datasets: [{
+          data: chartData.data,
+          backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            'rgb(123, 88, 200)',
+            'rgb(100, 78, 134)',
+            'rgb(33, 18, 134)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(123, 88, 200, 1)',
+            'rgba(68, 118, 124, 1)',
+            'rgba(125, 64, 84, 1)'
+          ],
+            hoveroffset: 4
+        }]
+      },
+    });
+  });
+</script>

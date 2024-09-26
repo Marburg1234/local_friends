@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users,skip: [:passwords], controllers: {
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
     resources :trips, only: %i[index show destroy]
     get 'homes/top'
     get 'search' => "searches#search"
+    get 'reports/per_country' => "reports#per_country"
+    get 'reports/per_practice_language' => "reports#per_practice_language"
   end
 
   scope module: :public do

@@ -21,6 +21,12 @@ class Admin::UsersController < ApplicationController
     # 国別の利用者数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
     @user_counts_per_country = active_users_data.group(:country_id).count
 
+    # グラフ用のデータを準備
+    @chart_data = {
+      labels: @user_counts_per_country.keys.map { |country_id| Country.find(country_id).name },
+      data: @user_counts_per_country.values
+    }
+
     # ============================================================
     # 学習中の言語別人数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
     @user_practice_language = active_users_data.group(:practice_language_id).count

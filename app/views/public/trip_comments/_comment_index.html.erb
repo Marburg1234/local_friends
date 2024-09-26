@@ -21,7 +21,7 @@
       <%= trip_comment.comment %>
       <!--コメントしたユーザーでないと削除ボタンを表示しないif文を追加-->
       <% if trip_comment.user == current_user %>
-        <%= link_to "削除する", trip_trip_comment_path(trip, trip_comment), method: :delete, data: { confirm: "削除してよろしいでしょうか？" }, class: 'btn btn-danger btn-sm', remote:true, data: {"turbolinks" => false} %>
+        <%= link_to "削除する", trip_trip_comment_path(trip, trip_comment), method: :delete, data: { confirm: "削除してよろしいでしょうか？" }, class: 'btn btn-danger btn-sm', remote: true, data: {"turbolinks" => false} %>
       <% end %>
     </div>
   </div>
@@ -49,6 +49,51 @@
   // ページ読み込み時に無限スクロールを初期化
   $(document).on('turbolinks:load', function() {
     initInfiniteScroll();
+
+
+  // Ajax通信が成功したときに無限スクロールを再初期化
+  $(document).on('ajax:success', function() {
+    initInfiniteScroll();
   });
+
+  const targetElement = document.querySelector('#trip-comments');
+
+  // 投稿または削除をした際(getElementByIdで指定した箇所で変更があったのをトリガーに発動する)→結果は1度は動作するが2回やると動作しない…
+  document.getElementById('#trip-comments').addEventListener('DOMAttrModified', (event) => {
+    initInfiniteScroll();
+  });
+
+ });
+//   // 監視対象の要素を取得
+//   const targetNode = document.getElementById('trip-comments');
+//   console.log(targetNode)
+
+//   if (targetNode) {
+//   const observer = new MutationObserver((mutationsList, observer) => {
+//     // 変更が検出されたときの処理
+//     initInfiniteScroll();
+//   });
+
+//   // オブザーバの設定
+//   const config = {
+//       attributes: true,
+//       childList: true,
+//       subtree: true,
+//       characterData: true
+//   };
+
+//   // コールバック関数の定義
+//   const callback = (mutationsList, observer) => {
+//       for(let mutation of mutationsList) {
+//           if (mutation.type === 'childList') {
+//               console.log('子ノードが変更されました！');
+//               initInfiniteScroll();
+//           }
+//       }
+//   };
+
+//   // 監視を開始
+//   observer.observe(targetNode, config);
+// }
 
 </script>
