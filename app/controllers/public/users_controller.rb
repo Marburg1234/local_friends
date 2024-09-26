@@ -55,9 +55,8 @@ class Public::UsersController < ApplicationController
 # ================================================
   # いいねした記事一覧を表示するメソッドlikes
   def likes
-    @user = current_user
-    @trip = Trip.find(params[:id])
-    @favorites = @user.favorites.page(params[:page]).per(1)
+    user = current_user
+    @favorites = user.favorites.page(params[:page]).per(1)
   end
 # ================================================
 
