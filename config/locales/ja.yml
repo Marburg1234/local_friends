@@ -1,4 +1,8 @@
 ja:
+  search:
+    options:
+      user: "ユーザー"
+      trip: "投稿記事"
   activerecord:
     attributes:
       user:
