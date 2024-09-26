@@ -56,11 +56,11 @@ Rails.application.routes.draw do
         get "/my_page" => "users#my_page"
         patch 'withdraw'
         post "/guest_sign_in" => "users/sessions#guest_sign_in"
+        get "/likes" => "users#likes"
       end
       member do
         get "/unsubscribe" => "users#unsubscribe"
         get 'post_index'
-        get "/likes" => "users#likes"
       end
     end
   end
