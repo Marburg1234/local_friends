@@ -53,7 +53,7 @@
         </tr>
         <tr>
           <th class="px-3 py-2">住所</th>
-          <td class="pl-3"><%= link_to show_map_path(@trip) do %><%= @trip.address %><% end %></td>
+          <td class="pl-3"><%= link_to show_map_path(@trip), data: {"turbolinks" => false} do %><%= @trip.address %><% end %></td>
         </tr>
         <tr>
           <th class="px-3 py-2">投稿日</th>
@@ -121,10 +121,4 @@
     <% end %>
   </div>
 </div>
-
-
-
-
-
-
 

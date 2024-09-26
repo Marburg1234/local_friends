@@ -14,6 +14,8 @@
         <!-- Profile Image -->
         <div class="form-group">
           <h4 class="mb-3">プロフィール写真</h4>
+            <span>※拡張子jpg・jpeg・pngを選択することができます</span><br/>
+            <span>※画像サイズ5MB以下</span>
           <div class="d-flex align-items-center mb-3">
             <label for="profile_image_select" style="cursor: pointer; margin-right: 10px; background-color:#CCFFFF;">
               <%= image_tag 'icon_folder.png', size: '50x50' %>選択する
@@ -48,18 +50,21 @@
         <!-- Introduction -->
         <div class="form-group">
           <label><strong>自己紹介文</strong></label>
-          <%= f.text_area :introduction, class: 'form-control' %>
+          <%= f.text_area :introduction, class: 'form-control', required: true %>
         </div>
 
         <!-- Topic -->
         <div class="form-group">
           <label><strong>話したい話題</strong></label>
-          <%= f.text_area :topic, class: 'form-control' %>
+          <%= f.text_area :topic, class: 'form-control', required: true %>
         </div>
 
          <!--Sub Images-->
         <div class="form-group">
           <label><strong>サブ写真(※最大6枚の画像を保存できます)</strong></label>
+          <p>(shiftやctrlキーを押しながら複数枚選択できます)</p>
+            <span>※拡張子jpg・jpeg・pngを選択することができます</span><br/>
+            <span>※画像サイズ5MB以下</span>
           <%= f.file_field :sub_images, placeholder: "画像をアップ", multiple: true, accept: "image/*", 'onChange': 'SubimgPreview(event, "preview-item2")', class: 'form-control-file' %>
           <div id="preview-item2" class="d-flex mt-2">
             <% @user.get_sub_images.each do |sub_image| %>

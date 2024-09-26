@@ -20,6 +20,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'main_margin_top', 'data-turbolinks-track': 'reload' %>
 
+
+
   </head>
 
   <body>
@@ -29,6 +31,14 @@
 
     <main class="main-content d-flex justify-content-center flex-column">
       <%= yield %>
+
+      <!-- Topへ戻るボタン -->
+      <span style="position:fixed; bottom:30px; right:30px;">
+        <%= link_to "#", id: "scroll-top" do %>
+         <%= image_tag 'top_back2.png', size: '40x40' %>
+        <% end %>
+      </span>
+
     </main>
 
     <footer>
@@ -39,3 +49,4 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-jpostal-ja@2.14.45/jquery.jpostal.min.js"></script>
   </body>
 </html>
+

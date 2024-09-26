@@ -11,7 +11,7 @@
       <%= image_tag 'nature-5.jpg', size: '200x200' %>
     </div>
     <div class=" col-md-7">
-      <%= link_to "ユーザー管理をする", admin_users_path, class: 'btn btn-success w-100 my-3' %><br />
+      <%= link_to "ユーザー管理をする", admin_users_path, class: 'btn btn-success w-100 my-3', data: { turbolinks: false } %><br />
       <%= link_to "投稿記事の管理をする", admin_trips_path, class: 'btn btn-warning w-100' %>
     </div>
   </div>

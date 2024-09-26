@@ -35,7 +35,7 @@ class Public::SessionsController < Devise::SessionsController
 
     # 【処理内容4】 アクティブでない会員に対する処理
     if user.is_active == false
-      flash[:notice] = "退会済みです。再度ご登録をしてご利用ください"
+      flash[:notice] = "退会済みです。管理者にお問い合わせください。"
       redirect_to new_user_registration_path
     end
   end

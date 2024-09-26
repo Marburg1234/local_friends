@@ -28,8 +28,11 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   # ユーザーのサブ写真を扱う
   has_many_attached :sub_images
-# ========================================================================================
+
+  validates :profile_image, content_type: ['image/png', 'image/jpeg', 'image/jpg'], size: { less_than: 5.megabytes }
+  validates :sub_images, content_type: ['image/png', 'image/jpeg', 'image/jpg'], size: { less_than: 5.megabytes }
   validate :validate_sub_images_count
+# ========================================================================================
 
 
 # ========================================================================================

@@ -4,13 +4,13 @@ class Trip < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
 
-  validates :post_code, presence: true
+  validates :post_code, presence: true, format: { with: /\A\d{7}\z/, message: "はハイフンなしの数字で入力してください" }
   validates :address, presence: true, length: { minimum: 2 }
   validates :title, presence: true
   validates :explain, presence: true
 
   has_one_attached :trip_image
-
+  validates :trip_image, content_type: ['image/png', 'image/jpeg', 'image/jpg'], size: { less_than: 5.megabytes }
 
   geocoded_by :address
   after_validation :geocode

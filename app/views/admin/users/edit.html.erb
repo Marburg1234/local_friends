@@ -43,6 +43,11 @@
     <% end %>
   </div>
 
+  <div class="col-10 text-right my-4">
+    <p>※抹消する場合にはこちら</p>
+    <%= link_to "削除する", admin_user_path, method: :delete, class: 'btn btn-danger', data: { confirm: "本当に削除しますか？" } %>
+  </div>
+
 <!--以下がユーザー情報に関するコード-->
   <div class="row d-flex justify-content-center mb-4">
     <div class="col-lg-5 col-md-5 col-sm-12 justify-content-center text-center shadow border p-3" style="border-radius: 20px;">
@@ -68,3 +73,6 @@
     </div>
   </div>
 </div>
+
+
+

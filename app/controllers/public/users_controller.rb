@@ -12,7 +12,8 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").to_a.shuffle
+    users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all.shuffle
+    @users = Kaminari.paginate_array(users).page(params[:page]).per(12)
   end
 
   def show
@@ -55,7 +56,8 @@ class Public::UsersController < ApplicationController
   # いいねした記事一覧を表示するメソッドlikes
   def likes
     @user = current_user
-    @favorites = @user.favorites.page(params[:page]).per(4)
+    @trip = Trip.find(params[:id])
+    @favorites = @user.favorites.page(params[:page]).per(1)
   end
 # ================================================
 
