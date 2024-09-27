@@ -67,7 +67,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out' do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out', data: { confirm: "本当にログアウトしますか？" } do %>
             <i class="fa-solid fa-person-walking-arrow-right"></i><span>ログアウト</span>
             <% end %>
           </li>

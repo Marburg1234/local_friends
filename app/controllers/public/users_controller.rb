@@ -3,6 +3,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
   before_action :ensure_log_in_user, only: [:edit, :update]
   before_action :check_not_active_user, only: [:show, :post_index, :edit]
+  before_action :check_user_show_access, only: [:show]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
@@ -94,6 +95,15 @@ class Public::UsersController < ApplicationController
       redirect_to my_page_users_path
     end
   end
+
+# 自分のshowページへ直接アクセスしたらマイページに遷移
+  def check_user_show_access
+    @user = User.find(params[:id])
+    if @user.id == current_user.id
+      redirect_to my_page_users_path
+    end
+  end
+
 
 # 退会したユーザーのshowページへ直接アクセスするのを防ぐメソッド
 # 同時にparams 1000などで直接アクセスされた際にリダイレクトする (RecordNotFoundエラーを防ぐ)

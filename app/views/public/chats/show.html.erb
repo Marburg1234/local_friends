@@ -139,7 +139,7 @@
               <label for="chat_image" style="cursor: pointer;">
                 <i class="fas fa-image fa-lg"></i>
               </label>
-              <%= f.file_field :image, id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
+              <%= f.file_field :image, class: 'image_scroll', id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
               <%= f.submit "送信", class: "btn btn-info btn-sm", id: 'send_button' %>
             </div>
             <div id="preview-item3" class="mt-2"></div>
@@ -173,13 +173,9 @@
     reader.readAsDataURL(input.files[0]);  //ファイルをData URLとして読み込む
   }
 
-</script>
-
-
-<script>
   // 自動スクロール用の関数
   function scrollToBottom() {
-    const chatContainer = document.querySelector('.message'); // または '.message' に変更
+    const chatContainer = document.querySelector('.message'); // チャットメッセージを表示するコンテナのクラス
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
       console.log("scrollTop:", chatContainer.scrollTop);
@@ -188,11 +184,41 @@
   }
 
   // ページロード時にスクロール
-  window.addEventListener('DOMContentLoaded', scrollToBottom);
-  console.log("読み込んだ");
+  window.addEventListener('load', scrollToBottom);
+    console.log("ページが完全に読み込まれました");
 
-  // メッセージ送信時にスクロール（メッセージ送信フォームがsubmitされたとき）
+  // メッセージ送信時にスクロール
   document.querySelector('.chat-form-container form').addEventListener('submit', function(event) {
-    setTimeout(scrollToBottom, 100); // タイミングを調整
+    setTimeout(scrollToBottom, 200); // メッセージ送信後にスクロール
+    // document.getElementById('preview-item3').innerHTML = '';  //既存の内容をクリアする
+    console.log("uu")
   });
+
+  // document.querySelector('#chat_image').addEventListener('submit', function(event) {
+  //   console.log("vv")
+  //   // handleImageUpload()
+  //   const fileInput = document.querySelector('.chat-form-container input[type="file"]');
+  //   if (fileInput) {
+  //     console.log("Before reset:", fileInput.value);
+  //     fileInput.value = ''; // ファイル入力をリセット
+  //   }
+  // });
+
+  // 画像が送信された後にスクロール
+  // function handleImageUpload() {
+  //   // ここで画像が送信された後、スクロールを実行します。
+  //   setTimeout(scrollToBottom, 50000); // 画像が追加されてからスクロール
+  //   document.querySelector("#chat_image").reset(); // フォーム全体をリセット
+  //   preview.innerHTML = '';  //既存の内容をクリアする
+  // }
+
+  // 新しいメッセージが読み込まれた後にもスクロールするための関数
+  function onNewMessage() {
+    setTimeout(scrollToBottom, 200); // メッセージが追加されてからスクロール
+  }
+
+  // Ajaxで新しいメッセージを受信したときなどに呼び出す
+  // メッセージの受信時にonNewMessageを呼び出す（具体的な実装に応じて調整）
+  // document.addEventListener('newMessageReceived', onNewMessage);
 </script>
+

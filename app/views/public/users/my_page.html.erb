@@ -17,7 +17,7 @@
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-4 text-center">
       <!--いいねした記事一覧ページへのリンク-->
-      <%= link_to likes_users_path(current_user), class: 'btn favorite_index rounded-pill border-info mb-3', data: { turbolinks: false } do %>
+      <%= link_to likes_users_path, class: 'btn favorite_index rounded-pill border-info mb-3', data: { turbolinks: false } do %>
         <%= image_tag 'favorite_index.png' %>いいね記事一覧
       <% end %>
       <!--Chat相手一覧ページへのリンク挿入-->

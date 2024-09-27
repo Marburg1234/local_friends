@@ -2,6 +2,7 @@ class Public::TripsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:new, :edit]
   before_action :check_not_active_user, only: [:show, :edit]
+  before_action :ensure_log_in_user, only: [:edit, :update]
 
   def new
     @trip = Trip.new
@@ -99,6 +100,14 @@ class Public::TripsController < ApplicationController
       end
     rescue ActiveRecord::RecordNotFound
       redirect_to trips_path
+    end
+  end
+
+  # 他人の投稿編集ページへ直接アクセスするのを防ぐメソッド
+  def ensure_log_in_user
+    @trip = Trip.find(params[:id])
+    unless @trip.user_id == current_user.id
+      redirect_to trip_path(@trip)
     end
   end
 

@@ -1,4 +1,4 @@
 $('.message').append('<%= j(render "public/chats/chat", chat: @chat) %>');
 $('input[type=text]').val("")
 $("#preview-item3").html('');  <!--表示されているプレビュー画像を送信したらプレビューから削除するメソッド-->
-
+document.querySelector('.chat-form-container form').reset();
