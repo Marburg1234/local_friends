@@ -64,13 +64,13 @@ class Public::UsersController < ApplicationController
 # ================================================
   # フォロー機能のメソッド
   def follows
-    user = User.find(params[:id])
-    @users = user.followings
+    @user = User.find(params[:id])
+    @users = @user.followings
   end
 
   def followers
-    user = User.find(params[:id])
-    @users = user.followers
+    @user = User.find(params[:id])
+    @users = @user.followers
   end
 # ================================================
 
