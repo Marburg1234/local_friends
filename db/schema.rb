@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "chats", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "chat_room_id", null: false
+    t.integer "user_id", null: false
+    t.integer "chat_room_id", null: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "regions", force: :cascade do |t|
-    t.bigint "country_id", null: false
+    t.integer "country_id", null: false
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
 
   create_table "trips", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "post_code", null: false
+    t.string "post_code", null: false
     t.string "address", null: false
     t.string "title", null: false
     t.text "explain", null: false
@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
   end
 
   create_table "user_rooms", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "chat_room_id", null: false
+    t.integer "user_id", null: false
+    t.integer "chat_room_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["chat_room_id"], name: "index_user_rooms_on_chat_room_id"
@@ -139,10 +139,10 @@ ActiveRecord::Schema.define(version: 2024_09_17_154659) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.bigint "country_id", null: false
-    t.bigint "region_id", null: false
-    t.bigint "mother_language_id", null: false
-    t.bigint "practice_language_id", null: false
+    t.integer "country_id", null: false
+    t.integer "region_id", null: false
+    t.integer "mother_language_id", null: false
+    t.integer "practice_language_id", null: false
     t.string "first_name", null: false
     t.string "family_name", null: false
     t.text "introduction", null: false

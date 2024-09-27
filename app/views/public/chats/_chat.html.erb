@@ -12,7 +12,7 @@
     <!--画像を後(下)に表示する-->
     <div class='file-container d-flex justify-content-end my-3' id="chat_<%= chat.id %>">
       <%= chat.created_at.strftime( "%H:%M" ) %>
-      <%= image_tag(chat.image.variant(resize_to_limit: [200, 200]), class: 'rounded') %>
+      <%= image_tag(chat.image.variant(resize_to_limit: [120, 120]), class: 'rounded') %>
       <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
     </div>
   </div>
@@ -30,7 +30,7 @@
   <div class="right-container d-flex justify-content-end">
     <div class='file-container d-flex my-3' id="chat_<%= chat.id %>">
       <%= chat.created_at.strftime( "%H:%M" ) %>
-      <%= image_tag(chat.image.variant(resize_to_limit: [200, 200]), width: '100%', height: 'auto', class: 'rounded') %>
+      <%= image_tag(chat.image.variant(resize_to_limit: [120, 120]), width: '100%', height: 'auto', class: 'rounded') %>
       <%= button_to "削除", chat_path(chat), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm ml-2 mt-1", remote: true, id: "delete_chat_#{chat.id}" %>
     </div>
   </div>
