@@ -190,7 +190,7 @@
   // メッセージ送信時にスクロール
   document.querySelector('.chat-form-container form').addEventListener('submit', function(event) {
     setTimeout(scrollToBottom, 200); // メッセージ送信後にスクロール
-    // document.getElementById('preview-item3').innerHTML = '';  //既存の内容をクリアする
+    document.getElementById('preview-item3').innerHTML = '';  //既存の内容をクリアする
     console.log("uu")
   });
 
@@ -213,9 +213,9 @@
   // }
 
   // 新しいメッセージが読み込まれた後にもスクロールするための関数
-  function onNewMessage() {
-    setTimeout(scrollToBottom, 200); // メッセージが追加されてからスクロール
-  }
+  // function onNewMessage() {
+  //   setTimeout(scrollToBottom, 100); // メッセージが追加されてからスクロール
+  // }
 
   // Ajaxで新しいメッセージを受信したときなどに呼び出す
   // メッセージの受信時にonNewMessageを呼び出す（具体的な実装に応じて調整）
