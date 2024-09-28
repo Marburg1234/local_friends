@@ -1,9 +1,9 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
-  before_action :ensure_log_in_user, only: [:edit, :update]
   before_action :check_not_active_user, only: [:show, :post_index, :edit]
-  before_action :check_user_show_access, only: [:show]
+  before_action :ensure_log_in_user, only: [:edit, :update]
+  before_action :check_user_show_access, only: [:show, :edit]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
