@@ -16,7 +16,7 @@
 
       <%= form_with model: @trip, local:true do |f| %>
 
-      <!-- Photo Preview -->
+      <!-- 写真選択 -->
       <div class="form-group">
         <h4 class="mb-3">写真をアップロード</h4>
         <div class="d-flex mb-3">
@@ -28,31 +28,31 @@
         <div id="preview-item1" class="text-center mb-4"><%= image_tag @trip.get_trip_image, size: '200x300', class: 'img-thumbnail' %></div>
       </div>
 
-      <!-- Postal Code -->
+      <!-- 郵便番号 -->
       <div class="form-group">
         <label><strong>郵便番号</strong></label>
         <%= f.text_field :post_code, id: 'zipcode', class: 'form-control', required: true, placeholder: "例: 123-4567" %>
       </div>
 
-      <!-- Address -->
+      <!-- 住所 -->
       <div class="form-group">
         <label><strong>住所</strong></label>
         <%= f.text_field :address, class: 'form-control', required: true, placeholder: "例: 東京都渋谷区" %>
       </div>
 
-      <!-- Title -->
+      <!-- タイトル -->
       <div class="form-group">
         <label><strong>タイトル</strong></label>
         <%= f.text_field :title, local: true, class: 'form-control', required: true, placeholder: "タイトルを入力してください" %>
       </div>
 
-      <!-- Explanation -->
+      <!-- 記事の説明 -->
       <div class="form-group">
         <label><strong>説明欄</strong></label>
         <%= f.text_area :explain, class: 'form-control', required: true, placeholder: "説明を入力してください" %>
       </div>
 
-      <!-- Submit Button -->
+      <!-- 保存するボタン -->
       <div class="form-group text-center mt-4">
         <%= f.submit "保存する", class: 'btn btn-info text-light btn-lg' %>
       </div>
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<!-- プレビュー用のJavascript -->
+<!--投稿写真プレビュー用のJavascript -->
 <script>
   function TripimgPreview(event, previewId) {
     var input = event.target;
@@ -85,12 +85,6 @@
   }
 </script>
 
+<!--住所を補完してくれるjsの読み込み-->
 <%= javascript_pack_tag "jpostal", 'data-turbolinks-track': 'reload' %>
 
-
-
-<!--`FileReader`オブジェクトは、ファイルの内容を非同期に読み込むためのオブジェクトです。この変数を使用して、ファイルのデータを読み込む処理を行います。-->
-
-<!--.onload イベントハンドラの1つ ページなどが読み込まれた時のイベント 今回の場合には、画像が読み込まれた時-->
-<!--イベントハンドラはさまざまな種類がある 例 クリックイベント（`onclick`）、入力値が変更されたイベント（`onchange`）-->
-<!--イベントハンドラ以降に具体的な処理が記述される-->

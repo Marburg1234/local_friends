@@ -1,20 +1,4 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<style>
-  .error-column {
-    position: sticky; /* スクロール時に固定 */
-    top: 100px; /* ヘッダーの高さに合わせて調整 */
-    z-index: 10; /* 他の要素の上に表示 */
-    padding: 10px;
-  }
-
-  .alert {
-    margin-bottom: 0; /* エラーメッセージの下の余白をなくす */
-  }
-
-  .text-left {
-    text-align: left; /* 左揃え */
-  }
-</style>
 
   <!--退会処理成功した際のフラッシュメッセージ-->
   <% if flash[:notice].present? %>
@@ -63,7 +47,6 @@
                 <% end %><br />
                 <%= f.password_field :password, autocomplete: "new-password", required: true, class: 'form-control' %>
               </div>
-
               <div class="field my-3">
                 <%= f.label :パスワード再入力 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
                 <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, class: 'form-control' %>
@@ -78,7 +61,6 @@
                 <%= f.label :住んでいる地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
                 <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
               </div>
-
               <!--母国語language 選択-->
               <div class="field mb-3">
                 <%= f.label :母国語 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
@@ -108,9 +90,7 @@
                 <%= f.submit "新規会員登録" %>
               </div>
             <% end %>
-
             <%= render "public/shared/links" %>
-
           </div>
         </div>
       </div>
@@ -121,28 +101,28 @@
 <!--JSの記述 国を選択したら、関連した地域が出てくる-->
 <script>
   document.addEventListener("turbolinks:load", function() {
-    const countrySelect = document.getElementById('country_select');
-    const regionSelect = document.getElementById('region_select');
+  const countrySelect = document.getElementById('country_select');
+  const regionSelect = document.getElementById('region_select');
 
-    countrySelect.addEventListener('change', function() {
-      const countryId = countrySelect.value;
+  countrySelect.addEventListener('change', function() {
+    const countryId = countrySelect.value;
 
-      if (countryId) {
-        fetch(`/countries/${countryId}/regions`)
-          .then(response => response.json())
-          .then(data => {
-            regionSelect.innerHTML = ''; // 既存の選択肢をクリア
+    if (countryId) {
+      fetch(`/countries/${countryId}/regions`)
+        .then(response => response.json())
+        .then(data => {
+          regionSelect.innerHTML = ''; // 既存の選択肢をクリア
 
-            data.forEach(region => {
-              const option = document.createElement('option');
-              option.value = region.id;
-              option.text = region.name;
-              regionSelect.appendChild(option);
-            });
+          data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.id;
+            option.text = region.name;
+            regionSelect.appendChild(option);
           });
-      } else {
-        regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
-      }
-    });
+        });
+    } else {
+      regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
+    }
+  });
   });
 </script>

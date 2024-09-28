@@ -5,25 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <!--Fontawesomeの読み込み-->
     <script src="https://kit.fontawesome.com/da08226a47.js" crossorigin="anonymous"></script>
     <!--chart.jsのCDN-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'chat_page', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'chat_page', mdia: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'main_margin_top', 'data-turbolinks-track': 'reload' %>
-
-
-
   </head>
-
   <body>
     <header>
       <%= render 'layouts/header' %>
@@ -31,14 +20,12 @@
 
     <main class="main-content d-flex justify-content-center flex-column">
       <%= yield %>
-
       <!-- Topへ戻るボタン -->
       <span style="position:fixed; bottom:30px; right:30px;">
         <%= link_to "#", id: "scroll-top" do %>
          <%= image_tag 'top_back2.png', size: '40x40' %>
         <% end %>
       </span>
-
     </main>
 
     <footer>

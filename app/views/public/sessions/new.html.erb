@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
- <!--退会処理成功とログアウトした際のフラッシュメッセージ-->
+  <!--退会処理成功とログアウトした際のフラッシュメッセージ-->
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "withdraw_notice" %>
   <% end %>
@@ -10,7 +10,6 @@
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <div class="form-body p-4">
         <h2 class="mb-3">ログイン</h2>
-
         <%= form_with model: @user, url: user_session_path do |f| %>
           <div class="field my-2">
             <%= f.label :メールアドレス %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
@@ -30,7 +29,6 @@
             <%= f.submit "ログインする" %>
           </div>
         <% end %>
-
         <%= render "public/shared/links" %>
       </div>
     </div>

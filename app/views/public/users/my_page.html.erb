@@ -12,8 +12,6 @@
       <h1><strong>マイページ</strong></h1>
     </div>
   </div>
-
-
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-4 text-center">
       <!--いいねした記事一覧ページへのリンク-->
@@ -30,16 +28,14 @@
       </span>
     </div>
   </div>
-
+  <!--ユーザー情報編集ページへのリンク-->
   <div class="row d-flex justify-content-center">
     <div class="col mt-2 mb-3 text-right">
       <%= link_to "ユーザー情報編集する", edit_user_path(current_user), class: 'btn btn-warning text-light shadow' %>
     </div>
   </div>
-
   <!--ユーザー情報は部分テンプレート-->
   <%= render 'layouts/user_show', user: @user, trips: @trips %>
-
 </div>
 
 

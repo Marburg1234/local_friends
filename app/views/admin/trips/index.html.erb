@@ -4,6 +4,7 @@
     width: 160px; /* 表が少しずれるのを防止 幅の設定*/
   }
 </style>
+
   <!--削除処理成功のメッセージ-->
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "success_notice" %>

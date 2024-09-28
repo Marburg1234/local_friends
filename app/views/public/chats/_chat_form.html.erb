@@ -1,0 +1,17 @@
+<div class="col-lg-4 col-md-12">
+  <!-- チャットを送るフォーム -->
+  <div class="chat-input chat-form-container">
+    <%= form_with model: chat, data: { remote: true } do |f| %>
+      <%= f.text_field :message, placeholder: "メッセージ", class: "form-control mb-2" %>
+      <div class="d-flex">
+        <label for="chat_image" style="cursor: pointer;">
+          <i class="fas fa-image fa-lg"></i>
+        </label>
+        <%= f.file_field :image, class: 'image_scroll', id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
+        <%= f.submit "送信", class: "btn btn-info btn-sm", id: 'send_button' %>
+      </div>
+      <div id="preview-item3" class="mt-2"></div>
+      <%= f.hidden_field :chat_room_id %>
+    <% end %>
+  </div>
+</div>

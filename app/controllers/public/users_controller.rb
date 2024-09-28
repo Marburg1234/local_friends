@@ -3,7 +3,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :my_page, :unsubscribe]
   before_action :check_not_active_user, only: [:show, :post_index, :edit]
   before_action :ensure_log_in_user, only: [:edit, :update]
-  before_action :check_user_show_access, only: [:show, :edit]
+  before_action :check_user_show_access, only: [:show]
 
   # 特定ユーザーの投稿一覧を表示する
   def post_index
@@ -16,11 +16,20 @@ class Public::UsersController < ApplicationController
     @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
   end
 
+  # マイページ
+  def my_page
+    @user = current_user
+    @trips = @user.trips
+  end
+
+  # ユーザー情報のページ
   def show
     @user = User.find(params[:id])
     @trips = @user.trips
   end
 
+# ====================================================
+  # ユーザー情報の編集
   def edit
     @user = User.find(params[:id])
   end
@@ -35,15 +44,15 @@ class Public::UsersController < ApplicationController
       render :edit
     end
   end
+# ====================================================
 
-  def my_page
-    @user = current_user
-    @trips = @user.trips
-  end
 
+# ===============================================
+  # 退会確認するページ
   def unsubscribe
   end
 
+  # 退会の処理
   def withdraw
     @user = User.find(current_user.id)
     @user.update(is_active:false)
@@ -51,6 +60,7 @@ class Public::UsersController < ApplicationController
     flash[:notice] = "退会しました。またのご利用お待ちしております！"
     redirect_to new_user_registration_path
   end
+# ================================================
 
 # ================================================
   # いいねした記事一覧を表示するメソッドlikes
@@ -72,6 +82,7 @@ class Public::UsersController < ApplicationController
     @users = @user.followers
   end
 # ================================================
+
 
   private
 # ストロングパラメーター

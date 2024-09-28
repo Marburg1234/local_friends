@@ -1,0 +1,26 @@
+<div class="left-container d-flex mb-3">
+<% if chat.message.present? && chat.image.attached? %>
+  <div class="d-flex flex-column">
+    <div class="d-flex">
+      <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+      <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
+      <br/><%= chat.created_at.strftime("%H:%M") %>
+    </div>
+    <div>
+      <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+      <%= image_tag chat.image, size: '120x120' %>
+      <%= chat.created_at.strftime("%H:%M") %>
+    </div>
+  </div>
+<% elsif chat.message.present? %>
+  <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+  <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
+  <br/><%= chat.created_at.strftime("%H:%M") %>
+<% elsif chat.image.attached? %>
+  <div>
+    <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
+    <%= image_tag chat.image, size: '120x120' %>
+    <%= chat.created_at.strftime("%H:%M") %>
+  </div>
+<% end %>
+</div>

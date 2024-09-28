@@ -1,79 +1,11 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<style>
-  /* チャット表示エリアのスタイル */
-  .chat-container {
-    display: flex;
-    flex-direction: column;
-    height: 600px; /* 高さは必要に応じて調整 */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-    overflow-y: auto; /* スクロールを有効にする */
-  }
-
-  /* チャットメッセージ表示エリア */
-  .message {
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    background-color: #f9f9f9;
-  }
-
-  /* 入力フォームエリア */
-  .chat-input {
-    border-top: 1px solid #ccc;
-    padding: 10px;
-    background-color: white;
-  }
-
-  /* 全体のチャットフォームの配置 */
-  .chat-form {
-    display: flex;
-    align-items: center; /* 垂直方向に中央揃え */
-  }
-
-  /* チャットフォーム全体を画面の右側に固定 */
-  .chat-form-container {
-  position: fixed;  /* 画面に固定 */
-  right: 100;         /* 画面右端に配置 */
-  bottom: 500;        /* 画面下端に配置 */
-  width: 300px;     /* 必要に応じて幅を調整 */
-  padding: 10px;
-  background-color: white; /* 背景色（必要に応じて変更） */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 影を追加して視認性を向上 */
-  z-index: 1000;    /* 他の要素より前面に表示 */
-  border: 1px solid #ddd; /* 境界線 */
-}
-
-/* 画面幅が768px以下の場合のスタイル */
-@media (max-width: 1000px) {
-  .chat-form-container {
-    position: fixed;
-    right: 0;  /* 右端にくっつける */
-    left: 0;   /* 左端にくっつける */
-    bottom: 0; /* 画面下部に配置 */
-    width: 100%;  /* 幅を100%に */
-    padding: 5px;
-    box-shadow: none; /* ボックスシャドウを削除 */
-    border: none; /* 境界線を削除 */
-    background-color: #fff; /* 背景色を変更 */
-  }
-}
-
-@media (max-width: 1000px) {
-  .chat-container-col {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}
-</style>
 
 <!-- チャット相手の表示 -->
 <h1 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>" class="mb-3 text-center">
   <strong><%= @user.family_name %><%= @user.first_name %>さんとのチャット</strong>
 </h1>
 
-
+<!--チャット画面-->
 <div class="container mb-5">
   <div class="row">
     <div class="col-lg-8 col-md-12 mx-auto">
@@ -82,7 +14,7 @@
         <!-- チャットの中身 -->
         <div class="message pb-5">
           <% previous_date = nil %> <!-- 前の日付を初期化 -->
-          <% @chats.each do |chat| %>
+          <% @chats.each do |chat| %> <!-- chatのデータをeachで回して取得 -->
             <% current_date = chat.created_at.to_date %> <!-- 現在の日付を取得 -->
             <!-- 日付が変わった場合に区切りを表示 -->
             <% if previous_date != current_date %>
@@ -93,61 +25,20 @@
               </div>
               <% previous_date = current_date %> <!-- 前の日付を更新 -->
             <% end %>
-
-            <!-- メッセージ内容の表示部分 -->
+            <!-- メッセージ内容の表示 -->
             <% if chat.user_id == current_user.id %>
+              <!--右側 送り主のメッセージ表示-->
               <%= render "public/chats/chat", chat: chat %>
             <% else %>
-              <div class="left-container d-flex mb-3">
-                <% if chat.message.present? && chat.image.attached? %>
-                  <div class="d-flex flex-column">
-                    <div class="d-flex">
-                      <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-                      <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
-                      <br/><%= chat.created_at.strftime("%H:%M") %>
-                    </div>
-                    <div>
-                      <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-                      <%= image_tag chat.image, size: '120x120' %>
-                      <%= chat.created_at.strftime("%H:%M") %>
-                    </div>
-                  </div>
-                <% elsif chat.message.present? %>
-                  <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-                  <p class="ml-1 p-2 shadow" style="text-align: left; background-color: #F5F5DC; padding: 5px; border-radius: 10px;"><strong><%= chat.message %></strong></p>
-                  <br/><%= chat.created_at.strftime("%H:%M") %>
-                <% elsif chat.image.attached? %>
-                  <div>
-                    <%= image_tag @user.get_profile_image, size: '40x40', class: 'rounded-circle mr-3' %>
-                    <%= image_tag chat.image, size: '120x120' %>
-                    <%= chat.created_at.strftime("%H:%M") %>
-                  </div>
-                <% end %>
-              </div>
+              <!--左側 受け取り側のメッセージ表示-->
+              <%= render 'public/chats/chat_left_side', chat: chat %>
             <% end %>
           <% end %>
         </div>
       </div>
-
     </div>
-    <div class="col-lg-4 col-md-12">
-            <!-- チャットを送るフォーム -->
-        <div class="chat-input chat-form-container">
-          <%= form_with model: @chat, data: { remote: true } do |f| %>
-            <%= f.text_field :message, placeholder: "メッセージ", class: "form-control mb-2" %>
-            <div class="d-flex">
-              <label for="chat_image" style="cursor: pointer;">
-                <i class="fas fa-image fa-lg"></i>
-              </label>
-              <%= f.file_field :image, class: 'image_scroll', id: "chat_image", style: "display:none", 'onChange': 'SendimgPreview(event, "preview-item3")' %>
-              <%= f.submit "送信", class: "btn btn-info btn-sm", id: 'send_button' %>
-            </div>
-            <div id="preview-item3" class="mt-2"></div>
-
-            <%= f.hidden_field :chat_room_id %>
-          <% end %>
-        </div>
-    </div>
+    <!--chatの送信フォームは部分テンプレート-->
+    <%= render 'chat_form', chat: @chat %>
   </div>
 </div>
 
@@ -155,6 +46,7 @@
 
 
 <!--送信したい写真のプレビュー表示 関数名 SendimgPreview-->
+<!--ページ遷移した際に最新のメッセージまで自動スクロールしてくれるJavascript( scrollToBottom)-->
 <script>
   function SendimgPreview(event, previewId) {
     var input = event.target;  //input要素を取得する
@@ -178,47 +70,16 @@
     const chatContainer = document.querySelector('.message'); // チャットメッセージを表示するコンテナのクラス
     if (chatContainer) {
       chatContainer.scrollTop = chatContainer.scrollHeight;
-      console.log("scrollTop:", chatContainer.scrollTop);
-      console.log("scrollHeight:", chatContainer.scrollHeight);
     }
   }
 
   // ページロード時にスクロール
   window.addEventListener('load', scrollToBottom);
-    console.log("ページが完全に読み込まれました");
 
   // メッセージ送信時にスクロール
   document.querySelector('.chat-form-container form').addEventListener('submit', function(event) {
     setTimeout(scrollToBottom, 200); // メッセージ送信後にスクロール
     document.getElementById('preview-item3').innerHTML = '';  //既存の内容をクリアする
-    console.log("uu")
   });
-
-  // document.querySelector('#chat_image').addEventListener('submit', function(event) {
-  //   console.log("vv")
-  //   // handleImageUpload()
-  //   const fileInput = document.querySelector('.chat-form-container input[type="file"]');
-  //   if (fileInput) {
-  //     console.log("Before reset:", fileInput.value);
-  //     fileInput.value = ''; // ファイル入力をリセット
-  //   }
-  // });
-
-  // 画像が送信された後にスクロール
-  // function handleImageUpload() {
-  //   // ここで画像が送信された後、スクロールを実行します。
-  //   setTimeout(scrollToBottom, 50000); // 画像が追加されてからスクロール
-  //   document.querySelector("#chat_image").reset(); // フォーム全体をリセット
-  //   preview.innerHTML = '';  //既存の内容をクリアする
-  // }
-
-  // 新しいメッセージが読み込まれた後にもスクロールするための関数
-  // function onNewMessage() {
-  //   setTimeout(scrollToBottom, 100); // メッセージが追加されてからスクロール
-  // }
-
-  // Ajaxで新しいメッセージを受信したときなどに呼び出す
-  // メッセージの受信時にonNewMessageを呼び出す（具体的な実装に応じて調整）
-  // document.addEventListener('newMessageReceived', onNewMessage);
 </script>
 

@@ -12,29 +12,29 @@
     width: 100%; /* 幅の調整 */
   }
 </style>
-<% if flash[:notice].present? %>
+  <!--フラッシュメッセージ-->
+  <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "success_notice" %>
   <% end %>
-<!--戻るボタン-->
-<span class="ml-3">
-  <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
-</span>
+  <!--戻るボタン-->
+  <span class="ml-3">
+    <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
+  </span>
 
 <div class="container my-5">
   <!--ページの題名-->
-    <h1 class="col text-center mt-4 mb-4 border-bottom pb-3"><strong>投稿詳細</strong></h1>
-    <% if current_user == @trip.user %>
-      <div class="text-right mb-3">
-        <%= link_to "投稿を編集する", edit_trip_path(@trip), method: :get, class: 'btn btn-success' %>
-      </div>
-    <% end %>
+  <h1 class="col text-center mt-4 mb-4 border-bottom pb-3"><strong>投稿詳細</strong></h1>
+  <% if current_user == @trip.user %>
+    <div class="text-right mb-3">
+      <%= link_to "投稿を編集する", edit_trip_path(@trip), method: :get, class: 'btn btn-success' %>
+    </div>
+  <% end %>
 
-    <% if current_user == @trip.user %>
-      <div class="text-right">
-        <%= link_to "投稿を削除する", trip_path(@trip), method: :delete,  data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
-      </div>
-    <% end %>
-
+  <% if current_user == @trip.user %>
+    <div class="text-right">
+      <%= link_to "投稿を削除する", trip_path(@trip), method: :delete,  data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
+    </div>
+  <% end %>
 
   <!--投稿写真と投稿情報-->
   <div class="row my-3">

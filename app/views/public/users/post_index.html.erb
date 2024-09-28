@@ -5,7 +5,6 @@
   <% end %>
 
 <div class="container">
-
   <!--ページの題名-->
   <div class="row">
     <div class="col-lg-5 col-md-8 col-sm-12 mx-auto text-center mt-2">
@@ -13,7 +12,7 @@
     </div>
   </div>
 
-  <!--投稿一覧の表示-->
+  <!--特定ユーザーの投稿一覧の表示-->
   <div class="row d-flex">
     <% @trips.each_slice(4) do |trips| %>
       <div class="row">
@@ -33,5 +32,5 @@
       </div>
     <% end %>
   </div>
-   <%= paginate @trips %>
+  <%= paginate @trips %>
 </div>
