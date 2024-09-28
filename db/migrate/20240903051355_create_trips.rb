@@ -7,6 +7,9 @@ class CreateTrips < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.text :explain, null: false
 
+      t.float :latitude, null: false, default: 0
+      t.float :longitude, null: false, default: 0
+
       t.timestamps
     end
   end
