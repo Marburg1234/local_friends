@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody class="country_table_body">
-          <% @user_practice_language.order(:practice_language_id).each do |practice_language_id, count| %>
+          <% @user_practice_language.each do |practice_language_id, count| %>
             <tr>
               <td><%= practice_language_id %></td>
               <td><%= Language.find(practice_language_id).name %></td>

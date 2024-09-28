@@ -18,7 +18,7 @@ class Admin::ReportsController < ApplicationController
     # 全ユーザーの人数を数える
     @users_count = all_users_count
     # 学習中の言語別人数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
-    @user_practice_language = active_users_data.group(:practice_language_id).order(practice_language_id: :desc).count
+    @user_practice_language = active_users_data.group(:practice_language_id).order(:practice_language_id).count
 
     # グラフ用のデータを準備
     @chat_data = {
