@@ -19,7 +19,7 @@
             <% end %>
           </div>
         </div>
-        <div class="border rounded p-2 mt-2 mb-2" style="overflow-wrap: break-word;"><%= trip_comment.comment %></div>
+        <div class="border rounded p-2 mt-2 mb-2 comment-index" style="overflow-wrap: break-word;"><%= trip_comment.comment %></div>
       </div>
     </div>
   </div>
@@ -47,51 +47,32 @@
   // ページ読み込み時に無限スクロールを初期化
   $(document).on('turbolinks:load', function() {
     initInfiniteScroll();
-
+  });
 
   // Ajax通信が成功したときに無限スクロールを再初期化
   $(document).on('ajax:success', function() {
     initInfiniteScroll();
+    console.log('Ajax通信成功');
   });
 
-  const targetElement = document.querySelector('#trip-comments');
+  // 監視対象の要素を取得
+  let targetNode = document.getElementById('trip-comments');
 
-  // 投稿または削除をした際(getElementByIdで指定した箇所で変更があったのをトリガーに発動する)→結果は1度は動作するが2回やると動作しない…
-  document.getElementById('#trip-comments').addEventListener('DOMAttrModified', (event) => {
-    initInfiniteScroll();
-  });
+  if (targetNode) {
+    const observer = new MutationObserver((mutationsList, observer) => {
+      // コメントの投稿や削除が検出されたときに無限スクロールを再初期化
+      console.log('DOMに変更がありました');
+      initInfiniteScroll();
+    });
 
- });
-//   // 監視対象の要素を取得
-//   const targetNode = document.getElementById('trip-comments');
-//   console.log(targetNode)
+    // オブザーバの設定
+    const config = {
+      childList: true,    // 子ノードの変化を監視
+      subtree: true       // 全ての子孫ノードも監視対象とする
+    };
 
-//   if (targetNode) {
-//   const observer = new MutationObserver((mutationsList, observer) => {
-//     // 変更が検出されたときの処理
-//     initInfiniteScroll();
-//   });
-
-//   // オブザーバの設定
-//   const config = {
-//       attributes: true,
-//       childList: true,
-//       subtree: true,
-//       characterData: true
-//   };
-
-//   // コールバック関数の定義
-//   const callback = (mutationsList, observer) => {
-//       for(let mutation of mutationsList) {
-//           if (mutation.type === 'childList') {
-//               console.log('子ノードが変更されました！');
-//               initInfiniteScroll();
-//           }
-//       }
-//   };
-
-//   // 監視を開始
-//   observer.observe(targetNode, config);
-// }
-
+    // 監視を開始
+    observer.observe(targetNode, config);
+  }
 </script>
+
