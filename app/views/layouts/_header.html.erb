@@ -67,15 +67,12 @@
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out' do %>
+            <%= link_to destroy_user_session_path, method: :delete, class: 'btn nav-log-out', data: { confirm: "本当にログアウトしますか？" } do %>
             <i class="fa-solid fa-person-walking-arrow-right"></i><span>ログアウト</span>
             <% end %>
           </li>
         <% else %>
           <!--ユーザーサインアウト状態のヘッダーnav-->
-          <li>
-            <%= link_to "管理者ログイン", new_admin_session_path, method: :GET, class: 'nav-link text-warning mr-5 border' %>
-          </li>
           <li>
             <%= link_to new_user_registration_path, class: 'header-link nav-link' do %>
             <i class="fa-solid fa-right-to-bracket"></i> 新規会員登録
