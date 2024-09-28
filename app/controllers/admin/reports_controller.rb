@@ -1,4 +1,5 @@
 class Admin::ReportsController < ApplicationController
+  before_action :authenticate_admin!
 
   def per_country
     # 全ユーザーの人数を数える

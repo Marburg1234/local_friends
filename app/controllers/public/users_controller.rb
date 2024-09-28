@@ -13,8 +13,7 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all.shuffle
-    @users = Kaminari.paginate_array(users).page(params[:page]).per(12)
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
   end
 
   def show
