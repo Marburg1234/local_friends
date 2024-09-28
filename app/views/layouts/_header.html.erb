@@ -36,7 +36,7 @@
         <% if admin_signed_in? %>
           <%= link_to 'ユーザー一覧', admin_users_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem', data: { turbolinks: false } %>
           <%= link_to '投稿一覧', admin_trips_path, class: 'text-warning hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-light hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
+          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, data: { confirm: "本当にログアウトしますか？" }, class: 'text-light hover-effect mx-3 link-offset-2', style: 'font-size:1.3rem' %>
 
         <!--ユーザー サインイン状態のヘッダーnav-->
         <% elsif user_signed_in? %>
