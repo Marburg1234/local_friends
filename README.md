@@ -23,7 +23,7 @@
 * 現地の人の知り合いが欲しい時
 ​
 ## 設計書
-- 実装機能リスト(<https://docs.google.com/spreadsheets/d/1El_BWcOR9txk0VFWa7xycR30CU--GQ8Z6l6QJDSDZ3Q/edit?usp=sharing>)
+- 実装機能リスト (<https://docs.google.com/spreadsheets/d/1El_BWcOR9txk0VFWa7xycR30CU--GQ8Z6l6QJDSDZ3Q/edit?usp=sharing>)
 - アプリケーション設計書 (<https://docs.google.com/spreadsheets/d/1veQgb8Eq26-OTAWZbdLvf9TTf_2EK6q2u62aaf75Jbo/edit?usp=sharing>)
 - テーブル定義書 (<https://docs.google.com/spreadsheets/d/1-uuWdq01vMw4_MthColqSjM9J0jpao1_x_NJCkfMfDQ/edit?usp=sharing>)
 - ER図 (<https://drive.google.com/file/d/1FpLk1thMRhxoL_TRy0XommMIJxgrt03O/view?usp=sharing>)
