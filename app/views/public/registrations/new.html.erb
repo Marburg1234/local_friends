@@ -28,11 +28,11 @@
             <%= form_with model: @user, url: user_registration_path do |f| %>
               <div class="field mb-4">
                 <%= f.label :姓 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true, class: 'form-control', placeholder: "例)権現坂" %>
+                <%= f.text_field :family_name, autofocus: true, autocomplete: "family_name", required: true, class: 'form-control name_limit', placeholder: "例)権現坂 (最大25文字)" %>
               </div>
               <div class="field my-3">
                 <%= f.label :名 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                <%= f.text_field :first_name, autocomplete: "first_name", required: true, class: 'form-control', placeholder: "例)太一郎" %>
+                <%= f.text_field :first_name, autocomplete: "first_name", required: true, class: 'form-control name_limit', placeholder: "例)太一郎 (最大25文字)" %>
               </div>
 
               <div class="field my-3">
@@ -53,7 +53,7 @@
               </div>
               <!--Country 選択-->
               <div class="field my-3">
-                <%= f.label :国 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+                <%= f.label :出身国 %><span class="mx-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span>※後からの変更はできません<br />
                 <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %>
               </div>
               <!--Region 選択-->
@@ -79,12 +79,12 @@
               <!--自己紹介文 introduction入力欄-->
               <div class="field mb-3">
                 <%= f.label :自己紹介 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                <%= f.text_area :introduction, class: 'form-control', rows:"3", placeholder: "自己紹介文を作成しよう！(最大300文字)", required: true %>
+                <%= f.text_area :introduction, class: 'introduction form-control', rows:"3", placeholder: "自己紹介文を作成しよう！(最大300文字)", required: true %>
               </div>
               <!--好きな話題 topic入力欄-->
               <div class="field mb-3">
                 <%= f.label :話したい話題 %><span class="ml-2 text-light p-1" style="background-color: #FF6600;"><%= "必須" %></span><br />
-                <%= f.text_area :topic, class: 'form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事(最大100文字)", required: true %>
+                <%= f.text_area :topic, class: 'topic form-control', rows:"3", placeholder: "どんな話題が好きですか？ 例)アニメ・音楽・仕事(最大100文字)", required: true %>
               </div>
               <div class="actions my-3">
                 <%= f.submit "新規会員登録" %>
