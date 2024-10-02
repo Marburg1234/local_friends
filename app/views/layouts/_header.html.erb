@@ -49,18 +49,18 @@
             <% if current_user.notifications.where(read: false).any? %>
               <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-circle-exclamation"></i>通知
-                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").count %></span>
               </button>
             <% else %>
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-circle-exclamation"></i>通知
-                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").count %></span>
               </button>
             <% end %>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <% if current_user.notifications.where(read: false).any? %>
+              <% if current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").any? %>
                 <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
-                <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
+                <% current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").limit(5).order(created_at: :desc).each do |notification| %>
                   <%= link_to notification_message(notification), notification_path(notification), method: :patch, class: "dropdown-item" %>
                 <% end %>
               <% else %>
@@ -74,10 +74,26 @@
             <span>(ユーザーを探す)</span>
             <% end %>
           </li>
-          <li>
-            <%= link_to chats_path, method: :GET, class: 'nav-link text-warning active' do %>
-            <i class="fa-solid fa-comment-dots"></i><span>Chat</span>
+          <li class="nav-item dropdown">
+            <!--chat相手一覧へのアイコンとリンク-->
+            <%= link_to chats_path, method: :get, class: 'nav-link text-warning active' do %>
+              <i class="fa-solid fa-comment-dots"></i><span> Chat</span>
             <% end %>
+            <!-- 通知のドロップダウンボタン -->
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="badge badge-danger"><%= current_user.notifications.where(read: false).where(notifiable_type: "Chat").count %></span>
+            </button>
+            <!-- 通知内容 ドロップダウンメニュー -->
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% if current_user.notifications.where(read: false).where(notifiable_type: "Chat").any? %>
+                <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
+                <% current_user.notifications.where(read: false).where(notifiable_type: "Chat").limit(5).order(created_at: :desc).each do |notification| %>
+                  <%= link_to notification_message(notification), notification_path(notification), method: :patch, class: "dropdown-item" %>
+                <% end %>
+              <% else %>
+                <span class="dropdown-item disabled">未読の通知はありません</span>
+              <% end %>
+            </div>
           </li>
           <li>
             <%= link_to trips_path, method: :GET, class: 'nav-link text-warning active' do %>
