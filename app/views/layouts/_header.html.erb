@@ -46,7 +46,7 @@
             <% end %>
           </li>
           <li class="dropdown">
-            <% if current_user.notifications.where(read: false).any? %>
+            <% if current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").any? %>
               <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa-solid fa-circle-exclamation"></i>通知
                 <span class="badge badge-danger"><%= current_user.notifications.where(read: false).where.not(notifiable_type: "Chat").count %></span>
