@@ -3,6 +3,7 @@ class Trip < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   validates :post_code, presence: true, format: { with: /\A[\w\-]+\z/, message: "は正しい形式で入力してください" }
   validates :address, presence: true, length: { minimum: 2 }

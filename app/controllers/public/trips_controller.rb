@@ -11,7 +11,11 @@ class Public::TripsController < ApplicationController
   def create
       @trip = Trip.new(trip_params)
       @trip.user_id = current_user.id
+      tags = Vision.get_image_data(trip_params[:trip_image])
     if @trip.save
+      tags.each do |tag|
+        @trip.tags.create(name: tag)
+      end
       flash[:notice] = "投稿しました！"
       redirect_to trips_path
     else

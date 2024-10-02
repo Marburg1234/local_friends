@@ -40,6 +40,11 @@
   <div class="row my-3">
     <div class="col-lg-4 offset-1 col-md-8 col-sm-12 text-center">
       <%= image_tag @trip.get_trip_image, size: '300x300' %>
+      <div class="tag-box p-3">
+        <% @trip.tags.each do |tag| %>
+          <span class="trip_image_tag"><%= tag.name %></span>
+        <% end %>
+      </div>
     </div>
     <div class="col-lg-6 col-md-4 col-sm-12">
       <table>

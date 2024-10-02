@@ -1,5 +1,6 @@
 $(function() {
-  // 各フィールドの最大文字数を設定
+  // 制限した文字数を超えると文字色を赤くするJavascriptを実装する
+  // 最初に各フィールドの最大文字数を設定(これはクラス名を使っている nameLimitはname_limitのこと)
   const maxLengths = {
     nameLimit: 25, // 名前の最大文字数
     introduction: 300, // 自己紹介の最大文字数
@@ -7,11 +8,14 @@ $(function() {
   };
 
   // すべての対象フィールドを取得
-  const nameFields = document.querySelectorAll('.name_limit'); // 名前のフィールド
-  const introductionField = document.querySelector('.introduction'); // 自己紹介フィールド
-  const topicField = document.querySelector('.topic'); // 好きな話題フィールド
+  // 名前はfamily_nameとfirst_nameで同じ文字数制限なので複数扱えるquerySelectorAllで記述する
+  const nameFields = document.querySelectorAll('.name_limit'); // 名前のフィールド クラス名で紐づけてしている
+  // 下の2つは1か所のみなのでquerySelectorで記述している
+  const introductionField = document.querySelector('.introduction'); // 自己紹介フィールド クラス名で紐づけ
+  const topicField = document.querySelector('.topic'); // 好きな話題フィールド クラス名で紐づけ
 
-  console.log("ここまで読み込み済み");
+
+// 以下は、実際の発火 addEventListener('input')で監視してもらって、inputが最大文字数を超えると赤くするというメソッドを記述している
 
   // 名前フィールドの処理
   nameFields.forEach(function(field) {
