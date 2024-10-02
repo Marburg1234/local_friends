@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :chat_rooms, through: :user_rooms
+  has_many :notifications, dependent: :destroy
 
 # ========================================================================================
   validates :first_name, presence: { message: '名前を入力してください' }, length: { maximum: 25 }

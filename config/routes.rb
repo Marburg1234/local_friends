@@ -69,4 +69,6 @@ Rails.application.routes.draw do
     get 'regions', on: :member
   end
 
+  resources :notifications, only: [:update]
+
 end

@@ -4,6 +4,7 @@ class Trip < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :trip_comments, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :post_code, presence: true, format: { with: /\A[\w\-]+\z/, message: "は正しい形式で入力してください" }
   validates :address, presence: true, length: { minimum: 2 }
@@ -15,6 +16,9 @@ class Trip < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode
+
+  # コールバック機能 通知のメソッドを呼び出す(tripモデルにレコードが登録されたら発動するafter_create)
+  after_create :notify_followers
 
   # 新しい順に表示する
   default_scope { order(created_at: :desc) }
@@ -40,6 +44,14 @@ class Trip < ApplicationRecord
   # 検索するためのメソッド 部分一致検索のみに変更した
   def self.looks(search, word)
     @trip = Trip.where("title LIKE? OR `explain` LIKE? OR post_code LIKE? OR address LIKE?", "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
+  end
+
+  private
+
+  def notify_followers
+    user.followers.each do |follower|
+      Notification.create(user_id: follower.id, notifiable: self)
+    end
   end
 
 end
