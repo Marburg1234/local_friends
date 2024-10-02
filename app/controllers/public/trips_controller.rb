@@ -63,7 +63,13 @@ class Public::TripsController < ApplicationController
 
   def update
     @trip = Trip.find(params[:id])
+    tags = Vision.get_image_data(trip_params[:trip_image])
     if @trip.update(trip_params)
+      @trip.tags.destroy_all  # 既存のタグを削除
+      # update→createに変更 1つずつ登録してレコードが作られるように変更した updateは最後のタグが回数分レコード登録されてしまっていた
+      tags.each do |tag|
+        @trip.tags.create(name: tag)
+      end
       flash[:notice] = "編集内容を保存しました"
       redirect_to trip_path(@trip)
     else
