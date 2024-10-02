@@ -211,6 +211,23 @@ label {
   border: 1px solid #ddd; /* 境界線 */
 }
 
+// trip_show タグのスタイル設定
+.trip_image_tag {
+  background-color: #6633FF;
+  font-weight: 500;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+
 
 // レスポンシブ対応
 
