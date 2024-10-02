@@ -6,6 +6,8 @@ class NotificationsController < ApplicationController
     case notification.notifiable_type
     when "Trip"
       redirect_to trip_path(notification.notifiable)
+    when "Chat"
+      redirect_to chats_path
     else
       redirect_to trip_path(notification.notifiable.trip)
     end
