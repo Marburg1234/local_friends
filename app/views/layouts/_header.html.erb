@@ -46,10 +46,17 @@
             <% end %>
           </li>
           <li class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa-solid fa-circle-exclamation"></i>通知
-              <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
-            </button>
+            <% if current_user.notifications.where(read: false).any? %>
+              <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-circle-exclamation"></i>通知
+                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+              </button>
+            <% else %>
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-circle-exclamation"></i>通知
+                <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+              </button>
+            <% end %>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <% if current_user.notifications.where(read: false).any? %>
                 <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
