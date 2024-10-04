@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_02_082351) do
+ActiveRecord::Schema.define(version: 2024_10_04_124808) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -170,6 +170,7 @@ ActiveRecord::Schema.define(version: 2024_10_02_082351) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "nationality", default: 1, null: false
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["region_id"], name: "index_users_on_region_id"
@@ -187,5 +188,6 @@ ActiveRecord::Schema.define(version: 2024_10_02_082351) do
   add_foreign_key "user_rooms", "chat_rooms"
   add_foreign_key "user_rooms", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "users", "countries", column: "nationality"
   add_foreign_key "users", "regions"
 end

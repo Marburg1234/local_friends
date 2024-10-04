@@ -12,21 +12,27 @@
     <h5 class="mb-3 border-bottom text-center">基本情報</h5>
     <table>
       <tr>
-        <th class="pr-3 pb-2">Name</th>
+        <th class="pr-3 pb-2">名前</th>
         <th class="pl-3 pb-2"><%= user.family_name %>  <%= user.first_name %></th>
       </tr>
       <tr>
-        <th class="pr-3 pb-2">Country</th>
-        <th class="pl-3 pb-2"><%= user.country.name %></th>
+        <th class="pr-3 pb-2">出身国</th>
+        <th class="pl-3 pb-2"><%= user.nationality_country.name %></th>
       </tr>
       <tr>
-        <th class="pr-3 pb-2">Location</th>
+        <th class="pr-3 pb-2">年齢</th>
+        <th class="pl-3 pb-2"><%= user.age %></th>
+      </tr>
+      <tr>
+        <th class="pr-3 pb-2">住んでいる地域</th>
         <th class="pl-3 pb-2">
           <% if user_signed_in? %>
-            <%= link_to region_map_path(user.region_id), data: {"turbolinks" => false} do %><%= user.region.name %><% end %>
+            <%= link_to region_map_path(user.region_id), data: {"turbolinks" => false} do %>
+            <%= user.country.name %>・<%= user.region.name %>
+            <% end %><br/>
             <span style="font-size: 0.9rem;">(地名をクリックすると、地図で場所の確認ができます)</span>
           <% else %>
-            <%= user.region.name %>
+            <%= user.country.name %>・<%= user.region.name %>
           <% end %>
         </th>
       </tr>

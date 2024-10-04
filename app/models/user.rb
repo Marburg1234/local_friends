@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
   has_many :chat_rooms, through: :user_rooms
   has_many :notifications, dependent: :destroy
-
+  belongs_to :nationality_country, class_name: 'Country', foreign_key: 'nationality'
 # ========================================================================================
   validates :first_name, presence: { message: '名前を入力してください' }, length: { maximum: 25 }
   validates :family_name, presence: { message: '姓を入力してください' }, length: { maximum: 25 }

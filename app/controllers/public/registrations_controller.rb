@@ -8,7 +8,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :family_name, :country_id, :region_id, :mother_language_id, :practice_language_id, :age, :introduction, :topic])
+    devise_parameter_sanitizer.permit(:sign_up, keys:[:first_name, :family_name, :country_id, :region_id, :mother_language_id, :practice_language_id, :age, :introduction, :topic, :nationality])
   end
 
   def create
