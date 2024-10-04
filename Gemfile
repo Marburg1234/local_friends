@@ -77,3 +77,5 @@ gem 'devise-i18n'
 gem 'active_storage_validations'
 
 gem 'google-cloud-translate'
+
+gem 'rails-html-sanitizer', '~> 1.4'
