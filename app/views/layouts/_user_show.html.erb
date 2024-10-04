@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'user_show', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+
 <!--以下がユーザー情報に関するコード-->
 <div class="row d-flex justify-content-center mb-4 responsive-margin">
   <!--1. プロフィール写真表示-->
@@ -28,6 +29,7 @@
         <th class="pl-3 pb-2">
           <% if user_signed_in? %>
             <%= link_to region_map_path(user.region_id), data: {"turbolinks" => false} do %>
+            <i class="fa-solid fa-location-dot"></i>
             <%= user.country.name %>・<%= user.region.name %>
             <% end %><br/>
             <span style="font-size: 0.9rem;">(地名をクリックすると、地図で場所の確認ができます)</span>
@@ -35,6 +37,44 @@
             <%= user.country.name %>・<%= user.region.name %>
           <% end %>
         </th>
+        <% if request.path == my_page_users_path %>
+        <th class="pl-4">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa-solid fa-globe "></i>地域変更
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title fs-5" id="exampleModalLabel">住んでいる国・地域の変更</h3>
+                  <button type="button" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+                </div>
+                <%= form_with(model: @user, local: true, multipart: true) do |f| %>
+                  <div class="modal-body">
+                    <!--Country 選択-->
+                    <div class="field my-3">
+                      <% already_registered_country = @user.country_id %>
+                      <%= f.label :住んでいる国 %><span class="mx-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+                      <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %>
+                    </div>
+                    <!--Region 選択-->
+                    <div class="field mb-3">
+                      <%= f.label :住んでいる地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
+                      <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <%= f.submit "変更する", class: 'btn btn-info' %>
+                  </div>
+                 <% end %>
+              </div>
+            </div>
+          </div>
+        </th>
+        <% end %>
       </tr>
     </table>
   </div>
@@ -101,6 +141,7 @@
 </div>
 
 
+
 <!--7. ユーザー写真のスライドショー-->
 <!--スライドショー(carousel)でサブ写真を表示する each_with_indexで取り出したデータそれぞれに0から番号を割り振る-->
 <!--carouselでは最初の画像にactiveクラスを与えないといけない-->
@@ -131,3 +172,34 @@
   <% end %>
   </div>
 </div>
+
+
+
+<!--JSの記述 国を選択したら、関連した地域が出てくる-->
+<script>
+  document.addEventListener("turbolinks:load", function() {
+  const countrySelect = document.getElementById('country_select');
+  const regionSelect = document.getElementById('region_select');
+
+  countrySelect.addEventListener('change', function() {
+    const countryId = countrySelect.value;
+
+    if (countryId) {
+      fetch(`/countries/${countryId}/regions`)
+        .then(response => response.json())
+        .then(data => {
+          regionSelect.innerHTML = ''; // 既存の選択肢をクリア
+
+          data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.id;
+            option.text = region.name;
+            regionSelect.appendChild(option);
+          });
+        });
+    } else {
+      regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
+    }
+  });
+  });
+</script>

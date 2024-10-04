@@ -87,7 +87,7 @@ class Public::UsersController < ApplicationController
   private
 # ストロングパラメーター
   def user_params
-    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, sub_images: [])
+    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, :country_id, :region_id, sub_images: [])
   end
 
 # ゲストログインユーザーのダイレクトアタックを阻止するメソッド
