@@ -37,44 +37,8 @@
             <%= user.country.name %>・<%= user.region.name %>
           <% end %>
         </th>
-        <% if request.path == my_page_users_path %>
-        <th class="pl-4">
-          <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa-solid fa-globe "></i>地域変更
-          </button>
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title fs-5" id="exampleModalLabel">住んでいる国・地域の変更</h3>
-                  <button type="button" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
-                </div>
-                <%= form_with(model: @user, local: true, multipart: true) do |f| %>
-                  <div class="modal-body">
-                    <!--Country 選択-->
-                    <div class="field my-3">
-                      <% already_registered_country = @user.country_id %>
-                      <%= f.label :住んでいる国 %><span class="mx-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                      <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %>
-                    </div>
-                    <!--Region 選択-->
-                    <div class="field mb-3">
-                      <%= f.label :住んでいる地域 %><span class="ml-2 text-light p-1" style="background-color: #FF6600; font-size:0.8rem;"><%= "必須" %></span><br />
-                      <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                   <%= f.submit "変更する", class: 'btn btn-info' %>
-                  </div>
-                 <% end %>
-              </div>
-            </div>
-          </div>
-        </th>
-        <% end %>
+        <!--住んでいる地域を変更するボタンと編集Modalは部分テンプレート-->
+        <%= render 'layouts/user_location_change', user: user %>
       </tr>
     </table>
   </div>
@@ -110,13 +74,9 @@
 </div>
 
 <div class="row d-flex justify-content-center mb-4 responsive-margin">
-  <!--5. ユーザー写真を表示する-->
-  <div class="col-lg-4 col-md-5 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#EEFFFF;">
-    <h5 class="mb-3 border-bottom text-center">ユーザー写真</h5>
-    <% user.sub_images.each do |sub_image| %>
-      <%= image_tag sub_image, size: '90x90', class: 'rounded mr-3 mb-3' %>
-    <% end %>
-  </div>
+  <!--5. ユーザー写真(最大6枚は部分テンプレート-->
+  <%= render 'layouts/user_slideshow', user: user %>
+
   <!--6. ユーザーが投稿した写真を最新4件表示する-->
   <div class="col-lg-7 offset-lg-1 col-md-5 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#FFFFEE;">
     <h5 class="mb-3 border-bottom text-center">投稿した写真</h5>
@@ -140,66 +100,3 @@
   </div>
 </div>
 
-
-
-<!--7. ユーザー写真のスライドショー-->
-<!--スライドショー(carousel)でサブ写真を表示する each_with_indexで取り出したデータそれぞれに0から番号を割り振る-->
-<!--carouselでは最初の画像にactiveクラスを与えないといけない-->
-  <!--方法1 取り出した値にindex番号をつける 最初=0番のものはactiveクラスのdivになる！-->
-<p><span class="border-bottom">サブ写真スライドショー</span></p>
-<div class="d-flex mb-5">
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width:400px">
-    <div class="carousel-inner">
-       <% user.sub_images.each_with_index do |sub_image, index| %>
-        <% if index == 0 %>
-          <div class="carousel-item active">
-            <%= image_tag sub_image, class: "d-block w-100", height: 300 %>
-          </div>
-        <% else %>
-          <div class="carousel-item">
-            <%= image_tag sub_image, class: "d-block w-100", height: 300 %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  <%= link_to "#carouselExampleControls", role: "button", data: {slide: "prev"}, class: "carousel-control-prev" do %>
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  <% end %>
-  <%= link_to "#carouselExampleControls", role: "button", data: {slide: "next"}, class: "carousel-control-next" do %>
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  <% end %>
-  </div>
-</div>
-
-
-
-<!--JSの記述 国を選択したら、関連した地域が出てくる-->
-<script>
-  document.addEventListener("turbolinks:load", function() {
-  const countrySelect = document.getElementById('country_select');
-  const regionSelect = document.getElementById('region_select');
-
-  countrySelect.addEventListener('change', function() {
-    const countryId = countrySelect.value;
-
-    if (countryId) {
-      fetch(`/countries/${countryId}/regions`)
-        .then(response => response.json())
-        .then(data => {
-          regionSelect.innerHTML = ''; // 既存の選択肢をクリア
-
-          data.forEach(region => {
-            const option = document.createElement('option');
-            option.value = region.id;
-            option.text = region.name;
-            regionSelect.appendChild(option);
-          });
-        });
-    } else {
-      regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
-    }
-  });
-  });
-</script>

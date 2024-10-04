@@ -30,6 +30,13 @@
   color: white;
 }
 
+// user_show スライドショーへのボタン(各画像をリンクにしている部分 buttonタグのデフォルト設定を廃止)
+  .user_slideshow-button {
+    background: none; /* 背景を削除 */
+    border: none; /* ボーダーを削除 */
+    padding: 0; /* パディングを削除 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+}
 
 
 

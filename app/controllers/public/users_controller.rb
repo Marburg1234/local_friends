@@ -46,7 +46,6 @@ class Public::UsersController < ApplicationController
   end
 # ====================================================
 
-
 # ===============================================
   # 退会確認するページ
   def unsubscribe
