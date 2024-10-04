@@ -20,8 +20,10 @@ class Trip < ApplicationRecord
   # コールバック機能 通知のメソッドを呼び出す(tripモデルにレコードが登録されたら発動するafter_create)
   after_create :notify_followers
 
-  # 新しい順に表示する
-  default_scope { order(created_at: :desc) }
+  # 任意の並び替えができるようにする(新しい順/古い順/いいねの多い順)
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
+  scope :favorite_count, -> { left_joins(:favorites).group(:id).order('COUNT(favorites.id) DESC') }
 
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name

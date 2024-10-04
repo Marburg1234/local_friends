@@ -30,10 +30,22 @@ class Public::TripsController < ApplicationController
     respond_to do |format|
       # htmlでのリクエストの場合の処理 (通常のindexへのアクセス)
       format.html do
+        Rails.logger.debug "params[:old]: #{params[:old]}"
+      Rails.logger.debug "params[:favorite_count]: #{params[:favorite_count]}"
+
+
         # 退会済みユーザーのidを取得する(whereで条件指定→pluckでidを取得する)
         not_active_users = User.where(is_active: false).pluck(:id)
         # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
         @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+        if params[:old]
+          @trips = @trips.old
+        elsif params[:favorite_count]
+          @trips = @trips.favorite_count
+        else
+          @trips = @trips.latest
+        end
+
       end
       # json形式でのリクエストの場合の処理 (APIやJS非同期のリクエストがきたとき)
       format.json do
