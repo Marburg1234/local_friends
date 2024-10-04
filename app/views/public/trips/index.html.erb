@@ -43,7 +43,7 @@
           <% end %>
           <br/>
           <div class="pt-1 d-flex">
-            <span style="vertical-align: middle; display: flex; align-items: center;">投稿ユーザー：</span>
+            <span style="vertical-align: middle; display: flex; align-items: center;"><%= image_tag trip.user.get_profile_image, size: '50x50', class: 'rounded-circle' %></span>
               <%= link_to user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
                 <%= trip.user.family_name %> <%= trip.user.first_name %>
               <% end %>

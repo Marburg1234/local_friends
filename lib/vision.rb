@@ -1,6 +1,7 @@
 require 'base64'
 require 'json'
 require 'net/https'
+require "google/cloud/translate"
 
 module Vision
   class << self
