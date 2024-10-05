@@ -26,12 +26,6 @@
     <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
   <% end %>
 
-<!--並び替えボタンを用意-->
- <%= link_to '新しい順', trips_path, data: {"turbolinks" => false} %>
-|<%= link_to '古い順', trips_path(old: "true"), data: {"turbolinks" => false} %>
-|<%= link_to 'いいね多い順', trips_path(favorite_count: "true"), data: {"turbolinks" => false} %>
-
-
 <!--ページの題名-->
 <div class="my-5">
   <h1 class="text-center"><strong>投稿一覧から気になる投稿を見つけよう！</strong></h1>
@@ -39,6 +33,17 @@
 </div>
 
 <div class="container">
+  <!--並べ替えのボタンとクリックすると並べ替えの選択肢が出てくるdropdownを実装-->
+  <div class="dropdown mb-4">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+      並び替え
+    </button>
+    <ul class="dropdown-menu">
+      <li><%= link_to '1. 新しい順', trips_path, data: {"turbolinks" => false}, class: 'dropdown-item' %></li>
+      <li><%= link_to '2. 古い順', trips_path(old: "true"), data: {"turbolinks" => false}, class: 'dropdown-item' %></li>
+      <li><%= link_to '3. いいね多い順', trips_path(favorite_count: "true"), data: {"turbolinks" => false}, class: 'dropdown-item' %></li>
+    </ul>
+  </div>
   <div class="auto-scroll">
     <div class="row">
       <% @trips.each do |trip| %>
