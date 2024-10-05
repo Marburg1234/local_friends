@@ -13,7 +13,26 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
+    # @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
+
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all
+    
+    case params[:sort_by]
+      when 'country_region'
+        if params[:country_id].present? && params[:region_id].present?
+          @users = @users.where(country_id: params[:country_id], region_id: params[:region_id])
+        end
+      when 'language'
+        if params[:mother_language_id].present?
+          @users = @users.where(mother_language_id: params[:mother_language_id])
+        end
+      when 'nationality'
+        if params[:nationality].present?
+          @users = @users.where(nationality: params[:nationality])
+        end
+      else
+        @users = @users.limit(12).shuffle
+    end
   end
 
   # マイページ
