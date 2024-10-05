@@ -25,10 +25,6 @@ class Trip < ApplicationRecord
   scope :old, -> { order(created_at: :asc) }
   scope :favorite_count, -> { left_joins(:favorites).group(:id).order('COUNT(favorites.id) DESC') }
 
-  def address_display
-    '〒' + post_code + ' ' + address + ' ' + name
-  end
-
   # 投稿画像を取得するメソッド
   def get_trip_image
     unless trip_image.attached?
