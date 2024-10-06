@@ -4,12 +4,12 @@
 <!--以下がユーザー情報に関するコード-->
 <div class="row d-flex justify-content-center mb-4 responsive-margin">
   <!--1. プロフィール写真表示-->
-  <div class="col-lg-4 col-md-5 col-sm-12 justify-content-center text-center shadow border p-3" style="border-radius: 20px;">
+  <div class="col-lg-4 col-md-12 col-sm-12 justify-content-center text-center shadow border p-3" style="border-radius: 20px;">
    <h5 class="mb-3 border-bottom">プロフィール写真</h5>
    <%= image_tag user.get_profile_image, size: '150x150', class: 'rounded-circle' %>
   </div>
   <!--2. ユーザー基本情報表示-->
-  <div class="col-lg-7 offset-lg-1 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
+  <div class="col-lg-7 offset-lg-1 col-md-12 col-sm-12 shadow border p-3" style="border-radius: 20px;">
     <h5 class="mb-3 border-bottom text-center">基本情報</h5>
     <table>
       <tr>
@@ -32,7 +32,7 @@
             <i class="fa-solid fa-location-dot"></i>
             <%= user.country.name %>・<%= user.region.name %>
             <% end %><br/>
-            <span style="font-size: 0.9rem;">(地名をクリックすると、地図で場所の確認ができます)</span>
+            <span class="d-none d-lg-inline-block" style="font-size: 0.9rem;">(地名をクリックすると、地図で場所の確認ができます)</span>
           <% else %>
             <%= user.country.name %>・<%= user.region.name %>
           <% end %>
@@ -46,7 +46,7 @@
 
 <div class="row d-flex justify-content-center rounded mb-4 responsive-margin">
   <!--3. ユーザー登録言語の情報を表示-->
-  <div class="col-lg-4 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
+  <div class="col-lg-4 col-md-12 col-sm-12 shadow border p-3" style="border-radius: 20px;">
     <h5 class="mb-3 border-bottom text-center">母国語と学習中の言語</h5>
     <table>
       <tr>
@@ -59,7 +59,7 @@
       </tr>
     </table>
   </div>
-  <div class="responsive-margin col-lg-7 offset-lg-1 col-md-5 col-sm-12 shadow border p-3" style="border-radius: 20px;">
+  <div class="responsive-margin col-lg-7 offset-lg-1 col-md-12 col-sm-12 shadow border p-3" style="border-radius: 20px;">
     <!--4. 自己紹介 話したい話題を表示-->
     <div class="my-3">
       <h5 class="mb-3 border-bottom text-center">自己紹介・話したい話題</h5>
@@ -78,7 +78,7 @@
   <%= render 'layouts/user_slideshow', user: user %>
 
   <!--6. ユーザーが投稿した写真を最新4件表示する-->
-  <div class="col-lg-7 offset-lg-1 col-md-5 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#FFFFEE;">
+  <div class="col-lg-7 offset-lg-1 col-md-12 col-sm-12 flex-wrap shadow border p-3" style="border-radius: 20px; background-color:#FFFFEE;">
     <h5 class="mb-3 border-bottom text-center">投稿した写真</h5>
       <div>
         <div class="text-center">

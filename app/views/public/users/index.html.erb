@@ -5,140 +5,146 @@
   <%= content_tag :div, flash[:alert], class: "guest_limit_notice" %>
 <% end %>
 
-<!-- ソートするためのボタン Modal開くボタン -->
-<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#user_index_modal">
-  ソートする
-</button>
-
-<!-- Modalのページ ソートオプションとしてボタンを3つ用意する -->
-<div class="modal fade" id="user_index_modal" tabindex="-1" aria-labelledby="user_index_modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="user_index_modalLabel">ソートオプション</h1>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
-      </div>
-        <div class="modal-body border-bottom">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mother_language">
-            言語でソートする
-          </button>
-        </div>
-        <div class="modal-body border-bottom">
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#country_region">
-            住んでいる国と地域から
-          </button>
-        </div>
-        <div class="modal-body">
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nationality_sort">
-            出身国で選ぶ
-          </button>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--============================================================================-->
-<!--1.言語からユーザーの検索(ソート)をする-->
-<div class="modal fade" id="mother_language" tabindex="-1" aria-labelledby="mother_languageLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="mother_languageLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with url: users_path, method: :get, local: true do |f| %>
-        <div>
-          <%= f.label :言語で選ぶ %><br/>
-          <%= f.label :母国語 %>
-          <%= f.select :mother_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
-          <%= f.hidden_field :sort_by, value: 'language' %>
-        </div>
-        <div class="text-right">
-          <%= f.submit '実行する', class: 'btn btn-info' %>
-        </div>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--2.住んでいる国と地域からソート-->
-<div class="modal fade" id="country_region" tabindex="-1" aria-labelledby="country_regionLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="country_regionLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with url: users_path, method: :get, local: true do |f| %>
-        <div>
-          <%= f.label :住んでいる国と地域から %><br/>
-          <%= f.label :住んでいる国 %>
-          <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %><br />
-          <%= f.label :住んでいる地域 %>
-          <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
-          <%= f.hidden_field :sort_by, value: 'country_region' %>
-        </div>
-        <div class="text-right">
-          <%= f.submit '実行する', class: 'btn btn-info' %>
-        </div>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--3.出身国からユーザーの検索(ソート)をする-->
-<div class="modal fade" id="nationality_sort" tabindex="-1" aria-labelledby="nationality_sortLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="nationality_sortLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
-      </div>
-      <div class="modal-body">
-        <%= form_with url: users_path, method: :get, local: true do |f| %>
-        <div>
-          <%= f.label :出身国で選ぶ %><br/>
-          <%= f.label :出身国 %>
-          <%= f.collection_select :nationality, Country.all, :id, :name, { include_blank: true } %>
-          <%= f.hidden_field :sort_by, value: 'nationality' %>
-        </div>
-        <div class="text-right">
-          <%= f.submit '実行する', class: 'btn btn-info' %>
-        </div>
-        <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--============================================================================-->
-
-
 <div class="container container-fluid my-5">
   <div class="row my-3">
     <div class="col-12 px-sm-0 text-center">
       <h1 class="pr-3 pl-3"><strong>他のユーザーと交流しよう！</strong></h1>
     </div>
+
+    <!-- ソートするためのボタン Modal開くボタン -->
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#user_index_modal">
+      条件で絞り込む
+    </button>
+
+    <!-- 1つ目のModal ソートオプション3種類を表示 -->
+    <!--============================================================================-->
+    <div class="modal fade" id="user_index_modal" tabindex="-1" aria-labelledby="user_index_modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="user_index_modalLabel">ソートオプション</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+            <div class="modal-body border-bottom">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mother_language">
+                言語から
+              </button>
+            </div>
+            <div class="modal-body border-bottom">
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#country_region">
+                住んでいる国と地域から
+              </button>
+            </div>
+            <div class="modal-body">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nationality_sort">
+                出身国から
+              </button>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--============================================================================-->
+
+    <!--2番目のModal 選択したソートオプションによって、中身が変わるように以下で記述している-->
+    <!--============================================================================-->
+    <!--1.言語からユーザーの検索(ソート)をする-->
+    <div class="modal fade" id="mother_language" tabindex="-1" aria-labelledby="mother_languageLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="mother_languageLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :言語で選ぶ %><br/>
+              <%= f.label :母国語 %>
+              <%= f.select :mother_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
+              <%= f.hidden_field :sort_by, value: 'language' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--2.住んでいる国と地域からソート-->
+    <div class="modal fade" id="country_region" tabindex="-1" aria-labelledby="country_regionLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="country_regionLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :住んでいる国と地域から %><br/>
+              <%= f.label :住んでいる国 %>
+              <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %><br />
+              <%= f.label :住んでいる地域 %>
+              <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
+              <%= f.hidden_field :sort_by, value: 'country_region' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--3.出身国からユーザーの検索(ソート)をする-->
+    <div class="modal fade" id="nationality_sort" tabindex="-1" aria-labelledby="nationality_sortLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="nationality_sortLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :出身国で選ぶ %><br/>
+              <%= f.label :出身国 %>
+              <%= f.collection_select :nationality, Country.all, :id, :name, { include_blank: true } %>
+              <%= f.hidden_field :sort_by, value: 'nationality' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--============================================================================-->
+
+
+
+
   </div>
   <div class="auto-scroll">
     <div class="row my-3">
-      <div class="col-12 d-flex flex-wrap">
+      <div class="col-12 col-sm-12 d-flex flex-wrap">
         <% @users.each_slice(4) do |users| %>
           <% users.each do |user| %>
             <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->

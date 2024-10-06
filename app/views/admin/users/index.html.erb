@@ -12,9 +12,13 @@
      <!--会員数を表示する表を部分テンプレ化呼び出す-->
      <%= render 'users_index_table', users_count: @users_count, active_users_all: @active_users_all, active_user_ration: @active_user_ration, not_active_users: @not_active_users, not_active_user_ration: @not_active_user_ration %>
       <!--国別のユーザー数を表示する-->
-      <h3 class="text-center border-bottom pb-2 my-4"><%= link_to "国別の会員数情報を見る", admin_reports_per_country_path, class: 'btn btn-info mx-1 p-2 container-fluid', style: "font-size: 1.3rem", data: { turbolinks: false } %></h3>
+      <h3 class="text-center border-bottom pb-2 my-4">
+        <%= link_to "国別の会員数情報を見る", admin_reports_per_country_path, class: 'btn btn-info mx-1 p-2 container-fluid', style: "font-size: 1.3rem", data: { turbolinks: false } %>
+      </h3>
       <!--学習中の言語別ユーザー数を表示する-->
-      <h3 class="text-center border-bottom pb-2 my-4"><%= link_to "学習中の言語別の会員数情報を見る", admin_reports_per_practice_language_path, class: 'btn btn-success mx-1 p-2 container-fluid', style: "font-size: 1.3rem", data: { turbolinks: false } %></h3>
+      <h3 class="text-center border-bottom pb-2 my-4">
+        <%= link_to "学習中の言語別の会員数情報を見る", admin_reports_per_practice_language_path, class: 'btn btn-success mx-1 p-2 container-fluid', style: "font-size: 1.3rem", data: { turbolinks: false } %>
+      </h3>
     </div>
 
     <!--ページ右側に配置する-->

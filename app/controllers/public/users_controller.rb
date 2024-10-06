@@ -16,7 +16,7 @@ class Public::UsersController < ApplicationController
     # @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
 
     @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all
-    
+
     case params[:sort_by]
       when 'country_region'
         if params[:country_id].present? && params[:region_id].present?
@@ -84,7 +84,7 @@ class Public::UsersController < ApplicationController
   # いいねした記事一覧を表示するメソッドlikes
   def likes
     user = current_user
-    @favorites = user.favorites.page(params[:page]).per(1)
+    @favorites = user.favorites.page(params[:page]).per(5)
   end
 # ================================================
 
