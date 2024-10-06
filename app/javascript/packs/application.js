@@ -19,7 +19,7 @@ import "../packs/map_region.js";
 import './valid_color';
 // import "../packs/map_trip_new.js";
 import "../packs/top_back.js";
-import "../packs/main_margin_top.js";
+// import "../packs/main_margin_top.js";
 
 
 
