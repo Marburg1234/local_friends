@@ -16,6 +16,11 @@
       条件で絞り込む
     </button>
 
+    <!-- ユーザーフリーワード検索ボタン Modal開くボタン -->
+    <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#user_search_modal">
+      検索する
+    </button>
+
     <!-- 1つ目のModal ソートオプション3種類を表示 -->
     <!--============================================================================-->
     <div class="modal fade" id="user_index_modal" tabindex="-1" aria-labelledby="user_index_modalLabel" aria-hidden="true">
@@ -55,7 +60,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="mother_languageLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="mother_languageLabel">言語で絞り込む</h1>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
           </div>
           <div class="modal-body">
@@ -83,7 +88,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="country_regionLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="country_regionLabel">国と地域で絞り込む</h1>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
           </div>
           <div class="modal-body">
@@ -113,7 +118,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="nationality_sortLabel">Modal title</h1>
+            <h1 class="modal-title fs-5" id="nationality_sortLabel">出身国で絞り込む</h1>
             <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
           </div>
           <div class="modal-body">
@@ -137,7 +142,30 @@
     </div>
 
     <!--============================================================================-->
-
+    <!-- ユーザー検索のModal -->
+    <!--============================================================================-->
+    <div class="modal fade" id="user_search_modal" tabindex="-1" aria-labelledby="user_search_modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="user_search_modalLabel">ユーザーを検索する</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+            <div class="modal-body border-bottom">
+              <p>名前・国名・地域名で検索できます</p>
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
+                <%= f.text_field :word, placeholder: 'フリーワード' %>
+                <%= f.submit "検索", class: "btn-sm btn-primary" %>
+                <%= f.hidden_field :range, value: 'User' %>
+              <% end %>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--============================================================================-->
 
 
 
@@ -152,12 +180,11 @@
                 <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top rounded-circle object-fit-cover' %>
               <div class="card-body text-dark">
                 <div class="card-title">
-                  <strong><%= user.family_name %><%= "  " %><%= user.first_name %></strong>
+                  <strong><%= user.full_name %></strong>
                 </div>
                 <div class="card-text">
                   出身
-                  <span><%= user.country.name %></span>
-                  <td><% user.region.name %></td>
+                  <td><%= user.nationality_country.name %></td>
                 </div>
                 <div class="card-text">
                   <th>母国語</th>
