@@ -276,3 +276,27 @@ label {
     padding-left: 15px;
   }
 }
+
+@media (max-width: 768px) {
+  .flex-column-md-responsive {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .responsive_about_title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 縦方向に中央に配置するための高さ */
+    padding: 20px; /* スマホ用の余白調整 */
+  }
+}
+
+@media (max-width: 768px) {
+  .row-reverse {
+    display: flex;
+    flex-direction: column-reverse; /* 要素の順番を逆にする */
+  }
+}

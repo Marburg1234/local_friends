@@ -1,74 +1,85 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <!--アプリの説明を挿入する-->
-  <div class="about_image text-center text-light">
-    <h1 class="text-center text-light pb-3 mt-3">Local.Friendsについて</h1>
-    <h3 class="my-3">旅行先で現地の人と交流することを目的としたアプリです！</h3>
-    <h3 class="my-3">このアプリを通じて仲間を見つけましょう！</h3>
-    <p>※ポートフォリオで制作したアプリのため閉鎖する場合があります</p>
-    <%= link_to "早速始める！", new_user_registration_path, class: 'btn btn-lg btn-success w-25', style: 'background-color: #6699FF	  ;' %>
+<div class="container-fluid">
+  <!-- アプリの説明 -->
+  <div class="about_image text-center text-light responsive_about_title">
+    <h1 class="text-center text-light pb-3 mt-3 d-none d-lg-block d-md-block">Local.Friendsについて</h1>
+
+    <!-- 大画面向けの説明 -->
+    <h3 class="my-3 d-none d-lg-block">旅行先で現地の人と交流することを目的としたアプリです！</h3>
+    <h3 class="my-3 d-none d-lg-block">このアプリを通じて仲間を見つけましょう！</h3>
+    <p class="d-none d-lg-block">※ポートフォリオで制作したアプリのため閉鎖する場合があります</p>
+    <%= link_to "早速始める！", new_user_registration_path, class: 'btn btn-success w-50 btn-lg d-none d-lg-inline-block', style: 'background-color: #6699FF;' %>
+
+
+    <!-- 小さな画面向けの説明 -->
+    <h3 class="my-3 d-lg-none d-md-none">Local.Friendsについて</h3>
+    <h5 class="d-lg-none">旅行先で現地の人と<br/>交流できるアプリ！</h5>
+    <%= link_to "早速始める！", new_user_registration_path, class: 'btn btn-success w-75 w-md-50 btn-lg d-lg-none', style: 'background-color: #6699FF;' %>
   </div>
+
+
+  <!-- 説明部分と画像のペア1 -->
   <div class="row mt-2">
-    <div class="col-6" style="height: 400px; background-color: #F5F5F5;">
-      <div class="col-8 mx-auto mt-4" style="height: 300px; ">
-        <h3 class="text-center py-3"><strong>1.無料登録してコミュニティに参加しよう！</strong></h3>
-        <h4 class="px-5">
-          まずはアプリに登録して、自分のページを<br />
-          作成しよう！<br />
-          登録することで、投稿やチャットをして交流することができます。
-        </h4>
+    <!-- テキスト -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-center" style="background-color: #F5F5F5;">
+      <div class="text-center">
+        <h3 class="py-3"><strong>1. 無料登録してコミュニティに参加しよう！</strong></h3>
+        <p>まずはアプリに登録して、自分のページを作成しよう！登録することで、投稿やチャットをして交流することができます。</p>
       </div>
     </div>
-    <div class="col-6 d-flex justify-content-center pt-5" style="height: 400px; background-color: #CCFFFF;">
-      <div><%= image_tag '200516_e_determination02.png', size: '200x200', style: 'object-fit:cover' %></div>
-      <div><%= image_tag 'my_page.jpg', size: '400x200', style: 'object-fit:contain;' %></div>
+    <!-- 画像 -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex flex-column align-items-center" style="background-color: #CCFFFF;">
+      <%= image_tag '200516_e_determination02.png', class: 'img-fluid mb-3', style: 'width: 200px; height: auto;' %>
+      <%= image_tag 'my_page.jpg', class: 'img-fluid', style: 'width: 400px; height: auto;' %>
     </div>
   </div>
-  <div class="row">
-    <div class="col-6 d-flex justify-content-center pt-5" style="height: 400px; background-color: #CCFF99;">
-      <div><%= image_tag '230226_balloon_ride.png', size: '200x200', style: 'object-fit:cover' %></div>
-      <div><%= image_tag 'trip_show.png', size: '400x200', style: 'object-fit:contain;' %></div>
-      </div>
-    <div class="col-6" style="height: 400px; background-color: #F5F5F5;">
-      <div class="col-8 mx-auto mt-4" style="height: 300px">
-        <h3 class="text-center py-3"><strong>2.投稿を通じて自分を発信しよう！</strong></h3>
-        <h4 class="px-5">
-          旅行先の画像・お気に入りの画像を投稿して<br>
-          自分のことを発信しよう！
-        </h4>
-      </div>
+
+  <!-- 説明部分と画像のペア2 -->
+  <div class="row mt-2 row-reverse">
+    <!-- 画像 -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex flex-column align-items-center" style="background-color: #CCFF99;">
+      <%= image_tag '230226_balloon_ride.png', class: 'img-fluid mb-3', style: 'width: 200px; height: auto;' %>
+      <%= image_tag 'trip_show.png', class: 'img-fluid', style: 'width: 400px; height: auto;' %>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-6" style="height: 400px; background-color: #F5F5F5;">
-      <div class="col-8 mx-auto mt-4" style="height: 300px">
-        <h3 class="text-center py-3"><strong>3.仲間を見つけて交流しよう！</strong></h3>
-        <h4 class="px-5">
-          アプリを通じて仲間を見つけよう！<br/>
-          言語・住んでいるエリア・投稿内容から<br />
-          簡単に仲間を見つけることができます。<br />
-          (相互フォローでチャットができます！)
-        </h4>
-      </div>
-    </div>
-    <div class="col-6 d-flex justify-content-center pt-5" style="height: 400px; background-color: #FFFFCC;">
-      <div><%= image_tag '221023_with_mobile2.png', size: '200x200', style: 'object-fit:cover' %></div>
-      <div><%= image_tag 'community.jpg', size: '400x200', style: 'object-fit:contain;' %></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 d-flex justify-content-center pt-5" style="height: 400px; background-color: #FFD5EC;">
-      <div><%= image_tag '221224_laughing.png', size: '200x200', style: 'object-fit:cover' %></div>
-      <div><%= image_tag 'chat.png', size: '400x200', style: 'object-fit:contain;' %></div>
-    </div>
-    <div class="col-6" style="height: 400px; background-color: #F5F5F5;">
-      <div class="col-8 mx-auto mt-4" style="height: 300px">
-        <h3 class="text-center py-3"><strong>4.出会った仲間と直接交流しよう！</strong></h3>
-        <h4 class="px-5">
-          アプリを通して、仲を深めたら実際に現地で交流しよう！<br>
-          日本であれば、日本のいいところを発信しよう。
-          海外であれば、いろんな国の人と交流しよう。
-        </h4>
+    <!-- テキスト -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-center" style="background-color: #F5F5F5;">
+      <div class="text-center">
+        <h3 class="py-3"><strong>2. 投稿を通じて自分を発信しよう！</strong></h3>
+        <p>旅行先の画像・お気に入りの画像を投稿して自分のことを発信しよう！</p>
       </div>
     </div>
   </div>
+
+  <!-- 説明部分と画像のペア3 -->
+  <div class="row mt-2">
+    <!-- テキスト -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-center" style="background-color: #F5F5F5;">
+      <div class="text-center">
+        <h3 class="py-3"><strong>3. 仲間を見つけて交流しよう！</strong></h3>
+        <p>アプリを通じて仲間を見つけよう！言語・住んでいるエリア・投稿内容から簡単に仲間を見つけることができます。</p>
+      </div>
+    </div>
+    <!-- 画像 -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex flex-column align-items-center" style="background-color: #FFFFCC;">
+      <%= image_tag '221023_with_mobile2.png', class: 'img-fluid mb-3', style: 'width: 200px; height: auto;' %>
+      <%= image_tag 'community.jpg', class: 'img-fluid', style: 'width: 400px; height: auto;' %>
+    </div>
+  </div>
+
+  <!-- 説明部分と画像のペア4 -->
+  <div class="row mt-2 row-reverse">
+    <!-- 画像 -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex flex-column align-items-center" style="background-color: #FFD5EC;">
+      <%= image_tag '221224_laughing.png', class: 'img-fluid mb-3', style: 'width: 200px; height: auto;' %>
+      <%= image_tag 'chat.png', class: 'img-fluid', style: 'width: 400px; height: auto;' %>
+    </div>
+    <!-- テキスト -->
+    <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center justify-content-center" style="background-color: #F5F5F5;">
+      <div class="text-center">
+        <h3 class="py-3"><strong>4. 出会った仲間と直接交流しよう！</strong></h3>
+        <p>アプリを通して、仲を深めたら実際に現地で交流しよう！</p>
+      </div>
+    </div>
+  </div>
+</div>
