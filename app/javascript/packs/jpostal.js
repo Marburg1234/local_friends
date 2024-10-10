@@ -1,8 +1,8 @@
 function jpostal() {
-  $('#zipcode').jpostal({
-    postcode : ['#zipcode'],
+  $('.zipcode').jpostal({
+    postcode : ['.zipcode'],
     address : {
-      '#trip_address': '%3%4%5'
+      '.trip_address': '%3%4%5'
     }
   });
 }
