@@ -50,7 +50,21 @@ function getGeocode(latlng) {
 
       // 必要な部分（郵便番号や住所など）を抽出
       const postalCode = addressComponents.find(comp => comp.types.includes('postal_code'));
-      const address = results[0].formatted_address;
+      const country = addressComponents.find(comp => comp.types.includes('country'));
+      const formattedAddress = results[0].formatted_address;
+
+      // 「日本」や郵便番号部分を除外するロジック
+      let address = formattedAddress;
+      if (country) {
+        address = address.replace(country.long_name, ''); // 国名を削除
+      }
+      if (postalCode) {
+        address = address.replace(`〒${postalCode.long_name}`, ''); // 〒と郵便番号を削除
+      }
+
+      // 不要なカンマや余計な文字を削除
+      address = address.replace(/^\s*,\s*|\s*,\s*$|〒\s*\d{3}-\d{4}|、/g, '').trim();
+
 
       // フォームに住所と郵便番号を表示
       document.getElementById('postal_code_input').value = postalCode?.long_name || '';
@@ -63,23 +77,6 @@ function getGeocode(latlng) {
   });
 }
 
-// 投稿フォームの住所を地図に反映する関数
-function geocodeAddress() {
-  const geocoder = new google.maps.Geocoder();
-  const address = document.getElementById('address_input').value;
-
-  geocoder.geocode({ address: address }, (results, status) => {
-    if (status === 'OK' && results[0]) {
-      const location = results[0].geometry.location;
-
-      // 地図をその場所にズームして移動
-      map.setCenter(location);
-      placeMarker(location);
-    } else {
-      alert('住所が見つかりませんでした');
-    }
-  });
-}
 
 // 初期化関数を呼び出して地図を表示
 initMap();
