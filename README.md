@@ -42,3 +42,4 @@
   - Free! イラスト素材サイト てがきですの！β (<https://regeld.com/desi/>)
   - Icon-rainbow (<https://icon-rainbow.com/>)
   - かわいいフリー素材集 いらすとや (<https://www.irasutoya.com/>)
+  - Font Awesome (<https://fontawesome.com/>)
