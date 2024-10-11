@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <!-- チャット相手の表示 -->
-<h1 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>" class="mb-3 text-center">
+<h1 id="room" data-room="<%= @room.id %>" data-user="<%= current_user.id %>" class="mb-3 my-5 text-center">
   <strong><%= @user.family_name %><%= @user.first_name %>さんとのチャット</strong>
 </h1>
 

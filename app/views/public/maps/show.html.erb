@@ -1,10 +1,9 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<div class="my-3">
   <!--戻るボタン-->
-  <span class="ml-3">
-    <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
-  </span>
+<%= render '../views/layouts/back_btn' %>
+
+<div class="my-3">
   <!--タイトル・投稿記事の住所の表示-->
   <h1 class="text-center my-3">投稿の場所を確認しよう！</h1>
   <h2 class="text-center"><span class="border-bottom" style="background-color: #FFFF99;">住所：<%= @trip_address %></span></h2>
