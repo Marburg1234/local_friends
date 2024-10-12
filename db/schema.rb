@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_02_032748) do
+ActiveRecord::Schema.define(version: 2024_10_04_124808) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -86,6 +86,17 @@ ActiveRecord::Schema.define(version: 2024_10_02_032748) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "notifiable_type", null: false
+    t.integer "notifiable_id", null: false
+    t.boolean "read", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "regions", force: :cascade do |t|
     t.integer "country_id", null: false
     t.string "name", null: false
@@ -159,6 +170,7 @@ ActiveRecord::Schema.define(version: 2024_10_02_032748) do
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "nationality", default: 1, null: false
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["region_id"], name: "index_users_on_region_id"
@@ -169,11 +181,13 @@ ActiveRecord::Schema.define(version: 2024_10_02_032748) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chats", "chat_rooms"
   add_foreign_key "chats", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "regions", "countries"
   add_foreign_key "tags", "trips"
   add_foreign_key "trips", "users"
   add_foreign_key "user_rooms", "chat_rooms"
   add_foreign_key "user_rooms", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "users", "countries", column: "nationality"
   add_foreign_key "users", "regions"
 end

@@ -30,10 +30,23 @@
   color: white;
 }
 
+// user_show スライドショーへのボタン(各画像をリンクにしている部分 buttonタグのデフォルト設定を廃止)
+  .user_slideshow-button {
+    background: none; /* 背景を削除 */
+    border: none; /* ボーダーを削除 */
+    padding: 0; /* パディングを削除 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+}
 
 
-
-// レスポンシブ対応 user_show
+// レスポンシブ対応 user_show mdサイズのレスポンシブ
+@media (max-width: 991px) {
+  /* nth-child(even)を使って偶数番目の要素に対して適用 2番目の要素にmargin-topを入れる */
+  .responsive-margin > *:nth-child(even) {
+    margin-top: 20px; /* 必要に応じて値を調整 */
+  }
+}
+// レスポンシブ対応 user_show smサイズのレスポンシブ
 @media (max-width: 768px) {
   /* nth-child(even)を使って偶数番目の要素に対して適用 2番目の要素にmargin-topを入れる */
   .responsive-margin > *:nth-child(even) {

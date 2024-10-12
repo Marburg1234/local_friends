@@ -161,7 +161,8 @@ User.create!(first_name: 'Liam') do |user|
     user.family_name = 'O Connor'
     user.email = '1@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = Country.find_by(name: 'アメリカ').id
+    user.nationality = Country.find_by(name: 'アメリカ').id
+    user.country_id = Country.find_by(name: 'ドイツ').id
     user.region_id = Region.find_by(name: 'Hamburg').id
     user.mother_language_id = Language.find_by( name: '英語').id
     user.practice_language_id = Language.find_by( name: 'ドイツ語').id
@@ -179,6 +180,7 @@ User.create!(first_name: 'Isabel') do |user|
     user.family_name = 'López'
     user.email = '2@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'イギリス').id
     user.country_id = Country.find_by(name: 'イギリス').id
     user.region_id = Region.find_by(name: 'New Castle').id
     user.mother_language_id = Language.find_by( name: '英語').id
@@ -197,6 +199,7 @@ User.create!(first_name: 'Sophie') do |user|
     user.family_name = 'Müller'
     user.email = '3@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'ドイツ').id
     user.country_id = Country.find_by(name: 'ドイツ').id
     user.region_id = Region.find_by(name: 'München').id
     user.mother_language_id = Language.find_by( name: 'ドイツ語').id
@@ -215,7 +218,8 @@ User.create!(first_name: 'Hamilton') do |user|
     user.family_name = 'Ojay'
     user.email = '4@yahoo.co.jp'
     user.password = '111111'
-    user.country_id = Country.find_by(name: 'アメリカ').id
+    user.nationality = Country.find_by(name: 'アメリカ').id
+    user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '沖縄').id
     user.mother_language_id = Language.find_by( name: '中国語').id
     user.practice_language_id = Language.find_by( name: '日本語').id
@@ -233,6 +237,7 @@ User.create!(first_name: 'Emily') do |user|
     user.family_name = 'Thompson'
     user.email = '5@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'アメリカ').id
     user.country_id = Country.find_by(name: 'アメリカ').id
     user.region_id = Region.find_by(name: 'Ohio').id
     user.mother_language_id = Language.find_by( name: '英語').id
@@ -251,6 +256,7 @@ User.create!(first_name: 'Hiroshi') do |user|
     user.family_name = 'Nakamura'
     user.email = '6@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'アメリカ').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '兵庫').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -269,6 +275,7 @@ User.create!(first_name: 'Marta') do |user|
     user.family_name = 'Nowak'
     user.email = '7@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'フランス').id
     user.country_id = Country.find_by(name: 'フランス').id
     user.region_id = Region.find_by(name: 'Bordeaux').id
     user.mother_language_id = Language.find_by( name: 'フランス語').id
@@ -287,6 +294,7 @@ User.create!(first_name: 'Carlos') do |user|
     user.family_name = 'Ramirez'
     user.email = '8@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: 'ドイツ').id
     user.country_id = Country.find_by(name: 'ドイツ').id
     user.region_id = Region.find_by(name: 'Leipzig').id
     user.mother_language_id = Language.find_by( name: 'ドイツ語').id
@@ -305,6 +313,7 @@ User.create!(first_name: 'Yumi') do |user|
     user.family_name = 'Tanaka'
     user.email = '9@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '日本').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '徳島').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -323,6 +332,7 @@ User.create!(first_name: 'Takumi') do |user|
     user.family_name = 'Yamada'
     user.email = '10@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '日本').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '東京').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -341,6 +351,7 @@ User.create!(first_name: 'Haruka') do |user|
     user.family_name = 'Saito'
     user.email = '11@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '日本').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '北海道').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -359,6 +370,7 @@ User.create!(first_name: 'Kenta') do |user|
     user.family_name = 'Nikaido'
     user.email = '12@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '日本').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '北海道').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -377,6 +389,7 @@ User.create!(first_name: 'Shohei') do |user|
     user.family_name = 'Suzuki'
     user.email = '13@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '日本').id
     user.country_id = Country.find_by(name: '日本').id
     user.region_id = Region.find_by(name: '長野').id
     user.mother_language_id = Language.find_by( name: '日本語').id
@@ -395,6 +408,7 @@ User.create!(first_name: 'Min-Ji') do |user|
     user.family_name = 'Kim'
     user.email = '14@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '韓国').id
     user.country_id = Country.find_by(name: '韓国').id
     user.region_id = Region.find_by(name: 'Incheon').id
     user.mother_language_id = Language.find_by( name: '韓国語').id
@@ -413,6 +427,7 @@ User.create!(first_name: 'Jae-Hyun') do |user|
     user.family_name = 'Park'
     user.email = '15@yahoo.co.jp'
     user.password = '111111'
+    user.nationality = Country.find_by(name: '韓国').id
     user.country_id = Country.find_by(name: '韓国').id
     user.region_id = Region.find_by(name: 'Incheon').id
     user.mother_language_id = Language.find_by( name: '韓国語').id

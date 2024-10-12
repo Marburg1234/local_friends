@@ -10,23 +10,181 @@
     <div class="col-12 px-sm-0 text-center">
       <h1 class="pr-3 pl-3"><strong>他のユーザーと交流しよう！</strong></h1>
     </div>
+
+    <!-- ソートするためのボタン Modal開くボタン -->
+    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#user_index_modal">
+      条件で絞り込む
+    </button>
+
+    <!-- ユーザーフリーワード検索ボタン Modal開くボタン -->
+    <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#user_search_modal">
+      検索する
+    </button>
+
+    <!-- 1つ目のModal ソートオプション3種類を表示 -->
+    <!--============================================================================-->
+    <div class="modal fade" id="user_index_modal" tabindex="-1" aria-labelledby="user_index_modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="user_index_modalLabel">ソートオプション</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+            <div class="modal-body border-bottom">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mother_language">
+                言語から
+              </button>
+            </div>
+            <div class="modal-body border-bottom">
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#country_region">
+                住んでいる国と地域から
+              </button>
+            </div>
+            <div class="modal-body">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nationality_sort">
+                出身国から
+              </button>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--============================================================================-->
+
+    <!--2番目のModal 選択したソートオプションによって、中身が変わるように以下で記述している-->
+    <!--============================================================================-->
+    <!--1.言語からユーザーの検索(ソート)をする-->
+    <div class="modal fade" id="mother_language" tabindex="-1" aria-labelledby="mother_languageLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="mother_languageLabel">言語で絞り込む</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :言語で選ぶ %><br/>
+              <%= f.label :母国語 %>
+              <%= f.select :mother_language_id, options_from_collection_for_select(Language.all, :id, :name), include_blank: true %>
+              <%= f.hidden_field :sort_by, value: 'language' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--2.住んでいる国と地域からソート-->
+    <div class="modal fade" id="country_region" tabindex="-1" aria-labelledby="country_regionLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="country_regionLabel">国と地域で絞り込む</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :住んでいる国と地域から %><br/>
+              <%= f.label :住んでいる国 %>
+              <%= f.collection_select :country_id, Country.all, :id, :name, { include_blank: true }, { id: 'country_select' } %><br />
+              <%= f.label :住んでいる地域 %>
+              <%= f.select :region_id, [], { include_blank: true }, { id: 'region_select' } %>
+              <%= f.hidden_field :sort_by, value: 'country_region' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--3.出身国からユーザーの検索(ソート)をする-->
+    <div class="modal fade" id="nationality_sort" tabindex="-1" aria-labelledby="nationality_sortLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="nationality_sortLabel">出身国で絞り込む</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+          <div class="modal-body">
+            <%= form_with url: users_path, method: :get, local: true do |f| %>
+            <div>
+              <%= f.label :出身国で選ぶ %><br/>
+              <%= f.label :出身国 %>
+              <%= f.collection_select :nationality, Country.all, :id, :name, { include_blank: true } %>
+              <%= f.hidden_field :sort_by, value: 'nationality' %>
+            </div>
+            <div class="text-right">
+              <%= f.submit '実行する', class: 'btn btn-info' %>
+            </div>
+            <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--============================================================================-->
+    <!-- ユーザー検索のModal -->
+    <!--============================================================================-->
+    <div class="modal fade" id="user_search_modal" tabindex="-1" aria-labelledby="user_search_modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="user_search_modalLabel">ユーザーを検索する</h1>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+          </div>
+            <div class="modal-body border-bottom">
+              <p>名前・国名・地域名で検索できます</p>
+              <%= form_with url: search_path, local: true, method: :get do |f| %>
+                <%= f.text_field :word, placeholder: 'フリーワード' %>
+                <%= f.submit "検索", class: "btn-sm btn-primary" %>
+                <%= f.hidden_field :range, value: 'User' %>
+              <% end %>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--============================================================================-->
+
+
+
   </div>
   <div class="auto-scroll">
     <div class="row my-3">
-      <div class="col-12 d-flex flex-wrap">
+      <div class="col-12 col-sm-12 d-flex flex-wrap">
         <% @users.each_slice(4) do |users| %>
           <% users.each do |user| %>
             <div class="card p-1 mt-5 col-6 col-sm-3"> <!-- col-6でカードの幅を指定 -->
               <%= link_to user_path(user.id) do %>
-                <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top border-bottom rounded' %>
+                <%= image_tag user.get_profile_image, size: '150x150', class: 'card-img-top rounded-circle object-fit-cover' %>
               <div class="card-body text-dark">
                 <div class="card-title">
-                  <strong><%= user.family_name %><%= "  " %><%= user.first_name %></strong>
+                  <strong><%= user.full_name %></strong>
                 </div>
                 <div class="card-text">
                   出身
-                  <span><%= user.country.name %></span>
-                  <td><% user.region.name %></td>
+                  <td><%= user.nationality_country.name %></td>
                 </div>
                 <div class="card-text">
                   <th>母国語</th>
@@ -46,3 +204,34 @@
   </div>
 </div>
 
+
+
+
+<!--JSの記述 国を選択したら、関連した地域が出てくる-->
+<script>
+  document.addEventListener("turbolinks:load", function() {
+  const countrySelect = document.getElementById('country_select');
+  const regionSelect = document.getElementById('region_select');
+
+  countrySelect.addEventListener('change', function() {
+    const countryId = countrySelect.value;
+
+    if (countryId) {
+      fetch(`/countries/${countryId}/regions`)
+        .then(response => response.json())
+        .then(data => {
+          regionSelect.innerHTML = ''; // 既存の選択肢をクリア
+
+          data.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.id;
+            option.text = region.name;
+            regionSelect.appendChild(option);
+          });
+        });
+    } else {
+      regionSelect.innerHTML = ''; // 国が選択されていない場合、地域もクリア
+    }
+  });
+  });
+</script>

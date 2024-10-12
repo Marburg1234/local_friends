@@ -34,6 +34,13 @@ class Public::TripsController < ApplicationController
         not_active_users = User.where(is_active: false).pluck(:id)
         # 取得した退会ユーザーのidを使用して、記事を探す際に退会ユーザー分を除外する
         @trips = Trip.where.not(user_id: not_active_users).page(params[:page]).per(5)
+        if params[:old]
+          @trips = @trips.old
+        elsif params[:favorite_count]
+          @trips = @trips.favorite_count
+        else
+          @trips = @trips.latest
+        end
       end
       # json形式でのリクエストの場合の処理 (APIやJS非同期のリクエストがきたとき)
       format.json do
@@ -63,7 +70,25 @@ class Public::TripsController < ApplicationController
 
   def update
     @trip = Trip.find(params[:id])
+    # 新しい画像がアップロードされているか確認
+    if trip_params[:trip_image].present?
+      # 新しい画像がアップロードされた場合、タグを取得
+      tags = Vision.get_image_data(trip_params[:trip_image])
+    else
+      # 新しい画像がアップロードされていない場合、既存の画像を保持
+      trip_params[:trip_image] = @trip.trip_image
+      tags = [] # タグの更新は行わない
+    end
+
+    # 更新処理
     if @trip.update(trip_params)
+      # 上記のif文で取得したtagsがあるかどうかで動作を分けている tagsを取得=新しい画像を選んだ場合 tagsがない=既存の画像のまま
+      if tags.any?
+        @trip.tags.destroy_all  # 新しい画像があった場合、既存のタグを削除
+        tags.each do |tag|
+          @trip.tags.create(name: tag)
+        end
+      end
       flash[:notice] = "編集内容を保存しました"
       redirect_to trip_path(@trip)
     else

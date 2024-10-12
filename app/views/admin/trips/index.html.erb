@@ -1,9 +1,4 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<style>
-  .left{
-    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
-  }
-</style>
 
   <!--削除処理成功のメッセージ-->
   <% if flash[:notice].present? %>
@@ -12,8 +7,8 @@
 
   <!--ページの題名-->
   <div class="col-md-10 mx-auto text-center my-5">
-    <h1 class="text-center">投稿一覧</h1>
-    <p class="text-center">合計投稿件数：<%= @all_trips %></p>
+    <h1>投稿一覧</h1>
+    <p>合計投稿件数：<%= @all_trips %></p>
   </div>
 
 <div class="container">
@@ -26,10 +21,9 @@
         <% end %>
         <br/>
         <div class="pt-1 d-flex">
-          <span style="vertical-align: middle; display: flex; align-items: center;">投稿ユーザー：</span>
+          <span class="admin_trip_user_name">投稿ユーザー：</span>
             <%= link_to admin_user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
-              <%= trip.user.family_name %>
-              <%= trip.user.first_name %>
+              <%= trip.user.full_name %>
             <% end %>
         </div>
       </div>
@@ -38,15 +32,15 @@
       <div class="col-6">
         <table class="table mt-2">
           <tr>
-            <th class="left">タイトル</th>
+            <th>タイトル</th>
             <td><%= trip.title %></td>
           </tr>
           <tr>
-            <th class="left">場所</th>
+            <th>場所</th>
             <td><%= trip.address%></td>
           </tr>
           <tr>
-            <th class="left">投稿日</th>
+            <th>投稿日</th>
             <td><%= trip.created_at.strftime('%Y/%m/%d') %></td>
           </tr>
           <tr>

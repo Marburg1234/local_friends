@@ -26,6 +26,9 @@
           <%= f.file_field :trip_image, id: "trip_image_post", style: 'display: none;', accept: "image/*", class: 'form-control-file', 'onChange': 'TripimgPreview(event, "preview-item1")' %>
         </div>
         <div id="preview-item1" class="text-center mb-4"><%= image_tag @trip.get_trip_image, size: '200x300', class: 'img-thumbnail' %></div>
+        <% @trip.tags.each do |tag| %>
+          <span class="trip_image_tag"><%= tag.name %></span>
+        <% end %>
       </div>
 
       <!-- 郵便番号 -->

@@ -15,6 +15,7 @@
   .left{
     width: 160px; /* 表が少しずれるのを防止 幅の設定*/
   }
+
 </style>
 
   <!--処理が成功した際にでるフラッシュメッセージ-->
@@ -28,38 +29,51 @@
 
 <!--ページの題名-->
 <div class="my-5">
-  <h1 class="text-center"><strong>投稿一覧から気になる投稿を見つけよう！</strong></h1>
+  <h1 class="text-center"><strong>投稿一覧</strong></h1>
+  <p class="text-center d-none d-lg-block d-md-block"><strong>投稿から気の合うユーザーを見つけよう！</strong></p>
   <div class="text-center mt-3"><%= link_to "地図から投稿を探す", maps_path, class: 'btn btn-info btn-lg', data: {"turbolinks" => false} %></div>
 </div>
 
-<div class="container">
+<div class="container responsive_fluid">
+  <!--並べ替え・検索機能は部分テンプレート-->
+  <%= render 'search_and_sort' %>
+
   <div class="auto-scroll">
     <div class="row">
       <% @trips.each do |trip| %>
-        <!-- 左側 -->
-        <div class="col-lg-4 col-md-6 mb-5">
-          <%= link_to trip_path(trip.id) do %>
-            <%= image_tag trip.get_trip_image, size: "240x180" %>
-          <% end %>
-          <br/>
-          <div class="pt-1 d-flex">
-            <span style="vertical-align: middle; display: flex; align-items: center;">投稿ユーザー：</span>
-              <%= link_to user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
-                <%= trip.user.family_name %> <%= trip.user.first_name %>
-              <% end %>
+
+        <!--左側の部分-->
+        <div class="col-lg-4 col-md-5 col-sm-12">
+          <!-- 投稿画像の表示(リンク) -->
+          <div>
+            <%= link_to trip_path(trip.id) do %>
+              <%= image_tag trip.get_trip_image, class: "img-fluid img-thumbnail fixed-size" %> <!-- スマホ画面では自動で縮小 -->
+            <% end %>
+          </div>
+          <!-- 投稿者の表示(リンク) -->
+          <div class="pt-1 d-flex align-items-center">
+            <%= link_to user_path(trip.user), method: :GET, class: 'nav-link text-warning' do %>
+              <%= image_tag trip.user.get_profile_image, size: '50x50', class: 'rounded-circle mr-2' %> <!-- スペースを追加 -->
+              <%= trip.user.full_name %>
+            <% end %>
           </div>
         </div>
 
-        <!-- 右側 -->
-        <div class="col-lg-8 col-md-12">
+        <!-- 右側の部分 -->
+        <div class="col-lg-8 col-md-7 col-sm-12">
           <table class="table mt-2">
             <tr>
               <th class="left">タイトル</th>
               <td><%= trip.title %></td>
             </tr>
-            <tr>
+            <!-- 場所 (スマホで非表示) -->
+            <tr class="d-none d-sm-table-row">
               <th class="left">場所</th>
-              <td><%= link_to show_map_path(trip), data: {"turbolinks" => false} do %><%= trip.address%><% end %> (地図を確認できます)</td>
+              <td class="w-75">
+                <%= link_to show_map_path(trip), data: {"turbolinks" => false}, class: "d-inline-block text-truncate w-100" do %>
+                  <%= trip.address %>
+                <% end %> (地図を確認できます)
+              </td>
             </tr>
             <tr>
               <th class="left">投稿日</th>
@@ -67,7 +81,9 @@
             </tr>
             <tr>
               <th class="left"></th>
-              <td id="favorite_button_<%= trip.id %>"><%= render 'public/favorites/like', trip: trip %></td>
+              <td id="favorite_button_<%= trip.id %>">
+                <%= render 'public/favorites/like', trip: trip %>
+              </td>
             </tr>
           </table>
         </div>
@@ -76,6 +92,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- jQuery CDN (必ず先に読み込む) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

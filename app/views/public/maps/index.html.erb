@@ -1,9 +1,7 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-  <!--戻るボタン-->
-  <span class="ml-3">
-    <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
-  </span>
+<!--戻るボタン-->
+<%= render '../views/layouts/back_btn' %>
 
 <!--タイトル-->
 <h1 class="text-center my-3">気になる投稿やスポットを探そう！</h1>

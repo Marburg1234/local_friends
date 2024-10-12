@@ -13,7 +13,26 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
+    # @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
+
+    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all
+
+    case params[:sort_by]
+      when 'country_region'
+        if params[:country_id].present? && params[:region_id].present?
+          @users = @users.where(country_id: params[:country_id], region_id: params[:region_id])
+        end
+      when 'language'
+        if params[:mother_language_id].present?
+          @users = @users.where(mother_language_id: params[:mother_language_id])
+        end
+      when 'nationality'
+        if params[:nationality].present?
+          @users = @users.where(nationality: params[:nationality])
+        end
+      else
+        @users = @users.limit(12).shuffle
+    end
   end
 
   # マイページ
@@ -46,7 +65,6 @@ class Public::UsersController < ApplicationController
   end
 # ====================================================
 
-
 # ===============================================
   # 退会確認するページ
   def unsubscribe
@@ -66,7 +84,7 @@ class Public::UsersController < ApplicationController
   # いいねした記事一覧を表示するメソッドlikes
   def likes
     user = current_user
-    @favorites = user.favorites.page(params[:page]).per(1)
+    @favorites = user.favorites.page(params[:page]).per(5)
   end
 # ================================================
 
@@ -87,7 +105,7 @@ class Public::UsersController < ApplicationController
   private
 # ストロングパラメーター
   def user_params
-    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, sub_images: [])
+    params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, :country_id, :region_id, sub_images: [])
   end
 
 # ゲストログインユーザーのダイレクトアタックを阻止するメソッド

@@ -13,6 +13,87 @@
     <div class=" col-md-7">
       <%= link_to "ユーザー管理をする", admin_users_path, class: 'btn btn-success w-100 my-3', data: { turbolinks: false } %><br />
       <%= link_to "投稿記事の管理をする", admin_trips_path, class: 'btn btn-warning w-100' %>
+      <!-- フリーワード検索ボタン Modal開くボタン -->
+      <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#admin_search_modal">
+        検索する
+      </button>
     </div>
   </div>
 </div>
+
+<!-- 1つ目のModal 検索オプション2種類を表示 -->
+<!--============================================================================-->
+<div class="modal fade" id="admin_search_modal" tabindex="-1" aria-labelledby="admin_search_modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="admin_search_modalLabel">検索オプション</h1>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+      </div>
+        <div class="modal-body border-bottom">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#admin_user_search">
+            ユーザーを検索
+          </button>
+        </div>
+        <div class="modal-body border-bottom">
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#admin_trip_search">
+            投稿記事を検索
+          </button>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--============================================================================-->
+
+
+<!--2つ目のModal 選択した検索オプションによって、中身が変わる-->
+<!--============================================================================-->
+<!--1.ユーザーの検索をする-->
+<div class="modal fade" id="admin_user_search" tabindex="-1" aria-labelledby="admin_user_searchLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="admin_user_searchLabel">ユーザー検索</h1>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>名前・国名・地域名で検索できます</p>
+        <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word, placeholder: 'フリーワード' %>
+          <%= f.submit "検索", class: "btn-sm btn-primary" %>
+          <%= f.hidden_field :range, value: 'User' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--=====================================================================================-->
+<!--2.投稿記事の検索をする-->
+<div class="modal fade" id="admin_trip_search" tabindex="-1" aria-labelledby="admin_trip_searchLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="admin_trip_searchLabel">投稿記事の検索</h1>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><i class="fa-regular fa-circle-xmark" style="font-size:1.7rem"></i></button>
+      </div>
+      <div class="modal-body">
+        <p>フリーワードで検索できます</p>
+        <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
+          <%= f.text_field :word, placeholder: 'フリーワード' %>
+          <%= f.submit "検索", class: "btn-sm btn-primary" %>
+          <%= f.hidden_field :range, value: 'Trip' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--============================================================================-->
