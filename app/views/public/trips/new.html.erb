@@ -23,10 +23,10 @@
         </div>
         <div id="preview-item1" class="text-center mb-4"></div>
       </div>
-
+      <h4>※住所は、入力するか地図から選択することができます！</h4>
       <!-- 郵便番号 -->
       <div class="form-group">
-        <label><strong>郵便番号(ハイフンなしで入力してください)</strong></label>
+        <label><strong>郵便番号</strong></label>
         <%= f.text_field :post_code, id: 'postal_code_input', class: 'zipcode form-control', required: true, placeholder: "例: 1234567" %>
       </div>
 
@@ -36,7 +36,7 @@
         <%= f.text_field :address, id: 'address_input', class: 'trip_address form-control', required: true, placeholder: "例: 東京都渋谷区" %>
       </div>
       <!--地図を表示する-->
-      <div class="container my-3">
+      <div class="my-3">
         <div id="trip_new_map"></div>
       </div>
 

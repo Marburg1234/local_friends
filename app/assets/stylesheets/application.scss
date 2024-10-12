@@ -101,7 +101,7 @@ label {
 }
 
 // 地図の表示するサイズ
-#map, #maps, #region_map, #trip_new_map {
+#map, #maps, #region_map, #trip_new_map{
   width: 100%;
   height: 500px;
 }
@@ -258,7 +258,28 @@ label {
   height: 250px;
   object-fit: fill; //要素のサイズを画像で埋める 伸縮させる
 }
+
+.left{
+    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
+}
 // =========================================
+
+// 自動スクロール用のスタイル
+// kaminariを表示しない
+// =========================================
+.pagination {
+    display: none; /* 要素自体を表示しない */
+  }
+
+  .container {
+    width: 1140px; /* 固定幅の設定 */
+  }
+
+  .jscroll-inner {
+    width: 100%; /* 幅の調整 */
+  }
+// =========================================
+
 
 
 // レスポンシブ対応

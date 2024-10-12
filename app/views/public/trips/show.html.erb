@@ -1,17 +1,5 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<style>
-  .pagination {
-    display: none; /* 要素自体を表示しない */
-  }
 
-  .container {
-    width: 1140px; /* 固定幅の設定 */
-  }
-
-  .jscroll-inner {
-    width: 100%; /* 幅の調整 */
-  }
-</style>
   <!--フラッシュメッセージ-->
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "success_notice" %>
