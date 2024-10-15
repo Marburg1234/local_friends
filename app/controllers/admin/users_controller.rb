@@ -4,7 +4,8 @@ class Admin::UsersController < ApplicationController
 # ユーザー一覧表示=============================================================================
   def index
     # 全ユーザー情報を取得して10人1ページで表示する(ゲストは除く)
-    @users = User.where.not(email: "guest@example.com").order(id: :asc).page(params[:page]).per(10)
+    @users = User.where.not(email: "guest@example.com").all.order(id: :asc).page(params[:page]).per(10)
+
     # 全ユーザーの人数を数える
     @users_count = User.where.not(email: "guest@example.com").all.count
 

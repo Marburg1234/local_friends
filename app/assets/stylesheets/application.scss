@@ -15,7 +15,7 @@ main{
 .registration_alert-message{
   color: white;
   background-color: #FF8856;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
 }
@@ -23,7 +23,7 @@ main{
 // 処理が成功した時にフラッシュ
 .success_notice{
   background-color: #CBFFD3	;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -34,7 +34,7 @@ main{
 .fail_notice{
   background-color: #FF8856;
   color: white;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -45,7 +45,7 @@ main{
 .guest_limit_notice{
   background-color: #99CC66;
   color: white;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -55,7 +55,7 @@ main{
 // 退会したユーザーへのフラッシュ
 .withdraw_notice{
   background-color: #FFCC33;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -120,31 +120,31 @@ label {
   margin: 20px 0;
 }
 
-.pagination {
+.pagination_admin {
   display: inline-block;
   padding-left: 0;
   margin: 0;
   list-style: none;
 }
 
-.pagination li {
+.pagination_admin li {
   display: inline;
   margin: 0 5px;
 }
 
-.pagination a,
-.pagination span {
+.pagination_admin a,
+.pagination_admin span {
   color: #007bff;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.2s, color 0.2s;
 }
-.pagination a {
+.pagination_admin a {
   border: 1px solid black;
 }
 
-.pagination a:hover {
+.pagination_admin a:hover {
   background-color: #99FFFF;
 }
 // ===============================================================
@@ -262,22 +262,6 @@ label {
 .left{
     width: 160px; /* 表が少しずれるのを防止 幅の設定*/
 }
-// =========================================
-
-// 自動スクロール用のスタイル
-// kaminariを表示しない
-// =========================================
-.pagination {
-    display: none; /* 要素自体を表示しない */
-  }
-
-  .container {
-    width: 1140px; /* 固定幅の設定 */
-  }
-
-  .jscroll-inner {
-    width: 100%; /* 幅の調整 */
-  }
 // =========================================
 
 
