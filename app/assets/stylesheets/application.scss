@@ -114,37 +114,37 @@ label {
 
 
 // ======================================================
-// ページネーションに関するスタイル
+// 管理者側ページネーションに関するスタイル
 .pagination-container {
   text-align: center;
   margin: 20px 0;
 }
 
-.pagination_admin {
+.pagination {
   display: inline-block;
   padding-left: 0;
   margin: 0;
   list-style: none;
 }
 
-.pagination_admin li {
+.pagination li {
   display: inline;
   margin: 0 5px;
 }
 
-.pagination_admin a,
-.pagination_admin span {
+.pagination a,
+.pagination span {
   color: #007bff;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.2s, color 0.2s;
 }
-.pagination_admin a {
+.pagination a {
   border: 1px solid black;
 }
 
-.pagination_admin a:hover {
+.pagination a:hover {
   background-color: #99FFFF;
 }
 // ===============================================================
