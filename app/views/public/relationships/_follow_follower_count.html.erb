@@ -1,9 +1,9 @@
 <!--フォロー数・フォロワー数の表示と一覧へのリンク設定-->
 <div class="d-flex justify-content-end my-2">
   <%= link_to follows_user_path(user.id), class: 'btn btn-info' do %>
-    フォロー数：<%= user.followings.count %>
+    フォロー数：<%= user.followings.where(is_active: true).count %>
   <% end %>
   <%= link_to followers_user_path(user.id), class: 'btn btn-secondary' do %>
-    フォロワー数：<%= user.followers.count %>
+    フォロワー数：<%= user.followers.where(is_active: true).count %>
   <% end %>
 </div>

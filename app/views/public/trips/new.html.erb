@@ -12,7 +12,7 @@
       <%= form_with model: @trip, local:true do |f| %>
       <!-- 画像Wの投稿とプレビュー表示 -->
       <div class="form-group">
-        <h4 class="mb-3">写真をアップロード</h4>
+        <h4 class="mb-3">写真をアップロード<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></h4>
         <span>※拡張子jpg・jpeg・pngの投稿ができます</span><br/>
         <span>※画像サイズ5MB以下</span>
         <div class="d-flex mb-3">
@@ -23,7 +23,8 @@
         </div>
         <div id="preview-item1" class="text-center mb-4"></div>
       </div>
-      <h4>※住所は、入力するか地図から選択することができます！</h4>
+      <h5>※郵便番号と住所は、入力するか地図から選択することができます！<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></h5>
+      <h5>【住所を入力する】</h5>
       <!-- 郵便番号 -->
       <div class="form-group">
         <label><strong>郵便番号</strong></label>
@@ -35,6 +36,7 @@
         <label><strong>住所</strong></label>
         <%= f.text_field :address, id: 'address_input', class: 'trip_address form-control', required: true, placeholder: "例: 東京都渋谷区" %>
       </div>
+      <h5>【地図から選択する】</h5>
       <!--地図を表示する-->
       <div class="my-3">
         <div id="trip_new_map"></div>
@@ -42,13 +44,13 @@
 
       <!-- タイトル -->
       <div class="form-group">
-        <label><strong>タイトル</strong></label>
+        <label><strong>タイトル<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></strong></label>
         <%= f.text_field :title, local: true, class: 'form-control', required: true, placeholder: "タイトルを入力してください" %>
       </div>
 
       <!-- 説明欄 -->
       <div class="form-group">
-        <label><strong>説明欄</strong></label>
+        <label><strong>説明欄<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></strong></label>
         <%= f.text_area :explain, class: 'form-control', required: true, placeholder: "説明を入力してください" %>
       </div>
 
