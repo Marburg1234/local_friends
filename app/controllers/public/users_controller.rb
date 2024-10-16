@@ -90,12 +90,12 @@ class Public::UsersController < ApplicationController
   # フォロー機能のメソッド
   def follows
     @user = User.find(params[:id])
-    @users = @user.followings
+    @users = @user.followings.where.not(is_active: false)
   end
 
   def followers
     @user = User.find(params[:id])
-    @users = @user.followers
+    @users = @user.followers.where.not(is_active: false)
   end
 # ================================================
 
