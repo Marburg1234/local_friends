@@ -3,15 +3,21 @@
   <div class="row mb-4 p-3 bg-light rounded shadow-sm">
     <!-- ユーザー画像 -->
     <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-      <%= image_tag trip_comment.user.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+      <%= link_to user_path(trip_comment.user) do %>
+        <%= image_tag trip_comment.user.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+      <% end %>
     </div>
 
     <!-- コメント内容 -->
     <div class="col-lg-9 col-md-8 col-sm-7">
       <div class="comment-details" style="position: relative;">
         <div class="d-flex mb-3">
-          <strong><%= trip_comment.user.family_name %> <%= trip_comment.user.first_name %></strong>
-          <span class=" ml-5 text-muted"><%= trip_comment.created_at.strftime('%Y/%m/%d') %></span>
+          <strong>
+            <%= link_to user_path(trip_comment.user) do %>
+              <%= trip_comment.user.full_name %>
+            <% end %>
+          </strong>
+          <span class=" ml-5 text-muted"><%= trip_comment.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span>
           <!-- 削除ボタン -->
           <div style="position: absolute; top: 2px; right: 2px">
             <% if trip_comment.user == current_user %>
@@ -19,7 +25,7 @@
             <% end %>
           </div>
         </div>
-        <div class="border rounded p-2 mt-2 mb-2 comment-index" style="overflow-wrap: break-word;"><%= trip_comment.comment %></div>
+        <div class="rounded p-2 mt-2 mb-2 comment-index" style="overflow-wrap: break-word;"><%= trip_comment.comment %></div>
       </div>
     </div>
   </div>

@@ -13,9 +13,7 @@ class Public::UsersController < ApplicationController
 
   # ランダムでユーザーを表示する
   def index
-    # @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").limit(12).shuffle
-
-    @users = User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all
+    @users = user_all
 
     case params[:sort_by]
       when 'country_region'
@@ -145,5 +143,11 @@ class Public::UsersController < ApplicationController
       redirect_to users_path, alert: "ユーザーが見つかりませんでした。"
     end
   end
+
+# 全ユーザー情報を取得する(ログインユーザー/ゲスト/退会ユーザーは除く)
+  def user_all
+    User.where.not(id: current_user.id).where.not(is_active: false).where.not(email: "guest@example.com").all
+  end
+
 
 end

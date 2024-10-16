@@ -1,22 +1,5 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-<style>
-  .pagination {
-    display: none; /* 要素自体を表示しない */
-  }
-
-  .container {
-    width: 1140px; /* 固定幅の設定 */
-  }
-
-  .jscroll-inner {
-    width: 100%; /* 幅の調整 */
-  }
-
-  .left{
-    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
-  }
-
-</style>
+<%= stylesheet_link_tag 'auto_scroll', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   <!--処理が成功した際にでるフラッシュメッセージ-->
   <% if flash[:notice].present? %>

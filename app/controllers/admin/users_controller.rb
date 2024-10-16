@@ -4,19 +4,13 @@ class Admin::UsersController < ApplicationController
 # ユーザー一覧表示=============================================================================
   def index
     # 全ユーザー情報を取得して10人1ページで表示する(ゲストは除く)
-    @users = User.where.not(email: "guest@example.com").order(id: :asc).page(params[:page]).per(10)
+    @users = user_all_remove_guest.order(id: :asc).page(params[:page]).per(10)
     # 全ユーザーの人数を数える
-    @users_count = User.where.not(email: "guest@example.com").all.count
-
-    # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
-    @active_users_all = active_users_all
-    # 有効ユーザーの割合算出 メソッド2
-    @active_user_ration = active_user_ration
-
-    # 退会済みのユーザーの合計人数 メソッド4
-    @not_active_users = not_active_users
-    # 退会済みユーザーの割合算出 メソッド3
-    @not_active_user_ration = not_active_user_ration
+    @users_count = user_all_count
+    #有効ユーザーの人数と割合
+    active_users_count_ration
+    # 退会済みのユーザーの人数と割合
+    not_active_users_count_ration
     # ============================================================
     # 国別の利用者数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
     @user_counts_per_country = active_users_data.group(:country_id).count
@@ -28,7 +22,7 @@ class Admin::UsersController < ApplicationController
     }
 
     # ============================================================
-    # 学習中の言語別人数を表示するための情報を取得メソッド6を使用 (ゲスト,退会ユーザー除いている)
+    # 学習中の言語別人数を表示するための情報を取得(ゲスト,退会ユーザー除いている)
     @user_practice_language = active_users_data.group(:practice_language_id).count
     # ============================================================
   end
@@ -67,42 +61,33 @@ class Admin::UsersController < ApplicationController
 
 # 有効ユーザーの一覧表示=============================================================================
   def active_users
-    # 全ユーザー情報を取得する(ゲストは除く) メソッド1を活用
+    # 全ユーザー情報を取得する
     @users = user_all_remove_guest
     # 全ユーザーの人数を数える
-    @users_count = @users.count
+    @users_count = user_all_count
 
-    # 有効ユーザーの情報を取得し10件ごとに表示する(退会済みとゲストを除く)
-    @active_users = User.where.not(is_active: false).where.not(email: "guest@example.com").all.order(id: :asc).page(params[:page]).per(10)
-    # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
-    @active_users_all = active_users_all
-    # 有効ユーザーの割合算出
-    @active_user_ration = active_user_ration
-
-    # 退会済みのユーザーの合計人数メソッド4
-    @not_active_users =  not_active_users
-    # 退会済みユーザーの割合算出
-    @not_active_user_ration = not_active_user_ration
+    # 有効ユーザーの情報を取得し10件ごとに表示する
+    @active_users = active_users_data.all.order(id: :asc).page(params[:page]).per(10)
+    #有効ユーザーの人数と割合
+    active_users_count_ration
+    # 退会済みのユーザーの人数と割合
+    not_active_users_count_ration
   end
 # ===============================================================================================
 
 # 退会ユーザーの一覧表示=============================================================================
   def inactive_users
-    # 全ユーザー情報を取得する(ゲストは除く) メソッド1を活用
+    # 全ユーザー情報を取得する
     @users = user_all_remove_guest
     # 全ユーザーの人数を数える
-    @users_count = @users.count
-    # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
-    @active_users_all = active_users_all
-    # 有効ユーザーの割合算出 メソッド2
-    @active_user_ration = active_user_ration
+    @users_count = user_all_count
+    #有効ユーザーの人数と割合
+    active_users_count_ration
 
-    # 退会済みユーザーの情報取得と10件ごとに表示(退会済みを検索キーとして情報を抽出する)
-    @not_actives = User.where(is_active: false).where.not(email: "guest@example.com").all.order(id: :asc).page(params[:page]).per(10)
-    # 退会済みのユーザーの合計人数 メソッド4
-    @not_active_users = not_active_users
-    # 退会済みユーザーの割合算出 メソッド3
-    @not_active_user_ration = not_active_user_ration
+    # 退会済みユーザーを10件ごとに表示
+    @not_actives = not_active_users_data.all.order(id: :asc).page(params[:page]).per(10)
+    # 退会済みのユーザーの人数と割合
+    not_active_users_count_ration
   end
 # ===============================================================================================
 
@@ -113,34 +98,58 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:first_name, :family_name, :introduction, :topic, :profile_image, :practice_language_id, :is_active, sub_images: [])
   end
 
-  # 全ユーザーを取得するメソッド(ゲストは除く) メソッド1
+  # 全ユーザーを取得するメソッド(ゲストは除く)
   def user_all_remove_guest
-    User.where.not(email: "guest@example.com")
+    User.where.not(email: "guest@example.com").all
+  end
+  # 全ユーザーの人数を取得する
+  def user_all_count
+    user_all_remove_guest.count
   end
 
-  # 有効ユーザーの割合算出 メソッド2
+  # 有効ユーザーのデータを取得する
+  def active_users_data
+    User.where.not(is_active: false).where.not(email: "guest@example.com")
+  end
+
+  # 有効ユーザーの合計人数
+  def active_users_count
+    active_users_data.all.count
+  end
+
+  # 有効ユーザーの割合算出
   def active_user_ration
     @active_users_all * 100 / @users_count
   end
 
-  # 退会済みユーザーの割合算出 メソッド3
+  #退会ユーザーのデータを取得する
+  def not_active_users_data
+    User.where(is_active: false).where.not(email: "guest@example.com")
+  end
+
+  # 退会ユーザーの合計人数
+  def not_active_users_count
+    User.where(is_active: false).all.count
+  end
+
+  # 退会済みユーザーの割合算出
   def not_active_user_ration
     @not_active_users * 100 / @users_count
   end
 
-  # 退会済みのユーザーの合計人数 メソッド4
-  def not_active_users
-    User.where(is_active: false).all.count
+  #まとめたメソッド
+  def active_users_count_ration
+    # 有効ユーザーの合計人数
+    @active_users_all = active_users_count
+    # 有効ユーザーの割合算出
+    @active_user_ration = active_user_ration
   end
 
-  # 有効ユーザーの合計人数 (退会済みとゲストを除いている) メソッド5
-  def active_users_all
-    User.where.not(is_active: false).where.not(email: "guest@example.com").all.count
-  end
-
-  # 有効ユーザーのデータ(たち)(退会済みとゲストを除く) メソッド6
-  def active_users_data
-    User.where.not(is_active: false).where.not(email: "guest@example.com")
+  def not_active_users_count_ration
+    # 退会済みのユーザーの合計人数
+    @not_active_users =  not_active_users_count
+    # 退会済みユーザーの割合算出
+    @not_active_user_ration = not_active_user_ration
   end
 
 end

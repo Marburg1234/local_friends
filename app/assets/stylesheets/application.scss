@@ -15,7 +15,7 @@ main{
 .registration_alert-message{
   color: white;
   background-color: #FF8856;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
 }
@@ -23,7 +23,7 @@ main{
 // 処理が成功した時にフラッシュ
 .success_notice{
   background-color: #CBFFD3	;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -34,7 +34,7 @@ main{
 .fail_notice{
   background-color: #FF8856;
   color: white;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -45,7 +45,7 @@ main{
 .guest_limit_notice{
   background-color: #99CC66;
   color: white;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -55,7 +55,7 @@ main{
 // 退会したユーザーへのフラッシュ
 .withdraw_notice{
   background-color: #FFCC33;
-  heigth: 50px;
+  height: 50px;
   text-align: center;
   margin: 30px 0px;
   font-size: 1.3rem;
@@ -101,7 +101,7 @@ label {
 }
 
 // 地図の表示するサイズ
-#map, #maps, #region_map, #trip_new_map {
+#map, #maps, #region_map, #trip_new_map{
   width: 100%;
   height: 500px;
 }
@@ -114,7 +114,7 @@ label {
 
 
 // ======================================================
-// ページネーションに関するスタイル
+// 管理者側ページネーションに関するスタイル
 .pagination-container {
   text-align: center;
   margin: 20px 0;
@@ -232,6 +232,14 @@ label {
   vertical-align: baseline;
   border-radius: .25em;
 }
+
+.trip_title{
+  background-color: #FFDBC9;
+}
+.trip_explain{
+  background-color: #EDFFBE;
+}
+
 // =========================================
 
 // admin_trip_indexページ
@@ -250,7 +258,12 @@ label {
   height: 250px;
   object-fit: fill; //要素のサイズを画像で埋める 伸縮させる
 }
+
+.left{
+    width: 160px; /* 表が少しずれるのを防止 幅の設定*/
+}
 // =========================================
+
 
 
 // レスポンシブ対応
