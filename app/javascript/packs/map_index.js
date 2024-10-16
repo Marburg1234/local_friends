@@ -31,6 +31,7 @@ async function initMap() {
       const latitude = item.latitude;
       const longitude = item.longitude;
       const title = item.title;
+      const tripId = item.id
       // 追記
       const userImage = item.user.image;
       const userName = item.user.name;
@@ -48,6 +49,7 @@ async function initMap() {
       // マーカー押して出てくる情報ウィンドウの設定
       const contentString = `
         <div class="information container p-0">
+          <div><span class="btn btn-light rounded-pill btn-sm text-light"><a href="/trips/${tripId}">詳細ページへ</a></span></div>
           <div class="mb-3 d-flex align-items-center border-bottom pt-3">
             <img class="rounded-circle mr-2" src="${userImage}" width="40" height="40">
             <p class="lead m-0 font-weight-bold">${userName}</p>

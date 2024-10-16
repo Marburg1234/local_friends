@@ -14,10 +14,7 @@ header{
   z-index: 100;
 }
 
-// headerの透過に伴って、margin-topをmain上部に入れる
-main{
-  margin-top: var(--header-height);
-}
+
 
 footer{
   background-color: #008BBB;

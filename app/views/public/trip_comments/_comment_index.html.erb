@@ -4,8 +4,14 @@
   <div class="row mb-4 p-3 bg-light rounded shadow-sm">
     <!-- ユーザー画像 -->
     <div class="col-lg-2 col-md-3 col-sm-4 text-center">
-      <%= link_to user_path(trip_comment.user) do %>
-        <%= image_tag trip_comment.user.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+      <% if user_signed_in? %>
+        <%= link_to user_path(trip_comment.user) do %>
+          <%= image_tag trip_comment.user.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+        <% end %>
+      <% elsif admin_signed_in? %>
+        <%= link_to admin_user_path(trip_comment.user) do %>
+          <%= image_tag trip_comment.user.get_profile_image, size: '80x80', class: 'rounded-circle border' %>
+        <% end %>
       <% end %>
     </div>
 
@@ -14,8 +20,14 @@
       <div class="comment-details" style="position: relative;">
         <div class="d-flex mb-3">
           <strong>
-            <%= link_to user_path(trip_comment.user) do %>
-              <%= trip_comment.user.full_name %>
+            <% if user_signed_in? %>
+              <%= link_to user_path(trip_comment.user) do %>
+                <%= trip_comment.user.full_name %>
+              <% end %>
+            <% elsif admin_signed_in? %>
+              <%= link_to admin_user_path(trip_comment.user) do %>
+                <%= trip_comment.user.full_name %>
+              <% end %>
             <% end %>
           </strong>
           <span class=" ml-5 text-muted"><%= trip_comment.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span>

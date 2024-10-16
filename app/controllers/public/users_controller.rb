@@ -29,7 +29,7 @@ class Public::UsersController < ApplicationController
           @users = @users.where(nationality: params[:nationality])
         end
       else
-        @users = @users.limit(12).shuffle
+        @users = @users.to_a.sample(12)
     end
   end
 
