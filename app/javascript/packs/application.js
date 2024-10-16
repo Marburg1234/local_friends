@@ -22,10 +22,13 @@ import "../packs/map_trip_new.js";
 import "../packs/top_back.js";
 
 
-
-
-
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+
+// ブラウザバック時にリロードする処理
+window.addEventListener('popstate', function (e) {
+window.location.reload();
+console.log("Reload!");
+});

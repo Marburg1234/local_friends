@@ -1,4 +1,12 @@
 <!--戻るボタン-->
+<!-- 戻るボタン -->
 <span class="ml-3 mt-5">
-  <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
+  <button class="btn btn-secondary py-2 px-3" style="font-size:1.3rem" onclick="reloadAndGoBack()">Back</button>
 </span>
+
+<script>
+  function reloadAndGoBack() {
+    // ページをリロードしてから履歴を戻る
+    window.location.href = document.referrer; // リファラ（前のページのURL）にリロード付きで戻る
+  }
+</script>
