@@ -26,6 +26,11 @@
   <h1 class="my-4 text-center"><strong>検索結果</strong></h1>
 
   <div class="col-4 mx-auto my-4 text-center">
+    <% if @range == "User" %>
+      "ユーザー検索"<br/>
+    <% elsif @range == "Trip" %>
+      "投稿記事を検索"<br/>
+    <% end %>
     キーワード: <%= @word %><br>
     検索結果：<%= @range == "User" ? @users_count : @trips_count %>件
   </div>
