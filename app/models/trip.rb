@@ -6,7 +6,6 @@ class Trip < ApplicationRecord
   has_many :tags, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  validates :post_code, presence: true, format: { with: /\A[\w\-]+\z/, message: "は正しい形式で入力してください" }
   validates :address, presence: true, length: { minimum: 2 }
   validates :title, presence: true
   validates :explain, presence: true
