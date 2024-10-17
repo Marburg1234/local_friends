@@ -17,13 +17,15 @@ class NotificationsController < ApplicationController
   private
 
   def check_is_record
-    notification = current_user.notifications.find(params[:id])
+    notification = current_user.notifications.find_by(id: params[:id])
+    # 通知が見つからない場合、または関連するレコードが見つからない場合
     if notification.nil? || notification.notifiable.nil?
-      redirect_to trips_path, alert: "対象のレコードが存在しません。"
+      redirect_to request.referer, alert: "対象のレコードが存在しません。"
     else
       update
     end
   end
+
 
 
 end
