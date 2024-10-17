@@ -18,7 +18,7 @@ header{
 
 footer{
   background-color: #008BBB;
-  width: 100%;
+  width: 100% ;
   padding: 10px;
 }
 
@@ -63,9 +63,9 @@ footer{
 
 // aboutページの背景画像 =========================
 .about_image{
-  /*background-image: url(/assets/nature-4.jpg);*/
   background-image: image-url("World-14.png");
   height: 400px;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-color:rgba(0,0,0,0.5);

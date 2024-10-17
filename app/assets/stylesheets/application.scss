@@ -265,7 +265,7 @@ label {
 // =========================================
 
 .must_notice{
-  background-color: #FF6600; 
+  background-color: #FF6600;
   font-size:0.8rem;
 }
 
@@ -319,9 +319,24 @@ label {
   }
 }
 
-@media (max-width: 768px) {
+// @media (max-width: 768px) {
+//   .row-reverse {
+//     display: flex;
+//     flex-direction: column-reverse; /* 要素の順番を逆にする */
+//   }
+// }
+
+/* スタイルの追加 */
+@media (max-width: 990px) {
   .row-reverse {
-    display: flex;
-    flex-direction: column-reverse; /* 要素の順番を逆にする */
+    flex-direction: column !important; /* 縦並びにする */
+  }
+
+  .row-reverse .col-lg-6:nth-child(1) {
+    order: 2; /* 画像部分を下に */
+  }
+
+  .row-reverse .col-lg-6:nth-child(2) {
+    order: 1; /* テキスト部分を上に */
   }
 }
