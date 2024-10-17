@@ -1,4 +1,5 @@
 class NotificationsController < ApplicationController
+  before_action :check_is_record
 
   def update
     notification = current_user.notifications.find(params[:id])
@@ -12,5 +13,17 @@ class NotificationsController < ApplicationController
       redirect_to trip_path(notification.notifiable.trip)
     end
   end
+
+  private
+
+  def check_is_record
+    notification = current_user.notifications.find(params[:id])
+    if notification.present?
+      update
+    else
+      redirect_to request.referer
+    end
+  end
+
 
 end
