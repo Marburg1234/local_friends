@@ -23,17 +23,17 @@
         </div>
         <div id="preview-item1" class="text-center mb-4"></div>
       </div>
-      <h5>※郵便番号と住所は、入力するか地図から選択することができます！<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></h5>
+      <h5>※住所は入力するか地図から選択することができます！</h5>
       <h5>【住所を入力する】</h5>
       <!-- 郵便番号 -->
       <div class="form-group">
-        <label><strong>郵便番号</strong></label>
-        <%= f.text_field :post_code, id: 'postal_code_input', class: 'zipcode form-control', required: true, placeholder: "例: 1234567" %>
+        <label><strong>郵便番号</strong> (必須ではありません / 郵便番号の補完が使用できます)</label>
+        <%= f.text_field :post_code, id: 'postal_code_input', class: 'zipcode form-control', placeholder: "例: 1234567" %>
       </div>
 
       <!-- 住所 -->
       <div class="form-group">
-        <label><strong>住所</strong></label>
+        <label><strong>住所<span class="must_notice ml-2 text-light p-1"><%= "必須" %></span></strong></label>
         <%= f.text_field :address, id: 'address_input', class: 'trip_address form-control', required: true, placeholder: "例: 東京都渋谷区" %>
       </div>
       <h5>【地図から選択する】</h5>
