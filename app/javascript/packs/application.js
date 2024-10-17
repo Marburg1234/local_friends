@@ -17,10 +17,10 @@ import "../stylesheets/application";
 import "../packs/map_index.js";
 import "../packs/map_show.js";
 import "../packs/map_region.js";
-import './valid_color';
+
 import "../packs/map_trip_new.js";
 import "../packs/top_back.js";
-
+import './valid_color';
 
 Rails.start()
 Turbolinks.start()
