@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>
+<!--<= stylesheet_link_tag 'public_homes', media: 'all', 'data-turbolinks-track': 'reload' %>-->
 
 <nav class="header navbar navbar-expand-lg navbar-dark d-flex justify-content-between">
   <!--左側のロゴ表示 条件分岐をしている-->
@@ -70,7 +70,7 @@
           <li class="nav-item dropdown">
             <!--chat相手一覧へのアイコンとリンク-->
             <%= link_to chats_path, method: :get, class: 'nav-link text-warning active' do %>
-              <i class="fa-solid fa-comment-dots"></i><span> Chat</span>
+              <i class="fa-solid fa-comment-dots"></i>Chat
             <% end %>
             <!-- 通知のドロップダウンボタン -->
             <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
