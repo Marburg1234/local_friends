@@ -1,3 +1,6 @@
+@import './public_homes';
+@import './user_show';
+
 *{
   margin:0;
   padding:0;
@@ -318,13 +321,6 @@ label {
     padding: 20px; /* スマホ用の余白調整 */
   }
 }
-
-// @media (max-width: 768px) {
-//   .row-reverse {
-//     display: flex;
-//     flex-direction: column-reverse; /* 要素の順番を逆にする */
-//   }
-// }
 
 /* スタイルの追加 */
 @media (max-width: 990px) {
