@@ -1,10 +1,5 @@
 <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<!--戻るボタン-->
-<span class="ml-3">
-  <%= link_to 'Back', :back, class: 'btn btn-secondary py-2 px-3', style: 'font-size:1.3rem' %>
-</span>
-
 <div class="container my-5 p-4 shadow bg-white rounded">
   <% if flash[:notice].present? %>
     <%= content_tag :div, flash[:notice], class: "success_notice" %>

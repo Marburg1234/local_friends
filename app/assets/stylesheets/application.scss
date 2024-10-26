@@ -1,5 +1,3 @@
-@import './public_homes';
-@import './user_show';
 
 *{
   margin:0;
@@ -7,14 +5,154 @@
   box-sizing: border-box;
 }
 
+
+header{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #008BBB;
+  padding: 10px;
+  z-index: 100;
+}
+
 // ヘッダー下に隠れないように固定で設定する
 main{
   margin-top: 100px;
 }
 
-// フラッシュメッセージのスタイル
+footer{
+  background-color: #008BBB;
+  width: 100% ;
+  padding: 10px;
+}
+
+// Topページの背景画像===========================
+.top_image{
+  /*background-image: url(/assets/nature-4.jpg);*/
+  background-image: image-url("nature-4.jpg");
+  width: 100%;
+  height: 600px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color:rgba(0,0,0,0.5);
+  background-blend-mode:darken;
+}
+// ================================================
+
+// aboutページの背景画像 =========================
+.about_image{
+  background-image: image-url("World-14.png");
+  height: 400px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color:rgba(0,0,0,0.5);
+  background-blend-mode:darken;
+}
+// ==============================================
+
+// aboutページのスタイル============================
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+// ===============================================
+
+// ==============================
+//  ロゴに関するcss
+.logo_font {
+  font-family: 'Sacramento', cursive;
+}
+
+.logo:hover{
+  font-size: 2.3rem;
+  transition: size 2.0s;
+  font-weight: bold;
+}
+
+.local{
+  color: #66FFFF;
+}
+
+.friends{
+  color:#FFFF66;
+}
+// ==============================================
+
+
+// ヘッダーのリンクcss================================
+.nav-link i{
+  color: #FFCC99;
+  font-size: 1.3rem;
+}
+
+.nav-link span{
+  color: #FFCC99;
+}
+
+/* ホバー時のスタイル */
+.nav-link:hover {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-log-out i{
+  color: white;
+}
+
+.nav-log-out span{
+  color: white;
+}
+
+.nav-log-out:hover{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+// ===============================================
+
+// 管理側 user_indexページのcss===================
+.admin_user_table .head{
+  background-color: #336699;
+  color: white;
+}
+
+.admin_user_table .analyse_link:hover{
+  background-color: yellow;
+  font-size: 2.3rem;
+}
+
+.admin_user_table .active_users{
+  background-color:#CCFF99;
+}
+
+.admin_user_table .non_active_users{
+  background-color:#FFABCE;
+}
+
+.country_table_head .head{
+  background-color: #336699;
+  color: white;
+}
+
+.country_table_body td{
+  color: black;
+}
+
+// ==================================================
+
+// user_show スライドショーへのカスタムボタン============
+.user_slideshow-button {
+  background: none; /* 背景を削除 */
+  border: none; /* ボーダーを削除 */
+  padding: 0; /* パディングを削除 */
+  cursor: pointer; /* カーソルをポインターに変更 */
+}
 // =======================================================
-// 新規登録画面でのフラッシュ
+
+// フラッシュメッセージのスタイル=======================================================
+// 新規登録画面でのフラッシュ エラー内容の表示
 .registration_alert-message{
   color: white;
   background-color: #FF8856;
@@ -23,7 +161,7 @@ main{
   margin: 30px 0px;
 }
 
-// 処理が成功した時にフラッシュ
+// 処理成功時
 .success_notice{
   background-color: #CBFFD3	;
   height: 50px;
@@ -33,7 +171,7 @@ main{
   font-weight: bold;
 }
 
-// 処理失敗時のフラッシュ
+// 処理失敗時
 .fail_notice{
   background-color: #FF8856;
   color: white;
@@ -89,7 +227,7 @@ main{
 }
 
 
-// chatページ
+// chatページ=========================================
 label {
     background-color: #fff;
     padding: 10px;
@@ -102,22 +240,24 @@ label {
       color: #333;
     }
 }
+// ===================================================
 
-// 地図の表示するサイズ
+// 地図の表示するサイズ=============================
 #map, #maps, #region_map, #trip_new_map{
   width: 100%;
   height: 500px;
 }
+// ================================================
 
-// 管理者側 円グラフのサイズ調整
+// 管理者側 円グラフのサイズ調整=================
 #chart {
   width: 500px;
   height: 300px;
 }
-
+// ==================================================
 
 // ======================================================
-// 管理者側ページネーションに関するスタイル
+// 管理者側ページネーションに関するスタイル Kaminari
 .pagination-container {
   text-align: center;
   margin: 20px 0;
@@ -152,8 +292,7 @@ label {
 }
 // ===============================================================
 
-// 新規登録画面のスタイル(public/user/registration)
-// ==============================================================
+// 新規登録画面のスタイル(public/user/registration)=================
 // エラー文が左上で固定されて表示 & スクロールしてもついてくる仕様にする
 .error-column {
   position: sticky; /* スクロール時に固定 */
@@ -172,8 +311,7 @@ label {
 // ==============================================================
 
 
-// =========================================================
-// チャット画面でのcss
+// チャット画面でのcss===========================================
   /* チャット表示エリアのスタイル */
   .chat-container {
     display: flex;
@@ -218,9 +356,9 @@ label {
   z-index: 1000;    /* 他の要素より前面に表示 */
   border: 1px solid #ddd; /* 境界線 */
 }
+// ===============================================================
 
-// trip_show タグのスタイル設定
-// =====================================
+// trip_show タグのスタイル設定=====================================
 .trip_image_tag {
   background-color: #6633FF;
   font-weight: 500;
@@ -245,8 +383,7 @@ label {
 
 // =========================================
 
-// admin_trip_indexページ
-// ========================================
+// admin_trip_indexページ=================
 .admin_trip_user_name{
   vertical-align: middle;
   display: flex;
@@ -254,8 +391,8 @@ label {
 }
 // =========================================
 
-// trip_index 投稿一覧の画像サイズを固定する
-// =========================================
+//
+// trip_index 投稿一覧の画像サイズを固定する=============
 .fixed-size{
   width: 350px;
   height: 250px;
@@ -272,8 +409,10 @@ label {
   font-size:0.8rem;
 }
 
-// レスポンシブ対応
 
+
+// レスポンシブ対応
+// =================================================
 /* chat画面 1000px以下の場合のスタイル */
 @media (max-width: 1000px) {
   .chat-form-container {
@@ -310,7 +449,7 @@ label {
     flex-direction: column;
   }
 }
-
+/* Aboutページ*/
 @media (max-width: 768px) {
   .responsive_about_title {
     display: flex;
@@ -322,7 +461,7 @@ label {
   }
 }
 
-/* スタイルの追加 */
+/* Aboutページ*/
 @media (max-width: 990px) {
   .row-reverse {
     flex-direction: column !important; /* 縦並びにする */
@@ -334,5 +473,20 @@ label {
 
   .row-reverse .col-lg-6:nth-child(2) {
     order: 1; /* テキスト部分を上に */
+  }
+}
+
+// user_show mdサイズのレスポンシブ
+@media (max-width: 991px) {
+  /* nth-child(even)を使って偶数番目の要素に対して適用 2番目の要素にmargin-topを入れる */
+  .responsive-margin > *:nth-child(even) {
+    margin-top: 20px; /* 必要に応じて値を調整 */
+  }
+}
+// レスポンシブ対応 user_show smサイズのレスポンシブ
+@media (max-width: 768px) {
+  /* nth-child(even)を使って偶数番目の要素に対して適用 2番目の要素にmargin-topを入れる */
+  .responsive-margin > *:nth-child(even) {
+    margin-top: 20px; /* 必要に応じて値を調整 */
   }
 }
