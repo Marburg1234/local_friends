@@ -5,6 +5,7 @@ class Trip < ApplicationRecord
   has_many :trip_comments, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
+  has_many :visit_counts, dependent: :destroy
 
   validates :address, presence: true, length: { minimum: 2 }
   validates :title, presence: true

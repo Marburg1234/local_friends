@@ -54,9 +54,14 @@
         <td  id="favorite_button_<%= @trip.id %>" class="pl-3">
           <!--いいね♡の表示-->
           <%= render 'public/favorites/like', trip: @trip %>
-         </td>
+        </td>
+        <!--コメント数の表示-->
         <td id="comment-count" class="pl-3">
           <%= render 'public/trip_comments/count', trip: @trip %>
+        </td>
+        <!--ページ閲覧数の表示-->
+        <td class="pl-3">
+          閲覧数：<%= @trip.visit_counts.count %>
         </td>
       </table>
     </div>
