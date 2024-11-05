@@ -57,6 +57,12 @@ class Public::TripsController < ApplicationController
         # paginateを入れておく コメント一覧
         @trip_index = @trip.trip_comments.page(params[:page]).per(5)
         @trip_comment = TripComment.new
+        #ページの訪問数のレコードを作成する
+        @user = @trip.user
+        user = current_user
+        if user != @user
+          user.visit_counts.create(trip_id: @trip.id)
+        end
       end
       format.json do
         @trip = Trip.find(params[:id])
